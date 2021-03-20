@@ -1,0 +1,45 @@
+MPLINK 4.48, Linker
+Linker Map File - Created Sun Mar 07 04:28:59 2021
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000056
+.config_2007_SUMA_INTERRUPTOR.O       code   0x002007    program   0x000002
+.config_2008_SUMA_INTERRUPTOR.O       code   0x002008    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x00002a      
+                            0x002007    0x002008      
+            45 out of 8455 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                ACARREO_0   0x00001f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\SUMA_INTERRUPTOR\suma_interruptor.asm
+                ACARREO_1   0x000021    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\SUMA_INTERRUPTOR\suma_interruptor.asm
+             CARGAR_DATOS   0x000012    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\SUMA_INTERRUPTOR\suma_interruptor.asm
+                   INICIO   0x000001    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\SUMA_INTERRUPTOR\suma_interruptor.asm
+          SUMA_ARITMETICA   0x000015    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\SUMA_INTERRUPTOR\suma_interruptor.asm
+              SUMA_LOGICA   0x000023    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\SUMA_INTERRUPTOR\suma_interruptor.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   INICIO   0x000001    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\SUMA_INTERRUPTOR\suma_interruptor.asm
+             CARGAR_DATOS   0x000012    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\SUMA_INTERRUPTOR\suma_interruptor.asm
+          SUMA_ARITMETICA   0x000015    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\SUMA_INTERRUPTOR\suma_interruptor.asm
+                ACARREO_0   0x00001f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\SUMA_INTERRUPTOR\suma_interruptor.asm
+                ACARREO_1   0x000021    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\SUMA_INTERRUPTOR\suma_interruptor.asm
+              SUMA_LOGICA   0x000023    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\SUMA_INTERRUPTOR\suma_interruptor.asm
+
+
