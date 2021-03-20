@@ -1,0 +1,53 @@
+MPLINK 4.48, Linker
+Linker Map File - Created Mon Mar 15 02:50:44 2021
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000064
+.config_2007_CORRIMIENTO.O       code   0x002007    program   0x000002
+.config_2008_CORRIMIENTO.O       code   0x002008    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000031      
+                            0x002007    0x002008      
+            52 out of 8455 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+         CARGAR_DATOS_DER   0x000011    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+         CARGAR_DATOS_IZQ   0x00000e    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+                     CERO   0x000014    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+                   CERO_D   0x00001c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+                    FINAL   0x000020    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+                   INICIO   0x000001    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+                PRINCIPAL   0x00000a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+            RETARDO_400ms   0x000024    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+                      UNO   0x000018    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+                     loop   0x00002a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                   INICIO   0x000001    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+                PRINCIPAL   0x00000a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+         CARGAR_DATOS_IZQ   0x00000e    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+         CARGAR_DATOS_DER   0x000011    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+                     CERO   0x000014    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+                      UNO   0x000018    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+                   CERO_D   0x00001c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+                    FINAL   0x000020    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+            RETARDO_400ms   0x000024    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+                     loop   0x00002a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Corrimiento\Corrimiento.asm
+
+
