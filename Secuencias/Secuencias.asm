@@ -6,6 +6,7 @@ list		p=16f887	; list directive to define processor
 	__CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
 
 ORG 0x000 ; posición 0
+retfie
 
 CBLOCK 0X20
 	CounterA, CounterB, CounterC, Aux, Contador
