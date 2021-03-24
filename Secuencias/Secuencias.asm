@@ -137,7 +137,7 @@ UNO_D_SEC2:
 ; ------------------------------------------------SEC 3-------------------------------------
 SEC3:
 	CLRF			Contador
-	GOTO 		INICIO	
+	
 
 PRIN_SEC3
 	MOVF		Contador, W
@@ -150,7 +150,7 @@ PRIN_SEC3
 	XORWF		Contador,W
 	BTFSS		STATUS, Z 	; Si Z = 1
 	GOTO 		PRIN_SEC3
-	GOTO 		SEC3
+	GOTO 		INICIO
 	
 TABLA:
 	ADDWF		PCL, F
