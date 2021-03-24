@@ -1,4 +1,4 @@
-MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  20:06:29         PAGE  1
+MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  22:52:42         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -27,7 +27,7 @@ Warning[205]: Found directive in column 1. (ORG)
                       00009 
 Warning[205]: Found directive in column 1. (CBLOCK)
                       00010 CBLOCK 0X20
-  00000020            00011         CounterA, CounterB, CounterC, Aux
+  00000020            00011         CounterA, CounterB, CounterC, Aux, Contador
 Warning[205]: Found directive in column 1. (ENDC)
                       00012 ENDC
                       00013 
@@ -57,7 +57,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 0009   1303           00032         BCF                     STATUS, RP1
 000A   1283           00033         BCF                     STATUS, RP0
                       00034 ;SE COLOCA EN CEROS LOS PUERTOS
-MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  20:06:29         PAGE  2
+MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  22:52:42         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -86,7 +86,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0016   1003           00055         BCF                     STATUS, C
 0017   3001           00056         MOVLW           b'00000001'             ;ENCENDER EL BIT 0
 0018   0086           00057         MOVWF           PORTB
-0019   204C           00058         CALL            RETARDO_400ms
+0019   205E           00058         CALL            RETARDO_400ms
                       00059 
 001A                  00060 CARGAR_DATOS_IZQ:
 001A   1F86           00061         BTFSS           PORTB, 7                        ;EL BIT 7 DEL PUERTO B ESTÁ EN ¿1?
@@ -101,22 +101,22 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0020                  00070 CERO:
 0020   0D06           00071         RLF                     PORTB, 0
 0021   0086           00072         MOVWF           PORTB
-0022   204C           00073         CALL            RETARDO_400ms
+0022   205E           00073         CALL            RETARDO_400ms
 0023   281A           00074         GOTO            CARGAR_DATOS_IZQ
 0024                  00075 UNO:
 0024   0C06           00076         RRF                     PORTB, 0 
 0025   0086           00077         MOVWF           PORTB
-0026   204C           00078         CALL            RETARDO_400ms
+0026   205E           00078         CALL            RETARDO_400ms
 0027   281D           00079         GOTO            CARGAR_DATOS_DER
                       00080 
 0028                  00081 CERO_D:
 0028   0C06           00082         RRF                     PORTB, 0
 0029   0086           00083         MOVWF           PORTB
-002A   204C           00084         CALL            RETARDO_400ms
+002A   205E           00084         CALL            RETARDO_400ms
 002B   281D           00085         GOTO            CARGAR_DATOS_DER
                       00086 
 002C                  00087 FINAL:
-MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  20:06:29         PAGE  3
+MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  22:52:42         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -132,7 +132,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0030   1003           00095         BCF                     STATUS, C
 0031   3001           00096         MOVLW           b'00000001'             ;ENCENDER EL BIT 0
 0032   0086           00097         MOVWF           PORTB
-0033   204C           00098         CALL            RETARDO_400ms
+0033   205E           00098         CALL            RETARDO_400ms
                       00099 
 0034                  00100 CARGAR_DATOS_IZQ_SEC1:
 0034   1F86           00101         BTFSS           PORTB, 7                        ;EL BIT 7 DEL PUERTO B ESTÁ EN ¿1?
@@ -142,7 +142,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0037                  00105 CERO_SEC1:
 0037   0D06           00106         RLF                     PORTB, 0
 0038   0086           00107         MOVWF           PORTB
-0039   204C           00108         CALL            RETARDO_400ms
+0039   205E           00108         CALL            RETARDO_400ms
 003A   2834           00109         GOTO            CARGAR_DATOS_IZQ_SEC1   
                       00110 
 003B                  00111 UNO_SEC1:
@@ -152,7 +152,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 003C   1003           00115         BCF                     STATUS, C
 003D   3080           00116         MOVLW           b'10000000'                     ;ENCENDER EL BIT 7
 003E   0086           00117         MOVWF           PORTB
-003F   204C           00118         CALL            RETARDO_400ms
+003F   205E           00118         CALL            RETARDO_400ms
                       00119 
 0040                  00120 CARGAR_DATOS_DER_SEC2:
 0040   1C06           00121         BTFSS           PORTB, 0                                ;EL BIT 0  DEL PUERTO B ESTÁ EN ¿1?
@@ -162,7 +162,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0043                  00125 CERO_D_SEC2:
 0043   0C06           00126         RRF                     PORTB, 0
 0044   0086           00127         MOVWF           PORTB
-0045   204C           00128         CALL            RETARDO_400ms
+0045   205E           00128         CALL            RETARDO_400ms
 0046   2840           00129         GOTO            CARGAR_DATOS_DER_SEC2
                       00130 
 0047                  00131 UNO_D_SEC2:
@@ -173,33 +173,56 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00136 
                       00137 ; ------------------------------------------------SEC 3-------------------------------------
 004B                  00138 SEC3:
-004B   280D           00139         GOTO INICIO
-                      00140 
-MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  20:06:29         PAGE  4
+004B   01A4           00139         CLRF                    Contador
+004C   280D           00140         GOTO            INICIO  
+MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  22:52:42         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-004C                  00141 RETARDO_400ms:
-004C   3003           00142                 movlw   D'3'
-004D   00A2           00143                 movwf   CounterC
-004E   3008           00144                 movlw   D'8'
-004F   00A1           00145                 movwf   CounterB
-0050   3076           00146                 movlw   D'118'
-0051   00A0           00147                 movwf   CounterA
-0052   0BA0           00148 loop            decfsz  CounterA,1
-0053   2852           00149                 goto    loop
-0054   0BA1           00150                 decfsz  CounterB,1
-0055   2852           00151                 goto    loop
-0056   0BA2           00152                 decfsz  CounterC,1
-0057   2852           00153                 goto    loop
-0058   3400           00154                 retlw   0
-0059   0008           00155                 RETURN
-                      00156 
-                      00157 
-                      00158         END                      
-MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  20:06:29         PAGE  5
+                      00141 
+004D                  00142 PRIN_SEC3
+004D   0824           00143         MOVF            Contador, W
+004E   2057           00144         CALL            TABLA
+004F   0086           00145         MOVWF           PORTB
+0050   205E           00146         CALL            RETARDO_400ms
+0051   0AA4           00147         INCF                    Contador, F     
+                      00148 
+0052   3006           00149         MOVLW           .6
+0053   0624           00150         XORWF           Contador,W
+0054   1D03           00151         BTFSS           STATUS, Z       ; Si Z = 1
+0055   284D           00152         GOTO            PRIN_SEC3
+0056   284B           00153         GOTO            SEC3
+                      00154         
+0057                  00155 TABLA:
+0057   0782           00156         ADDWF           PCL, F
+0058   3481           00157         RETLW           b'10000001'
+0059   3442           00158         RETLW           b'01000010'
+005A   3424           00159         RETLW           b'00100100'
+005B   3418           00160         RETLW           b'00011000'
+005C   3424           00161         RETLW           b'00100100'
+005D   3442           00162         RETLW           b'01000010'
+                      00163 
+005E                  00164 RETARDO_400ms:
+005E   3003           00165                 movlw   D'3'
+005F   00A2           00166                 movwf   CounterC
+0060   3008           00167                 movlw   D'8'
+0061   00A1           00168                 movwf   CounterB
+0062   3076           00169                 movlw   D'118'
+0063   00A0           00170                 movwf   CounterA
+0064   0BA0           00171 loop            decfsz  CounterA,1
+0065   2864           00172                 goto    loop
+0066   0BA1           00173                 decfsz  CounterB,1
+0067   2864           00174                 goto    loop
+0068   0BA2           00175                 decfsz  CounterC,1
+0069   2864           00176                 goto    loop
+006A   3400           00177                 retlw   0
+006B   0008           00178                 RETURN
+                      00179 
+                      00180 
+                      00181         END                      
+MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  22:52:42         PAGE  5
 
 
 SYMBOL TABLE
@@ -258,7 +281,7 @@ BRG5                              00000005
 BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
-MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  20:06:29         PAGE  6
+MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  22:52:42         PAGE  6
 
 
 SYMBOL TABLE
@@ -317,7 +340,7 @@ CCPR1H                            00000016
 CCPR1L                            00000015
 CCPR2                             0000001B
 CCPR2H                            0000001C
-MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  20:06:29         PAGE  7
+MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  22:52:42         PAGE  7
 
 
 SYMBOL TABLE
@@ -339,6 +362,7 @@ CM2CON0                           00000108
 CM2CON1                           00000109
 CREN                              00000004
 CSRC                              00000007
+Contador                          00000024
 CounterA                          00000020
 CounterB                          00000021
 CounterC                          00000022
@@ -375,13 +399,13 @@ GCEN                              00000007
 GIE                               00000007
 GO                                00000001
 GO_DONE                           00000001
-GO_NOT_DONE                       00000001
-MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  20:06:29         PAGE  8
+MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  22:52:42         PAGE  8
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+GO_NOT_DONE                       00000001
 HTS                               00000002
 I2C_DATA                          00000005
 I2C_READ                          00000002
@@ -434,13 +458,13 @@ NOT_W                             00000002
 NOT_WRITE                         00000002
 OERR                              00000001
 OPTION_REG                        00000081
-OSCCON                            0000008F
-MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  20:06:29         PAGE  9
+MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  22:52:42         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+OSCCON                            0000008F
 OSCTUNE                           00000090
 OSFIE                             00000007
 OSFIF                             00000007
@@ -470,6 +494,7 @@ PORTC                             00000007
 PORTD                             00000008
 PORTE                             00000009
 PR2                               00000092
+PRIN_SEC3                         0000004D
 PRSEN                             00000007
 PS0                               00000000
 PS1                               00000001
@@ -492,14 +517,14 @@ RA3                               00000003
 RA4                               00000004
 RA5                               00000005
 RA6                               00000006
-RA7                               00000007
-RB0                               00000000
-MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  20:06:29         PAGE 10
+MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  22:52:42         PAGE 10
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+RA7                               00000007
+RB0                               00000000
 RB1                               00000001
 RB2                               00000002
 RB3                               00000003
@@ -540,7 +565,7 @@ RE1                               00000001
 RE2                               00000002
 RE3                               00000003
 READ_WRITE                        00000002
-RETARDO_400ms                     0000004C
+RETARDO_400ms                     0000005E
 RP0                               00000005
 RP1                               00000006
 RSEN                              00000001
@@ -551,14 +576,14 @@ R_W                               00000002
 S                                 00000003
 SBOREN                            00000004
 SCKP                              00000004
-SCS                               00000000
-SEC0                              00000016
-MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  20:06:29         PAGE 11
+MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  22:52:42         PAGE 11
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+SCS                               00000000
+SEC0                              00000016
 SEC1                              00000030
 SEC2                              0000003C
 SEC3                              0000004B
@@ -610,14 +635,15 @@ T1SYNC                            00000002
 T2CKPS0                           00000000
 T2CKPS1                           00000001
 T2CON                             00000012
-TEST_1                            00000010
-TEST_2                            00000013
-MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  20:06:29         PAGE 12
+MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  22:52:42         PAGE 12
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TABLA                             00000057
+TEST_1                            00000010
+TEST_2                            00000013
 TMR0                              00000001
 TMR0IE                            00000005
 TMR0IF                            00000002
@@ -668,15 +694,15 @@ TRISD                             00000088
 TRISD0                            00000000
 TRISD1                            00000001
 TRISD2                            00000002
-TRISD3                            00000003
-TRISD4                            00000004
-TRISD5                            00000005
-MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  20:06:29         PAGE 13
+MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  22:52:42         PAGE 13
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TRISD3                            00000003
+TRISD4                            00000004
+TRISD5                            00000005
 TRISD6                            00000006
 TRISD7                            00000007
 TRISE                             00000089
@@ -727,15 +753,15 @@ WDTPS3                            00000004
 WPUB                              00000095
 WPUB0                             00000000
 WPUB1                             00000001
-WPUB2                             00000002
-WPUB3                             00000003
-WPUB4                             00000004
-MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  20:06:29         PAGE 14
+MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  22:52:42         PAGE 14
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+WPUB2                             00000002
+WPUB3                             00000003
+WPUB4                             00000004
 WPUB5                             00000005
 WPUB6                             00000006
 WPUB7                             00000007
@@ -786,15 +812,15 @@ _IDLOC1                           00002001
 _IDLOC2                           00002002
 _IDLOC3                           00002003
 _IESO_OFF                         00003BFF
-_IESO_ON                          00003FFF
-_INTOSC                           00003FFD
-_INTOSCIO                         00003FFC
-MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  20:06:29         PAGE 15
+MPASM  5.50                    SECUENCIAS.ASM   3-23-2021  22:52:42         PAGE 15
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_IESO_ON                          00003FFF
+_INTOSC                           00003FFD
+_INTOSCIO                         00003FFC
 _INTRC_OSC_CLKOUT                 00003FFD
 _INTRC_OSC_NOCLKOUT               00003FFC
 _LP_OSC                           00003FF8
@@ -815,19 +841,19 @@ _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
 __DEBUG                           1
-loop                              00000052
+loop                              00000064
 
 
 MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
 
 0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
-0040 : XXXXXXXXXXXXXXXX XXXXXXXXXX------ ---------------- ----------------
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXX---- ----------------
 2000 : -------XX------- ---------------- ---------------- ----------------
 
 All other memory blocks unused.
 
-Program Memory Words Used:    90
-Program Memory Words Free:  8102
+Program Memory Words Used:   108
+Program Memory Words Free:  8084
 
 
 Errors   :     0

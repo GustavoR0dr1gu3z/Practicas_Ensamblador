@@ -8,7 +8,7 @@ list		p=16f887	; list directive to define processor
 ORG 0x000 ; posición 0
 
 CBLOCK 0X20
-	CounterA, CounterB, CounterC, Aux
+	CounterA, CounterB, CounterC, Aux, Contador
 ENDC
 
 GOTO PUERTOS ; Comienzo del programa
@@ -136,20 +136,30 @@ UNO_D_SEC2:
 
 ; ------------------------------------------------SEC 3-------------------------------------
 SEC3:
-	MOVLW		b'10000001'
+	CLRF			Contador
+	GOTO 		INICIO	
 
+PRIN_SEC3
+	MOVF		Contador, W
+	CALL 		TABLA
+	MOVWF		PORTB
+	CALL 		RETARDO_400ms
+	INCF			Contador, F	
+
+	MOVLW		.6
+	XORWF		Contador,W
+	BTFSS		STATUS, Z 	; Si Z = 1
+	GOTO 		PRIN_SEC3
+	GOTO 		SEC3
 	
-
-
-
-
-
-
-
-
-
-
-
+TABLA:
+	ADDWF		PCL, F
+	RETLW		b'10000001'
+	RETLW		b'01000010'
+	RETLW		b'00100100'
+	RETLW		b'00011000'
+	RETLW		b'00100100'
+	RETLW		b'01000010'
 
 RETARDO_400ms:
 		movlw	D'3'
