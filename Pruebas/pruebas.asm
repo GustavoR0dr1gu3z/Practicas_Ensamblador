@@ -41,7 +41,7 @@ list		p=16f887	; list directive to define processor
 ORG     0x000             ; processor reset vector
 
 CBLOCK 0X20
-	Contador
+	Contador, CounterA, CounterB, CounterC 
 ENDC
 
 GOTO 	INICIO           ; go to beginning of program
@@ -75,7 +75,7 @@ PRINCIPAL:
 	INCF			Contador, F	
 
 	MOVLW		.6
-	XORWF		Contador
+	XORWF		Contador,W
 	BTFSS		STATUS, Z 	; Si Z = 1
 	GOTO 		PRINCIPAL
 	GOTO 		REINICIAR
