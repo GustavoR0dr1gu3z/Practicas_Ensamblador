@@ -1,4 +1,4 @@
-MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-7-2021  4:28:58         PAGE  1
+MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-22-2021  20:02:50         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Warning[205]: Found directive in column 1. (list)
 Warning[205]: Found directive in column 1. (ORG)
 0000                  00040 ORG 0x000 ; posición 0
                       00041 
-MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-7-2021  4:28:58         PAGE  2
+MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-22-2021  20:02:50         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 0015                  00083 SUMA_ARITMETICA:
 0015   0805           00084         MOVF            PORTA,W                  ;LEER EL PUERTO A
 0016   00A0           00085         MOVWF           SUMA1                   ;SE AGREGA A SUMA1
-MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-7-2021  4:28:58         PAGE  3
+MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-22-2021  20:02:50         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -155,7 +155,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 002A   2812           00116         GOTO            CARGAR_DATOS    
                       00117 
                       00118         END
-MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-7-2021  4:28:58         PAGE  4
+MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-22-2021  20:02:50         PAGE  4
 
 
 SYMBOL TABLE
@@ -214,7 +214,7 @@ BRG4                              00000004
 BRG5                              00000005
 BRG6                              00000006
 BRG7                              00000007
-MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-7-2021  4:28:58         PAGE  5
+MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-22-2021  20:02:50         PAGE  5
 
 
 SYMBOL TABLE
@@ -273,7 +273,7 @@ CCPR2                             0000001B
 CCPR2H                            0000001C
 CCPR2L                            0000001B
 CHS0                              00000002
-MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-7-2021  4:28:58         PAGE  6
+MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-22-2021  20:02:50         PAGE  6
 
 
 SYMBOL TABLE
@@ -332,7 +332,7 @@ INICIO                            00000001
 INTCON                            0000000B
 INTE                              00000004
 INTEDG                            00000006
-MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-7-2021  4:28:58         PAGE  7
+MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-22-2021  20:02:50         PAGE  7
 
 
 SYMBOL TABLE
@@ -391,7 +391,7 @@ P1M1                              00000007
 PCL                               00000002
 PCLATH                            0000000A
 PCON                              0000008E
-MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-7-2021  4:28:58         PAGE  8
+MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-22-2021  20:02:50         PAGE  8
 
 
 SYMBOL TABLE
@@ -450,7 +450,7 @@ RBIE                              00000003
 RBIF                              00000000
 RC0                               00000000
 RC1                               00000001
-MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-7-2021  4:28:58         PAGE  9
+MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-22-2021  20:02:50         PAGE  9
 
 
 SYMBOL TABLE
@@ -509,7 +509,7 @@ SREN                              00000005
 SSPADD                            00000093
 SSPBUF                            00000013
 SSPCON                            00000014
-MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-7-2021  4:28:58         PAGE 10
+MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-22-2021  20:02:50         PAGE 10
 
 
 SYMBOL TABLE
@@ -568,7 +568,7 @@ TMR1IF                            00000000
 TMR1L                             0000000E
 TMR1ON                            00000000
 TMR2                              00000011
-MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-7-2021  4:28:58         PAGE 11
+MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-22-2021  20:02:50         PAGE 11
 
 
 SYMBOL TABLE
@@ -627,7 +627,7 @@ TUN0                              00000000
 TUN1                              00000001
 TUN2                              00000002
 TUN3                              00000003
-MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-7-2021  4:28:58         PAGE 12
+MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-22-2021  20:02:50         PAGE 12
 
 
 SYMBOL TABLE
@@ -686,7 +686,7 @@ _BOR4V_BOR40V                     00003FFF
 _BOREN_NSLEEP                     00003EFF
 _BOREN_OFF                        00003CFF
 _BOREN_ON                         00003FFF
-MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-7-2021  4:28:58         PAGE 13
+MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-22-2021  20:02:50         PAGE 13
 
 
 SYMBOL TABLE
@@ -745,7 +745,7 @@ _WDT_OFF                          00003FF7
 _WDT_ON                           00003FFF
 _WRT_1FOURTH                      00003BFF
 _WRT_256                          00003DFF
-MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-7-2021  4:28:58         PAGE 14
+MPASM  5.50              SUMA_INTERRUPTOR.ASM   3-22-2021  20:02:50         PAGE 14
 
 
 SYMBOL TABLE

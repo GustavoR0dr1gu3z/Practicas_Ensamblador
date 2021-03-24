@@ -10,4 +10,4 @@ Message[302] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\PROYECTOS_MPLAB\NIBLES\NIBLES.AS
 Message[302] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\PROYECTOS_MPLAB\NIBLES\NIBLES.ASM 61 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\PROYECTOS_MPLAB\NIBLES\NIBLES.ASM 66 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\PROYECTOS_MPLAB\NIBLES\NIBLES.ASM 67 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Warning[205] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\PROYECTOS_MPLAB\NIBLES\NIBLES.ASM 123 : Found directive in column 1. (END)
+Warning[205] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\PROYECTOS_MPLAB\NIBLES\NIBLES.ASM 106 : Found directive in column 1. (END)

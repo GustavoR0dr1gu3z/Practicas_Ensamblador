@@ -1,4 +1,4 @@
-MPASM  5.50                        NIBLES.ASM   3-12-2021  8:56:10         PAGE  1
+MPASM  5.50                        NIBLES.ASM   3-22-2021  20:23:55         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Warning[205]: Found directive in column 1. (list)
 Warning[205]: Found directive in column 1. (ORG)
 0000                  00040 ORG 0x000 ; posición 0
                       00041 
-MPASM  5.50                        NIBLES.ASM   3-12-2021  8:56:10         PAGE  2
+MPASM  5.50                        NIBLES.ASM   3-22-2021  20:23:55         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -113,57 +113,40 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 000F   0805           00079         MOVF            PORTA,W                 ;   W = 1010 1111
 0010   00A0           00080         MOVWF           NIBLES                  ;   NIBLES = 1010 1111
 0011   0E20           00081         SWAPF           NIBLES,W                ;   W = 1111 1010
-0012   390F           00082         ANDLW           0X0F                    ;   W = 1111 1010 AND 0000 1111
+0012   390F           00082         ANDLW           0X0F                            ;   W = 1111 1010 AND 0000 1111
 0013   00A3           00083         MOVWF           ICO_8                   ;   ICO_8 = 0000 1010
                       00084 
-MPASM  5.50                        NIBLES.ASM   3-12-2021  8:56:10         PAGE  3
+MPASM  5.50                        NIBLES.ASM   3-22-2021  20:23:55         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0014   0820           00085         MOVF            NIBLES,W                ;  W = NIBLES = 1010 1111 
-0015   390F           00086         ANDLW           0X0F                    ;  W = 1010 1111 AND 0000 1111 = 0000 1111
+0014   0820           00085         MOVF            NIBLES,W                        ;  W = NIBLES = 1010 1111 
+0015   390F           00086         ANDLW           0X0F                            ;  W = 1010 1111 AND 0000 1111 = 0000 1111
                       00087         
 0016   0723           00088         ADDWF           ICO_8, W                        ;  W = 0000 1010 + 0000 1111 = 0001 1000
 0017   00A1           00089         MOVWF           SUMA_PORTA               ;  SUMA_PORTA = 0001 1001  
                       00090                  
                       00091         ;CLRF           NIBLES                  ;   LIMPIAR/COLOCAR EN CEROS LA VARIABLE NIBLES
-0018   2023           00092         CALL            RETARDO_400ms
-0019   0807           00093         MOVF            PORTC,W                 ;   W = 1101 0001
-001A   00A0           00094         MOVWF           NIBLES                  ;   NIBLES = 1101 0001
-001B   0E20           00095         SWAPF           NIBLES,W                ;   W = 0001 1101
-001C   390F           00096         ANDLW           0X0F                    ;   W = 0001 1101 AND 0000 1111
-001D   00A3           00097         MOVWF           ICO_8                   ;   ICO_8 = 0000 1101
+                      00092 
+0018   0807           00093         MOVF            PORTC,W                 ;   W = 1101 0001
+0019   00A0           00094         MOVWF           NIBLES                  ;   NIBLES = 1101 0001
+001A   0E20           00095         SWAPF           NIBLES,W                ;   W = 0001 1101
+001B   390F           00096         ANDLW           0X0F                            ;   W = 0001 1101 AND 0000 1111
+001C   00A3           00097         MOVWF           ICO_8                   ;   ICO_8 = 0000 1101
                       00098 
-001E   0820           00099         MOVF            NIBLES,W                ;  W = NIBLES = 1101 0001
-001F   390F           00100         ANDLW           0X0F                    ;  W = 1101 0001 AND 0000 1111 = 0000 0001
+001D   0820           00099         MOVF            NIBLES,W                        ;  W = NIBLES = 1101 0001
+001E   390F           00100         ANDLW           0X0F                            ;  W = 1101 0001 AND 0000 1111 = 0000 0001
                       00101         
-0020   0723           00102         ADDWF           ICO_8, W                        ;  W = 0000 1101 + 0000 0001 = 0001 1000 = 0000 
+001F   0723           00102         ADDWF           ICO_8, W                        ;  W = 0000 1101 + 0000 0001 = 0001 1000 = 0000 
                             1110
                       00103 
-0021   0721           00104         ADDWF           SUMA_PORTA,W    ; SE SUMA 0001 1001 + 0000 1110 = 0010 0111
-0022   0086           00105         MOVWF           PORTB                   ; SE MUESTRA AL PUERTOB
-                      00106 
-0023                  00107 RETARDO_400ms
-                      00108         ;PIC Time Delay = 0,40000100 s with Osc = 4000000 Hz
-0023   3003           00109                 movlw   D'3'
-0024   00D2           00110                 movwf   CounterC
-0025   3008           00111                 movlw   D'8'
-0026   00D1           00112                 movwf   CounterB
-0027   3076           00113                 movlw   D'118'
-0028   00D0           00114                 movwf   CounterA
-0029   0BD0           00115 loop            decfsz  CounterA,1
-002A   2829           00116                 goto    loop
-002B   0BD1           00117                 decfsz  CounterB,1
-002C   2829           00118                 goto    loop
-002D   0BD2           00119                 decfsz  CounterC,1
-002E   2829           00120                 goto    loop
-002F   3400           00121                 retlw   0
-0030   0008           00122                 RETURN 
+0020   0721           00104         ADDWF           SUMA_PORTA,W    ; SE SUMA 0001 1001 + 0000 1110 = 0010 0111
+0021   0086           00105         MOVWF           PORTB                   ; SE MUESTRA AL PUERTOB
 Warning[205]: Found directive in column 1. (END)
-                      00123 END
-MPASM  5.50                        NIBLES.ASM   3-12-2021  8:56:10         PAGE  4
+                      00106 END
+MPASM  5.50                        NIBLES.ASM   3-22-2021  20:23:55         PAGE  4
 
 
 SYMBOL TABLE
@@ -222,7 +205,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM  5.50                        NIBLES.ASM   3-12-2021  8:56:10         PAGE  5
+MPASM  5.50                        NIBLES.ASM   3-22-2021  20:23:55         PAGE  5
 
 
 SYMBOL TABLE
@@ -281,7 +264,7 @@ CCPR2L                            0000001B
 CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
-MPASM  5.50                        NIBLES.ASM   3-12-2021  8:56:10         PAGE  6
+MPASM  5.50                        NIBLES.ASM   3-22-2021  20:23:55         PAGE  6
 
 
 SYMBOL TABLE
@@ -340,7 +323,7 @@ ICO_8                             00000023
 INDF                              00000000
 INICIO                            00000001
 INTCON                            0000000B
-MPASM  5.50                        NIBLES.ASM   3-12-2021  8:56:10         PAGE  7
+MPASM  5.50                        NIBLES.ASM   3-22-2021  20:23:55         PAGE  7
 
 
 SYMBOL TABLE
@@ -399,7 +382,7 @@ OSTS                              00000003
 P                                 00000004
 P1M0                              00000006
 P1M1                              00000007
-MPASM  5.50                        NIBLES.ASM   3-12-2021  8:56:10         PAGE  8
+MPASM  5.50                        NIBLES.ASM   3-22-2021  20:23:55         PAGE  8
 
 
 SYMBOL TABLE
@@ -458,7 +441,7 @@ RB5                               00000005
 RB6                               00000006
 RB7                               00000007
 RBIE                              00000003
-MPASM  5.50                        NIBLES.ASM   3-12-2021  8:56:10         PAGE  9
+MPASM  5.50                        NIBLES.ASM   3-22-2021  20:23:55         PAGE  9
 
 
 SYMBOL TABLE
@@ -496,7 +479,6 @@ RE1                               00000001
 RE2                               00000002
 RE3                               00000003
 READ_WRITE                        00000002
-RETARDO_400ms                     00000023
 RP0                               00000005
 RP1                               00000006
 RSEN                              00000001
@@ -517,13 +499,13 @@ SPEN                              00000007
 SR0                               00000006
 SR1                               00000007
 SRCON                             00000185
-MPASM  5.50                        NIBLES.ASM   3-12-2021  8:56:10         PAGE 10
+SREN                              00000005
+MPASM  5.50                        NIBLES.ASM   3-22-2021  20:23:55         PAGE 10
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-SREN                              00000005
 SSPADD                            00000093
 SSPBUF                            00000013
 SSPCON                            00000014
@@ -576,13 +558,13 @@ TMR1IF                            00000000
 TMR1L                             0000000E
 TMR1ON                            00000000
 TMR2                              00000011
-MPASM  5.50                        NIBLES.ASM   3-12-2021  8:56:10         PAGE 11
+TMR2IE                            00000001
+MPASM  5.50                        NIBLES.ASM   3-22-2021  20:23:55         PAGE 11
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-TMR2IE                            00000001
 TMR2IF                            00000001
 TMR2ON                            00000002
 TOUTPS0                           00000003
@@ -635,13 +617,13 @@ TUN0                              00000000
 TUN1                              00000001
 TUN2                              00000002
 TUN3                              00000003
-MPASM  5.50                        NIBLES.ASM   3-12-2021  8:56:10         PAGE 12
+TUN4                              00000004
+MPASM  5.50                        NIBLES.ASM   3-22-2021  20:23:55         PAGE 12
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-TUN4                              00000004
 TX8_9                             00000006
 TX9                               00000006
 TX9D                              00000000
@@ -694,13 +676,13 @@ _BOR4V_BOR40V                     00003FFF
 _BOREN_NSLEEP                     00003EFF
 _BOREN_OFF                        00003CFF
 _BOREN_ON                         00003FFF
-MPASM  5.50                        NIBLES.ASM   3-12-2021  8:56:10         PAGE 13
+_BOREN_SBODEN                     00003DFF
+MPASM  5.50                        NIBLES.ASM   3-22-2021  20:23:55         PAGE 13
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-_BOREN_SBODEN                     00003DFF
 _BOR_NSLEEP                       00003EFF
 _BOR_OFF                          00003CFF
 _BOR_ON                           00003FFF
@@ -753,28 +735,27 @@ _WDT_OFF                          00003FF7
 _WDT_ON                           00003FFF
 _WRT_1FOURTH                      00003BFF
 _WRT_256                          00003DFF
-MPASM  5.50                        NIBLES.ASM   3-12-2021  8:56:10         PAGE 14
+_WRT_HALF                         000039FF
+MPASM  5.50                        NIBLES.ASM   3-22-2021  20:23:55         PAGE 14
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-_WRT_HALF                         000039FF
 _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
-loop                              00000029
 
 
 MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
 
-0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX X---------------
+0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XX-------------- ----------------
 2000 : -------XX------- ---------------- ---------------- ----------------
 
 All other memory blocks unused.
 
-Program Memory Words Used:    49
-Program Memory Words Free:  8143
+Program Memory Words Used:    34
+Program Memory Words Free:  8158
 
 
 Errors   :     0

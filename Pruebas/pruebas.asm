@@ -30,67 +30,83 @@
 ;**********************************************************************
 
 
-	list		p=16f887	; list directive to define processor
-	#include	<p16f887.inc>	; processor specific variable definitions
+list		p=16f887	; list directive to define processor
+#include	<p16f887.inc>	; processor specific variable definitions
 
 
 	__CONFIG    _CONFIG1, _LVP_OFF & _FCMEN_ON & _IESO_OFF & _BOR_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _PWRTE_ON & _WDT_OFF & _INTRC_OSC_NOCLKOUT
 	__CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
 
-
 ;**********************************************************************
-	ORG     0x000             ; processor reset vector
+ORG     0x000             ; processor reset vector
 
-	SUMA
-	SUMA_1
-	SUMA_2
-	ADENDO
-	RESU
+CBLOCK 0X20
+	Contador
+ENDC
 
-	NOP
-	GOTO INICIO
+GOTO 	INICIO           ; go to beginning of program
 
-INICIO:
-	BSF STATUS, RP0
-
-	MOVLW D'255'	;MANDAR 11111111 A LA ENTRADA
-	MOVWF TRISA		;PUERTO A COMO ENTRADA
-
-	MOVLW 0X00		;MANDAR 0 A LA SALIDA
-	MOVWF TRISB		;PUERTO B COMO SALIDA
-
-	MOVLW D'255'	;MANDAR 11111111 A LA ENTRADA
-	MOVWF TRISC		;PUERTO C COMO ENTRADA
-
-
-	BSF STATUS, RP1
-
-	MOVLW	0X00			
-	MOVWF 	ANSEL			
-	CLRF	ANSELH
-
-
-	BCF STATUS, RP0
-	BCF STATUS, RP1
+INICIO
+; SE ACCEDE AL BANCO 1 PARA USAR LOS TRIS
+	BSF STATUS, RP0 
+; SE CONFIGURA EL PUERTO B COMO SALIDA
+	MOVLW 		0X00		;W = 00000000
+	MOVWF 		TRISB		;PUERTO B COMO SALIDA
 	
-	CLRF PORTA
-	CLRF PORTB
-	CLRF PORTC
+;SE ACCEDE AL BANCO 3 PARA LOS ANSEL, ANSELH
+	BSF 			STATUS, RP1
+;SE LIMPIAN (coloca 0's)LOS REGISTROS ANSEL, ANSELH PARA E/S DIGITAL
+	CLRF 		ANSEL
+	CLRF 		ANSELH
+
+;SE ACCEDE AL BANCO 0 PARA LOS PUERTOS
+	BCF 			STATUS, RP1
+	BCF 			STATUS, RP0
+;SE COLOCA EN CEROS LOS PUERTOS
+	CLRF 		PORTB
+REINICIAR
+	CLRF			Contador
+
+PRINCIPAL:
+	CALL 		TABLA
+	MOVWF		PORTB
+	CALL 		RETARDO_400ms
+	INCF			Contador, F	
+
+	MOVLW		.6
+	XORWF		Contador
+	BTFSS		STATUS, Z 	; Si Z = 1
+	GOTO 		PRINCIPAL
+	GOTO 		REINICIAR
+
+
+TABLA:
 	
-CARGAR:  	
-	MOVF PORTA,W	;VAMOS A LEER EL PUERTO A Y SE QUEDA EN W
-	MOVWF SUMA		;LA INFO DEL PUERTO A, SE QUEDA EN SUMA
+	RETLW		b'10000001'
+	RETLW		b'01000010'
+	RETLW		b'00100100'
+	RETLW		b'00011000'
+	RETLW		b'00100100'
+	RETLW		b'01000010'
 
-	MOVF PORTC,W	;VAMOS A LEER EL PUERTO C Y SE QUEDA EN W
-	MOVWF ADENDO	;LA INFO DEL PUERTO C, SE QUEDA EN ADENDO
+RETARDO_400ms:
+		movlw	D'3'
+		movwf	CounterC
+		movlw	D'8'
+		movwf	CounterB
+		movlw	D'118'
+		movwf	CounterA
+loop		decfsz	CounterA,1
+		goto	loop
+		decfsz	CounterB,1
+		goto	loop
+		decfsz	CounterC,1
+		goto	loop
+		retlw	0
+		RETURN
 
-	MOVF SUMA,W		;LEEMOS LA VARIABLE SUMA Y SE QUEDA EN W
-	ADDWF ADENDO,W	;SUMAMOS W CON ADENDO
-	MOVF ADENDO, RESU
 
-	MOVF RESU,W
-	MOVWF PORTB	;AQUI SE MOSTRARÁ EL RESULTADO DE LA SUMA
-	GOTO CARGAR
 
-END              
 
+
+	END   
