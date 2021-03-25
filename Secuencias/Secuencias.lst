@@ -1,4 +1,4 @@
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  1
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:57:50         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -31,41 +31,41 @@ Warning[205]: Found directive in column 1. (CBLOCK)
 Warning[205]: Found directive in column 1. (ENDC)
                       00012 ENDC
                       00013 
-                      00014 
 Warning[203]: Found opcode in column 1. (GOTO)
-0000   2801           00015 GOTO PUERTOS ; Comienzo del programa
-                      00016 
-0001                  00017 PUERTOS:
-                      00018 ; SE ACCEDE AL BANCO 1 PARA USAR LOS TRIS
-0001   1683           00019         BSF                     STATUS, RP0 
-                      00020 ; SE CONFIGURAN LOS PUERTOS DE ENTRADAS Y SALIDAS
-0002   30FF           00021         MOVLW           0XFF                                    ;W = 11111111
+0000   2801           00014 GOTO PUERTOS ; Comienzo del programa
+                      00015 
+0001                  00016 PUERTOS:
+                      00017 ; SE ACCEDE AL BANCO 1 PARA USAR LOS TRIS
+0001   1683           00018         BSF                     STATUS, RP0 
+                      00019 ; SE CONFIGURAN LOS PUERTOS DE ENTRADAS Y SALIDAS
+0002   30FF           00020         MOVLW           0XFF                                    ;W = 11111111
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0003   0085           00022         MOVWF           TRISA                           ;PUERTO A COMO ENTRADA
-0004   3000           00023         MOVLW           0X00                            ;W=00000000
+0003   0085           00021         MOVWF           TRISA                           ;PUERTO A COMO ENTRADA
+0004   3000           00022         MOVLW           0X00                            ;W=00000000
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0005   0086           00024         MOVWF           TRISB                           ;PUERTO B COMO SALIDA
-                      00025 
-                      00026 ;SE ACCEDE AL BANCO 3 PARA LOS ANSEL, ANSELH
-0006   1703           00027         BSF                     STATUS, RP1
-                      00028 ;SE LIMPIAN (coloca 0's)LOS REGISTROS ANSEL, ANSELH PARA E/S DIGITAL
+0005   0086           00023         MOVWF           TRISB                           ;PUERTO B COMO SALIDA
+                      00024 
+                      00025 ;SE ACCEDE AL BANCO 3 PARA LOS ANSEL, ANSELH
+0006   1703           00026         BSF                     STATUS, RP1
+                      00027 ;SE LIMPIAN (coloca 0's)LOS REGISTROS ANSEL, ANSELH PARA E/S DIGITAL
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0007   0188           00029         CLRF            ANSEL
+0007   0188           00028         CLRF            ANSEL
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0008   0189           00030         CLRF            ANSELH
-                      00031 
-                      00032 ;SE ACCEDE AL BANCO 0 PARA LOS PUERTOS
-0009   1303           00033         BCF                     STATUS, RP1
-000A   1283           00034         BCF                     STATUS, RP0
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  2
+0008   0189           00029         CLRF            ANSELH
+                      00030 
+                      00031 ;SE ACCEDE AL BANCO 0 PARA LOS PUERTOS
+0009   1303           00032         BCF                     STATUS, RP1
+000A   1283           00033         BCF                     STATUS, RP0
+                      00034 ;SE COLOCA EN CEROS LOS PUERTOS
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:57:50         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00035 ;SE COLOCA EN CEROS LOS PUERTOS
-000B   0186           00036         CLRF            PORTB
-000C   0185           00037         CLRF            PORTA
+000B   0186           00035         CLRF            PORTB
+000C   0185           00036         CLRF            PORTA
+                      00037 
                       00038 
 000D                  00039 INICIO:
 000D   1805           00040         BTFSC           PORTA,0                 ;Está en 0
@@ -82,148 +82,149 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0013   1885           00051         BTFSC           PORTA,1         ;Está en 0
 0014   284B           00052         GOTO            SEC3            ;NO
 0015   2830           00053         GOTO            SEC1            ;SI     
-                      00054 ; ------------------------------------------------SEC 0-------------------------------------
-0016                  00055 SEC0:
-0016   1003           00056         BCF                     STATUS, C
-0017   3001           00057         MOVLW           b'00000001'             ;ENCENDER EL BIT 0
-0018   0086           00058         MOVWF           PORTB
-0019   205D           00059         CALL            RETARDO_400ms
-                      00060 
-001A                  00061 CARGAR_DATOS_IZQ:
-001A   1F86           00062         BTFSS           PORTB, 7                        ;EL BIT 7 DEL PUERTO B ESTÁ EN ¿1?
-001B   2820           00063         GOTO            CERO                    ;SINO ESTÁ EN 1 
-001C   2824           00064         GOTO            UNO                             ;ESTÁ EN 1
-                      00065 
-001D                  00066 CARGAR_DATOS_DER:
-001D   1C86           00067         BTFSS           PORTB, 1                        ;EL BIT 1  DEL PUERTO B ESTÁ EN ¿1?
-001E   2828           00068         GOTO            CERO_D                  ;SINO ESTÁ EN 1 
-001F   282C           00069         GOTO            FINAL                   ;ESTÁ EN 1
-                      00070 
-0020                  00071 CERO:
-0020   0D06           00072         RLF                     PORTB, 0
-0021   0086           00073         MOVWF           PORTB
-0022   205D           00074         CALL            RETARDO_400ms
-0023   281A           00075         GOTO            CARGAR_DATOS_IZQ
-0024                  00076 UNO:
-0024   0C06           00077         RRF                     PORTB, 0 
-0025   0086           00078         MOVWF           PORTB
-0026   205D           00079         CALL            RETARDO_400ms
-0027   281D           00080         GOTO            CARGAR_DATOS_DER
-                      00081 
-0028                  00082 CERO_D:
-0028   0C06           00083         RRF                     PORTB, 0
-0029   0086           00084         MOVWF           PORTB
-002A   205D           00085         CALL            RETARDO_400ms
-002B   281D           00086         GOTO            CARGAR_DATOS_DER
-                      00087 
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  3
+                      00054 
+                      00055 
+                      00056 ; ------------------------------------------------SEC 0-------------------------------------
+0016                  00057 SEC0:
+0016   1003           00058         BCF                     STATUS, C
+0017   3001           00059         MOVLW           b'00000001'             ;ENCENDER EL BIT 0
+0018   0086           00060         MOVWF           PORTB
+0019   205D           00061         CALL            RETARDO_400ms
+                      00062 
+001A                  00063 CARGAR_DATOS_IZQ:
+001A   1F86           00064         BTFSS           PORTB, 7                        ;EL BIT 7 DEL PUERTO B ESTÁ EN ¿1?
+001B   2820           00065         GOTO            CERO                    ;SINO ESTÁ EN 1 
+001C   2824           00066         GOTO            UNO                             ;ESTÁ EN 1
+                      00067 
+001D                  00068 CARGAR_DATOS_DER:
+001D   1C86           00069         BTFSS           PORTB, 1                        ;EL BIT 1  DEL PUERTO B ESTÁ EN ¿1?
+001E   2828           00070         GOTO            CERO_D                  ;SINO ESTÁ EN 1 
+001F   282C           00071         GOTO            FINAL                   ;ESTÁ EN 1
+                      00072 
+0020                  00073 CERO:
+0020   0D06           00074         RLF                     PORTB, 0
+0021   0086           00075         MOVWF           PORTB
+0022   205D           00076         CALL            RETARDO_400ms
+0023   281A           00077         GOTO            CARGAR_DATOS_IZQ
+0024                  00078 UNO:
+0024   0C06           00079         RRF                     PORTB, 0 
+0025   0086           00080         MOVWF           PORTB
+0026   205D           00081         CALL            RETARDO_400ms
+0027   281D           00082         GOTO            CARGAR_DATOS_DER
+                      00083 
+0028                  00084 CERO_D:
+0028   0C06           00085         RRF                     PORTB, 0
+0029   0086           00086         MOVWF           PORTB
+002A   205D           00087         CALL            RETARDO_400ms
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:57:50         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-002C                  00088 FINAL:
-002C   1003           00089         BCF                     STATUS, C
-002D   3001           00090         MOVLW           b'00000001'                     ;ENCENDER EL BIT 0
-002E   0086           00091         MOVWF           PORTB
-002F   280D           00092         GOTO            INICIO
-                      00093 
-                      00094 ; ------------------------------------------------SEC 1-------------------------------------
-0030                  00095 SEC1:
-0030   1003           00096         BCF                     STATUS, C
-0031   3001           00097         MOVLW           b'00000001'             ;ENCENDER EL BIT 0
-0032   0086           00098         MOVWF           PORTB
-0033   205D           00099         CALL            RETARDO_400ms
-                      00100 
-0034                  00101 CARGAR_DATOS_IZQ_SEC1:
-0034   1F86           00102         BTFSS           PORTB, 7                        ;EL BIT 7 DEL PUERTO B ESTÁ EN ¿1?
-0035   2837           00103         GOTO            CERO_SEC1               ;SINO ESTÁ EN 1 
-0036   283B           00104         GOTO            UNO_SEC1                ;ESTÁ EN 1
-                      00105 
-0037                  00106 CERO_SEC1:
-0037   0D06           00107         RLF                     PORTB, 0
-0038   0086           00108         MOVWF           PORTB
-0039   205D           00109         CALL            RETARDO_400ms
-003A   2834           00110         GOTO            CARGAR_DATOS_IZQ_SEC1   
-                      00111 
-003B                  00112 UNO_SEC1:
-003B   280D           00113         GOTO INICIO
-                      00114 ; ------------------------------------------------SEC 2-------------------------------------
-003C                  00115 SEC2:
-003C   1003           00116         BCF                     STATUS, C
-003D   3080           00117         MOVLW           b'10000000'                     ;ENCENDER EL BIT 7
-003E   0086           00118         MOVWF           PORTB
-003F   205D           00119         CALL            RETARDO_400ms
-                      00120 
-0040                  00121 CARGAR_DATOS_DER_SEC2:
-0040   1C06           00122         BTFSS           PORTB, 0                                ;EL BIT 0  DEL PUERTO B ESTÁ EN ¿1?
-0041   2843           00123         GOTO            CERO_D_SEC2                     ;SINO ESTÁ EN 1 
-0042   2847           00124         GOTO            UNO_D_SEC2                      ;ESTÁ EN 1
-                      00125 
-0043                  00126 CERO_D_SEC2:
-0043   0C06           00127         RRF                     PORTB, 0
-0044   0086           00128         MOVWF           PORTB
-0045   205D           00129         CALL            RETARDO_400ms
-0046   2840           00130         GOTO            CARGAR_DATOS_DER_SEC2
-                      00131 
-0047                  00132 UNO_D_SEC2:
-0047   1003           00133         BCF                     STATUS, C
-0048   3001           00134         MOVLW           b'00000001'                     ;ENCENDER EL BIT 0
-0049   0086           00135         MOVWF           PORTB
-004A   280D           00136         GOTO            INICIO
-                      00137 
-                      00138 ; ------------------------------------------------SEC 3-------------------------------------
-004B                  00139 SEC3:
-004B   01A4           00140         CLRF                    Contador
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  4
+002B   281D           00088         GOTO            CARGAR_DATOS_DER
+                      00089 
+002C                  00090 FINAL:
+002C   1003           00091         BCF                     STATUS, C
+002D   3001           00092         MOVLW           b'00000001'                     ;ENCENDER EL BIT 0
+002E   0086           00093         MOVWF           PORTB
+002F   280D           00094         GOTO            INICIO
+                      00095 
+                      00096 ; ------------------------------------------------SEC 1-------------------------------------
+0030                  00097 SEC1:
+0030   1003           00098         BCF                     STATUS, C
+0031   3001           00099         MOVLW           b'00000001'             ;ENCENDER EL BIT 0
+0032   0086           00100         MOVWF           PORTB
+0033   205D           00101         CALL            RETARDO_400ms
+                      00102 
+0034                  00103 CARGAR_DATOS_IZQ_SEC1:
+0034   1F86           00104         BTFSS           PORTB, 7                        ;EL BIT 7 DEL PUERTO B ESTÁ EN ¿1?
+0035   2837           00105         GOTO            CERO_SEC1               ;SINO ESTÁ EN 1 
+0036   283B           00106         GOTO            UNO_SEC1                ;ESTÁ EN 1
+                      00107 
+0037                  00108 CERO_SEC1:
+0037   0D06           00109         RLF                     PORTB, 0
+0038   0086           00110         MOVWF           PORTB
+0039   205D           00111         CALL            RETARDO_400ms
+003A   2834           00112         GOTO            CARGAR_DATOS_IZQ_SEC1   
+                      00113 
+003B                  00114 UNO_SEC1:
+003B   280D           00115         GOTO INICIO
+                      00116 ; ------------------------------------------------SEC 2-------------------------------------
+003C                  00117 SEC2:
+003C   1003           00118         BCF                     STATUS, C
+003D   3080           00119         MOVLW           b'10000000'                     ;ENCENDER EL BIT 7
+003E   0086           00120         MOVWF           PORTB
+003F   205D           00121         CALL            RETARDO_400ms
+                      00122 
+0040                  00123 CARGAR_DATOS_DER_SEC2:
+0040   1C06           00124         BTFSS           PORTB, 0                                ;EL BIT 0  DEL PUERTO B ESTÁ EN ¿1?
+0041   2843           00125         GOTO            CERO_D_SEC2                     ;SINO ESTÁ EN 1 
+0042   2847           00126         GOTO            UNO_D_SEC2                      ;ESTÁ EN 1
+                      00127 
+0043                  00128 CERO_D_SEC2:
+0043   0C06           00129         RRF                     PORTB, 0
+0044   0086           00130         MOVWF           PORTB
+0045   205D           00131         CALL            RETARDO_400ms
+0046   2840           00132         GOTO            CARGAR_DATOS_DER_SEC2
+                      00133 
+0047                  00134 UNO_D_SEC2:
+0047   1003           00135         BCF                     STATUS, C
+0048   3001           00136         MOVLW           b'00000001'                     ;ENCENDER EL BIT 0
+0049   0086           00137         MOVWF           PORTB
+004A   280D           00138         GOTO            INICIO
+                      00139 
+                      00140 ; ------------------------------------------------SEC 3-------------------------------------
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:57:50         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00141         
-                      00142 
-004C                  00143 PRIN_SEC3
-004C   0824           00144         MOVF            Contador, W
-004D   2056           00145         CALL            TABLA
-004E   0086           00146         MOVWF           PORTB
-004F   205D           00147         CALL            RETARDO_400ms
-0050   0AA4           00148         INCF                    Contador, F     
-                      00149 
-0051   3006           00150         MOVLW           .6
-0052   0624           00151         XORWF           Contador,W
-0053   1D03           00152         BTFSS           STATUS, Z       ; Si Z = 1
-0054   284C           00153         GOTO            PRIN_SEC3
-0055   280D           00154         GOTO            INICIO
-                      00155         
-0056                  00156 TABLA:
-0056   0782           00157         ADDWF           PCL, F
-0057   3481           00158         RETLW           b'10000001'
-0058   3442           00159         RETLW           b'01000010'
-0059   3424           00160         RETLW           b'00100100'
-005A   3418           00161         RETLW           b'00011000'
-005B   3424           00162         RETLW           b'00100100'
-005C   3442           00163         RETLW           b'01000010'
-                      00164 
-005D                  00165 RETARDO_400ms:
-005D   3003           00166                 movlw   D'3'
-005E   00A2           00167                 movwf   CounterC
-005F   3008           00168                 movlw   D'8'
-0060   00A1           00169                 movwf   CounterB
-0061   3076           00170                 movlw   D'118'
-0062   00A0           00171                 movwf   CounterA
-0063   0BA0           00172 loop            decfsz  CounterA,1
-0064   2863           00173                 goto    loop
-0065   0BA1           00174                 decfsz  CounterB,1
-0066   2863           00175                 goto    loop
-0067   0BA2           00176                 decfsz  CounterC,1
-0068   2863           00177                 goto    loop
-0069   3400           00178                 retlw   0
-006A   0008           00179                 RETURN
-                      00180 
-                      00181 
+004B                  00141 SEC3:
+004B   01A4           00142         CLRF                    Contador
+                      00143         
+                      00144 
+004C                  00145 PRIN_SEC3
+004C   0824           00146         MOVF            Contador, W
+004D   2056           00147         CALL            TABLA
+004E   0086           00148         MOVWF           PORTB
+004F   205D           00149         CALL            RETARDO_400ms
+0050   0AA4           00150         INCF                    Contador, F     
+                      00151 
+0051   3006           00152         MOVLW           .6
+0052   0624           00153         XORWF           Contador,W
+0053   1D03           00154         BTFSS           STATUS, Z       ; Si Z = 1      se coloca Z en 1 únicamente cuando la operación 
+                            da cero.
+0054   284C           00155         GOTO            PRIN_SEC3
+0055   280D           00156         GOTO            INICIO
+                      00157         
+0056                  00158 TABLA:
+0056   0782           00159         ADDWF           PCL, F
+0057   3481           00160         RETLW           b'10000001'
+0058   3442           00161         RETLW           b'01000010'
+0059   3424           00162         RETLW           b'00100100'
+005A   3418           00163         RETLW           b'00011000'
+005B   3424           00164         RETLW           b'00100100'
+005C   3442           00165         RETLW           b'01000010'
+                      00166 
+005D                  00167 RETARDO_400ms:
+005D   3003           00168                 movlw   D'3'
+005E   00A2           00169                 movwf   CounterC
+005F   3008           00170                 movlw   D'8'
+0060   00A1           00171                 movwf   CounterB
+0061   3076           00172                 movlw   D'118'
+0062   00A0           00173                 movwf   CounterA
+0063   0BA0           00174 loop            decfsz  CounterA,1
+0064   2863           00175                 goto    loop
+0065   0BA1           00176                 decfsz  CounterB,1
+0066   2863           00177                 goto    loop
+0067   0BA2           00178                 decfsz  CounterC,1
+0068   2863           00179                 goto    loop
+0069   3400           00180                 retlw   0
+006A   0008           00181                 RETURN
                       00182         END                      
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  5
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:57:50         PAGE  5
 
 
 SYMBOL TABLE
@@ -282,7 +283,7 @@ BRG5                              00000005
 BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  6
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:57:50         PAGE  6
 
 
 SYMBOL TABLE
@@ -341,7 +342,7 @@ CCPR1H                            00000016
 CCPR1L                            00000015
 CCPR2                             0000001B
 CCPR2H                            0000001C
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  7
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:57:50         PAGE  7
 
 
 SYMBOL TABLE
@@ -400,7 +401,7 @@ GCEN                              00000007
 GIE                               00000007
 GO                                00000001
 GO_DONE                           00000001
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  8
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:57:50         PAGE  8
 
 
 SYMBOL TABLE
@@ -459,7 +460,7 @@ NOT_W                             00000002
 NOT_WRITE                         00000002
 OERR                              00000001
 OPTION_REG                        00000081
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  9
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:57:50         PAGE  9
 
 
 SYMBOL TABLE
@@ -518,7 +519,7 @@ RA3                               00000003
 RA4                               00000004
 RA5                               00000005
 RA6                               00000006
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE 10
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:57:50         PAGE 10
 
 
 SYMBOL TABLE
@@ -577,7 +578,7 @@ R_W                               00000002
 S                                 00000003
 SBOREN                            00000004
 SCKP                              00000004
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE 11
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:57:50         PAGE 11
 
 
 SYMBOL TABLE
@@ -636,7 +637,7 @@ T1SYNC                            00000002
 T2CKPS0                           00000000
 T2CKPS1                           00000001
 T2CON                             00000012
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE 12
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:57:50         PAGE 12
 
 
 SYMBOL TABLE
@@ -695,7 +696,7 @@ TRISD                             00000088
 TRISD0                            00000000
 TRISD1                            00000001
 TRISD2                            00000002
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE 13
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:57:50         PAGE 13
 
 
 SYMBOL TABLE
@@ -754,7 +755,7 @@ WDTPS3                            00000004
 WPUB                              00000095
 WPUB0                             00000000
 WPUB1                             00000001
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE 14
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:57:50         PAGE 14
 
 
 SYMBOL TABLE
@@ -813,7 +814,7 @@ _IDLOC1                           00002001
 _IDLOC2                           00002002
 _IDLOC3                           00002003
 _IESO_OFF                         00003BFF
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE 15
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:57:50         PAGE 15
 
 
 SYMBOL TABLE

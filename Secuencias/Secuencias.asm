@@ -11,7 +11,6 @@ CBLOCK 0X20
 	CounterA, CounterB, CounterC, Aux, Contador
 ENDC
 
-
 GOTO PUERTOS ; Comienzo del programa
 
 PUERTOS:
@@ -36,6 +35,7 @@ PUERTOS:
 	CLRF 		PORTB
 	CLRF 		PORTA
 
+
 INICIO:
 	BTFSC		PORTA,0 		;Está en 0
 	GOTO 		TEST_2		;NO
@@ -51,6 +51,8 @@ TEST_2:
 	BTFSC		PORTA,1		;Está en 0
 	GOTO		SEC3		;NO
 	GOTO 		SEC1		;SI	
+
+
 ; ------------------------------------------------SEC 0-------------------------------------
 SEC0:
 	BCF			STATUS, C
@@ -139,7 +141,6 @@ UNO_D_SEC2:
 SEC3:
 	CLRF			Contador
 	
-
 PRIN_SEC3
 	MOVF		Contador, W
 	CALL 		TABLA
@@ -149,7 +150,7 @@ PRIN_SEC3
 
 	MOVLW		.6
 	XORWF		Contador,W
-	BTFSS		STATUS, Z 	; Si Z = 1
+	BTFSS		STATUS, Z 	; Si Z = 1      El bit Z se usa mucho para saber si un número es igual a otro.
 	GOTO 		PRIN_SEC3
 	GOTO 		INICIO
 	
@@ -177,6 +178,4 @@ loop		decfsz	CounterA,1
 		goto	loop
 		retlw	0
 		RETURN
-
-
 	END                      
