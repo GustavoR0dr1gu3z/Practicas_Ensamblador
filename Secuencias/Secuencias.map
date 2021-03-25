@@ -1,12 +1,11 @@
 MPLINK 4.48, Linker
-Linker Map File - Created Wed Mar 24 18:08:17 2021
+Linker Map File - Created Wed Mar 24 18:11:37 2021
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
                    .org_0       code   0x000000    program   0x000000
-                   .org_1       code   0x000000    program   0x000006
-                   .org_2       code   0x000004    program   0x0000f0
+                   .org_1       code   0x000000    program   0x0000d6
 .config_2007_SECUENCIAS.O       code   0x002007    program   0x000002
 .config_2008_SECUENCIAS.O       code   0x002008    program   0x000002
 
@@ -15,69 +14,68 @@ Linker Map File - Created Wed Mar 24 18:08:17 2021
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x000002      
-                            0x000004    0x00007b      
+                            0x000000    0x00006a      
                             0x002007    0x002008      
-            125 out of 8455 program addresses used, program memory utilization is 1%
+            109 out of 8455 program addresses used, program memory utilization is 1%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-         CARGAR_DATOS_DER   0x000022    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-    CARGAR_DATOS_DER_SEC2   0x00004d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-         CARGAR_DATOS_IZQ   0x00001f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-    CARGAR_DATOS_IZQ_SEC1   0x00003f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                     CERO   0x000025    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                   CERO_D   0x000031    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-              CERO_D_SEC2   0x000050    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                CERO_SEC1   0x000042    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                    FINAL   0x000037    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                   INICIO   0x000012    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                PRIN_SEC3   0x00005b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                  PUERTOS   0x000006    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-            RETARDO_400ms   0x00006e    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                     SEC0   0x00001b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                     SEC1   0x00003b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                     SEC2   0x000049    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                     SEC3   0x00005a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                    TABLA   0x000067    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                   TEST_1   0x000015    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                   TEST_2   0x000018    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                      UNO   0x00002b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-               UNO_D_SEC2   0x000056    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                 UNO_SEC1   0x000048    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                     loop   0x000074    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+         CARGAR_DATOS_DER   0x00001d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+    CARGAR_DATOS_DER_SEC2   0x000040    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+         CARGAR_DATOS_IZQ   0x00001a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+    CARGAR_DATOS_IZQ_SEC1   0x000034    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                     CERO   0x000020    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                   CERO_D   0x000028    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+              CERO_D_SEC2   0x000043    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                CERO_SEC1   0x000037    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                    FINAL   0x00002c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                   INICIO   0x00000d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                PRIN_SEC3   0x00004c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                  PUERTOS   0x000001    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+            RETARDO_400ms   0x00005d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                     SEC0   0x000016    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                     SEC1   0x000030    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                     SEC2   0x00003c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                     SEC3   0x00004b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                    TABLA   0x000056    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                   TEST_1   0x000010    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                   TEST_2   0x000013    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                      UNO   0x000024    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+               UNO_D_SEC2   0x000047    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                 UNO_SEC1   0x00003b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                     loop   0x000063    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
 
 
 
                               Symbols - Sorted by Address
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                  PUERTOS   0x000006    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                   INICIO   0x000012    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                   TEST_1   0x000015    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                   TEST_2   0x000018    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                     SEC0   0x00001b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-         CARGAR_DATOS_IZQ   0x00001f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-         CARGAR_DATOS_DER   0x000022    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                     CERO   0x000025    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                      UNO   0x00002b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                   CERO_D   0x000031    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                    FINAL   0x000037    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                     SEC1   0x00003b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-    CARGAR_DATOS_IZQ_SEC1   0x00003f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                CERO_SEC1   0x000042    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                 UNO_SEC1   0x000048    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                     SEC2   0x000049    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-    CARGAR_DATOS_DER_SEC2   0x00004d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-              CERO_D_SEC2   0x000050    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-               UNO_D_SEC2   0x000056    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                     SEC3   0x00005a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                PRIN_SEC3   0x00005b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                    TABLA   0x000067    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-            RETARDO_400ms   0x00006e    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
-                     loop   0x000074    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                  PUERTOS   0x000001    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                   INICIO   0x00000d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                   TEST_1   0x000010    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                   TEST_2   0x000013    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                     SEC0   0x000016    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+         CARGAR_DATOS_IZQ   0x00001a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+         CARGAR_DATOS_DER   0x00001d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                     CERO   0x000020    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                      UNO   0x000024    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                   CERO_D   0x000028    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                    FINAL   0x00002c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                     SEC1   0x000030    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+    CARGAR_DATOS_IZQ_SEC1   0x000034    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                CERO_SEC1   0x000037    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                 UNO_SEC1   0x00003b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                     SEC2   0x00003c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+    CARGAR_DATOS_DER_SEC2   0x000040    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+              CERO_D_SEC2   0x000043    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+               UNO_D_SEC2   0x000047    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                     SEC3   0x00004b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                PRIN_SEC3   0x00004c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                    TABLA   0x000056    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+            RETARDO_400ms   0x00005d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
+                     loop   0x000063    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Secuencias\Secuencias.asm
 
 
