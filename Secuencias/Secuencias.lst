@@ -1,4 +1,4 @@
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  18:11:36         PAGE  1
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                       00032 ;SE ACCEDE AL BANCO 0 PARA LOS PUERTOS
 0009   1303           00033         BCF                     STATUS, RP1
 000A   1283           00034         BCF                     STATUS, RP0
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  18:11:36         PAGE  2
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 002A   205D           00085         CALL            RETARDO_400ms
 002B   281D           00086         GOTO            CARGAR_DATOS_DER
                       00087 
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  18:11:36         PAGE  3
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00138 ; ------------------------------------------------SEC 3-------------------------------------
 004B                  00139 SEC3:
 004B   01A4           00140         CLRF                    Contador
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  18:11:36         PAGE  4
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -223,7 +223,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00180 
                       00181 
                       00182         END                      
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  18:11:36         PAGE  5
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  5
 
 
 SYMBOL TABLE
@@ -282,7 +282,7 @@ BRG5                              00000005
 BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  18:11:36         PAGE  6
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  6
 
 
 SYMBOL TABLE
@@ -341,7 +341,7 @@ CCPR1H                            00000016
 CCPR1L                            00000015
 CCPR2                             0000001B
 CCPR2H                            0000001C
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  18:11:36         PAGE  7
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  7
 
 
 SYMBOL TABLE
@@ -400,7 +400,7 @@ GCEN                              00000007
 GIE                               00000007
 GO                                00000001
 GO_DONE                           00000001
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  18:11:36         PAGE  8
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  8
 
 
 SYMBOL TABLE
@@ -459,7 +459,7 @@ NOT_W                             00000002
 NOT_WRITE                         00000002
 OERR                              00000001
 OPTION_REG                        00000081
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  18:11:36         PAGE  9
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE  9
 
 
 SYMBOL TABLE
@@ -518,7 +518,7 @@ RA3                               00000003
 RA4                               00000004
 RA5                               00000005
 RA6                               00000006
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  18:11:36         PAGE 10
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE 10
 
 
 SYMBOL TABLE
@@ -577,7 +577,7 @@ R_W                               00000002
 S                                 00000003
 SBOREN                            00000004
 SCKP                              00000004
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  18:11:36         PAGE 11
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE 11
 
 
 SYMBOL TABLE
@@ -636,7 +636,7 @@ T1SYNC                            00000002
 T2CKPS0                           00000000
 T2CKPS1                           00000001
 T2CON                             00000012
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  18:11:36         PAGE 12
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE 12
 
 
 SYMBOL TABLE
@@ -695,7 +695,7 @@ TRISD                             00000088
 TRISD0                            00000000
 TRISD1                            00000001
 TRISD2                            00000002
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  18:11:36         PAGE 13
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE 13
 
 
 SYMBOL TABLE
@@ -754,7 +754,7 @@ WDTPS3                            00000004
 WPUB                              00000095
 WPUB0                             00000000
 WPUB1                             00000001
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  18:11:36         PAGE 14
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE 14
 
 
 SYMBOL TABLE
@@ -813,7 +813,7 @@ _IDLOC1                           00002001
 _IDLOC2                           00002002
 _IDLOC3                           00002003
 _IESO_OFF                         00003BFF
-MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  18:11:36         PAGE 15
+MPASM  5.50                    SECUENCIAS.ASM   3-24-2021  19:13:44         PAGE 15
 
 
 SYMBOL TABLE
