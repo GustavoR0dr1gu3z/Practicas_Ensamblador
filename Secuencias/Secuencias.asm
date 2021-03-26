@@ -10,7 +10,7 @@ ORG 0x000 ; posición 0
 CBLOCK 0X20
 	CounterA, CounterB, CounterC, Aux, Contador
 ENDC
-
+NOP
 GOTO PUERTOS ; Comienzo del programa
 
 PUERTOS:
@@ -35,22 +35,26 @@ PUERTOS:
 	CLRF 		PORTB
 	CLRF 		PORTA
 
+	;BCF		STATUS,C
 
 INICIO:
-	BTFSC		PORTA,0 		;Está en 0
-	GOTO 		TEST_2		;NO
-	GOTO 		TEST_1		;SI
+	BTFSS		PORTA,0 		;Está en 1
+	GOTO 		Cero0		;NO
+	GOTO 		Uno0		;SI
 	
 
-TEST_1:
-	BTFSC 		PORTA,1		;Está en 0
-	GOTO 		SEC2		;NO
-	GOTO 		SEC0		;SI
+Uno0:
+	BTFSS 		PORTA,1		;Está en 1
+	GOTO 		SEC1		;NO
+	GOTO		SEC3		;SI
+	
 
-TEST_2:
-	BTFSC		PORTA,1		;Está en 0
-	GOTO		SEC3		;NO
-	GOTO 		SEC1		;SI	
+Cero0:
+	BTFSS		PORTA,1		;Está en 1
+	GOTO 		SEC0		;NO
+	GOTO 		SEC2		;SI
+
+	
 
 
 ; ------------------------------------------------SEC 0-------------------------------------
@@ -67,25 +71,22 @@ CARGAR_DATOS_IZQ:
 
 CARGAR_DATOS_DER:
 	BTFSS		PORTB, 1			;EL BIT 1  DEL PUERTO B ESTÁ EN ¿1?
-	GOTO		CERO_D			;SINO ESTÁ EN 1 
+	GOTO		UNO			;SINO ESTÁ EN 1 
 	GOTO 		FINAL			;ESTÁ EN 1
+
 
 CERO:
 	RLF 			PORTB, 0
 	MOVWF 		PORTB
 	CALL		RETARDO_400ms
-	GOTO 		CARGAR_DATOS_IZQ
-UNO:
-	RRF			PORTB, 0 
-	MOVWF 		PORTB
-	CALL		RETARDO_400ms
-	GOTO 		CARGAR_DATOS_DER
+	BTFSS		PORTA,0				;ESTÁ EN 1?
+	GOTO 		VERI					; NO
+	GOTO 		INICIO				;SI
 
-CERO_D:
-	RRF			PORTB, 0
-	MOVWF		PORTB
-	CALL		RETARDO_400ms
-	GOTO 		CARGAR_DATOS_DER
+VERI
+	BTFSS		PORTA,1				;ESTÁ EN 1?
+	GOTO 		CARGAR_DATOS_IZQ	;NO
+	GOTO 		INICIO				;SI
 
 FINAL:
 	BCF			STATUS, C
@@ -93,6 +94,24 @@ FINAL:
 	MOVWF 		PORTB
 	GOTO		INICIO
 
+UNO:
+	RRF			PORTB, 0 
+	MOVWF 		PORTB
+	CALL		RETARDO_400ms
+	BTFSS		PORTA,0				;ESTÁ EN 1?
+	GOTO 		VERI2				;NO
+	GOTO 		INICIO				;SI
+
+;CERO_D:
+;	RRF			PORTB, 0
+;	MOVWF		PORTB
+;	CALL		RETARDO_400ms
+;	GOTO 		CARGAR_DATOS_DER
+
+VERI2
+	BTFSS		PORTA,1				;ESTÁ EN 1?
+	GOTO 		CARGAR_DATOS_DER
+	GOTO 		INICIO
 ; ------------------------------------------------SEC 1-------------------------------------
 SEC1:
 	BCF			STATUS, C
@@ -109,7 +128,14 @@ CERO_SEC1:
 	RLF 			PORTB, 0
 	MOVWF 		PORTB
 	CALL		RETARDO_400ms
-	GOTO 		CARGAR_DATOS_IZQ_SEC1	
+	BTFSS		PORTA,0			;ESTÁ EN 1?
+	GOTO 		INICIO					;NO	
+	GOTO 		VERI3	;SI
+
+VERI3
+	BTFSS		PORTA,1			;ESTÁ EN 1?
+	GOTO 		CARGAR_DATOS_IZQ_SEC1
+	GOTO 		INICIO
 
 UNO_SEC1:
 	GOTO INICIO
@@ -129,6 +155,13 @@ CERO_D_SEC2:
 	RRF			PORTB, 0
 	MOVWF		PORTB
 	CALL		RETARDO_400ms
+	BTFSS		PORTA,0				;ESTÁ EN 1?
+	GOTO 		VERI4				;NO
+	GOTO 		INICIO				;SI
+
+VERI4
+	BTFSS		PORTA,1
+	GOTO 		INICIO
 	GOTO 		CARGAR_DATOS_DER_SEC2
 
 UNO_D_SEC2:
@@ -147,7 +180,15 @@ PRIN_SEC3
 	MOVWF		PORTB
 	CALL 		RETARDO_400ms
 	INCF			Contador, F	
+	BTFSS		PORTA,0
+	GOTO 		INICIO
+	GOTO 		VERI5
 
+VERI5:
+	BTFSS		PORTA,1
+	GOTO 		INICIO
+	GOTO 		CONTADOR
+CONTADOR:
 	MOVLW		.6
 	XORWF		Contador,W
 	BTFSS		STATUS, Z 	; Si Z = 1      El bit Z se usa mucho para saber si un número es igual a otro.
