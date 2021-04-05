@@ -42,7 +42,7 @@
 ORG     0x000					; processor reset vector
 
 CBLOCK 0X20
-				Contador, CounterA, CounterB, CounterC
+				Contador, CounterA, CounterB, CounterC, Co
 ENDC
 
 
@@ -55,6 +55,8 @@ PUERTOS:
 							; SE CONFIGURAN LOS PUERTOS DE ENTRADAS Y SALIDAS
 	MOVLW 		0X00		;W = 00000000
 	MOVWF 		TRISB		;PUERTO B COMO SALIDA
+	MOVLW		0X00
+	MOVWF		TRISC
 
 							;SE ACCEDE AL BANCO 3 PARA LOS ANSEL, ANSELH
 	BSF 			STATUS, RP1
@@ -67,30 +69,38 @@ PUERTOS:
 	BCF 			STATUS, RP0
 							;SE COLOCA EN CEROS LOS PUERTOS
 	CLRF 		PORTB
+	CLRF			PORTC
 
 INICIO:
 	CLRF 		Contador
-
-DISPLAY
+	CLRF			Co
+DISPLAY1:
 	MOVF		Contador,W
-	CALL		TABLA
+	MOVF		Contador,Co
+	CALL		TABLA1
 	MOVWF		PORTB
-	CALL		RETARDO_400ms
-	INCF			Contador, F
 
+DISPLAY2:
+	MOVF		Co,W
+	CALL 		TABLA2
+	MOVWF 		PORTC
+	CALL		RETARDO_400ms
+
+	INCF			Contador, F
+	INCF			Co,F
 
 CONTADOR:
-	MOVLW		.16
+	MOVLW		.26
 	XORWF		Contador,W
 	BTFSS		STATUS, Z 	; Si Z = 1      El bit Z se usa mucho para saber si un número es igual a otro.
-	GOTO 		DISPLAY
+	GOTO 		DISPLAY1
 	GOTO 		INICIO
 
 TABLA1:
-	ADDWF		PCL, 1
+	ADDWF		PCL, F
 	RETLW		b'11111011'	; G_1
 	RETLW		b'11111100'	; U_1
-	RETLW		b'10000011'	; S_1
+	RETLW		b'10111011'	; S_1
 	RETLW		b'00000011'	; T_1
 	RETLW		b'11001111'	; A_1
 	RETLW		b'11000000'	; V_1
@@ -116,7 +126,7 @@ TABLA1:
 	RETLW		b'00000000'	; ESPACIO
 
 TABLA2:
-	ADDWF 		PCL,1
+	ADDWF 		PCL,F
 	RETLW		b'00001000'	; G_2	
 	RETLW		b'00000000'	; U_2
 	RETLW		b'10001000'	; S_2
@@ -161,6 +171,4 @@ loop		decfsz	CounterA,1
 		goto	loop
 		retlw	0
 		RETURN
-
-
 END
