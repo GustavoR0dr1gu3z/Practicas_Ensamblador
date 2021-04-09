@@ -83,7 +83,7 @@ PRINT_M1DER2:
 	INCF			Co, F
 
 CONTADOR:
-	MOVLW		.26
+	MOVLW		.11
 	XORWF		Contador, W
 	BTFSS		STATUS, Z
 	GOTO		PRINT_M1DER
@@ -91,15 +91,89 @@ CONTADOR:
 
 ; ------------------------------------------------SEC 1-------------------------------------
 SEC1:						; M1 - IZQUIERDA
+	CLRF 		Contador
+	CLRF			Co
+
+PRINT_M1IZQ:
+	MOVF 		Contador, W
+	MOVF		Contador, Co
+	CALL		M1IZQ
+	MOVWF		PORTB
+
+PRINT_M1IZQ2:
+	MOVF		Co,W
+	CALL		M1IZQ2
+	MOVWF		PORTC
+	CALL 		RETARDO_400ms
+
+	INCF			Contador, F
+	INCF			Co, F
+
+CONTADOR:
+	MOVLW		.11
+	XORWF		Contador, W
+	BTFSS		STATUS, Z
+	GOTO		PRINT_M1IZQ
+	GOTO 		INICIO
+
 
 ; ------------------------------------------------SEC 2-------------------------------------
 SEC2:						; M2 - DERECHA
+	CLRF 		Contador
+	CLRF			Co
 
+PRINT_M1DER:
+	MOVF 		Contador, W
+	MOVF		Contador, Co
+	CALL		M1DER
+	MOVWF		PORTB
+
+PRINT_M1DER2:
+	MOVF		Co,W
+	CALL		M1DER2
+	MOVWF		PORTC
+	CALL 		RETARDO_400ms
+
+	INCF			Contador, F
+	INCF			Co, F
+
+CONTADOR:
+	MOVLW		.11
+	XORWF		Contador, W
+	BTFSS		STATUS, Z
+	GOTO		PRINT_M1DER
+	GOTO 		INICIO
 ; ------------------------------------------------SEC 3-------------------------------------
 SEC3:						; M3 - IZQUIERDA
+	CLRF 		Contador
+	CLRF			Co
 
+PRINT_M1DER:
+	MOVF 		Contador, W
+	MOVF		Contador, Co
+	CALL		M1DER
+	MOVWF		PORTB
+
+PRINT_M1DER2:
+	MOVF		Co,W
+	CALL		M1DER2
+	MOVWF		PORTC
+	CALL 		RETARDO_400ms
+
+	INCF			Contador, F
+	INCF			Co, F
+
+CONTADOR:
+	MOVLW		.11
+	XORWF		Contador, W
+	BTFSS		STATUS, Z
+	GOTO		PRINT_M1DER
+	GOTO 		INICIO
 ; -----------------------------------------------RETARDO---------------------------------
 
+
+
+; DISPLAY M1-DERECHA
 PRINT_M1DER:
 	ADDWF 		PCL, F
 	RETLW		b'00110011'	; M_1
@@ -110,10 +184,55 @@ PRINT_M1DER:
 	RETLW		b'00111000'	; R_1
 	RETLW		b'00001100'	; E_1
 	RETLW		b'00001100'	; C_1
-	RETLW		b''
+	RETLW		b'00110011'	; H_1
+	RETLW		b'00110000'	; A_1
+	RETLW		b'11111111'	; ESPACIO
+
+PRINT_M1DER2:
+	ADDWF		PCL, F
+	RETLW		b'11111010'	; M_2
+	RETLW		b'11111011'	; 1_2
+	RETLW 		b'01110111'	; -_2
+	RETLW		b'11011101'	; D_2
+	RETLW		b'01111111'	; E_2
+	RETLW		b'01100111'	; R_2
+	RETLW		b'01111111'	; E_2
+	RETLW		b'11111111'	; C_2
+	RETLW		b'01110111'	; H_2
+	RETLW		b'01110111'	; A_2
+	RETLW		b'11111111'	; ESPACIO
 
 
+; DISPLAY M1-IZQUIERDA
+PRINT_M1DER:
+	ADDWF 		PCL, F
+	RETLW		b'00110011'	; M_1
+	RETLW		b'11110011'	; 1_1
+	RETLW		b'11111111'	; -_1
+	RETLW		b'11000000'	; D_1
+	RETLW		b'00001100'	; E_1
+	RETLW		b'00111000'	; R_1
+	RETLW		b'00001100'	; E_1
+	RETLW		b'00001100'	; C_1
+	RETLW		b'00110011'	; H_1
+	RETLW		b'00110000'	; A_1
+	RETLW		b'11111111'	; ESPACIO
 
+PRINT_M1DER2:
+	ADDWF		PCL, F
+	RETLW		b'11111010'	; M_2
+	RETLW		b'11111011'	; 1_2
+	RETLW 		b'01110111'	; -_2
+	RETLW		b'11011101'	; D_2
+	RETLW		b'01111111'	; E_2
+	RETLW		b'01100111'	; R_2
+	RETLW		b'01111111'	; E_2
+	RETLW		b'11111111'	; C_2
+	RETLW		b'01110111'	; H_2
+	RETLW		b'01110111'	; A_2
+	RETLW		b'11111111'	; ESPACIO
+
+	
 
 RETARDO_400ms:
 		movlw	D'3'
