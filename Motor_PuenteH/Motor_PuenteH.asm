@@ -144,19 +144,19 @@ CONTADOR2:
 	GOTO		PRINT_M2DER
 	GOTO 		INICIO
 ; ------------------------------------------------SEC 3-------------------------------------
-SEC3:						; M3 - IZQUIERDA
+SEC3:						; M2 - IZQUIERDA
 	CLRF 		Contador
 	CLRF			Co
 
-PRINT_M3IZQ:
+PRINT_M2IZQ:
 	MOVF 		Contador, W
 	MOVF		Contador, Co
-	CALL		M3IZQ
+	CALL		M2IZQ
 	MOVWF		PORTB
 
-PRINT_M3IZQ:
+PRINT_M2IZQ2:
 	MOVF		Co,W
-	CALL		M3IZQ2
+	CALL		M2IZQ2
 	MOVWF		PORTC
 	CALL 		RETARDO_400ms
 
@@ -167,7 +167,7 @@ CONTADOR3:
 	MOVLW		.13
 	XORWF		Contador, W
 	BTFSS		STATUS, Z
-	GOTO		PRINT_M3IZQ
+	GOTO		PRINT_M2IZQ
 	GOTO 		INICIO
 
 ; DISPLAY M1-DERECHA
