@@ -8,7 +8,7 @@ list		p=16f887	; list directive to define processor
 
 ORG 0x000 ; posición 0
 CBLOCK 0X20
-	CounterA, CounterB, CounterC, Aux, Contador
+	CounterA, CounterB, CounterC, Aux, Contador, Co
 ENDC
 NOP
 GOTO PUERTOS ; Comienzo del programa
@@ -109,8 +109,8 @@ PRINT_M1IZQ2:
 	INCF			Contador, F
 	INCF			Co, F
 
-CONTADOR:
-	MOVLW		.11
+CONTADOR1:
+	MOVLW		.13
 	XORWF		Contador, W
 	BTFSS		STATUS, Z
 	GOTO		PRINT_M1IZQ
@@ -137,7 +137,7 @@ PRINT_M2DER2:
 	INCF			Contador, F
 	INCF			Co, F
 
-CONTADOR:
+CONTADOR2:
 	MOVLW		.11
 	XORWF		Contador, W
 	BTFSS		STATUS, Z
@@ -163,8 +163,8 @@ PRINT_M3IZQ:
 	INCF			Contador, F
 	INCF			Co, F
 
-CONTADOR:
-	MOVLW		.11
+CONTADOR3:
+	MOVLW		.13
 	XORWF		Contador, W
 	BTFSS		STATUS, Z
 	GOTO		PRINT_M3IZQ
