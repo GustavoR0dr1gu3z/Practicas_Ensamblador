@@ -64,6 +64,30 @@ Cero0:
 
 ; ------------------------------------------------SEC 0-------------------------------------
 SEC0: 						; M1 - DERECHA
+	CLRF 		Contador
+	CLRF			Co
+
+PRINT_M1DER:
+	MOVF 		Contador, W
+	MOVF		Contador, Co
+	CALL		M1DER
+	MOVWF		PORTB
+
+PRINT_M1DER2:
+	MOVF		Co,W
+	CALL		M1DER2
+	MOVWF		PORTC
+	CALL 		RETARDO_400ms
+
+	INCF			Contador, F
+	INCF			Co, F
+
+CONTADOR:
+	MOVLW		.26
+	XORWF		Contador, W
+	BTFSS		STATUS, Z
+	GOTO		PRINT_M1DER
+	GOTO 		INICIO
 
 ; ------------------------------------------------SEC 1-------------------------------------
 SEC1:						; M1 - IZQUIERDA
@@ -75,6 +99,20 @@ SEC2:						; M2 - DERECHA
 SEC3:						; M3 - IZQUIERDA
 
 ; -----------------------------------------------RETARDO---------------------------------
+
+PRINT_M1DER:
+	ADDWF 		PCL, F
+	RETLW		b'00110011'	; M_1
+	RETLW		b'11110011'	; 1_1
+
+
+
+
+
+
+
+
+
 RETARDO_400ms:
 		movlw	D'3'
 		movwf	CounterC
