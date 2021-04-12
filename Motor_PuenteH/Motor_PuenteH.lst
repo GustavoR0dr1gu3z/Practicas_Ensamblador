@@ -1,4 +1,4 @@
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE  1
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                       00031 ;SE LIMPIAN (coloca 0's)LOS REGISTROS ANSEL, ANSELH PARA E/S DIGITAL
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 000C   0188           00032         CLRF            ANSEL
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE  2
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -84,14 +84,14 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                       00050 
 0017                  00051 Uno0:
 0017   1C85           00052         BTFSS           PORTA,1         ;Está en 1
-0018   2834           00053         GOTO            SEC1            ;NO
-0019   2862           00054         GOTO            SEC3            ;SI
+0018   2836           00053         GOTO            SEC1            ;NO
+0019   2868           00054         GOTO            SEC3            ;SI
                       00055         
                       00056 
 001A                  00057 Cero0:
 001A   1C85           00058         BTFSS           PORTA,1         ;Está en 1
 001B   281D           00059         GOTO            SEC0            ;NO
-001C   284B           00060         GOTO            SEC2            ;SI
+001C   284F           00060         GOTO            SEC2            ;SI
                       00061 
                       00062         
                       00063 
@@ -100,333 +100,339 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 001D                  00066 SEC0:                                           ; M1 - DERECHA
 001D   01A4           00067         CLRF            Contador
 001E   01A5           00068         CLRF                    Co
-                      00069 
-001F                  00070 PRINT_M1DER:
-001F   0824           00071         MOVF            Contador, W
+001F   3001           00069         MOVLW           b'00000001'
+0020   0088           00070         MOVWF           PORTD
+                      00071 
+0021                  00072 PRINT_M1DER:
+0021   0824           00073         MOVF            Contador, W
 Warning[202]: Argument out of range.  Least significant bits used.
-0020   08A4           00072         MOVF            Contador, Co
-0021   2079           00073         CALL            M1DER
-0022   0086           00074         MOVWF           PORTB
-                      00075 
-                      00076 
-0023                  00077 PRINT_M1DER2:
-0023   0825           00078         MOVF            Co,W
-0024   2085           00079         CALL            M1DER2
-0025   0087           00080         MOVWF           PORTC
-0026   20E1           00081         CALL            RETARDO_400ms
-                      00082 
-0027   0AA4           00083         INCF                    Contador, F
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE  3
+0022   08A4           00074         MOVF            Contador, Co
+0023   2081           00075         CALL            M1DER
+0024   0086           00076         MOVWF           PORTB
+                      00077 
+                      00078 
+0025                  00079 PRINT_M1DER2:
+0025   0825           00080         MOVF            Co,W
+0026   208D           00081         CALL            M1DER2
+0027   0087           00082         MOVWF           PORTC
+0028   20E9           00083         CALL            RETARDO_400ms
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0028   0AA5           00084         INCF                    Co, F
-                      00085 
-0029   1C05           00086         BTFSS           PORTA,0                 ; EL PUERTO ESTÁ EN 1?
-002A   282C           00087         GOTO            CCx                             ; NO
-002B   2814           00088         GOTO            INICIO                  ; SI
-                      00089 
-002C                  00090 CCx:
-002C   1C85           00091         BTFSS           PORTA,1                 ; EL PUERTO ESTÁ EN 1?
-002D   282F           00092         GOTO            CONTADOR                ;NO
-002E   2814           00093         GOTO            INICIO                  ;SI
-                      00094 
-002F                  00095 CONTADOR:
-002F   300B           00096         MOVLW           .11
-0030   0624           00097         XORWF           Contador, W
-0031   1D03           00098         BTFSS           STATUS, Z
-0032   281F           00099         GOTO            PRINT_M1DER
-0033   2814           00100         GOTO            INICIO
-                      00101 
-                      00102 ; ------------------------------------------------SEC 1------------------------------------- 01
-0034                  00103 SEC1:                                           ; M1 - IZQUIERDA
-0034   01A4           00104         CLRF            Contador
-0035   01A5           00105         CLRF                    Co
-                      00106 
-0036                  00107 PRINT_M1IZQ:
-0036   0824           00108         MOVF            Contador, W
+                      00084 
+0029   0AA4           00085         INCF                    Contador, F
+002A   0AA5           00086         INCF                    Co, F
+                      00087 
+002B   1C05           00088         BTFSS           PORTA,0                 ; EL PUERTO ESTÁ EN 1?
+002C   282E           00089         GOTO            CCx                             ; NO
+002D   2814           00090         GOTO            INICIO                  ; SI
+                      00091 
+002E                  00092 CCx:
+002E   1C85           00093         BTFSS           PORTA,1                 ; EL PUERTO ESTÁ EN 1?
+002F   2831           00094         GOTO            CONTADOR                ;NO
+0030   2814           00095         GOTO            INICIO                  ;SI
+                      00096 
+0031                  00097 CONTADOR:
+0031   300B           00098         MOVLW           .11
+0032   0624           00099         XORWF           Contador, W
+0033   1D03           00100         BTFSS           STATUS, Z
+0034   2821           00101         GOTO            PRINT_M1DER
+0035   2814           00102         GOTO            INICIO
+                      00103 
+                      00104 ; ------------------------------------------------SEC 1------------------------------------- 01
+0036                  00105 SEC1:                                           ; M1 - IZQUIERDA
+0036   01A4           00106         CLRF            Contador
+0037   01A5           00107         CLRF                    Co
+0038   3002           00108         MOVLW           b'00000010'
+0039   0088           00109         MOVWF           PORTD
+003A                  00110 PRINT_M1IZQ:
+003A   0824           00111         MOVF            Contador, W
 Warning[202]: Argument out of range.  Least significant bits used.
-0037   08A4           00109         MOVF            Contador, Co
-0038   2091           00110         CALL            M1IZQ
-0039   0086           00111         MOVWF           PORTB
-                      00112 
-003A                  00113 PRINT_M1IZQ2:
-003A   0825           00114         MOVF            Co,W
-003B   209F           00115         CALL            M1IZQ2
-003C   0087           00116         MOVWF           PORTC
-003D   20E1           00117         CALL            RETARDO_400ms
-                      00118 
-003E   0AA4           00119         INCF                    Contador, F
-003F   0AA5           00120         INCF                    Co, F
+003B   08A4           00112         MOVF            Contador, Co
+003C   2099           00113         CALL            M1IZQ
+003D   0086           00114         MOVWF           PORTB
+                      00115 
+003E                  00116 PRINT_M1IZQ2:
+003E   0825           00117         MOVF            Co,W
+003F   20A7           00118         CALL            M1IZQ2
+0040   0087           00119         MOVWF           PORTC
+0041   20E9           00120         CALL            RETARDO_400ms
                       00121 
-0040   1C05           00122         BTFSS           PORTA,0                 ;ESTÁ EN 1?
-0041   2814           00123         GOTO            INICIO                  ;NO
-0042   2843           00124         GOTO            CUx                             ;SI
-                      00125 
-0043                  00126 CUx:
-0043   1C85           00127         BTFSS           PORTA,1                 ;ESTÁ EN 1?
-0044   2846           00128         GOTO            CONTADOR1               ;NO
-0045   2814           00129         GOTO            INICIO                  ;SI
-                      00130 
-0046                  00131 CONTADOR1:
-0046   300D           00132         MOVLW           .13
-0047   0624           00133         XORWF           Contador, W
-0048   1D03           00134         BTFSS           STATUS, Z
-0049   2836           00135         GOTO            PRINT_M1IZQ
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE  4
+0042   0AA4           00122         INCF                    Contador, F
+0043   0AA5           00123         INCF                    Co, F
+                      00124 
+0044   1C05           00125         BTFSS           PORTA,0                 ;ESTÁ EN 1?
+0045   2814           00126         GOTO            INICIO                  ;NO
+0046   2847           00127         GOTO            CUx                             ;SI
+                      00128 
+0047                  00129 CUx:
+0047   1C85           00130         BTFSS           PORTA,1                 ;ESTÁ EN 1?
+0048   284A           00131         GOTO            CONTADOR1               ;NO
+0049   2814           00132         GOTO            INICIO                  ;SI
+                      00133 
+004A                  00134 CONTADOR1:
+004A   300D           00135         MOVLW           .13
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-004A   2814           00136         GOTO            INICIO
-                      00137 
-                      00138 
-                      00139 ; ------------------------------------------------SEC 2------------------------------------- 10
-004B                  00140 SEC2:                                           ; M2 - DERECHA
-004B   01A4           00141         CLRF            Contador
-004C   01A5           00142         CLRF                    Co
-                      00143 
-004D                  00144 PRINT_M2DER:
-004D   0824           00145         MOVF            Contador, W
+004B   0624           00136         XORWF           Contador, W
+004C   1D03           00137         BTFSS           STATUS, Z
+004D   283A           00138         GOTO            PRINT_M1IZQ
+004E   2814           00139         GOTO            INICIO
+                      00140 
+                      00141 
+                      00142 ; ------------------------------------------------SEC 2------------------------------------- 10
+004F                  00143 SEC2:                                           ; M2 - DERECHA
+004F   01A4           00144         CLRF            Contador
+0050   01A5           00145         CLRF                    Co
+0051   3004           00146         MOVLW           b'00000100'
+0052   0088           00147         MOVWF           PORTD
+0053                  00148 PRINT_M2DER:
+0053   0824           00149         MOVF            Contador, W
 Warning[202]: Argument out of range.  Least significant bits used.
-004E   08A4           00146         MOVF            Contador, Co
-004F   20AD           00147         CALL            M2DER
-0050   0086           00148         MOVWF           PORTB
-                      00149 
-0051                  00150 PRINT_M2DER2:
-0051   0825           00151         MOVF            Co,W
-0052   20B9           00152         CALL            M2DER2
-0053   0087           00153         MOVWF           PORTC
-0054   20E1           00154         CALL            RETARDO_400ms
-                      00155 
-0055   0AA4           00156         INCF                    Contador, F
-0056   0AA5           00157         INCF                    Co, F
-                      00158 
-0057   1C05           00159         BTFSS           PORTA,0                 ;ESTÁ EN 1?
-0058   285A           00160         GOTO            UCx                             ;NO 
-0059   2814           00161         GOTO            INICIO                  ;SI
-005A                  00162 UCx:
-005A   1C85           00163         BTFSS           PORTA,1                 ;ESTÁ EN 1?
-005B   2814           00164         GOTO            INICIO                  ;NO
-005C   285D           00165         GOTO            CONTADOR2               ;SI     
-                      00166 
-005D                  00167 CONTADOR2:
-005D   300B           00168         MOVLW           .11
-005E   0624           00169         XORWF           Contador, W
-005F   1D03           00170         BTFSS           STATUS, Z
-0060   284D           00171         GOTO            PRINT_M2DER
-0061   2814           00172         GOTO            INICIO
-                      00173 ; ------------------------------------------------SEC 3------------------------------------- 11
-0062                  00174 SEC3:                                           ; M2 - IZQUIERDA
-0062   01A4           00175         CLRF            Contador
-0063   01A5           00176         CLRF                    Co
-                      00177 
-0064                  00178 PRINT_M2IZQ:
-0064   0824           00179         MOVF            Contador, W
-Warning[202]: Argument out of range.  Least significant bits used.
-0065   08A4           00180         MOVF            Contador, Co
-0066   20C5           00181         CALL            M2IZQ
-0067   0086           00182         MOVWF           PORTB
+0054   08A4           00150         MOVF            Contador, Co
+0055   20B5           00151         CALL            M2DER
+0056   0086           00152         MOVWF           PORTB
+                      00153 
+0057                  00154 PRINT_M2DER2:
+0057   0825           00155         MOVF            Co,W
+0058   20C1           00156         CALL            M2DER2
+0059   0087           00157         MOVWF           PORTC
+005A   20E9           00158         CALL            RETARDO_400ms
+                      00159 
+005B   0AA4           00160         INCF                    Contador, F
+005C   0AA5           00161         INCF                    Co, F
+                      00162 
+005D   1C05           00163         BTFSS           PORTA,0                 ;ESTÁ EN 1?
+005E   2860           00164         GOTO            UCx                             ;NO 
+005F   2814           00165         GOTO            INICIO                  ;SI
+0060                  00166 UCx:
+0060   1C85           00167         BTFSS           PORTA,1                 ;ESTÁ EN 1?
+0061   2814           00168         GOTO            INICIO                  ;NO
+0062   2863           00169         GOTO            CONTADOR2               ;SI     
+                      00170 
+0063                  00171 CONTADOR2:
+0063   300B           00172         MOVLW           .11
+0064   0624           00173         XORWF           Contador, W
+0065   1D03           00174         BTFSS           STATUS, Z
+0066   2853           00175         GOTO            PRINT_M2DER
+0067   2814           00176         GOTO            INICIO
+                      00177 ; ------------------------------------------------SEC 3------------------------------------- 11
+0068                  00178 SEC3:                                           ; M2 - IZQUIERDA
+0068   01A4           00179         CLRF            Contador
+0069   01A5           00180         CLRF                    Co
+006A   3008           00181         MOVLW           b'00001000'
+006B   0088           00182         MOVWF           PORTD
                       00183 
-0068                  00184 PRINT_M2IZQ2:
-0068   0825           00185         MOVF            Co,W
-0069   20D3           00186         CALL            M2IZQ2
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE  5
+006C                  00184 PRINT_M2IZQ:
+006C   0824           00185         MOVF            Contador, W
+Warning[202]: Argument out of range.  Least significant bits used.
+006D   08A4           00186         MOVF            Contador, Co
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-006A   0087           00187         MOVWF           PORTC
-006B   20E1           00188         CALL            RETARDO_400ms
+006E   20CD           00187         CALL            M2IZQ
+006F   0086           00188         MOVWF           PORTB
                       00189 
-006C   0AA4           00190         INCF                    Contador, F
-006D   0AA5           00191         INCF                    Co, F
-006E   1C05           00192         BTFSS           PORTA,0                 ;ESTÁ EN 1?
-006F   2814           00193         GOTO            INICIO                  ; NO
-0070   2871           00194         GOTO            UUx                             ;SI
+0070                  00190 PRINT_M2IZQ2:
+0070   0825           00191         MOVF            Co,W
+0071   20DB           00192         CALL            M2IZQ2
+0072   0087           00193         MOVWF           PORTC
+0073   20E9           00194         CALL            RETARDO_400ms
                       00195 
-0071                  00196 UUx:
-0071   1C85           00197         BTFSS           PORTA,1                 ; ESTÁ EN 1?
-0072   2814           00198         GOTO            INICIO                  ;NO
-0073   2874           00199         GOTO            CONTADOR3               ;SI
-                      00200 
-0074                  00201 CONTADOR3:
-0074   300D           00202         MOVLW           .13
-0075   0624           00203         XORWF           Contador, W
-0076   1D03           00204         BTFSS           STATUS, Z
-0077   2864           00205         GOTO            PRINT_M2IZQ
-0078   2814           00206         GOTO            INICIO
-                      00207 
-                      00208 ; DISPLAY M1-DERECHA
-0079                  00209 M1DER:
-0079   0782           00210         ADDWF           PCL, F
-007A   3433           00211         RETLW           b'00110011'     ; M_1
-007B   34F3           00212         RETLW           b'11110011'     ; 1_1
-007C   34FF           00213         RETLW           b'11111111'     ; -_1
-007D   34C0           00214         RETLW           b'11000000'     ; D_1
-007E   340C           00215         RETLW           b'00001100'     ; E_1
-007F   3438           00216         RETLW           b'00111000'     ; R_1
-0080   340C           00217         RETLW           b'00001100'     ; E_1
-0081   340C           00218         RETLW           b'00001100'     ; C_1
-0082   3433           00219         RETLW           b'00110011'     ; H_1
-0083   3430           00220         RETLW           b'00110000'     ; A_1
-0084   34FF           00221         RETLW           b'11111111'     ; ESPACIO
-                      00222 
-0085                  00223 M1DER2:
-0085   0782           00224         ADDWF           PCL, F
-0086   34FA           00225         RETLW           b'11111010'     ; M_2
-0087   34FB           00226         RETLW           b'11111011'     ; 1_2
-0088   3477           00227         RETLW           b'01110111'     ; -_2
-0089   34DD           00228         RETLW           b'11011101'     ; D_2
-008A   347F           00229         RETLW           b'01111111'     ; E_2
-008B   3467           00230         RETLW           b'01100111'     ; R_2
-008C   347F           00231         RETLW           b'01111111'     ; E_2
-008D   34FF           00232         RETLW           b'11111111'     ; C_2
-008E   3477           00233         RETLW           b'01110111'     ; H_2
-008F   3477           00234         RETLW           b'01110111'     ; A_2
-0090   34FF           00235         RETLW           b'11111111'     ; ESPACIO
-                      00236 
-                      00237 
-                      00238 ; DISPLAY M1-IZQUIERDA
-0091                  00239 M1IZQ:
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE  6
+0074   0AA4           00196         INCF                    Contador, F
+0075   0AA5           00197         INCF                    Co, F
+0076   1C05           00198         BTFSS           PORTA,0                 ;ESTÁ EN 1?
+0077   2814           00199         GOTO            INICIO                  ; NO
+0078   2879           00200         GOTO            UUx                             ;SI
+                      00201 
+0079                  00202 UUx:
+0079   1C85           00203         BTFSS           PORTA,1                 ; ESTÁ EN 1?
+007A   2814           00204         GOTO            INICIO                  ;NO
+007B   287C           00205         GOTO            CONTADOR3               ;SI
+                      00206 
+007C                  00207 CONTADOR3:
+007C   300D           00208         MOVLW           .13
+007D   0624           00209         XORWF           Contador, W
+007E   1D03           00210         BTFSS           STATUS, Z
+007F   286C           00211         GOTO            PRINT_M2IZQ
+0080   2814           00212         GOTO            INICIO
+                      00213 
+                      00214 ; DISPLAY M1-DERECHA
+0081                  00215 M1DER:
+0081   0782           00216         ADDWF           PCL, F
+0082   3433           00217         RETLW           b'00110011'     ; M_1
+0083   34F3           00218         RETLW           b'11110011'     ; 1_1
+0084   34FF           00219         RETLW           b'11111111'     ; -_1
+0085   34C0           00220         RETLW           b'11000000'     ; D_1
+0086   340C           00221         RETLW           b'00001100'     ; E_1
+0087   3438           00222         RETLW           b'00111000'     ; R_1
+0088   340C           00223         RETLW           b'00001100'     ; E_1
+0089   340C           00224         RETLW           b'00001100'     ; C_1
+008A   3433           00225         RETLW           b'00110011'     ; H_1
+008B   3430           00226         RETLW           b'00110000'     ; A_1
+008C   34FF           00227         RETLW           b'11111111'     ; ESPACIO
+                      00228 
+008D                  00229 M1DER2:
+008D   0782           00230         ADDWF           PCL, F
+008E   34FA           00231         RETLW           b'11111010'     ; M_2
+008F   34FB           00232         RETLW           b'11111011'     ; 1_2
+0090   3477           00233         RETLW           b'01110111'     ; -_2
+0091   34DD           00234         RETLW           b'11011101'     ; D_2
+0092   347F           00235         RETLW           b'01111111'     ; E_2
+0093   3467           00236         RETLW           b'01100111'     ; R_2
+0094   347F           00237         RETLW           b'01111111'     ; E_2
+0095   34FF           00238         RETLW           b'11111111'     ; C_2
+0096   3477           00239         RETLW           b'01110111'     ; H_2
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0091   0782           00240         ADDWF           PCL, F
-0092   3433           00241         RETLW           b'00110011'     ; M_1
-0093   34F3           00242         RETLW           b'11110011'     ; 1_1
-0094   34FF           00243         RETLW           b'11111111'     ; -_1
-0095   34CC           00244         RETLW           b'11001100'     ; I_1
-0096   34CC           00245         RETLW           b'11001100'     ; Z_1
-0097   3400           00246         RETLW           b'00000000'     ; Q_1
-0098   3403           00247         RETLW           b'00000011'     ; U_1
-0099   34CC           00248         RETLW           b'11001100'     ; I_1
-009A   340C           00249         RETLW           b'00001100'     ; E_1
-009B   3438           00250         RETLW           b'00111000'     ; R_1
-009C   34C0           00251         RETLW           b'11000000'     ; D_1
-009D   3430           00252         RETLW           b'00110000'     ; A_1
-009E   34FF           00253         RETLW           b'11111111'     ; ESPACIO
-                      00254 
-009F                  00255 M1IZQ2:
-009F   0782           00256         ADDWF           PCL, F
-00A0   34FA           00257         RETLW           b'11111010'     ; M_2
-00A1   34FB           00258         RETLW           b'11111011'     ; 1_2
-00A2   3477           00259         RETLW           b'01110111'     ; -_2
-00A3   34DD           00260         RETLW           b'11011101'     ; I_2
-00A4   34BB           00261         RETLW           b'10111011'     ; Z_2
-00A5   34EF           00262         RETLW           b'11101111'     ; Q_2
-00A6   34FF           00263         RETLW           b'11111111'     ; U_2
-00A7   34DD           00264         RETLW           b'11011101'     ; I_2
-00A8   347F           00265         RETLW           b'01111111'     ; E_2
-00A9   3467           00266         RETLW           b'01100111'     ; R_2
-00AA   34DD           00267         RETLW           b'11011101'     ; D_2
-00AB   3477           00268         RETLW           b'01110111'     ; A_2
-00AC   34FF           00269         RETLW           b'11111111'     ; ESPACIO
-                      00270 
-                      00271 
-                      00272 ; DISPLAY M2-DERECHA
-00AD                  00273 M2DER:
-00AD   0782           00274         ADDWF           PCL, F
-00AE   3433           00275         RETLW           b'00110011'     ; M_1
-00AF   3488           00276         RETLW           b'10001000'     ; 2_1
-00B0   34FF           00277         RETLW           b'11111111'     ; -_1
-00B1   34C0           00278         RETLW           b'11000000'     ; D_1
-00B2   340C           00279         RETLW           b'00001100'     ; E_1
-00B3   3438           00280         RETLW           b'00111000'     ; R_1
-00B4   340C           00281         RETLW           b'00001100'     ; E_1
-00B5   340C           00282         RETLW           b'00001100'     ; C_1
-00B6   3433           00283         RETLW           b'00110011'     ; H_1
-00B7   3430           00284         RETLW           b'00110000'     ; A_1
-00B8   34FF           00285         RETLW           b'11111111'     ; ESPACIO
-                      00286 
-00B9                  00287 M2DER2:
-00B9   0782           00288         ADDWF           PCL, F
-00BA   34FA           00289         RETLW           b'11111010'     ; M_2
-00BB   3477           00290         RETLW           b'01110111'     ; 2_2
-00BC   3477           00291         RETLW           b'01110111'     ; -_2
-00BD   34DD           00292         RETLW           b'11011101'     ; D_2
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE  7
+0097   3477           00240         RETLW           b'01110111'     ; A_2
+0098   34FF           00241         RETLW           b'11111111'     ; ESPACIO
+                      00242 
+                      00243 
+                      00244 ; DISPLAY M1-IZQUIERDA
+0099                  00245 M1IZQ:
+0099   0782           00246         ADDWF           PCL, F
+009A   3433           00247         RETLW           b'00110011'     ; M_1
+009B   34F3           00248         RETLW           b'11110011'     ; 1_1
+009C   34FF           00249         RETLW           b'11111111'     ; -_1
+009D   34CC           00250         RETLW           b'11001100'     ; I_1
+009E   34CC           00251         RETLW           b'11001100'     ; Z_1
+009F   3400           00252         RETLW           b'00000000'     ; Q_1
+00A0   3403           00253         RETLW           b'00000011'     ; U_1
+00A1   34CC           00254         RETLW           b'11001100'     ; I_1
+00A2   340C           00255         RETLW           b'00001100'     ; E_1
+00A3   3438           00256         RETLW           b'00111000'     ; R_1
+00A4   34C0           00257         RETLW           b'11000000'     ; D_1
+00A5   3430           00258         RETLW           b'00110000'     ; A_1
+00A6   34FF           00259         RETLW           b'11111111'     ; ESPACIO
+                      00260 
+00A7                  00261 M1IZQ2:
+00A7   0782           00262         ADDWF           PCL, F
+00A8   34FA           00263         RETLW           b'11111010'     ; M_2
+00A9   34FB           00264         RETLW           b'11111011'     ; 1_2
+00AA   3477           00265         RETLW           b'01110111'     ; -_2
+00AB   34DD           00266         RETLW           b'11011101'     ; I_2
+00AC   34BB           00267         RETLW           b'10111011'     ; Z_2
+00AD   34EF           00268         RETLW           b'11101111'     ; Q_2
+00AE   34FF           00269         RETLW           b'11111111'     ; U_2
+00AF   34DD           00270         RETLW           b'11011101'     ; I_2
+00B0   347F           00271         RETLW           b'01111111'     ; E_2
+00B1   3467           00272         RETLW           b'01100111'     ; R_2
+00B2   34DD           00273         RETLW           b'11011101'     ; D_2
+00B3   3477           00274         RETLW           b'01110111'     ; A_2
+00B4   34FF           00275         RETLW           b'11111111'     ; ESPACIO
+                      00276 
+                      00277 
+                      00278 ; DISPLAY M2-DERECHA
+00B5                  00279 M2DER:
+00B5   0782           00280         ADDWF           PCL, F
+00B6   3433           00281         RETLW           b'00110011'     ; M_1
+00B7   3488           00282         RETLW           b'10001000'     ; 2_1
+00B8   34FF           00283         RETLW           b'11111111'     ; -_1
+00B9   34C0           00284         RETLW           b'11000000'     ; D_1
+00BA   340C           00285         RETLW           b'00001100'     ; E_1
+00BB   3438           00286         RETLW           b'00111000'     ; R_1
+00BC   340C           00287         RETLW           b'00001100'     ; E_1
+00BD   340C           00288         RETLW           b'00001100'     ; C_1
+00BE   3433           00289         RETLW           b'00110011'     ; H_1
+00BF   3430           00290         RETLW           b'00110000'     ; A_1
+00C0   34FF           00291         RETLW           b'11111111'     ; ESPACIO
+                      00292 
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-00BE   347F           00293         RETLW           b'01111111'     ; E_2
-00BF   3467           00294         RETLW           b'01100111'     ; R_2
-00C0   347F           00295         RETLW           b'01111111'     ; E_2
-00C1   34FF           00296         RETLW           b'11111111'     ; C_2
-00C2   3477           00297         RETLW           b'01110111'     ; H_2
-00C3   3477           00298         RETLW           b'01110111'     ; A_2
-00C4   34FF           00299         RETLW           b'11111111'     ; ESPACIO
-                      00300         
-                      00301 
-                      00302 ; DISPLAY M2-IZQUIERDA
-00C5                  00303 M2IZQ:
-00C5   0782           00304         ADDWF           PCL, F
-00C6   3433           00305         RETLW           b'00110011'     ; M_1
-00C7   3488           00306         RETLW           b'10001000'     ; 2_1
-00C8   34FF           00307         RETLW           b'11111111'     ; -_1
-00C9   34CC           00308         RETLW           b'11001100'     ; I_1
-00CA   34CC           00309         RETLW           b'11001100'     ; Z_1
-00CB   3400           00310         RETLW           b'00000000'     ; Q_1
-00CC   3403           00311         RETLW           b'00000011'     ; U_1
-00CD   34CC           00312         RETLW           b'11001100'     ; I_1
-00CE   340C           00313         RETLW           b'00001100'     ; E_1
-00CF   3438           00314         RETLW           b'00111000'     ; R_1
-00D0   34C0           00315         RETLW           b'11000000'     ; D_1
-00D1   3430           00316         RETLW           b'00110000'     ; A_1
-00D2   34FF           00317         RETLW           b'11111111'     ; ESPACIO
-                      00318 
-00D3                  00319 M2IZQ2:
-00D3   0782           00320         ADDWF           PCL, F
-00D4   34FA           00321         RETLW           b'11111010'     ; M_2
-00D5   3477           00322         RETLW           b'01110111'     ; 2_2
-00D6   3477           00323         RETLW           b'01110111'     ; -_2
-00D7   34DD           00324         RETLW           b'11011101'     ; I_2
-00D8   34BB           00325         RETLW           b'10111011'     ; Z_2
-00D9   34EF           00326         RETLW           b'11101111'     ; Q_2
-00DA   34FF           00327         RETLW           b'11111111'     ; U_2
-00DB   34DD           00328         RETLW           b'11011101'     ; I_2
-00DC   347F           00329         RETLW           b'01111111'     ; E_2
-00DD   3467           00330         RETLW           b'01100111'     ; R_2
-00DE   34DD           00331         RETLW           b'11011101'     ; D_2
-00DF   3477           00332         RETLW           b'01110111'     ; A_2
-00E0   34FF           00333         RETLW           b'11111111'     ; ESPACIO
-                      00334 
-                      00335 
-                      00336 
-                      00337 
-                      00338 ; -----------------------------------------------RETARDO---------------------------------
-00E1                  00339 RETARDO_400ms:
-00E1   3003           00340                 movlw   D'3'
-00E2   00A2           00341                 movwf   CounterC
-00E3   3008           00342                 movlw   D'8'
-00E4   00A1           00343                 movwf   CounterB
-00E5   3076           00344                 movlw   D'118'
-00E6   00A0           00345                 movwf   CounterA
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE  8
+00C1                  00293 M2DER2:
+00C1   0782           00294         ADDWF           PCL, F
+00C2   34FA           00295         RETLW           b'11111010'     ; M_2
+00C3   3477           00296         RETLW           b'01110111'     ; 2_2
+00C4   3477           00297         RETLW           b'01110111'     ; -_2
+00C5   34DD           00298         RETLW           b'11011101'     ; D_2
+00C6   347F           00299         RETLW           b'01111111'     ; E_2
+00C7   3467           00300         RETLW           b'01100111'     ; R_2
+00C8   347F           00301         RETLW           b'01111111'     ; E_2
+00C9   34FF           00302         RETLW           b'11111111'     ; C_2
+00CA   3477           00303         RETLW           b'01110111'     ; H_2
+00CB   3477           00304         RETLW           b'01110111'     ; A_2
+00CC   34FF           00305         RETLW           b'11111111'     ; ESPACIO
+                      00306         
+                      00307 
+                      00308 ; DISPLAY M2-IZQUIERDA
+00CD                  00309 M2IZQ:
+00CD   0782           00310         ADDWF           PCL, F
+00CE   3433           00311         RETLW           b'00110011'     ; M_1
+00CF   3488           00312         RETLW           b'10001000'     ; 2_1
+00D0   34FF           00313         RETLW           b'11111111'     ; -_1
+00D1   34CC           00314         RETLW           b'11001100'     ; I_1
+00D2   34CC           00315         RETLW           b'11001100'     ; Z_1
+00D3   3400           00316         RETLW           b'00000000'     ; Q_1
+00D4   3403           00317         RETLW           b'00000011'     ; U_1
+00D5   34CC           00318         RETLW           b'11001100'     ; I_1
+00D6   340C           00319         RETLW           b'00001100'     ; E_1
+00D7   3438           00320         RETLW           b'00111000'     ; R_1
+00D8   34C0           00321         RETLW           b'11000000'     ; D_1
+00D9   3430           00322         RETLW           b'00110000'     ; A_1
+00DA   34FF           00323         RETLW           b'11111111'     ; ESPACIO
+                      00324 
+00DB                  00325 M2IZQ2:
+00DB   0782           00326         ADDWF           PCL, F
+00DC   34FA           00327         RETLW           b'11111010'     ; M_2
+00DD   3477           00328         RETLW           b'01110111'     ; 2_2
+00DE   3477           00329         RETLW           b'01110111'     ; -_2
+00DF   34DD           00330         RETLW           b'11011101'     ; I_2
+00E0   34BB           00331         RETLW           b'10111011'     ; Z_2
+00E1   34EF           00332         RETLW           b'11101111'     ; Q_2
+00E2   34FF           00333         RETLW           b'11111111'     ; U_2
+00E3   34DD           00334         RETLW           b'11011101'     ; I_2
+00E4   347F           00335         RETLW           b'01111111'     ; E_2
+00E5   3467           00336         RETLW           b'01100111'     ; R_2
+00E6   34DD           00337         RETLW           b'11011101'     ; D_2
+00E7   3477           00338         RETLW           b'01110111'     ; A_2
+00E8   34FF           00339         RETLW           b'11111111'     ; ESPACIO
+                      00340 
+                      00341 
+                      00342 
+                      00343 
+                      00344 ; -----------------------------------------------RETARDO---------------------------------
+00E9                  00345 RETARDO_400ms:
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-00E7   0BA0           00346 loop            decfsz  CounterA,1
-00E8   28E7           00347                 goto    loop
-00E9   0BA1           00348                 decfsz  CounterB,1
-00EA   28E7           00349                 goto    loop
-00EB   0BA2           00350                 decfsz  CounterC,1
-00EC   28E7           00351                 goto    loop
-00ED   3400           00352                 retlw   0
-00EE   0008           00353                 RETURN
-                      00354         END                      
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE  9
+00E9   3003           00346                 movlw   D'3'
+00EA   00A2           00347                 movwf   CounterC
+00EB   3008           00348                 movlw   D'8'
+00EC   00A1           00349                 movwf   CounterB
+00ED   3076           00350                 movlw   D'118'
+00EE   00A0           00351                 movwf   CounterA
+00EF   0BA0           00352 loop            decfsz  CounterA,1
+00F0   28EF           00353                 goto    loop
+00F1   0BA1           00354                 decfsz  CounterB,1
+00F2   28EF           00355                 goto    loop
+00F3   0BA2           00356                 decfsz  CounterC,1
+00F4   28EF           00357                 goto    loop
+00F5   3400           00358                 retlw   0
+00F6   0008           00359                 RETURN
+                      00360         END                      
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  9
 
 
 SYMBOL TABLE
@@ -485,7 +491,7 @@ BRG5                              00000005
 BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE 10
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 10
 
 
 SYMBOL TABLE
@@ -541,10 +547,10 @@ CCPR1L                            00000015
 CCPR2                             0000001B
 CCPR2H                            0000001C
 CCPR2L                            0000001B
-CCx                               0000002C
+CCx                               0000002E
 CHS0                              00000002
 CHS1                              00000003
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE 11
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 11
 
 
 SYMBOL TABLE
@@ -557,13 +563,13 @@ CKP                               00000004
 CM1CON0                           00000107
 CM2CON0                           00000108
 CM2CON1                           00000109
-CONTADOR                          0000002F
-CONTADOR1                         00000046
-CONTADOR2                         0000005D
-CONTADOR3                         00000074
+CONTADOR                          00000031
+CONTADOR1                         0000004A
+CONTADOR2                         00000063
+CONTADOR3                         0000007C
 CREN                              00000004
 CSRC                              00000007
-CUx                               00000043
+CUx                               00000047
 Cero0                             0000001A
 Co                                00000025
 Contador                          00000024
@@ -603,7 +609,7 @@ GIE                               00000007
 GO                                00000001
 GO_DONE                           00000001
 GO_NOT_DONE                       00000001
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE 12
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 12
 
 
 SYMBOL TABLE
@@ -634,14 +640,14 @@ IRCF1                             00000005
 IRCF2                             00000006
 IRP                               00000007
 LTS                               00000001
-M1DER                             00000079
-M1DER2                            00000085
-M1IZQ                             00000091
-M1IZQ2                            0000009F
-M2DER                             000000AD
-M2DER2                            000000B9
-M2IZQ                             000000C5
-M2IZQ2                            000000D3
+M1DER                             00000081
+M1DER2                            0000008D
+M1IZQ                             00000099
+M1IZQ2                            000000A7
+M2DER                             000000B5
+M2DER2                            000000C1
+M2IZQ                             000000CD
+M2IZQ2                            000000DB
 MC1OUT                            00000007
 MC2OUT                            00000006
 MSK                               00000093
@@ -662,7 +668,7 @@ NOT_PD                            00000003
 NOT_POR                           00000001
 NOT_RBPU                          00000007
 NOT_RC8                           00000006
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE 13
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 13
 
 
 SYMBOL TABLE
@@ -705,14 +711,14 @@ PORTC                             00000007
 PORTD                             00000008
 PORTE                             00000009
 PR2                               00000092
-PRINT_M1DER                       0000001F
-PRINT_M1DER2                      00000023
-PRINT_M1IZQ                       00000036
-PRINT_M1IZQ2                      0000003A
-PRINT_M2DER                       0000004D
-PRINT_M2DER2                      00000051
-PRINT_M2IZQ                       00000064
-PRINT_M2IZQ2                      00000068
+PRINT_M1DER                       00000021
+PRINT_M1DER2                      00000025
+PRINT_M1IZQ                       0000003A
+PRINT_M1IZQ2                      0000003E
+PRINT_M2DER                       00000053
+PRINT_M2DER2                      00000057
+PRINT_M2IZQ                       0000006C
+PRINT_M2IZQ2                      00000070
 PRSEN                             00000007
 PS0                               00000000
 PS1                               00000001
@@ -721,7 +727,7 @@ PSA                               00000003
 PSSAC0                            00000002
 PSSAC1                            00000003
 PSSBD0                            00000000
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE 14
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 14
 
 
 SYMBOL TABLE
@@ -780,7 +786,7 @@ RD6                               00000006
 RD7                               00000007
 RE0                               00000000
 RE1                               00000001
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE 15
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 15
 
 
 SYMBOL TABLE
@@ -789,7 +795,7 @@ SYMBOL TABLE
 RE2                               00000002
 RE3                               00000003
 READ_WRITE                        00000002
-RETARDO_400ms                     000000E1
+RETARDO_400ms                     000000E9
 RP0                               00000005
 RP1                               00000006
 RSEN                              00000001
@@ -802,9 +808,9 @@ SBOREN                            00000004
 SCKP                              00000004
 SCS                               00000000
 SEC0                              0000001D
-SEC1                              00000034
-SEC2                              0000004B
-SEC3                              00000062
+SEC1                              00000036
+SEC2                              0000004F
+SEC3                              00000068
 SEN                               00000000
 SENDB                             00000003
 SMP                               00000007
@@ -839,7 +845,7 @@ SWDTEN                            00000000
 SYNC                              00000004
 T0CS                              00000005
 T0IE                              00000005
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE 16
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 16
 
 
 SYMBOL TABLE
@@ -898,7 +904,7 @@ TRISB6                            00000006
 TRISB7                            00000007
 TRISC                             00000087
 TRISC0                            00000000
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE 17
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 17
 
 
 SYMBOL TABLE
@@ -941,11 +947,11 @@ TXIF                              00000004
 TXREG                             00000019
 TXSTA                             00000098
 UA                                00000001
-UCx                               0000005A
+UCx                               00000060
 ULPWUE                            00000005
 ULPWUIE                           00000002
 ULPWUIF                           00000002
-UUx                               00000071
+UUx                               00000079
 Uno0                              00000017
 VCFG0                             00000004
 VCFG1                             00000005
@@ -957,7 +963,7 @@ VRCON                             00000097
 VREN                              00000007
 VROE                              00000006
 VRR                               00000005
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE 18
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 18
 
 
 SYMBOL TABLE
@@ -1016,7 +1022,7 @@ _FCMEN_ON                         00003FFF
 _FOSC_EC                          00003FFB
 _FOSC_EXTRC_CLKOUT                00003FFF
 _FOSC_EXTRC_NOCLKOUT              00003FFE
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE 19
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 19
 
 
 SYMBOL TABLE
@@ -1056,7 +1062,7 @@ _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
 __DEBUG                           1
-loop                              000000E7
+loop                              000000EF
 
 
 MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
@@ -1064,16 +1070,16 @@ MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
 0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
 0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
 0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
-00C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXX- ----------------
+00C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXX---------
 2000 : -------XX------- ---------------- ---------------- ----------------
 
 All other memory blocks unused.
 
-Program Memory Words Used:   239
-Program Memory Words Free:  7953
+Program Memory Words Used:   247
+Program Memory Words Free:  7945
 
 
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:38:35         PAGE 20
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 20
 
 
 

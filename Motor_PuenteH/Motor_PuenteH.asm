@@ -66,6 +66,8 @@ Cero0:
 SEC0: 						; M1 - DERECHA
 	CLRF 		Contador
 	CLRF			Co
+	MOVLW		b'00000001'
+	MOVWF 		PORTD
 
 PRINT_M1DER:
 	MOVF 		Contador, W
@@ -103,7 +105,8 @@ CONTADOR:
 SEC1:						; M1 - IZQUIERDA
 	CLRF 		Contador
 	CLRF			Co
-
+	MOVLW		b'00000010'
+	MOVWF 		PORTD
 PRINT_M1IZQ:
 	MOVF 		Contador, W
 	MOVF		Contador, Co
@@ -140,7 +143,8 @@ CONTADOR1:
 SEC2:						; M2 - DERECHA
 	CLRF 		Contador
 	CLRF			Co
-
+	MOVLW		b'00000100'
+	MOVWF 		PORTD
 PRINT_M2DER:
 	MOVF 		Contador, W
 	MOVF		Contador, Co
@@ -174,6 +178,8 @@ CONTADOR2:
 SEC3:						; M2 - IZQUIERDA
 	CLRF 		Contador
 	CLRF			Co
+	MOVLW		b'00001000'
+	MOVWF 		PORTD
 
 PRINT_M2IZQ:
 	MOVF 		Contador, W
