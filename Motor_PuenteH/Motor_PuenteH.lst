@@ -1,4 +1,4 @@
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  1
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                       00031 ;SE LIMPIAN (coloca 0's)LOS REGISTROS ANSEL, ANSELH PARA E/S DIGITAL
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 000C   0188           00032         CLRF            ANSEL
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  2
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ Warning[202]: Argument out of range.  Least significant bits used.
 0026   208D           00081         CALL            M1DER2
 0027   0087           00082         MOVWF           PORTC
 0028   20E9           00083         CALL            RETARDO_400ms
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  3
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ Warning[202]: Argument out of range.  Least significant bits used.
                       00133 
 004A                  00134 CONTADOR1:
 004A   300D           00135         MOVLW           .13
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  4
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ Warning[202]: Argument out of range.  Least significant bits used.
 006C   0824           00185         MOVF            Contador, W
 Warning[202]: Argument out of range.  Least significant bits used.
 006D   08A4           00186         MOVF            Contador, Co
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  5
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -293,7 +293,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0094   347F           00237         RETLW           b'01111111'     ; E_2
 0095   34FF           00238         RETLW           b'11111111'     ; C_2
 0096   3477           00239         RETLW           b'01110111'     ; H_2
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  6
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00BF   3430           00290         RETLW           b'00110000'     ; A_1
 00C0   34FF           00291         RETLW           b'11111111'     ; ESPACIO
                       00292 
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  7
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -411,7 +411,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00343 
                       00344 ; -----------------------------------------------RETARDO---------------------------------
 00E9                  00345 RETARDO_400ms:
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  8
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -432,7 +432,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00F5   3400           00358                 retlw   0
 00F6   0008           00359                 RETURN
                       00360         END                      
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE  9
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  9
 
 
 SYMBOL TABLE
@@ -491,7 +491,7 @@ BRG5                              00000005
 BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 10
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 10
 
 
 SYMBOL TABLE
@@ -550,7 +550,7 @@ CCPR2L                            0000001B
 CCx                               0000002E
 CHS0                              00000002
 CHS1                              00000003
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 11
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 11
 
 
 SYMBOL TABLE
@@ -609,7 +609,7 @@ GIE                               00000007
 GO                                00000001
 GO_DONE                           00000001
 GO_NOT_DONE                       00000001
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 12
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 12
 
 
 SYMBOL TABLE
@@ -668,7 +668,7 @@ NOT_PD                            00000003
 NOT_POR                           00000001
 NOT_RBPU                          00000007
 NOT_RC8                           00000006
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 13
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 13
 
 
 SYMBOL TABLE
@@ -727,7 +727,7 @@ PSA                               00000003
 PSSAC0                            00000002
 PSSAC1                            00000003
 PSSBD0                            00000000
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 14
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 14
 
 
 SYMBOL TABLE
@@ -786,7 +786,7 @@ RD6                               00000006
 RD7                               00000007
 RE0                               00000000
 RE1                               00000001
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 15
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 15
 
 
 SYMBOL TABLE
@@ -845,7 +845,7 @@ SWDTEN                            00000000
 SYNC                              00000004
 T0CS                              00000005
 T0IE                              00000005
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 16
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 16
 
 
 SYMBOL TABLE
@@ -904,7 +904,7 @@ TRISB6                            00000006
 TRISB7                            00000007
 TRISC                             00000087
 TRISC0                            00000000
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 17
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 17
 
 
 SYMBOL TABLE
@@ -963,7 +963,7 @@ VRCON                             00000097
 VREN                              00000007
 VROE                              00000006
 VRR                               00000005
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 18
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 18
 
 
 SYMBOL TABLE
@@ -1022,7 +1022,7 @@ _FCMEN_ON                         00003FFF
 _FOSC_EC                          00003FFB
 _FOSC_EXTRC_CLKOUT                00003FFF
 _FOSC_EXTRC_NOCLKOUT              00003FFE
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 19
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 19
 
 
 SYMBOL TABLE
@@ -1061,7 +1061,6 @@ _WRT_HALF                         000039FF
 _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
-__DEBUG                           1
 loop                              000000EF
 
 
@@ -1079,7 +1078,7 @@ Program Memory Words Used:   247
 Program Memory Words Free:  7945
 
 
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  20:49:21         PAGE 20
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 20
 
 
 
