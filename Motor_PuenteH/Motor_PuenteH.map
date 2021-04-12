@@ -1,5 +1,5 @@
 MPLINK 4.48, Linker
-Linker Map File - Created Sun Apr 11 20:18:57 2021
+Linker Map File - Created Sun Apr 11 20:38:37 2021
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
@@ -23,11 +23,12 @@ Linker Map File - Created Sun Apr 11 20:18:57 2021
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
+                      CCx   0x00002c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                  CONTADOR   0x00002f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                 CONTADOR1   0x000046    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                 CONTADOR2   0x00005d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                 CONTADOR3   0x000074    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
-               CONTADOR3x   0x000071    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
+                      CUx   0x000043    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                     Cero0   0x00001a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                    INICIO   0x000014    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                     M1DER   0x000079    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
@@ -39,14 +40,11 @@ Linker Map File - Created Sun Apr 11 20:18:57 2021
                     M2IZQ   0x0000c5    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                    M2IZQ2   0x0000d3    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
               PRINT_M1DER   0x00001f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
-             PRINT_M1DER2   0x000029    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
-            PRINT_M1DER2x   0x000026    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
+             PRINT_M1DER2   0x000023    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
               PRINT_M1IZQ   0x000036    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
-             PRINT_M1IZQ2   0x000040    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
-            PRINT_M1IZQ2x   0x00003d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
+             PRINT_M1IZQ2   0x00003a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
               PRINT_M2DER   0x00004d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
-             PRINT_M2DER2   0x000057    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
-            PRINT_M2DER2x   0x000054    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
+             PRINT_M2DER2   0x000051    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
               PRINT_M2IZQ   0x000064    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
              PRINT_M2IZQ2   0x000068    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                   PUERTOS   0x000002    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
@@ -55,6 +53,8 @@ Linker Map File - Created Sun Apr 11 20:18:57 2021
                      SEC1   0x000034    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                      SEC2   0x00004b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                      SEC3   0x000062    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
+                      UCx   0x00005a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
+                      UUx   0x000071    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                      Uno0   0x000017    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                      loop   0x0000e7    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
 
@@ -69,23 +69,23 @@ Linker Map File - Created Sun Apr 11 20:18:57 2021
                     Cero0   0x00001a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                      SEC0   0x00001d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
               PRINT_M1DER   0x00001f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
-            PRINT_M1DER2x   0x000026    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
-             PRINT_M1DER2   0x000029    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
+             PRINT_M1DER2   0x000023    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
+                      CCx   0x00002c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                  CONTADOR   0x00002f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                      SEC1   0x000034    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
               PRINT_M1IZQ   0x000036    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
-            PRINT_M1IZQ2x   0x00003d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
-             PRINT_M1IZQ2   0x000040    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
+             PRINT_M1IZQ2   0x00003a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
+                      CUx   0x000043    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                 CONTADOR1   0x000046    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                      SEC2   0x00004b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
               PRINT_M2DER   0x00004d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
-            PRINT_M2DER2x   0x000054    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
-             PRINT_M2DER2   0x000057    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
+             PRINT_M2DER2   0x000051    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
+                      UCx   0x00005a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                 CONTADOR2   0x00005d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                      SEC3   0x000062    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
               PRINT_M2IZQ   0x000064    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
              PRINT_M2IZQ2   0x000068    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
-               CONTADOR3x   0x000071    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
+                      UUx   0x000071    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                 CONTADOR3   0x000074    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                     M1DER   0x000079    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm
                    M1DER2   0x000085    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Motor_PuenteH\Motor_PuenteH.asm

@@ -62,7 +62,7 @@ Cero0:
 	
 
 
-; ------------------------------------------------SEC 0-------------------------------------
+; ------------------------------------------------SEC 0------------------------------------- 00
 SEC0: 						; M1 - DERECHA
 	CLRF 		Contador
 	CLRF			Co
@@ -72,14 +72,8 @@ PRINT_M1DER:
 	MOVF		Contador, Co
 	CALL		M1DER
 	MOVWF		PORTB
-	BTFSS		PORTA,0		; EL PUERTO ESTÁ EN 1?
-	GOTO 		PRINT_M1DER2x; NO
-	GOTO 		INICIO		; SI
 
-PRINT_M1DER2x:
-	BTFSS		PORTA,1		; EL PUERTO ESTÁ EN 1?
-	GOTO		PRINT_M1DER2;NO
-	GOTO 		INICIO		;SI
+
 PRINT_M1DER2:
 	MOVF		Co,W
 	CALL		M1DER2
@@ -89,6 +83,15 @@ PRINT_M1DER2:
 	INCF			Contador, F
 	INCF			Co, F
 
+	BTFSS		PORTA,0			; EL PUERTO ESTÁ EN 1?
+	GOTO 		CCx				; NO
+	GOTO 		INICIO			; SI
+
+CCx:
+	BTFSS		PORTA,1			; EL PUERTO ESTÁ EN 1?
+	GOTO		CONTADOR		;NO
+	GOTO 		INICIO			;SI
+
 CONTADOR:
 	MOVLW		.11
 	XORWF		Contador, W
@@ -96,7 +99,7 @@ CONTADOR:
 	GOTO		PRINT_M1DER
 	GOTO 		INICIO
 
-; ------------------------------------------------SEC 1-------------------------------------
+; ------------------------------------------------SEC 1------------------------------------- 01
 SEC1:						; M1 - IZQUIERDA
 	CLRF 		Contador
 	CLRF			Co
@@ -106,14 +109,6 @@ PRINT_M1IZQ:
 	MOVF		Contador, Co
 	CALL		M1IZQ
 	MOVWF		PORTB
-	BTFSS		PORTA,0		;ESTÁ EN 1?
-	GOTO 		INICIO		;NO
-	GOTO		PRINT_M1IZQ2x ;SI
-
-PRINT_M1IZQ2x:
-	BTFSS		PORTA,1		;ESTÁ EN 1?
-	GOTO 		INICIO		 ;NO
-	GOTO		PRINT_M1IZQ2 ;SI
 
 PRINT_M1IZQ2:
 	MOVF		Co,W
@@ -124,6 +119,15 @@ PRINT_M1IZQ2:
 	INCF			Contador, F
 	INCF			Co, F
 
+	BTFSS		PORTA,0			;ESTÁ EN 1?
+	GOTO 		INICIO			;NO
+	GOTO		CUx 				;SI
+
+CUx:
+	BTFSS		PORTA,1			;ESTÁ EN 1?
+	GOTO 		CONTADOR1	 	;NO
+	GOTO		INICIO		 	;SI
+
 CONTADOR1:
 	MOVLW		.13
 	XORWF		Contador, W
@@ -132,7 +136,7 @@ CONTADOR1:
 	GOTO 		INICIO
 
 
-; ------------------------------------------------SEC 2-------------------------------------
+; ------------------------------------------------SEC 2------------------------------------- 10
 SEC2:						; M2 - DERECHA
 	CLRF 		Contador
 	CLRF			Co
@@ -142,14 +146,6 @@ PRINT_M2DER:
 	MOVF		Contador, Co
 	CALL		M2DER
 	MOVWF		PORTB
-	BTFSS		PORTA,0			;ESTÁ EN 1?
-	GOTO		PRINT_M2DER2x 	;NO 
-	GOTO 		INICIO			;SI
-
-PRINT_M2DER2x:
-	BTFSS		PORTA,1			;ESTÁ EN 1?
-	GOTO		INICIO			;NO
-	GOTO		PRINT_M2DER2			;SI	
 
 PRINT_M2DER2:
 	MOVF		Co,W
@@ -160,13 +156,21 @@ PRINT_M2DER2:
 	INCF			Contador, F
 	INCF			Co, F
 
+	BTFSS		PORTA,0			;ESTÁ EN 1?
+	GOTO		UCx				;NO 
+	GOTO 		INICIO			;SI
+UCx:
+	BTFSS		PORTA,1			;ESTÁ EN 1?
+	GOTO		INICIO			;NO
+	GOTO		CONTADOR2		;SI	
+
 CONTADOR2:
 	MOVLW		.11
 	XORWF		Contador, W
 	BTFSS		STATUS, Z
 	GOTO		PRINT_M2DER
 	GOTO 		INICIO
-; ------------------------------------------------SEC 3-------------------------------------
+; ------------------------------------------------SEC 3------------------------------------- 11
 SEC3:						; M2 - IZQUIERDA
 	CLRF 		Contador
 	CLRF			Co
@@ -187,12 +191,12 @@ PRINT_M2IZQ2:
 	INCF			Co, F
 	BTFSS		PORTA,0			;ESTÁ EN 1?
 	GOTO 		INICIO			; NO
-	GOTO 		CONTADOR3x		;SI
+	GOTO 		UUx				;SI
 
-CONTADOR3x:
+UUx:
 	BTFSS		PORTA,1			; ESTÁ EN 1?
 	GOTO 		INICIO			;NO
-	GOTO 		CONTADOR2		;SI
+	GOTO 		CONTADOR3		;SI
 
 CONTADOR3:
 	MOVLW		.13
