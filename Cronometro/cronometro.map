@@ -1,11 +1,11 @@
 MPLINK 4.48, Linker
-Linker Map File - Created Mon Apr 19 12:23:11 2021
+Linker Map File - Created Mon Apr 19 12:43:01 2021
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
                    .org_0       code   0x000000    program   0x000000
-                   .org_1       code   0x000000    program   0x0000b2
+                   .org_1       code   0x000000    program   0x0000b4
 .config_2007_CRONOMETRO.O       code   0x002007    program   0x000002
 .config_2008_CRONOMETRO.O       code   0x002008    program   0x000002
 
@@ -14,9 +14,9 @@ Linker Map File - Created Mon Apr 19 12:23:11 2021
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x000058      
+                            0x000000    0x000059      
                             0x002007    0x002008      
-            91 out of 8455 program addresses used, program memory utilization is 1%
+            92 out of 8455 program addresses used, program memory utilization is 1%
 
 
 
@@ -28,11 +28,11 @@ Linker Map File - Created Mon Apr 19 12:23:11 2021
                      DECE   0x00001b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
                    INICIO   0x00000a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
                      MILL   0x00002e    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-            RETARDO_400ms   0x00004b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+            RETARDO_400ms   0x00004c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
                     TABLA   0x000039    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
                    TABLA2   0x000044    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
                       UNI   0x000012    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-                     loop   0x000051    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+                     loop   0x000052    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
 
 
 
@@ -47,7 +47,7 @@ Linker Map File - Created Mon Apr 19 12:23:11 2021
                      MILL   0x00002e    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
                     TABLA   0x000039    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
                    TABLA2   0x000044    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-            RETARDO_400ms   0x00004b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-                     loop   0x000051    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+            RETARDO_400ms   0x00004c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+                     loop   0x000052    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
 
 

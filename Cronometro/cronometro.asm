@@ -110,7 +110,7 @@ ENDC ; Fin de bloque de librerías
 	    RETLW B'10110000' ; 3
 	    RETLW B'10011001' ; 4
 	    RETLW B'10010010' ; 5
-
+	    RETLW B'10000010' ; 6
 
 	    
 RETARDO_400ms:

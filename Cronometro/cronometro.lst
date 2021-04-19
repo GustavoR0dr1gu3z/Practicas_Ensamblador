@@ -1,4 +1,4 @@
-MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:23:10         PAGE  1
+MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:43:00         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Warning[207]: Found label after column 1. (INICIO)
 000B   00A3           00035             MOVWF UNIDAD
 000C   3000           00036             MOVLW 0X00 ; Inicialización de la variable DECENA
 000D   00A5           00037             MOVWF DECENA
-MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:23:10         PAGE  2
+MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:43:00         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -70,7 +70,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00042             
 Warning[207]: Found label after column 1. (UNI)
 0012                  00043         UNI ; Etiqueta para las unidades
-0012   204B           00044             CALL RETARDO_400ms ; Llama a la subrutina RETARDO
+0012   204C           00044             CALL RETARDO_400ms ; Llama a la subrutina RETARDO
 0013   0AA3           00045             INCF UNIDAD, 1 ; Incrementa la variable UNIDAD en 1
 0014   0823           00046             MOVF UNIDAD, 0 ; Mueve el valor de UNIDAD a W
 0015   3C09           00047             SUBLW 0X09 ; Le resta el valor de 10 a W
@@ -116,7 +116,7 @@ Warning[207]: Found label after column 1. (MILL)
 0034   2044           00084             CALL TABLA2
 0035   0086           00085             MOVWF PORTB
 0036   1D03           00086             BTFSS STATUS, Z ; Testea la bandera Z
-MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:23:10         PAGE  3
+MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:43:00         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -150,26 +150,26 @@ Warning[207]: Found label after column 1. (TABLA2)
 0048   34B0           00110             RETLW B'10110000' ; 3
 0049   3499           00111             RETLW B'10011001' ; 4
 004A   3492           00112             RETLW B'10010010' ; 5
-                      00113 
+004B   3482           00113             RETLW B'10000010' ; 6
                       00114 
                       00115             
-004B                  00116 RETARDO_400ms:
-004B   3003           00117                 movlw   D'3'
-004C   00A2           00118                 movwf   CounterC
-004D   3008           00119                 movlw   D'8'
-004E   00A1           00120                 movwf   CounterB
-004F   3076           00121                 movlw   D'118'
-0050   00A0           00122                 movwf   CounterA
-0051   0BA0           00123 loop            decfsz  CounterA,1
-0052   2851           00124                 goto    loop
-0053   0BA1           00125                 decfsz  CounterB,1
-0054   2851           00126                 goto    loop
-0055   0BA2           00127                 decfsz  CounterC,1
-0056   2851           00128                 goto    loop
-0057   3400           00129                 retlw   0
-0058   0008           00130                 RETURN
+004C                  00116 RETARDO_400ms:
+004C   3003           00117                 movlw   D'3'
+004D   00A2           00118                 movwf   CounterC
+004E   3008           00119                 movlw   D'8'
+004F   00A1           00120                 movwf   CounterB
+0050   3076           00121                 movlw   D'118'
+0051   00A0           00122                 movwf   CounterA
+0052   0BA0           00123 loop            decfsz  CounterA,1
+0053   2852           00124                 goto    loop
+0054   0BA1           00125                 decfsz  CounterB,1
+0055   2852           00126                 goto    loop
+0056   0BA2           00127                 decfsz  CounterC,1
+0057   2852           00128                 goto    loop
+0058   3400           00129                 retlw   0
+0059   0008           00130                 RETURN
                       00131        END
-MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:23:10         PAGE  4
+MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:43:00         PAGE  4
 
 
 SYMBOL TABLE
@@ -228,7 +228,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:23:10         PAGE  5
+MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:43:00         PAGE  5
 
 
 SYMBOL TABLE
@@ -287,7 +287,7 @@ CENTE                             00000024
 CENTENA                           00000024
 CHS0                              00000002
 CHS1                              00000003
-MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:23:10         PAGE  6
+MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:43:00         PAGE  6
 
 
 SYMBOL TABLE
@@ -346,7 +346,7 @@ I2C_DATA                          00000005
 I2C_READ                          00000002
 I2C_START                         00000003
 I2C_STOP                          00000004
-MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:23:10         PAGE  7
+MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:43:00         PAGE  7
 
 
 SYMBOL TABLE
@@ -405,7 +405,7 @@ OSCCON                            0000008F
 OSCTUNE                           00000090
 OSFIE                             00000007
 OSFIF                             00000007
-MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:23:10         PAGE  8
+MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:43:00         PAGE  8
 
 
 SYMBOL TABLE
@@ -464,7 +464,7 @@ RB1                               00000001
 RB2                               00000002
 RB3                               00000003
 RB4                               00000004
-MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:23:10         PAGE  9
+MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:43:00         PAGE  9
 
 
 SYMBOL TABLE
@@ -506,7 +506,7 @@ RE1                               00000001
 RE2                               00000002
 RE3                               00000003
 READ_WRITE                        00000002
-RETARDO_400ms                     0000004B
+RETARDO_400ms                     0000004C
 RP0                               00000005
 RP1                               00000006
 RSEN                              00000001
@@ -523,7 +523,7 @@ SENDB                             00000003
 SMP                               00000007
 SPBRG                             00000099
 SPBRGH                            0000009A
-MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:23:10         PAGE 10
+MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:43:00         PAGE 10
 
 
 SYMBOL TABLE
@@ -582,7 +582,7 @@ TMR1CS                            00000001
 TMR1GE                            00000006
 TMR1H                             0000000F
 TMR1IE                            00000000
-MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:23:10         PAGE 11
+MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:43:00         PAGE 11
 
 
 SYMBOL TABLE
@@ -641,7 +641,7 @@ TRISE1                            00000001
 TRISE2                            00000002
 TRISE3                            00000003
 TRMT                              00000001
-MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:23:10         PAGE 12
+MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:43:00         PAGE 12
 
 
 SYMBOL TABLE
@@ -700,7 +700,7 @@ WRERR                             00000003
 WUE                               00000001
 Z                                 00000002
 _BOR21V                           00003EFF
-MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:23:10         PAGE 13
+MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:43:00         PAGE 13
 
 
 SYMBOL TABLE
@@ -759,7 +759,7 @@ _MCLRE_OFF                        00003FDF
 _MCLRE_ON                         00003FFF
 _PWRTE_OFF                        00003FFF
 _PWRTE_ON                         00003FEF
-MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:23:10         PAGE 14
+MPASM  5.50                    CRONOMETRO.ASM   4-19-2021  12:43:00         PAGE 14
 
 
 SYMBOL TABLE
@@ -776,19 +776,19 @@ _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
 __DEBUG                           1
-loop                              00000051
+loop                              00000052
 
 
 MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
 
 0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
-0040 : XXXXXXXXXXXXXXXX XXXXXXXXX------- ---------------- ----------------
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXX------ ---------------- ----------------
 2000 : -------XX------- ---------------- ---------------- ----------------
 
 All other memory blocks unused.
 
-Program Memory Words Used:    89
-Program Memory Words Free:  8103
+Program Memory Words Used:    90
+Program Memory Words Free:  8102
 
 
 Errors   :     0
