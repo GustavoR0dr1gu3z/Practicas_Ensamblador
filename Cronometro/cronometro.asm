@@ -19,7 +19,7 @@ pclath_temp	EQU	0x7F		; variable used for context saving
 CBLOCK 0X20 ; Dirección de memoria para las variables
 T1, T2, T3 ; Variables usadas en retardo
 W_RES, STATUS_RES ; Variables usadas en interrupción
-CONT, PUNTERO, HABILITA
+CONT, PUNTERO, HABILITA, PTA
 ENDC ; Fin de bloque de librerías
 
 
