@@ -9,17 +9,8 @@
 	__CONFIG    _CONFIG1, _LVP_OFF & _FCMEN_ON & _IESO_OFF & _BOR_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _PWRTE_ON & _WDT_OFF & _INTRC_OSC_NOCLKOUT
 	__CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
 
-
-
-;***** VARIABLE DEFINITIONS
-w_temp		EQU	0x7D		; variable used for context saving
-status_temp	EQU	0x7E		; variable used for context saving
-pclath_temp	EQU	0x7F		; variable used for context saving
-
 CBLOCK 0X20 ; Dirección de memoria para las variables
-T1, T2, T3 ; Variables usadas en retardo
-W_RES, STATUS_RES ; Variables usadas en interrupción
-CONT, PUNTERO, HABILITA, PTA
+CounterA, CounterB, CounterC
 UNIDAD, CENTENA, DECENA, MILLAR
 ENDC ; Fin de bloque de librerías
 
@@ -27,8 +18,6 @@ ENDC ; Fin de bloque de librerías
 ;**********************************************************************
 	ORG     0x000             ; processor reset vector
 	    GOTO CONFIGURAR ; Ir a la etiqueta configurar
-	ORG 0X04 ; Directiva de interrupción
-	    GOTO INTERRUPCION ; Ir a la etiqueta configurar
 	
 	CONFIGURAR ; Configuración de puertos
 	   CLRW ; Limpiar a W
@@ -40,21 +29,6 @@ ENDC ; Fin de bloque de librerías
 	   BCF STATUS, RP0 ; RP0=0 del registro STATUS
 	   CLRF PORTA ; Limpia PORTA
 	   CLRF PORTB ; Limpia PORTB
-	   BSF PTA, 0 ; Poner el bit 0 de la variable PTA en 0
-	   
-	CONFI_TMR0 ; Configuración del TMR0 (Interrupción)
-	    MOVLW B'10100000' ; Asignación de valores a las banderas del registro
-	    
-	INTCONT
-	    MOVWF INTCON
-	    BSF STATUS, RP0
-	    MOVLW B'10000001' ; Asignación de valores a las banderas del registro
-	    
-	OPTION_REGG
-	    MOVWF OPTION_REG
-	    BCF STATUS, RP0
-	    MOVLW 0X00 ; Inicialización de la variable CONT
-	    MOVWF CONT
 	    
 	INICIO ; Inicio del programa principal
 	    MOVLW 0X00 ; Inicialización de la variable UNIDAD
@@ -67,10 +41,12 @@ ENDC ; Fin de bloque de librerías
 	    MOVWF MILLAR ; Inicialización de la variable MILLAR
 	    
 	UNI ; Etiqueta para las unidades
-	    CALL RETARDO ; Llama a la subrutina RETARDO
+	    CALL RETARDO_400ms ; Llama a la subrutina RETARDO
 	    INCF UNIDAD, 1 ; Incrementa la variable UNIDAD en 1
 	    MOVF UNIDAD, 0 ; Mueve el valor de UNIDAD a W
 	    SUBLW 0X09 ; Le resta el valor de 10 a W
+	    CALL TABLA
+   	    MOVWF PORTB
 	    BTFSS STATUS, Z ; Testea la bandera Z
 	    GOTO UNI
 	    GOTO DECE ; Salto en caso de que el bit testeado es igual a 1
@@ -80,6 +56,8 @@ ENDC ; Fin de bloque de librerías
 	    INCF DECENA, 1 ; Incrementa la variable DECENA en 1
 	    MOVF DECENA, 0 ; Mueve el valor de DECENA a W
 	    SUBLW 0X06 ; Le resta el valor de 6 a W
+	    CALL TABLA2
+   	    MOVWF PORTB
 	    BTFSS STATUS, Z ; Testea la bandera Z
 	    GOTO UNI
 	    GOTO CENTE ; Salto en caso de que el bit testeado es igual a 1
@@ -90,6 +68,8 @@ ENDC ; Fin de bloque de librerías
 	    INCF CENTENA, 1 ; Incrementa la variable CENTENA en 1
 	    MOVF CENTENA, 0 ; Mueve el valor de CENTENA a W
 	    SUBLW 0X09 ; Le resta el valor de 9 a W
+	    CALL TABLA
+   	    MOVWF PORTB
 	    BTFSS STATUS, Z ; Testea la bandera Z
 	    GOTO UNI
 	    GOTO MILL ; Salto en caso de que el bit testeado es igual a 1
@@ -101,42 +81,13 @@ ENDC ; Fin de bloque de librerías
 	    INCF MILLAR, 1 ; Incrementa la variable MILLAR en 1
 	    MOVF MILLAR, 0 ; Mueve el valor de la variable MILLAR a W
 	    SUBLW 0X06 ; Le resta el valor de 6 a W
+	    CALL TABLA2
+   	    MOVWF PORTB
 	    BTFSS STATUS, Z ; Testea la bandera Z
 	    GOTO UNI
 	    GOTO INICIO ; Salto en caso de que el bit testeado es igual a 1
 	    
-	;********RUTINAS**********
-	
-	INTERRUPCION ; Etiqueta para la interrupción
-	    MOVWF W_RES ; Mueve lo de W en la variable W_RES
-	    SWAPF STATUS, W ; Intercambia lo de STATUS y lo guarda en W
-	    MOVWF STATUS_RES ; Mueve lo de W en la variable STATUS_RES
-	    MOVF CONT, 0 ; Mueve lo de la variable CONT en W
-	    SUBLW 0X04 ; Resta 4 a W
-	    BTFSS STATUS, Z ; Testea la bandera Z
-	    GOTO CICLO
-	    CLRF CONT ; Salto en caso de que el bit testeado es igual a 1
-	    CLRF PTA ; Limpia la variable PTA
-	    BSF PTA, 0 ; Pone el bit 0 de la variable PTA en 0
-	    
-	CICLO ; Etiqueta para ciclo
-	    MOVF CONT, 0 ; Mueve lo de la variable CONT en W
-	    ADDLW 0X30 ; Suma el valor de 30 a W
-	    MOVWF FSR ; Mueve lo de W a la RAM
-	    MOVF INDF, 0 ; Mueve lo del registro INDF a W
-	    CALL TABLA ; Llama a la subrutina tabla
-	    MOVWF PORTB ; Mueve lo de W al registro PORTB
-	    MOVF PTA,0 ; Mueve lo de la variable PTA a W
-	    MOVWF PORTA
-	    INCF CONT, 1 ; Incrementa CONT y lo guarda en si mismo
-	    RLF PTA ; Multiplica lo de W por 2
-	    SWAPF STATUS_RES, W
-	    MOVWF STATUS ; Mueve lo de W a STATUS
-	    SWAPF W_RES, W_RES ; Intercambia lo de la variable W_RES
-	    SWAPF W_RES, W
-	    BCF INTCON, T0IF ; Limpia el bit T0IF del registro INTCON
-	    RETFIE ; Return de la interrupción
-	    
+
 	TABLA ; Tabla del 0 al 9 en hexadecimal
 	    ADDWF PCL,1 ; Suma PCL <- W+PCL
 	    RETLW B'11000000' ; 0
@@ -149,22 +100,32 @@ ENDC ; Fin de bloque de librerías
 	    RETLW B'10111000' ; 7
 	    RETLW B'10000000' ; 8
 	    RETLW B'10011000' ; 9
+
+
+	TABLA2 ; Tabla del 0 al 9 en hexadecimal
+	    ADDWF PCL,1 ; Suma PCL <- W+PCL
+	    RETLW B'11000000' ; 0
+	    RETLW B'11111001' ; 1
+	    RETLW B'10100100' ; 2
+	    RETLW B'10110000' ; 3
+	    RETLW B'10011001' ; 4
+	    RETLW B'10010010' ; 5
+
+
 	    
-	RETARDO ; Etiqueta para el retardo
-	    MOVLW D'10' ; Retraso de 1 milisegundo
-	    MOVWF T1 ; Mueve a la variable T1
-	LOOP1
-	    MOVLW D'155' ; Carga el valor en decimal de 40 ciclos
-	    MOVWF T2 ; Lo mueve a la variable T2
-       LOOP2
-	    MOVLW D'7' ; Carga el valor en decimal de 30 ciclos
-	    MOVWF T3 ; Lo mueve a la variable T3
-       LOOP3
-	    DECFSZ T3, 1 ; Decrementa el registro y salta si es cero
-	    GOTO LOOP3 ; Lo envía al loop3
-	    DECFSZ T2, 1 ; Decrementa el registro y salta si es cero
-	    GOTO LOOP2 ; Si no lo envía al loop2
-	    DECFSZ T1, 1 ; Decrementa si es cero salta
-	    GOTO LOOP1 ; Si no lo envía al loop1
-	    RETURN ; Repite la instrucción
+RETARDO_400ms:
+		movlw	D'3'
+		movwf	CounterC
+		movlw	D'8'
+		movwf	CounterB
+		movlw	D'118'
+		movwf	CounterA
+loop		decfsz	CounterA,1
+		goto	loop
+		decfsz	CounterB,1
+		goto	loop
+		decfsz	CounterC,1
+		goto	loop
+		retlw	0
+		RETURN
        END
