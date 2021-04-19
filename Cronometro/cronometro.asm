@@ -20,6 +20,7 @@ CBLOCK 0X20 ; Dirección de memoria para las variables
 T1, T2, T3 ; Variables usadas en retardo
 W_RES, STATUS_RES ; Variables usadas en interrupción
 CONT, PUNTERO, HABILITA, PTA
+UNIDAD, CENTENA, DECENA, MILLAR
 ENDC ; Fin de bloque de librerías
 
 
@@ -44,12 +45,12 @@ ENDC ; Fin de bloque de librerías
 	CONFI_TMR0 ; Configuración del TMR0 (Interrupción)
 	    MOVLW B'10100000' ; Asignación de valores a las banderas del registro
 	    
-	INTCON
+	INTCONT
 	    MOVWF INTCON
 	    BSF STATUS, RP0
 	    MOVLW B'10000001' ; Asignación de valores a las banderas del registro
 	    
-	OPTION_REG
+	OPTION_REGG
 	    MOVWF OPTION_REG
 	    BCF STATUS, RP0
 	    MOVLW 0X00 ; Inicialización de la variable CONT
