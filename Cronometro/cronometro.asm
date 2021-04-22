@@ -16,19 +16,38 @@ ENDC ; Fin de bloque de librerías
 
 
 ;**********************************************************************
-	ORG     0x000             ; processor reset vector
-	    GOTO CONFIGURAR ; Ir a la etiqueta configurar
-	
-	CONFIGURAR ; Configuración de puertos
 
-	   BSF 				STATUS, RP0 ; RP0=1 del registro STATUS
-	   MOVLW 			0X00 ; Cargar el valor a W
-	   MOVWF 			TRISB ; Mover lo de W a TRISB
-	   MOVLW 			0XF0 ; Cargar el valor a W
-	   MOVWF 			TRISA ; Mover lo de W a TRISA
-	   BCF 				STATUS, RP0 ; RP0=0 del registro STATUS
-	   CLRF 				PORTA ; Limpia PORTA
-	   CLRF 				PORTB ; Limpia PORTB
+GOTO PUERTOS ; Comienzo del programa
+
+PUERTOS:
+; SE ACCEDE AL BANCO 1 PARA USAR LOS TRIS
+	BSF 			STATUS, RP0 
+; SE CONFIGURAN LOS PUERTOS DE ENTRADAS Y SALIDAS
+	MOVLW 		0XFF						;W = 11111111
+	MOVWF 		TRISA					;PUERTO A COMO ENTRADA
+	MOVLW 		0X00					;W=00000000
+	MOVWF		TRISB					;PUERTO B COMO SALIDA
+	MOVLW		0X00					;W=00000000
+	MOVWF		TRISC					; PUERTO C COMO SALIDA
+	MOVLW		0X00					;W=00000000
+	MOVWF		TRISD					; PUERTO D COMO SALIDA
+
+;SE ACCEDE AL BANCO 3 PARA LOS ANSEL, ANSELH
+	BSF 			STATUS, RP1
+;SE LIMPIAN (coloca 0's)LOS REGISTROS ANSEL, ANSELH PARA E/S DIGITAL
+	CLRF 		ANSEL
+	CLRF 		ANSELH
+
+;SE ACCEDE AL BANCO 0 PARA LOS PUERTOS
+	BCF 			STATUS, RP1
+	BCF 			STATUS, RP0
+;SE COLOCA EN CEROS LOS PUERTOS
+	CLRF 		PORTB
+	CLRF 		PORTA
+	CLRF 		PORTC
+	CLRF			PORTD
+	;BCF		STATUS,C
+
 	    
 	INICIO ; Inicio del programa principal
 	    MOVLW 			0X00 ; Inicialización de la variable UNIDAD
