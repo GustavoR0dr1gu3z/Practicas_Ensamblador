@@ -12,6 +12,7 @@
 CBLOCK 0X20 ; Dirección de memoria para las variables
 CounterA, CounterB, CounterC
 UNIDAD, CENTENA, DECENA, MILLAR
+CONT
 ENDC ; Fin de bloque de librerías
 
 
@@ -43,19 +44,28 @@ PUERTOS:
 ; PONER EL BIT 0 DE LA VARIABLE PTA EN 0
 	BSF 			PTA, 0 
 
-CONFI_TMR0									 ; Configuración del TMR0 (Interrupción)
-	    MOVLW B'10100000' 						 ; Asignación de valores a las banderas del registro
+CONFIGURAR_TMR0									 ; Configuración del TMR0 (Interrupción)
+	MOVLW B'10100000' 						 ; Asignación de valores a las banderas del registro
+	
+INTCONN:
+	    MOVWF 			INTCON 					; Asignarle 10100000 a INTCON
+	    BSF				STATUS. RP0
+	    MOVLW 			b'10000001'				; Asignación de valores a las banderas del registro
+OPTION_REGG:
+	    MOVWF 			OPTION_REG				; Asignar los valores a option_reg
+	    BCF STATUS, RP0
+	    MOVLW 0X00							 	; Inicialización de la variable CONT
+	    MOVWF CONT								; Poner en 0's la variable contador
 
-	    
-	INICIO ; Inicio del programa principal
-	    MOVLW 			0X00 ; Inicialización de la variable UNIDAD
-	    MOVWF 			UNIDAD
-	    MOVLW 			0X00 ; Inicialización de la variable DECENA
-	    MOVWF 			DECENA
+INICIO
+	    MOVLW 			0X00 
+	    MOVWF 			UNIDAD					; Poner en ceros la variable UNIDAD
 	    MOVLW 			0X00
-	    MOVWF 			CENTENA ; Inicialización de la variable CENTENA
+	    MOVWF 			DECENA  					; Poner en ceros la variable DECENA
 	    MOVLW 			0X00
-	    MOVWF 			MILLAR ; Inicialización de la variable MILLAR
+	    MOVWF 			CENTENA 				; Poner en ceros la variable CENTENA
+	    MOVLW 			0X00
+	    MOVWF 			MILLAR 					; Poner en ceros la variable MILLAR
 	    
 	UNI ; Etiqueta para las unidades
 	    CALL RETARDO_400ms ; Llama a la subrutina RETARDO
