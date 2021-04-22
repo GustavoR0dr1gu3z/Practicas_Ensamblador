@@ -1,4 +1,4 @@
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  1
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -39,25 +39,25 @@ Warning[203]: Found opcode in column 1. (GOTO)
                       00017 ; SE ACCEDE AL BANCO 1 PARA USAR LOS TRIS
 0002   1683           00018         BSF                     STATUS, RP0 
                       00019 ; SE CONFIGURAN LOS PUERTOS DE ENTRADAS Y SALIDAS
-0003   30FF           00020         MOVLW           0XFF                                    ;W = 11111111
+0003   30FF           00020         MOVLW           0XFF                                            ;W = 11111111
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0004   0085           00021         MOVWF           TRISA                           ;PUERTO A COMO ENTRADA
-0005   3000           00022         MOVLW           0X00                            ;W=00000000
+0004   0085           00021         MOVWF           TRISA                                   ;PUERTO A COMO ENTRADA
+0005   3000           00022         MOVLW           0X00                                    ;W=00000000
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0006   0086           00023         MOVWF           TRISB                           ;PUERTO B COMO SALIDA
-0007   3000           00024         MOVLW           0X00                            ;W=00000000
+0006   0086           00023         MOVWF           TRISB                                   ;PUERTO B COMO SALIDA
+0007   3000           00024         MOVLW           0X00                                    ;W=00000000
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0008   0087           00025         MOVWF           TRISC                           ; PUERTO C COMO SALIDA
-0009   3000           00026         MOVLW           0X00                            ;W=00000000
+0008   0087           00025         MOVWF           TRISC                                   ; PUERTO C COMO SALIDA
+0009   3000           00026         MOVLW           0X00                                    ;W=00000000
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-000A   0088           00027         MOVWF           TRISD                           ; PUERTO D COMO SALIDA
+000A   0088           00027         MOVWF           TRISD                                   ; PUERTO D COMO SALIDA
                       00028 
                       00029 ;SE ACCEDE AL BANCO 3 PARA LOS ANSEL, ANSELH
 000B   1703           00030         BSF                     STATUS, RP1
                       00031 ;SE LIMPIAN (coloca 0's)LOS REGISTROS ANSEL, ANSELH PARA E/S DIGITAL
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 000C   0188           00032         CLRF            ANSEL
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  2
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -77,21 +77,21 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                       00043         ;BCF            STATUS,C
                       00044 
 0014                  00045 INICIO:
-0014   1C05           00046         BTFSS           PORTA,0                 ;Está en 1
-0015   281A           00047         GOTO            Cero0           ;NO
-0016   2817           00048         GOTO            Uno0            ;SI
+0014   1C05           00046         BTFSS           PORTA,0                                         ;Está en 1
+0015   281A           00047         GOTO            Cero0                                   ;NO
+0016   2817           00048         GOTO            Uno0                                    ;SI
                       00049         
                       00050 
 0017                  00051 Uno0:
-0017   1C85           00052         BTFSS           PORTA,1         ;Está en 1
-0018   2836           00053         GOTO            SEC1            ;NO
-0019   2868           00054         GOTO            SEC3            ;SI
+0017   1C85           00052         BTFSS           PORTA,1                                 ;Está en 1
+0018   2836           00053         GOTO            SEC1                                    ;NO
+0019   2868           00054         GOTO            SEC3                                    ;SI
                       00055         
                       00056 
 001A                  00057 Cero0:
-001A   1C85           00058         BTFSS           PORTA,1         ;Está en 1
-001B   281D           00059         GOTO            SEC0            ;NO
-001C   284F           00060         GOTO            SEC2            ;SI
+001A   1C85           00058         BTFSS           PORTA,1                                 ;Está en 1
+001B   281D           00059         GOTO            SEC0                                    ;NO
+001C   284F           00060         GOTO            SEC2                                    ;SI
                       00061 
                       00062         
                       00063 
@@ -116,7 +116,7 @@ Warning[202]: Argument out of range.  Least significant bits used.
 0026   208D           00081         CALL            M1DER2
 0027   0087           00082         MOVWF           PORTC
 0028   20E9           00083         CALL            RETARDO_400ms
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  3
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -126,14 +126,14 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0029   0AA4           00085         INCF                    Contador, F
 002A   0AA5           00086         INCF                    Co, F
                       00087 
-002B   1C05           00088         BTFSS           PORTA,0                 ; EL PUERTO ESTÁ EN 1?
-002C   282E           00089         GOTO            CCx                             ; NO
-002D   2814           00090         GOTO            INICIO                  ; SI
+002B   1C05           00088         BTFSS           PORTA,0                                 ; EL PUERTO ESTÁ EN 1?
+002C   282E           00089         GOTO            CCx                                             ; NO
+002D   2814           00090         GOTO            INICIO                                  ; SI
                       00091 
 002E                  00092 CCx:
-002E   1C85           00093         BTFSS           PORTA,1                 ; EL PUERTO ESTÁ EN 1?
-002F   2831           00094         GOTO            CONTADOR                ;NO
-0030   2814           00095         GOTO            INICIO                  ;SI
+002E   1C85           00093         BTFSS           PORTA,1                                 ; EL PUERTO ESTÁ EN 1?
+002F   2831           00094         GOTO            CONTADOR                                ;NO
+0030   2814           00095         GOTO            INICIO                                  ;SI
                       00096 
 0031                  00097 CONTADOR:
 0031   300B           00098         MOVLW           .11
@@ -164,18 +164,18 @@ Warning[202]: Argument out of range.  Least significant bits used.
 0042   0AA4           00122         INCF                    Contador, F
 0043   0AA5           00123         INCF                    Co, F
                       00124 
-0044   1C05           00125         BTFSS           PORTA,0                 ;ESTÁ EN 1?
-0045   2814           00126         GOTO            INICIO                  ;NO
-0046   2847           00127         GOTO            CUx                             ;SI
+0044   1C05           00125         BTFSS           PORTA,0                                 ;ESTÁ EN 1?
+0045   2814           00126         GOTO            INICIO                                  ;NO
+0046   2847           00127         GOTO            CUx                                             ;SI
                       00128 
 0047                  00129 CUx:
-0047   1C85           00130         BTFSS           PORTA,1                 ;ESTÁ EN 1?
-0048   284A           00131         GOTO            CONTADOR1               ;NO
-0049   2814           00132         GOTO            INICIO                  ;SI
+0047   1C85           00130         BTFSS           PORTA,1                                 ;ESTÁ EN 1?
+0048   284A           00131         GOTO            CONTADOR1                               ;NO
+0049   2814           00132         GOTO            INICIO                                  ;SI
                       00133 
 004A                  00134 CONTADOR1:
 004A   300D           00135         MOVLW           .13
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  4
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -209,13 +209,13 @@ Warning[202]: Argument out of range.  Least significant bits used.
 005B   0AA4           00160         INCF                    Contador, F
 005C   0AA5           00161         INCF                    Co, F
                       00162 
-005D   1C05           00163         BTFSS           PORTA,0                 ;ESTÁ EN 1?
-005E   2860           00164         GOTO            UCx                             ;NO 
-005F   2814           00165         GOTO            INICIO                  ;SI
+005D   1C05           00163         BTFSS           PORTA,0                                 ;ESTÁ EN 1?
+005E   2860           00164         GOTO            UCx                                             ;NO 
+005F   2814           00165         GOTO            INICIO                                  ;SI
 0060                  00166 UCx:
-0060   1C85           00167         BTFSS           PORTA,1                 ;ESTÁ EN 1?
-0061   2814           00168         GOTO            INICIO                  ;NO
-0062   2863           00169         GOTO            CONTADOR2               ;SI     
+0060   1C85           00167         BTFSS           PORTA,1                                 ;ESTÁ EN 1?
+0061   2814           00168         GOTO            INICIO                                  ;NO
+0062   2863           00169         GOTO            CONTADOR2                               ;SI     
                       00170 
 0063                  00171 CONTADOR2:
 0063   300B           00172         MOVLW           .11
@@ -234,7 +234,7 @@ Warning[202]: Argument out of range.  Least significant bits used.
 006C   0824           00185         MOVF            Contador, W
 Warning[202]: Argument out of range.  Least significant bits used.
 006D   08A4           00186         MOVF            Contador, Co
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  5
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -251,14 +251,14 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00195 
 0074   0AA4           00196         INCF                    Contador, F
 0075   0AA5           00197         INCF                    Co, F
-0076   1C05           00198         BTFSS           PORTA,0                 ;ESTÁ EN 1?
-0077   2814           00199         GOTO            INICIO                  ; NO
-0078   2879           00200         GOTO            UUx                             ;SI
+0076   1C05           00198         BTFSS           PORTA,0                                 ;ESTÁ EN 1?
+0077   2814           00199         GOTO            INICIO                                  ; NO
+0078   2879           00200         GOTO            UUx                                             ;SI
                       00201 
 0079                  00202 UUx:
-0079   1C85           00203         BTFSS           PORTA,1                 ; ESTÁ EN 1?
-007A   2814           00204         GOTO            INICIO                  ;NO
-007B   287C           00205         GOTO            CONTADOR3               ;SI
+0079   1C85           00203         BTFSS           PORTA,1                                 ; ESTÁ EN 1?
+007A   2814           00204         GOTO            INICIO                                  ;NO
+007B   287C           00205         GOTO            CONTADOR3                               ;SI
                       00206 
 007C                  00207 CONTADOR3:
 007C   300D           00208         MOVLW           .13
@@ -293,7 +293,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0094   347F           00237         RETLW           b'01111111'     ; E_2
 0095   34FF           00238         RETLW           b'11111111'     ; C_2
 0096   3477           00239         RETLW           b'01110111'     ; H_2
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  6
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00BF   3430           00290         RETLW           b'00110000'     ; A_1
 00C0   34FF           00291         RETLW           b'11111111'     ; ESPACIO
                       00292 
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  7
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -411,7 +411,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00343 
                       00344 ; -----------------------------------------------RETARDO---------------------------------
 00E9                  00345 RETARDO_400ms:
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  8
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -432,7 +432,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 00F5   3400           00358                 retlw   0
 00F6   0008           00359                 RETURN
                       00360         END                      
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE  9
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE  9
 
 
 SYMBOL TABLE
@@ -491,7 +491,7 @@ BRG5                              00000005
 BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 10
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE 10
 
 
 SYMBOL TABLE
@@ -550,7 +550,7 @@ CCPR2L                            0000001B
 CCx                               0000002E
 CHS0                              00000002
 CHS1                              00000003
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 11
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE 11
 
 
 SYMBOL TABLE
@@ -609,7 +609,7 @@ GIE                               00000007
 GO                                00000001
 GO_DONE                           00000001
 GO_NOT_DONE                       00000001
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 12
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE 12
 
 
 SYMBOL TABLE
@@ -668,7 +668,7 @@ NOT_PD                            00000003
 NOT_POR                           00000001
 NOT_RBPU                          00000007
 NOT_RC8                           00000006
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 13
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE 13
 
 
 SYMBOL TABLE
@@ -727,7 +727,7 @@ PSA                               00000003
 PSSAC0                            00000002
 PSSAC1                            00000003
 PSSBD0                            00000000
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 14
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE 14
 
 
 SYMBOL TABLE
@@ -786,7 +786,7 @@ RD6                               00000006
 RD7                               00000007
 RE0                               00000000
 RE1                               00000001
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 15
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE 15
 
 
 SYMBOL TABLE
@@ -845,7 +845,7 @@ SWDTEN                            00000000
 SYNC                              00000004
 T0CS                              00000005
 T0IE                              00000005
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 16
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE 16
 
 
 SYMBOL TABLE
@@ -904,7 +904,7 @@ TRISB6                            00000006
 TRISB7                            00000007
 TRISC                             00000087
 TRISC0                            00000000
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 17
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE 17
 
 
 SYMBOL TABLE
@@ -963,7 +963,7 @@ VRCON                             00000097
 VREN                              00000007
 VROE                              00000006
 VRR                               00000005
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 18
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE 18
 
 
 SYMBOL TABLE
@@ -1022,7 +1022,7 @@ _FCMEN_ON                         00003FFF
 _FOSC_EC                          00003FFB
 _FOSC_EXTRC_CLKOUT                00003FFF
 _FOSC_EXTRC_NOCLKOUT              00003FFE
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 19
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE 19
 
 
 SYMBOL TABLE
@@ -1078,7 +1078,7 @@ Program Memory Words Used:   247
 Program Memory Words Free:  7945
 
 
-MPASM  5.50                 MOTOR_PUENTEH.ASM   4-11-2021  21:04:34         PAGE 20
+MPASM  5.50                 MOTOR_PUENTEH.ASM   4-19-2021  19:10:31         PAGE 20
 
 
 

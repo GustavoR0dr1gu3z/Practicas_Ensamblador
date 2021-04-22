@@ -20,25 +20,25 @@ ENDC ; Fin de bloque de librerías
 	    GOTO CONFIGURAR ; Ir a la etiqueta configurar
 	
 	CONFIGURAR ; Configuración de puertos
-	   CLRW ; Limpiar a W
-	   BSF STATUS, RP0 ; RP0=1 del registro STATUS
-	   MOVLW 0X00 ; Cargar el valor a W
-	   MOVWF TRISB ; Mover lo de W a TRISB
-	   MOVLW 0XF0 ; Cargar el valor a W
-	   MOVWF TRISA ; Mover lo de W a TRISA
-	   BCF STATUS, RP0 ; RP0=0 del registro STATUS
-	   CLRF PORTA ; Limpia PORTA
-	   CLRF PORTB ; Limpia PORTB
+
+	   BSF 				STATUS, RP0 ; RP0=1 del registro STATUS
+	   MOVLW 			0X00 ; Cargar el valor a W
+	   MOVWF 			TRISB ; Mover lo de W a TRISB
+	   MOVLW 			0XF0 ; Cargar el valor a W
+	   MOVWF 			TRISA ; Mover lo de W a TRISA
+	   BCF 				STATUS, RP0 ; RP0=0 del registro STATUS
+	   CLRF 				PORTA ; Limpia PORTA
+	   CLRF 				PORTB ; Limpia PORTB
 	    
 	INICIO ; Inicio del programa principal
-	    MOVLW 0X00 ; Inicialización de la variable UNIDAD
-	    MOVWF UNIDAD
-	    MOVLW 0X00 ; Inicialización de la variable DECENA
-	    MOVWF DECENA
-	    MOVLW 0X00
-	    MOVWF CENTENA ; Inicialización de la variable CENTENA
-	    MOVLW 0X00
-	    MOVWF MILLAR ; Inicialización de la variable MILLAR
+	    MOVLW 			0X00 ; Inicialización de la variable UNIDAD
+	    MOVWF 			UNIDAD
+	    MOVLW 			0X00 ; Inicialización de la variable DECENA
+	    MOVWF 			DECENA
+	    MOVLW 			0X00
+	    MOVWF 			CENTENA ; Inicialización de la variable CENTENA
+	    MOVLW 			0X00
+	    MOVWF 			MILLAR ; Inicialización de la variable MILLAR
 	    
 	UNI ; Etiqueta para las unidades
 	    CALL RETARDO_400ms ; Llama a la subrutina RETARDO
