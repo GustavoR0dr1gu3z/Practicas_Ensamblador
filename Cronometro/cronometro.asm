@@ -67,11 +67,11 @@ INICIO
 	    MOVLW 			0X00
 	    MOVWF 			MILLAR 					; Poner en ceros la variable MILLAR
 	    
-	UNI ; Etiqueta para las unidades
-	    CALL RETARDO_400ms ; Llama a la subrutina RETARDO
-	    INCF UNIDAD, 1 ; Incrementa la variable UNIDAD en 1
-	    MOVF UNIDAD, 0 ; Mueve el valor de UNIDAD a W
-	    SUBLW 0X09 ; Le resta el valor de 10 a W
+E_UNIDADES ; Etiqueta para las unidades
+	    CALL RETARDO_400ms 						; Llama a la subrutina RETARDO
+	    INCF UNIDAD, 1 								; UNIDAD = UNIDAD+1
+	    MOVF UNIDAD, 0 								; W <- UNIDAD
+	    SUBLW 0X09 								; Le resta el valor de 10 a W
 	    CALL TABLA
    	    MOVWF PORTB
 	    BTFSS STATUS, Z ; Testea la bandera Z
