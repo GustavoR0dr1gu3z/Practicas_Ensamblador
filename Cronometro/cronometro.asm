@@ -6,9 +6,8 @@
 ; The labels following the directive are located in the respective .inc file.
 ; See respective data sheet for additional information on configuration word.
 
-	__CONFIG    _CONFIG1, _LVP_OFF & _FCMEN_ON & _IESO_OFF & _BOR_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _PWRTE_ON & _WDT_OFF & _INTRC_OSC_NOCLKOUT
-	__CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
-ORG 0x000 ; posición 0
+__CONFIG   _CONFIG1, _LVP_OFF & _FCMEN_ON & _IESO_OFF & _BOR_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _PWRTE_ON & _WDT_OFF & _INTRC_OSC_NOCLKOUT 
+__CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
 
 ;***** VARIABLE DEFINITIONS
 w_temp		EQU	0x7D		; variable used for context saving
@@ -24,26 +23,22 @@ UNIDAD,DECENA,CENTENA,MILLAR ;Variables del programa principal
 ENDC
 
 ;**********************************************************************
-nop
+ORG 0x000 ; posición 0
 GOTO PUERTOS ; Comienzo del programa
 
 ORG 0X04
 GOTO INTERRUPCION
 
 PUERTOS:
+	CLRW
 ; SE ACCEDE AL BANCO 1 PARA USAR LOS TRIS
 	BSF 			STATUS, RP0 
 ; SE CONFIGURAN LOS PUERTOS DE ENTRADAS Y SALIDAS
-	MOVLW 		0XF0						;W = 11110000
-	MOVWF 		TRISA					;PINES PUERTO A, SALIDA Y ENTRADAS
 	MOVLW 		0X00					;W = 00000000
 	MOVWF		TRISB					;PUERTO B COMO SALIDA
+	MOVLW 		0XF0						;W = 11110000
+	MOVWF 		TRISA					;PINES PUERTO A, SALIDA Y ENTRADAS
 
-;SE ACCEDE AL BANCO 3 PARA LOS ANSEL, ANSELH
-	BSF 			STATUS, RP1
-;SE LIMPIAN (coloca 0's)LOS REGISTROS ANSEL, ANSELH PARA E/S DIGITAL
-	CLRF 		ANSEL
-	CLRF 		ANSELH
 
 ;SE ACCEDE AL BANCO 0 PARA LOS PUERTOS
 	BCF 			STATUS, RP1
