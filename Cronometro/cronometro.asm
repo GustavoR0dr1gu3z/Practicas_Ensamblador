@@ -42,7 +42,7 @@ PUERTOS:
 	CLRF 		PORTA
 	CLRF 		PORTB
 ; PONER EL BIT 0 DE LA VARIABLE PTA EN 0
-	BSF 			PTA, 0 
+	BCF 			PTA, 0 
 
 CONFIGURAR_TMR0									 ; Configuración del TMR0 (Interrupción)
 	MOVLW B'10100000' 						 ; Asignación de valores a las banderas del registro
@@ -109,13 +109,13 @@ E_MILLARES ; Etiqueta para los millares
 
 INTERRUPCION:
 	MOVWF 				W_RES								 ; W_RES = WS
-	SWAPF 				STATUS, W	 							 ; W = SWAP (STATUS)
-	MOVWF 				STAT_RES 								 ; STAT_RES = W
+	SWAPF 				STATUS, W	 						 ; W = SWAP (STATUS)
+	MOVWF 				STAT_RES 							 ; STAT_RES = W
     	MOVF 				CONT, 0 								 ; W <- CONT
-	SUBLW 				04H 								; Resta 4 a W
-	BTFSS 				STATUS, Z 							; Testea la bandera Z
-	GOTO 				CICLO
-	CLRF 				CONT	 							; Salto en caso de que el bit testeado es igual a 1
+	SUBLW 				04H 									; W <- 04H-W
+	BTFSS 				STATUS, Z 							; Comprueba si la bandera Z
+	GOTO 				CICLO								; Si es 0 se va a CICLO
+	CLRF 				CONT	 							; Casi 1; se limpia CONT
 	CLRF 				PTA 									; Limpia la variable PTA
 	BSF 					PTA, 0 								; Pone el bit 0 de la variable PTA en 0		
 
