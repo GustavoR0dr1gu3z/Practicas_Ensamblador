@@ -1,4 +1,4 @@
-MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:03:56         PAGE  1
+MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:32:50         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -21,288 +21,275 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00006 ; The labels following the directive are located in the respective .inc file.
                       00007 ; See respective data sheet for additional information on configuration word.
                       00008 
-2007   28E4           00009         __CONFIG    _CONFIG1, _LVP_OFF & _FCMEN_ON & _IESO_OFF & _BOR_OFF & _CPD_OFF & _CP_OFF & _MCLRE_
-                            ON & _PWRTE_ON & _WDT_OFF & _INTRC_OSC_NOCLKOUT
-2008   3EFF           00010         __CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
-Warning[205]: Found directive in column 1. (ORG)
-0000                  00011 ORG 0x000 ; posición 0
+Warning[205]: Found directive in column 1. (__CONFIG)
+2007   28E4           00009 __CONFIG   _CONFIG1, _LVP_OFF & _FCMEN_ON & _IESO_OFF & _BOR_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _PWR
+                            TE_ON & _WDT_OFF & _INTRC_OSC_NOCLKOUT 
+Warning[205]: Found directive in column 1. (__CONFIG)
+2008   3EFF           00010 __CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
+                      00011 
                       00012 
-                      00013 ;***** VARIABLE DEFINITIONS
-  0000007D            00014 w_temp          EQU     0x7D            ; variable used for context saving
-  0000007E            00015 status_temp     EQU     0x7E            ; variable used for context saving
-  0000007F            00016 pclath_temp     EQU     0x7F            ; variable used for context saving
-                      00017 
 Warning[205]: Found directive in column 1. (CBLOCK)
-                      00018 CBLOCK 0X20 ; Dirección de memoria para las variables
-  00000020            00019 CounterA, CounterB, CounterC
-  00000023            00020 CONT, W_RES, STAT_RES, PTA
+                      00013 CBLOCK 0X20 ; Dirección de memoria para las variables
+  00000020            00014 CounterA, CounterB, CounterC
+  00000023            00015 CONT, W_RES, STAT_RES, PTA
 Warning[205]: Found directive in column 1. (ENDC)
-                      00021 ENDC ; Fin de bloque de librerías
+                      00016 ENDC ; Fin de bloque de librerías
 Warning[205]: Found directive in column 1. (CBLOCK)
-                      00022 CBLOCK 0X30
-  00000030            00023 UNIDAD,DECENA,CENTENA,MILLAR ;Variables del programa principal
+                      00017 CBLOCK 0X30
+  00000030            00018 UNIDAD,DECENA,CENTENA,MILLAR ;Variables del programa principal
 Warning[205]: Found directive in column 1. (ENDC)
-                      00024 ENDC
-                      00025 
-                      00026 ;**********************************************************************
-Warning[203]: Found opcode in column 1. (nop)
-0000   0000           00027 nop
-Warning[203]: Found opcode in column 1. (GOTO)
-0001   2805           00028 GOTO PUERTOS ; Comienzo del programa
-                      00029 
+                      00019 ENDC
+                      00020 
+                      00021 ;**********************************************************************
 Warning[205]: Found directive in column 1. (ORG)
-0004                  00030 ORG 0X04
+0000                  00022 ORG 0x000 ; posición 0
 Warning[203]: Found opcode in column 1. (GOTO)
-0004   283E           00031 GOTO INTERRUPCION
-                      00032 
-0005                  00033 PUERTOS:
-                      00034 ; SE ACCEDE AL BANCO 1 PARA USAR LOS TRIS
-MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:03:56         PAGE  2
+0000   2805           00023 GOTO PUERTOS ; Comienzo del programa
+                      00024 
+Warning[205]: Found directive in column 1. (ORG)
+0004                  00025 ORG 0X04
+Warning[203]: Found opcode in column 1. (GOTO)
+0004   283C           00026 GOTO INTERRUPCION
+                      00027 
+0005                  00028 PUERTOS:
+0005   0103           00029         CLRW
+                      00030 ; SE ACCEDE AL BANCO 1 PARA USAR LOS TRIS
+0006   1683           00031         BSF                     STATUS, RP0 
+                      00032 ; SE CONFIGURAN LOS PUERTOS DE ENTRADAS Y SALIDAS
+0007   3000           00033         MOVLW           0X00                                    ;W = 00000000
+MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:32:50         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0005   1683           00035         BSF                     STATUS, RP0 
-                      00036 ; SE CONFIGURAN LOS PUERTOS DE ENTRADAS Y SALIDAS
-0006   30F0           00037         MOVLW           0XF0                                            ;W = 11110000
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0007   0085           00038         MOVWF           TRISA                                   ;PINES PUERTO A, SALIDA Y ENTRADAS
-0008   3000           00039         MOVLW           0X00                                    ;W = 00000000
+0008   0086           00034         MOVWF           TRISB                                   ;PUERTO B COMO SALIDA
+0009   30F0           00035         MOVLW           0XF0                                            ;W = 11110000
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0009   0086           00040         MOVWF           TRISB                                   ;PUERTO B COMO SALIDA
-                      00041 
-                      00042 ;SE ACCEDE AL BANCO 3 PARA LOS ANSEL, ANSELH
-000A   1703           00043         BSF                     STATUS, RP1
-                      00044 ;SE LIMPIAN (coloca 0's)LOS REGISTROS ANSEL, ANSELH PARA E/S DIGITAL
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-000B   0188           00045         CLRF            ANSEL
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-000C   0189           00046         CLRF            ANSELH
+000A   0085           00036         MOVWF           TRISA                                   ;PINES PUERTO A, SALIDA Y ENTRADAS
+                      00037 
+                      00038 
+                      00039 ;SE ACCEDE AL BANCO 0 PARA LOS PUERTOS
+000B   1303           00040         BCF                     STATUS, RP1
+000C   1283           00041         BCF                     STATUS, RP0
+                      00042 ;SE COLOCA EN CEROS LOS PUERTOS
+000D   0185           00043         CLRF            PORTA
+000E   0186           00044         CLRF            PORTB
+                      00045 ; PONER EL BIT 0 DE LA VARIABLE PTA EN 0
+000F   1426           00046         BSF                     PTA, 0 
                       00047 
-                      00048 ;SE ACCEDE AL BANCO 0 PARA LOS PUERTOS
-000D   1303           00049         BCF                     STATUS, RP1
-000E   1283           00050         BCF                     STATUS, RP0
-                      00051 ;SE COLOCA EN CEROS LOS PUERTOS
-000F   0185           00052         CLRF            PORTA
-0010   0186           00053         CLRF            PORTB
-                      00054 ; PONER EL BIT 0 DE LA VARIABLE PTA EN 0
-0011   1026           00055         BCF                     PTA, 0 
-                      00056 
-0012                  00057 CONFIGURAR_TMR0                                                                  ; Configuración del TMR
+0010                  00048 CONFIGURAR_TMR0                                                                  ; Configuración del TMR
                             0 (Interrupción)
-0012   30A0           00058         MOVLW                           b'10100000'                                              ; Asign
+0010   30A0           00049         MOVLW                           b'10100000'                                              ; Asign
                             ación de valores a las banderas del registro
-                      00059         
-0013                  00060 INTCONN:
-0013   008B           00061             MOVWF                       INTCON                                  ; Asignarle 10100000 a I
+                      00050         
+0011                  00051 INTCONN:
+0011   008B           00052             MOVWF                       INTCON                                  ; Asignarle 10100000 a I
                             NTCON
-0014   1683           00062             BSF                         STATUS, RP0
-0015   3081           00063             MOVLW                       b'10000001'                             ; Asignación de valores 
+0012   1683           00053             BSF                         STATUS, RP0
+0013   3081           00054             MOVLW                       b'10000001'                             ; Asignación de valores 
                             a las banderas del registro
-0016                  00064 OPTION_REGG:
+0014                  00055 OPTION_REGG:
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0016   0081           00065             MOVWF                       OPTION_REG                              ; Asignar los valores a 
+0014   0081           00056             MOVWF                       OPTION_REG                              ; Asignar los valores a 
                             option_reg
-0017   1283           00066             BCF                                 STATUS, RP0
-0018   3000           00067             MOVLW                       0X00                                                            
+0015   1283           00057             BCF                                 STATUS, RP0
+0016   3000           00058             MOVLW                       0X00                                                            
                             ; Inicialización de la variable CONT
-0019   00A3           00068             MOVWF                       CONT                                                            
+0017   00A3           00059             MOVWF                       CONT                                                            
                             ; Poner en 0's la variable contador
-                      00069 
-001A                  00070 INICIO:
-001A   3000           00071             MOVLW                       0X00 
-001B   00B0           00072             MOVWF                       UNIDAD                                  ; Poner en ceros la vari
+                      00060 
+0018                  00061 INICIO:
+0018   3000           00062             MOVLW                       0X00 
+0019   00B0           00063             MOVWF                       UNIDAD                                  ; Poner en ceros la vari
                             able UNIDAD
-001C   00B1           00073             MOVWF                       DECENA                                          ; Poner en ceros
+001A   00B1           00064             MOVWF                       DECENA                                          ; Poner en ceros
                              la variable DECENA
-MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:03:56         PAGE  3
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-001D   00B2           00074             MOVWF                       CENTENA                                 ; Poner en ceros la vari
+001B   00B2           00065             MOVWF                       CENTENA                                 ; Poner en ceros la vari
                             able CENTENA
-001E   00B3           00075             MOVWF                       MILLAR                                  ; Poner en ceros la vari
+001C   00B3           00066             MOVWF                       MILLAR                                  ; Poner en ceros la vari
                             able MILLAR
-                      00076             
-001F                  00077 E_UNIDADES ; Etiqueta para las unidades
-001F   2060           00078             CALL                                RETARDO_400ms                                           
+                      00067             
+001D                  00068 E_UNIDADES ; Etiqueta para las unidades
+001D   2061           00069             CALL                                RETARDO_400ms                                           
                             ; Llama a la subrutina RETARDO
-0020   0AB0           00079             INCF                                UNIDAD, 1                                               
+001E   0AB0           00070             INCF                                UNIDAD, 1                                               
                                             ; UNIDAD = UNIDAD+1
-0021   0830           00080             MOVF                                UNIDAD, 0                                               
+MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:32:50         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+001F   0830           00071             MOVF                                UNIDAD, 0                                               
                                             ; W <- UNIDAD
-0022   3C0A           00081             SUBLW                       b'00001010'                                                     
+0020   3C09           00072             SUBLW                       b'00001001'                                                     
                                     ; W <- 0X09 (00001001)-W
-0023   1D03           00082             BTFSS                               STATUS, Z                                               
+0021   1D03           00073             BTFSS                               STATUS, Z                                               
                                             ; Comprueba si la bandera Z = 1
-0024   281F           00083             GOTO                                E_UNIDADES                                              
+0022   281D           00074             GOTO                                E_UNIDADES                                              
                                     ; Si es 0 se repite
-0025   2826           00084             GOTO                                E_DECENAS                                               
+0023   2824           00075             GOTO                                E_DECENAS                                               
                                     ; Si es 1 se va a E_DECENAS
-                      00085             
-0026                  00086 E_DECENAS ; Etiqueta para las decenas
-0026   01B0           00087             CLRF                                UNIDAD                                                  
+                      00076             
+0024                  00077 E_DECENAS ; Etiqueta para las decenas
+0024   01B0           00078             CLRF                                UNIDAD                                                  
                                     ; Pone en 0's la variable UNIDAD
-0027   0AB1           00088             INCF                                DECENA, 1                                               
+0025   0AB1           00079             INCF                                DECENA, 1                                               
                                             ; DECENA = DECENA+1
-0028   0831           00089             MOVF                                DECENA, 0                                               
+0026   0831           00080             MOVF                                DECENA, 0                                               
                                             ; W <- DECENA
-0029   3C06           00090             SUBLW                       b'00000110'                                                     
+0027   3C06           00081             SUBLW                       b'00000110'                                                     
                                     ; W <- 0x06 (00000110)-W
-002A   1D03           00091             BTFSS                               STATUS, Z                                               
+0028   1D03           00082             BTFSS                               STATUS, Z                                               
                                             ; Comprueba si la bandera Z = 1
-002B   281F           00092             GOTO                                E_UNIDADES                                              
+0029   281D           00083             GOTO                                E_UNIDADES                                              
                                     ; Si es 0 se repite el ciclo a E_UNIDADES
-002C   282D           00093             GOTO                                E_CENTENAS                                              
+002A   282B           00084             GOTO                                E_CENTENAS                                              
                                     ; Si es 1 se va a E_CENTENAS
-                      00094             
-002D                  00095 E_CENTENAS ; Etiqueta para las centenas
-002D   01B0           00096             CLRF                                UNIDAD                                                  
+                      00085             
+002B                  00086 E_CENTENAS ; Etiqueta para las centenas
+002B   01B0           00087             CLRF                                UNIDAD                                                  
                                     ; Pone en 0's la variable UNIDAD
-002E   01B1           00097             CLRF                                DECENA                                                  
+002C   01B1           00088             CLRF                                DECENA                                                  
                                     ; Pone en 0's la variable DECENA
-002F   0AB2           00098             INCF                                CENTENA, 1                                              
+002D   0AB2           00089             INCF                                CENTENA, 1                                              
                                             ; CENTENA = CENTENA+1
-0030   0832           00099             MOVF                                CENTENA, 0                                              
+002E   0832           00090             MOVF                                CENTENA, 0                                              
                                     ; W <- CENTENA
-0031   3C0A           00100             SUBLW                       b'00001010'                                                     
+002F   3C09           00091             SUBLW                       b'00001001'                                                     
                                     ; W <- 0X09 (00001001)-W
-0032   1D03           00101             BTFSS                               STATUS, Z                                               
+0030   1D03           00092             BTFSS                               STATUS, Z                                               
                                             ; Comprueba si la bandera Z = 1
-0033   281F           00102             GOTO                                E_UNIDADES                                              
+0031   281D           00093             GOTO                                E_UNIDADES                                              
                                     ; Si es 0 se repite el ciclo a E_UNIDADES
-0034   2835           00103             GOTO                                E_MILLARES                                              
-MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:03:56         PAGE  4
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
+0032   2833           00094             GOTO                                E_MILLARES                                              
                                     ; Si es 1 se va a E_MILLARES
-                      00104             
-0035                  00105 E_MILLARES ; Etiqueta para los millares
-0035   01B0           00106             CLRF                                UNIDAD                                                  
+                      00095             
+0033                  00096 E_MILLARES ; Etiqueta para los millares
+0033   01B0           00097             CLRF                                UNIDAD                                                  
                                     ; Poner en 0's la variable UNIDAD
-0036   01B1           00107             CLRF                                DECENA                                                  
+0034   01B1           00098             CLRF                                DECENA                                                  
                                     ; Poner en 0's la variable DECENA
-0037   01B2           00108             CLRF                                CENTENA                                                 
+0035   01B2           00099             CLRF                                CENTENA                                                 
                                     ; Poner en 0's la variable CENTENA
-0038   0AB3           00109             INCF                                MILLAR, 1                                               
-                                            ; MILLAR = MILLAR+1
-0039   0833           00110             MOVF                                MILLAR, 0                                               
-                                            ; W <- MILLAR
-003A   3C06           00111             SUBLW                       b'00000110'                                                     
-                                    ; W <- OXO6 (00000110)-W
-003B   1D03           00112             BTFSS                               STATUS, Z                                               
-                                            ; Comprueba si la bandera Z = 1
-003C   281F           00113             GOTO                                E_UNIDADES                                              
-                                    ; Si es 0 se repite el cicli a E_UNIDADES
-003D   281A           00114             GOTO                                INICIO                                                  
-                                    ; Si es 1 se va a INICIO
-                      00115             
-                      00116 
-003E                  00117 INTERRUPCION:
-003E   00A4           00118         MOVWF                           W_RES                                                           
-                             ; W_RES = WS
-003F   0E03           00119         SWAPF                           STATUS, W                                                       
-                             ; W = SWAP (STATUS)
-0040   00A5           00120         MOVWF                           STAT_RES                                                        
-                             ; STAT_RES = W
-0041   0823           00121         MOVF                            CONT, 0                                                         
-                                     ; W <- CONT
-0042   3C04           00122         SUBLW                           b'00000100'                                                     
-                                            ; W <- 04H-W
-0043   1D03           00123         BTFSS                           STATUS, Z                                                       
-                            ; Comprueba si la bandera Z
-0044   2848           00124         GOTO                            CICLO                                                           
-                            ; Si es 0 se va a CICLO
-0045   01A3           00125         CLRF                            CONT                                                            
-                            ; Casi 1; se limpia CONT
-0046   01A6           00126         CLRF                                    PTA                                                     
-                                            ; Limpia la variable PTA
-0047   1026           00127         BCF                                     PTA, 0                                                  
-                                    ; Pone el bit 0 de la variable PTA en 0         
-                      00128 
-                      00129 
-0048                  00130 CICLO ; Etiqueta para ciclo
-0048   0823           00131             MOVF                                CONT, 0                                                 
-                                            ; W <- CONT
-0049   3E30           00132             ADDLW                       b'00110000'                                                     
-                                            ; W <- 30H +W
-004A   0084           00133             MOVWF                       FSR                                                             
-                                    ; FSR <- W
-MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:03:56         PAGE  5
+0036   0AB3           00100             INCF                                MILLAR, 1                                               
+MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:32:50         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-004B   0800           00134             MOVF                                INDF, 0                                                 
+                                            ; MILLAR = MILLAR+1
+0037   0833           00101             MOVF                                MILLAR, 0                                               
+                                            ; W <- MILLAR
+0038   3C06           00102             SUBLW                       b'00000110'                                                     
+                                    ; W <- OXO6 (00000110)-W
+0039   1D03           00103             BTFSS                               STATUS, Z                                               
+                                            ; Comprueba si la bandera Z = 1
+003A   281D           00104             GOTO                                E_UNIDADES                                              
+                                    ; Si es 0 se repite el cicli a E_UNIDADES
+003B   2818           00105             GOTO                                INICIO                                                  
+                                    ; Si es 1 se va a INICIO
+                      00106             
+                      00107 
+003C                  00108 INTERRUPCION:
+003C   00A4           00109         MOVWF                           W_RES                                                           
+                             ; W_RES = WS
+003D   0E03           00110         SWAPF                           STATUS, W                                                       
+                             ; W = SWAP (STATUS)
+003E   00A5           00111         MOVWF                           STAT_RES                                                        
+                             ; STAT_RES = W
+003F   0823           00112         MOVF                            CONT, 0                                                         
+                                     ; W <- CONT
+0040   3C04           00113         SUBLW                           b'00000100'                                                     
+                                            ; W <- 04H-W
+0041   1D03           00114         BTFSS                           STATUS, Z                                                       
+                            ; Comprueba si la bandera Z
+0042   2846           00115         GOTO                            CICLO                                                           
+                            ; Si es 0 se va a CICLO
+0043   01A3           00116         CLRF                            CONT                                                            
+                            ; Casi 1; se limpia CONT
+0044   01A6           00117         CLRF                                    PTA                                                     
+                                            ; Limpia la variable PTA
+0045   1426           00118         BSF                                     PTA, 0                                                  
+                                    ; Pone el bit 0 de la variable PTA en 0         
+                      00119 
+                      00120 
+0046                  00121 CICLO ; Etiqueta para ciclo
+0046   0823           00122             MOVF                                CONT, 0                                                 
+                                            ; W <- CONT
+0047   3E50           00123             ADDLW                       b'01010000'                                                     
+                                            ; W <- 30H +W
+0048   0084           00124             MOVWF                       FSR                                                             
+                                    ; FSR <- W
+0049   0800           00125             MOVF                                INDF, 0                                                 
                                             ; W <- INDF
-004C   2056           00135             CALL                                TABLA                                                   
+004A   2056           00126             CALL                                TABLA                                                   
                                      ; Llama a la subrutina tabla
-004D   0086           00136             MOVWF                       PORTB                                                           
+004B   0086           00127             MOVWF                       PORTB                                                           
                             ; PORTB <- W
-Message[305]: Using default destination of 1 (file).
-004E   08A6           00137             MOVF                                PTA                                                     
-                                    ; W <- PTA
-004F   0085           00138             MOVWF                       PORTA                                                           
+004C   0826           00128             MOVF                                PTA,0                                                   
+                                            ; W <- PTA
+004D   0085           00129             MOVWF                       PORTA                                                           
                             ; PORTA <- W
-0050   0AA3           00139             INCF                                CONT, 1                                                 
+MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:32:50         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+004E   0AA3           00130             INCF                                CONT, 1                                                 
                                             ; CONT = CONT+1
 Message[305]: Using default destination of 1 (file).
-0051   0DA6           00140             RLF                                 PTA                                                     
+004F   0DA6           00131             RLF                                 PTA                                                     
                                             ; PTA = PTA*2
-0052   0E24           00141             SWAPF                       W_RES, W                                                        
+0050   0E25           00132             SWAPF                       STAT_RES, W                                                     
                             ; W_RES = SWAP(W_RES)
-0053   0083           00142             MOVWF                       STATUS                                                          
+0051   0083           00133             MOVWF                       STATUS                                                          
                             ; W = SWAP(W_RES)
-0054   110B           00143             BCF                                 INTCON, T0IF                                            
+Warning[202]: Argument out of range.  Least significant bits used.
+0052   0E24           00134             SWAPF                               W_RES, W_RES
+0053   0E24           00135             SWAPF                               W_RES, W
+0054   110B           00136             BCF                                 INTCON, T0IF                                            
                                     ; Limpia el bit T0IF del registro INTCON
-0055   0009           00144             RETFIE                                                                                      
+0055   0009           00137             RETFIE                                                                                      
                                             ; Return de la interrupción
-                      00145             
-                      00146 
-0056                  00147 TABLA:
-0056   0782           00148         ADDWF           PCL, 1; Suma PCL <- W+PCL
-0057   34F9           00149         RETLW           b'11111001'     ; 1
-0058   34A4           00150         RETLW           b'10100100'     ; 2
-0059   34B0           00151         RETLW           b'10110000'     ; 3
-005A   3499           00152         RETLW           b'10011001'     ; 4
-005B   3492           00153         RETLW           b'10010010'     ; 5
-005C   3482           00154         RETLW           b'10000010'     ; 6
-005D   34F8           00155         RETLW           b'11111000'     ; 7
-005E   3480           00156         RETLW           b'10000000'     ; 8
-005F   3498           00157         RETLW           b'10011000'     ; 9
-                      00158 
-                      00159             
-0060                  00160 RETARDO_400ms:
-0060   3003           00161                 movlw   D'3'
-0061   00A2           00162                 movwf   CounterC
-0062   3008           00163                 movlw   D'8'
-0063   00A1           00164                 movwf   CounterB
-0064   3076           00165                 movlw   D'118'
-0065   00A0           00166                 movwf   CounterA
-0066   0BA0           00167 loop            decfsz  CounterA,1
-0067   2866           00168                 goto    loop
-0068   0BA1           00169                 decfsz  CounterB,1
-0069   2866           00170                 goto    loop
-006A   0BA2           00171                 decfsz  CounterC,1
-006B   2866           00172                 goto    loop
-006C   3400           00173                 retlw   0
-MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:03:56         PAGE  6
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-006D   0008           00174                 RETURN
-                      00175 
-                      00176        END
-MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:03:56         PAGE  7
+                      00138             
+                      00139 
+0056                  00140 TABLA:
+0056   0782           00141         ADDWF           PCL, 1; Suma PCL <- W+PCL
+0057   34C0           00142         RETLW           b'11000000'     ; 0
+0058   34F9           00143         RETLW           b'11111001'     ; 1
+0059   34A4           00144         RETLW           b'10100100'     ; 2
+005A   34B0           00145         RETLW           b'10110000'     ; 3
+005B   3499           00146         RETLW           b'10011001'     ; 4
+005C   3492           00147         RETLW           b'10010010'     ; 5
+005D   3482           00148         RETLW           b'10000010'     ; 6
+005E   34F8           00149         RETLW           b'11111000'     ; 7
+005F   3480           00150         RETLW           b'10000000'     ; 8
+0060   3498           00151         RETLW           b'10011000'     ; 9
+                      00152 
+                      00153             
+0061                  00154 RETARDO_400ms:
+0061   3003           00155                 movlw   D'3'
+0062   00A2           00156                 movwf   CounterC
+0063   3008           00157                 movlw   D'8'
+0064   00A1           00158                 movwf   CounterB
+0065   3076           00159                 movlw   D'118'
+0066   00A0           00160                 movwf   CounterA
+0067   0BA0           00161 loop            decfsz  CounterA,1
+0068   2867           00162                 goto    loop
+0069   0BA1           00163                 decfsz  CounterB,1
+006A   2867           00164                 goto    loop
+006B   0BA2           00165                 decfsz  CounterC,1
+006C   2867           00166                 goto    loop
+006D   3400           00167                 retlw   0
+006E   0008           00168                 RETURN
+                      00169 
+                      00170        END
+MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:32:50         PAGE  6
 
 
 SYMBOL TABLE
@@ -361,7 +348,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:03:56         PAGE  8
+MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:32:50         PAGE  7
 
 
 SYMBOL TABLE
@@ -420,20 +407,20 @@ CENTENA                           00000032
 CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
-MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:03:56         PAGE  9
+MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:32:50         PAGE  8
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
 CHS3                              00000005
-CICLO                             00000048
+CICLO                             00000046
 CKE                               00000006
 CKP                               00000004
 CM1CON0                           00000107
 CM2CON0                           00000108
 CM2CON1                           00000109
-CONFIGURAR_TMR0                   00000012
+CONFIGURAR_TMR0                   00000010
 CONT                              00000023
 CREN                              00000004
 CSRC                              00000007
@@ -465,10 +452,10 @@ EEDATH                            0000010E
 EEIE                              00000004
 EEIF                              00000004
 EEPGD                             00000007
-E_CENTENAS                        0000002D
-E_DECENAS                         00000026
-E_MILLARES                        00000035
-E_UNIDADES                        0000001F
+E_CENTENAS                        0000002B
+E_DECENAS                         00000024
+E_MILLARES                        00000033
+E_UNIDADES                        0000001D
 F                                 00000001
 FERR                              00000002
 FSR                               00000004
@@ -479,7 +466,7 @@ GO                                00000001
 GO_DONE                           00000001
 GO_NOT_DONE                       00000001
 HTS                               00000002
-MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:03:56         PAGE 10
+MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:32:50         PAGE  9
 
 
 SYMBOL TABLE
@@ -490,12 +477,12 @@ I2C_READ                          00000002
 I2C_START                         00000003
 I2C_STOP                          00000004
 INDF                              00000000
-INICIO                            0000001A
+INICIO                            00000018
 INTCON                            0000000B
-INTCONN                           00000013
+INTCONN                           00000011
 INTE                              00000004
 INTEDG                            00000006
-INTERRUPCION                      0000003E
+INTERRUPCION                      0000003C
 INTF                              00000001
 IOCB                              00000096
 IOCB0                             00000000
@@ -538,14 +525,14 @@ NOT_TX8                           00000006
 NOT_W                             00000002
 NOT_WRITE                         00000002
 OERR                              00000001
-MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:03:56         PAGE 11
+MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:32:50         PAGE 10
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
 OPTION_REG                        00000081
-OPTION_REGG                       00000016
+OPTION_REGG                       00000014
 OSCCON                            0000008F
 OSCTUNE                           00000090
 OSFIE                             00000007
@@ -597,7 +584,7 @@ RA1                               00000001
 RA2                               00000002
 RA3                               00000003
 RA4                               00000004
-MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:03:56         PAGE 12
+MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:32:50         PAGE 11
 
 
 SYMBOL TABLE
@@ -647,7 +634,7 @@ RE1                               00000001
 RE2                               00000002
 RE3                               00000003
 READ_WRITE                        00000002
-RETARDO_400ms                     00000060
+RETARDO_400ms                     00000061
 RP0                               00000005
 RP1                               00000006
 RSEN                              00000001
@@ -656,7 +643,7 @@ RX9D                              00000000
 R_NOT_W                           00000002
 R_W                               00000002
 S                                 00000003
-MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:03:56         PAGE 13
+MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:32:50         PAGE 12
 
 
 SYMBOL TABLE
@@ -715,7 +702,7 @@ T2CKPS0                           00000000
 T2CKPS1                           00000001
 T2CON                             00000012
 TABLA                             00000056
-MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:03:56         PAGE 14
+MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:32:50         PAGE 13
 
 
 SYMBOL TABLE
@@ -774,7 +761,7 @@ TRISD2                            00000002
 TRISD3                            00000003
 TRISD4                            00000004
 TRISD5                            00000005
-MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:03:56         PAGE 15
+MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:32:50         PAGE 14
 
 
 SYMBOL TABLE
@@ -833,7 +820,7 @@ WPUB3                             00000003
 WPUB4                             00000004
 WPUB5                             00000005
 WPUB6                             00000006
-MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:03:56         PAGE 16
+MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:32:50         PAGE 15
 
 
 SYMBOL TABLE
@@ -892,7 +879,7 @@ _IESO_ON                          00003FFF
 _INTOSC                           00003FFD
 _INTOSCIO                         00003FFC
 _INTRC_OSC_CLKOUT                 00003FFD
-MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:03:56         PAGE 17
+MPASM  5.50                    CRONOMETRO.ASM   4-23-2021  9:32:50         PAGE 16
 
 
 SYMBOL TABLE
@@ -916,16 +903,13 @@ _WRT_HALF                         000039FF
 _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
-loop                              00000066
-pclath_temp                       0000007F
-status_temp                       0000007E
-w_temp                            0000007D
+loop                              00000067
 
 
 MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
 
-0000 : XX--XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
-0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXX-- ----------------
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXX- ----------------
 2000 : -------XX------- ---------------- ---------------- ----------------
 
 All other memory blocks unused.
@@ -935,7 +919,7 @@ Program Memory Words Free:  8084
 
 
 Errors   :     0
-Warnings :     9 reported,     0 suppressed
-Messages :     7 reported,     0 suppressed
+Warnings :    11 reported,     0 suppressed
+Messages :     4 reported,     0 suppressed
 
 
