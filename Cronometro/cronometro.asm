@@ -138,29 +138,30 @@ CICLO ; Etiqueta para ciclo
 	    BCF 				INTCON, T0IF 							; Limpia el bit T0IF del registro INTCON
 	    RETFIE 													; Return de la interrupción
 	    
-	TABLA ; Tabla del 0 al 9 en hexadecimal
-	    ADDWF PCL,1 ; Suma PCL <- W+PCL
-	    RETLW B'11000000' ; 0
-	    RETLW B'11111001' ; 1
-	    RETLW B'10100100' ; 2
-	    RETLW B'10110000' ; 3
-	    RETLW B'10011001' ; 4
-	    RETLW B'10010010' ; 5
-	    RETLW B'10000010' ; 6
-	    RETLW B'10111000' ; 7
-	    RETLW B'10000000' ; 8
-	    RETLW B'10011000' ; 9
+
+TABLA:
+	ADDWF		PCL, 1; Suma PCL <- W+PCL
+	RETLW		b'11000000'	; 0
+	RETLW 		b'11111001'	; 1
+	RETLW		b'10100100'	; 2
+	RETLW		b'10110000'	; 3
+	RETLW		b'10011001'	; 4
+	RETLW		b'10010010'	; 5
+	RETLW		b'10000010'	; 6
+	RETLW 		b'11111000' 	; 7
+	RETLW		b'10000000'	; 8
+	RETLW		b'10011000'	; 9
 
 
 	TABLA2 ; Tabla del 0 al 9 en hexadecimal
-	    ADDWF PCL,1 ; Suma PCL <- W+PCL
-	    RETLW B'11000000' ; 0
-	    RETLW B'11111001' ; 1
-	    RETLW B'10100100' ; 2
-	    RETLW B'10110000' ; 3
-	    RETLW B'10011001' ; 4
-	    RETLW B'10010010' ; 5
-	    RETLW B'10000010' ; 6
+	         ADDWF PCL,1 ; Suma PCL <- W+PCL
+		RETLW		b'11000000'	; 0
+		RETLW 		b'11111001'	; 1
+		RETLW		b'10100100'	; 2
+		RETLW		b'10110000'	; 3
+		RETLW		b'10011001'	; 4
+		RETLW		b'10010010'	; 5
+		RETLW		b'10000010'	; 6
 
 	    
 RETARDO_400ms:
