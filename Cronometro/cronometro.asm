@@ -117,7 +117,8 @@ INTERRUPCION:
 	GOTO 				CICLO								; Si es 0 se va a CICLO
 	CLRF 				CONT	 							; Casi 1; se limpia CONT
 	CLRF 				PTA 									; Limpia la variable PTA
-	BSF 					PTA, 0 								; Pone el bit 0 de la variable PTA en 0		
+	BCF 					PTA, 0 								; Pone el bit 0 de la variable PTA en 0		
+
 
 
 	TABLA ; Tabla del 0 al 9 en hexadecimal
