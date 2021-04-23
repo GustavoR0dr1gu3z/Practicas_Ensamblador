@@ -96,15 +96,15 @@ E_CENTENAS ; Etiqueta para las centenas
 	    GOTO E_MILLARES 							; Si es 1 se va a E_MILLARES
 	    
 E_MILLARES ; Etiqueta para los millares
-	    CLRF UNIDAD ; Limpia la variable UNIDAD
-	    CLRF DECENA ; Limpia la variable DECENA
-	    CLRF CENTENA ; Limpia la variable CENTENA
-	    INCF MILLAR, 1 ; Incrementa la variable MILLAR en 1
-	    MOVF MILLAR, 0 ; Mueve el valor de la variable MILLAR a W
-	    SUBLW 0X06 ; Le resta el valor de 6 a W
-	    BTFSS STATUS, Z ; Testea la bandera Z
-	    GOTO E_UNIDADES
-	    GOTO INICIO ; Salto en caso de que el bit testeado es igual a 1
+	    CLRF UNIDAD								; Poner en 0's la variable UNIDAD
+	    CLRF DECENA 								; Poner en 0's la variable DECENA
+	    CLRF CENTENA	 							; Poner en 0's la variable CENTENA
+	    INCF MILLAR, 1 								; MILLAR = MILLAR+1
+	    MOVF MILLAR, 0 								; W <- MILLAR
+	    SUBLW 0X06 								; W <- OXO6 (00000110)-W
+	    BTFSS STATUS, Z 								; Comprueba si la bandera Z = 1
+	    GOTO E_UNIDADES							; Si es 0 se repite el cicli a E_UNIDADES
+	    GOTO INICIO 								; Si es 1 se va a INICIO
 	    
 
 	TABLA ; Tabla del 0 al 9 en hexadecimal
