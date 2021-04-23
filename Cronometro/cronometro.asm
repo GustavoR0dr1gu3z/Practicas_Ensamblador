@@ -23,8 +23,11 @@ ENDC ; Fin de bloque de librerías
 
 
 ;**********************************************************************
-
+ORG 0X000
 GOTO PUERTOS ; Comienzo del programa
+
+ORG 0X04
+GOTO INTERRUPCION
 
 PUERTOS:
 ; SE ACCEDE AL BANCO 1 PARA USAR LOS TRIS
