@@ -120,7 +120,24 @@ INTERRUPCION:
 	BCF 					PTA, 0 								; Pone el bit 0 de la variable PTA en 0		
 
 
-
+CICLO ; Etiqueta para ciclo
+	    MOVF 				CONT, 0 								; W <- CONT
+	    ADDLW 			30H 									; W <- 30H +W
+	    MOVWF 			FSR 									; FSR <- W
+	    MOVF 				INDF, 0 								; W <- INDF
+	    CALL 				TABLA								 ; Llama a la subrutina tabla
+	    MOVWF 			PORTB 								; PORTB <- W
+	    MOVF 				PTA,0 								; W <- PTA
+	    MOVWF 			PORTA								; PORTA <- W
+	    INCF CONT, 1 ; Incrementa CONT y lo guarda en si mismo
+	    RLF PTA ; Multiplica lo de W por 2
+	    SWAPF STATUS_RES, W
+	    MOVWF STATUS ; Mueve lo de W a STATUS
+	    SWAPF W_RES, W_RES ; Intercambia lo de la variable W_RES
+	    SWAPF W_RES, W
+	    BCF INTCON, T0IF ; Limpia el bit T0IF del registro INTCON
+	    RETFIE ; Return de la interrupción
+	    
 	TABLA ; Tabla del 0 al 9 en hexadecimal
 	    ADDWF PCL,1 ; Suma PCL <- W+PCL
 	    RETLW B'11000000' ; 0
