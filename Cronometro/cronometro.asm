@@ -112,7 +112,7 @@ INTERRUPCION:
 	SWAPF 				STATUS, W	 							 ; W = SWAP (STATUS)
 	MOVWF 				STAT_RES 								 ; STAT_RES = W
     	MOVF 				CONT, 0 								 ; W <- CONT
-	SUBLW 				0X04 								; Resta 4 a W
+	SUBLW 				04H 								; Resta 4 a W
 	BTFSS 				STATUS, Z 							; Testea la bandera Z
 	GOTO 				CICLO
 	CLRF 				CONT	 							; Salto en caso de que el bit testeado es igual a 1
