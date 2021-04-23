@@ -9,6 +9,12 @@
 	__CONFIG    _CONFIG1, _LVP_OFF & _FCMEN_ON & _IESO_OFF & _BOR_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _PWRTE_ON & _WDT_OFF & _INTRC_OSC_NOCLKOUT
 	__CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
 
+;***** VARIABLE DEFINITIONS
+w_temp		EQU	0x7D		; variable used for context saving
+status_temp	EQU	0x7E		; variable used for context saving
+pclath_temp	EQU	0x7F		; variable used for context saving
+PTA EQU 05H
+
 CBLOCK 0X20 ; Dirección de memoria para las variables
 CounterA, CounterB, CounterC
 UNIDAD, CENTENA, DECENA, MILLAR
@@ -49,7 +55,7 @@ CONFIGURAR_TMR0									 ; Configuración del TMR0 (Interrupción)
 	
 INTCONN:
 	    MOVWF 			INTCON 					; Asignarle 10100000 a INTCON
-	    BSF				STATUS. RP0
+	    BSF				STATUS, RP0
 	    MOVLW 			b'10000001'				; Asignación de valores a las banderas del registro
 OPTION_REGG:
 	    MOVWF 			OPTION_REG				; Asignar los valores a option_reg
@@ -151,17 +157,6 @@ TABLA:
 	RETLW 		b'11111000' 	; 7
 	RETLW		b'10000000'	; 8
 	RETLW		b'10011000'	; 9
-
-
-	TABLA2 ; Tabla del 0 al 9 en hexadecimal
-	         ADDWF PCL,1 ; Suma PCL <- W+PCL
-		RETLW		b'11000000'	; 0
-		RETLW 		b'11111001'	; 1
-		RETLW		b'10100100'	; 2
-		RETLW		b'10110000'	; 3
-		RETLW		b'10011001'	; 4
-		RETLW		b'10010010'	; 5
-		RETLW		b'10000010'	; 6
 
 	    
 RETARDO_400ms:

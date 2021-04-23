@@ -1,11 +1,10 @@
 MPLINK 4.48, Linker
-Linker Map File - Created Mon Apr 19 12:43:01 2021
+Linker Map File - Created Thu Apr 22 22:24:11 2021
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
-                   .org_0       code   0x000000    program   0x000000
-                   .org_1       code   0x000000    program   0x0000b4
+                   .org_0       code   0x000000    program   0x0000dc
 .config_2007_CRONOMETRO.O       code   0x002007    program   0x000002
 .config_2008_CRONOMETRO.O       code   0x002008    program   0x000002
 
@@ -14,40 +13,48 @@ Linker Map File - Created Mon Apr 19 12:43:01 2021
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x000059      
+                            0x000000    0x00006d      
                             0x002007    0x002008      
-            92 out of 8455 program addresses used, program memory utilization is 1%
+            112 out of 8455 program addresses used, program memory utilization is 1%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                    CENTE   0x000024    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-               CONFIGURAR   0x000001    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-                     DECE   0x00001b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-                   INICIO   0x00000a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-                     MILL   0x00002e    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-            RETARDO_400ms   0x00004c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-                    TABLA   0x000039    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-                   TABLA2   0x000044    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-                      UNI   0x000012    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-                     loop   0x000052    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+                    CICLO   0x000047    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+          CONFIGURAR_TMR0   0x00000e    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+               E_CENTENAS   0x00002c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+                E_DECENAS   0x000025    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+               E_MILLARES   0x000034    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+               E_UNIDADES   0x00001e    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+                   INICIO   0x000016    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+                  INTCONN   0x00000f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+             INTERRUPCION   0x00003d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+              OPTION_REGG   0x000012    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+                  PUERTOS   0x000001    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+            RETARDO_400ms   0x000060    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+                    TABLA   0x000055    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+                     loop   0x000066    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
 
 
 
                               Symbols - Sorted by Address
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-               CONFIGURAR   0x000001    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-                   INICIO   0x00000a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-                      UNI   0x000012    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-                     DECE   0x00001b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-                    CENTE   0x000024    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-                     MILL   0x00002e    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-                    TABLA   0x000039    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-                   TABLA2   0x000044    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-            RETARDO_400ms   0x00004c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
-                     loop   0x000052    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+                  PUERTOS   0x000001    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+          CONFIGURAR_TMR0   0x00000e    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+                  INTCONN   0x00000f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+              OPTION_REGG   0x000012    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+                   INICIO   0x000016    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+               E_UNIDADES   0x00001e    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+                E_DECENAS   0x000025    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+               E_CENTENAS   0x00002c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+               E_MILLARES   0x000034    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+             INTERRUPCION   0x00003d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+                    CICLO   0x000047    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+                    TABLA   0x000055    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+            RETARDO_400ms   0x000060    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
+                     loop   0x000066    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\cronometro.asm
 
 
