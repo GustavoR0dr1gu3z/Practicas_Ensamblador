@@ -12,7 +12,7 @@
 CBLOCK 0X20 ; Dirección de memoria para las variables
 CounterA, CounterB, CounterC
 UNIDAD, CENTENA, DECENA, MILLAR
-CONT
+CONT, W_RES
 ENDC ; Fin de bloque de librerías
 
 
@@ -106,6 +106,19 @@ E_MILLARES ; Etiqueta para los millares
 	    GOTO E_UNIDADES							; Si es 0 se repite el cicli a E_UNIDADES
 	    GOTO INICIO 								; Si es 1 se va a INICIO
 	    
+
+INTERRUPCION:
+	MOVWF W_RES								 ; W_RES = WS
+	SWAPF STATUS, W	 							 ; W = SWAP (STATUS)
+	MOVWF STATUS_RES 							; Mueve lo de W en la variable STATUS_RES
+    	MOVF CONT, 0 ; Mueve lo de la variable CONT en W
+	SUBLW 0X04 ; Resta 4 a W
+	BTFSS STATUS, Z ; Testea la bandera Z
+	GOTO CICLO
+	CLRF CONT ; Salto en caso de que el bit testeado es igual a 1
+	CLRF PTA ; Limpia la variable PTA
+	BSF PTA, 0 ; Pone el bit 0 de la variable PTA en 0		
+
 
 	TABLA ; Tabla del 0 al 9 en hexadecimal
 	    ADDWF PCL,1 ; Suma PCL <- W+PCL
