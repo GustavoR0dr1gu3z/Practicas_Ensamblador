@@ -71,7 +71,7 @@ E_UNIDADES ; Etiqueta para las unidades
 	    CALL RETARDO_400ms 						; Llama a la subrutina RETARDO
 	    INCF UNIDAD, 1 								; UNIDAD = UNIDAD+1
 	    MOVF UNIDAD, 0 								; W <- UNIDAD
-	    SUBLW 0X09 								; W <- 0AH (00001010)-W
+	    SUBLW 0X09 								; W <- 0X09 (00001001)-W
 	    BTFSS STATUS, Z 								; Comprueba si la bandera Z = 1
 	    GOTO E_UNIDADES							; Si es 0 se repite
 	    GOTO E_DECENAS 							; Si es 1 se va a E_DECENAS
@@ -82,20 +82,20 @@ E_DECENAS ; Etiqueta para las decenas
 	    MOVF DECENA, 0 								; W <- DECENA
 	    SUBLW 0X06 								; W <- 0x06 (00000110)-W
 	    BTFSS STATUS, Z 								; Comprueba si la bandera Z = 1
-	    GOTO UNI									;
-	    GOTO CENTE 								; Salto en caso de que el bit testeado es igual a 1
+	    GOTO E_UNIDADES							; Si es 0 se repite el ciclo a E_UNIDADES
+	    GOTO E_CENTENAS							; Si es 1 se va a E_CENTENAS
 	    
-	CENTE ; Etiqueta para las centenas
-	    CLRF UNIDAD ; Limpia la variable UNIDAD
-	    CLRF DECENA ; Limpia la variable DECENA
-	    INCF CENTENA, 1 ; Incrementa la variable CENTENA en 1
-	    MOVF CENTENA, 0 ; Mueve el valor de CENTENA a W
-	    SUBLW 0X09 ; Le resta el valor de 9 a W
-	    BTFSS STATUS, Z ; Testea la bandera Z
-	    GOTO UNI
-	    GOTO MILL ; Salto en caso de que el bit testeado es igual a 1
+E_CENTENAS ; Etiqueta para las centenas
+	    CLRF UNIDAD 								; Pone en 0's la variable UNIDAD
+	    CLRF DECENA 								; Pone en 0's la variable DECENA
+	    INCF CENTENA, 1 								; CENTENA = CENTENA+1
+	    MOVF CENTENA, 0 							; W <- CENTENA
+	    SUBLW 0X09 								; W <- 0X09 (00001001)-W
+	    BTFSS STATUS, Z 								; Comprueba si la bandera Z = 1
+	    GOTO E_UNIDADES							; Si es 0 se repite el ciclo a E_UNIDADES
+	    GOTO E_MILLARES 							; Si es 1 se va a E_MILLARES
 	    
-	MILL ; Etiqueta para los millares
+E_MILLARES ; Etiqueta para los millares
 	    CLRF UNIDAD ; Limpia la variable UNIDAD
 	    CLRF DECENA ; Limpia la variable DECENA
 	    CLRF CENTENA ; Limpia la variable CENTENA
@@ -103,7 +103,7 @@ E_DECENAS ; Etiqueta para las decenas
 	    MOVF MILLAR, 0 ; Mueve el valor de la variable MILLAR a W
 	    SUBLW 0X06 ; Le resta el valor de 6 a W
 	    BTFSS STATUS, Z ; Testea la bandera Z
-	    GOTO UNI
+	    GOTO E_UNIDADES
 	    GOTO INICIO ; Salto en caso de que el bit testeado es igual a 1
 	    
 
