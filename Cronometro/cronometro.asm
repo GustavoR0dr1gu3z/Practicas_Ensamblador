@@ -12,7 +12,7 @@
 CBLOCK 0X20 ; Dirección de memoria para las variables
 CounterA, CounterB, CounterC
 UNIDAD, CENTENA, DECENA, MILLAR
-CONT, W_RES
+CONT, W_RES, STAT_RES
 ENDC ; Fin de bloque de librerías
 
 
@@ -68,56 +68,56 @@ INICIO
 	    MOVWF 			MILLAR 					; Poner en ceros la variable MILLAR
 	    
 E_UNIDADES ; Etiqueta para las unidades
-	    CALL RETARDO_400ms 						; Llama a la subrutina RETARDO
-	    INCF UNIDAD, 1 								; UNIDAD = UNIDAD+1
-	    MOVF UNIDAD, 0 								; W <- UNIDAD
+	    CALL 				RETARDO_400ms 						; Llama a la subrutina RETARDO
+	    INCF 				UNIDAD, 1 								; UNIDAD = UNIDAD+1
+	    MOVF 				UNIDAD, 0 								; W <- UNIDAD
 	    SUBLW 0X09 								; W <- 0X09 (00001001)-W
-	    BTFSS STATUS, Z 								; Comprueba si la bandera Z = 1
-	    GOTO E_UNIDADES							; Si es 0 se repite
-	    GOTO E_DECENAS 							; Si es 1 se va a E_DECENAS
+	    BTFSS 				STATUS, Z 								; Comprueba si la bandera Z = 1
+	    GOTO 				E_UNIDADES							; Si es 0 se repite
+	    GOTO 				E_DECENAS 							; Si es 1 se va a E_DECENAS
 	    
 E_DECENAS ; Etiqueta para las decenas
-	    CLRF UNIDAD 								; Pone en 0's la variable UNIDAD
-	    INCF DECENA, 1 								; DECENA = DECENA+1
-	    MOVF DECENA, 0 								; W <- DECENA
-	    SUBLW 0X06 								; W <- 0x06 (00000110)-W
-	    BTFSS STATUS, Z 								; Comprueba si la bandera Z = 1
-	    GOTO E_UNIDADES							; Si es 0 se repite el ciclo a E_UNIDADES
-	    GOTO E_CENTENAS							; Si es 1 se va a E_CENTENAS
+	    CLRF 				UNIDAD 								; Pone en 0's la variable UNIDAD
+	    INCF 				DECENA, 1 								; DECENA = DECENA+1
+	    MOVF 				DECENA, 0 								; W <- DECENA
+	    SUBLW 			0X06 								; W <- 0x06 (00000110)-W
+	    BTFSS 				STATUS, Z 								; Comprueba si la bandera Z = 1
+	    GOTO 				E_UNIDADES							; Si es 0 se repite el ciclo a E_UNIDADES
+	    GOTO	 			E_CENTENAS							; Si es 1 se va a E_CENTENAS
 	    
 E_CENTENAS ; Etiqueta para las centenas
-	    CLRF UNIDAD 								; Pone en 0's la variable UNIDAD
-	    CLRF DECENA 								; Pone en 0's la variable DECENA
-	    INCF CENTENA, 1 								; CENTENA = CENTENA+1
-	    MOVF CENTENA, 0 							; W <- CENTENA
-	    SUBLW 0X09 								; W <- 0X09 (00001001)-W
-	    BTFSS STATUS, Z 								; Comprueba si la bandera Z = 1
-	    GOTO E_UNIDADES							; Si es 0 se repite el ciclo a E_UNIDADES
-	    GOTO E_MILLARES 							; Si es 1 se va a E_MILLARES
+	    CLRF 				UNIDAD 								; Pone en 0's la variable UNIDAD
+	    CLRF 				DECENA 								; Pone en 0's la variable DECENA
+	    INCF 				CENTENA, 1 								; CENTENA = CENTENA+1
+	    MOVF 				CENTENA, 0 							; W <- CENTENA
+	    SUBLW 			0X09 								; W <- 0X09 (00001001)-W
+	    BTFSS 				STATUS, Z 								; Comprueba si la bandera Z = 1
+	    GOTO 				E_UNIDADES							; Si es 0 se repite el ciclo a E_UNIDADES
+	    GOTO 				E_MILLARES 							; Si es 1 se va a E_MILLARES
 	    
 E_MILLARES ; Etiqueta para los millares
-	    CLRF UNIDAD								; Poner en 0's la variable UNIDAD
-	    CLRF DECENA 								; Poner en 0's la variable DECENA
-	    CLRF CENTENA	 							; Poner en 0's la variable CENTENA
-	    INCF MILLAR, 1 								; MILLAR = MILLAR+1
-	    MOVF MILLAR, 0 								; W <- MILLAR
-	    SUBLW 0X06 								; W <- OXO6 (00000110)-W
-	    BTFSS STATUS, Z 								; Comprueba si la bandera Z = 1
-	    GOTO E_UNIDADES							; Si es 0 se repite el cicli a E_UNIDADES
-	    GOTO INICIO 								; Si es 1 se va a INICIO
+	    CLRF 				UNIDAD								; Poner en 0's la variable UNIDAD
+	    CLRF 				DECENA 								; Poner en 0's la variable DECENA
+	    CLRF 				CENTENA	 							; Poner en 0's la variable CENTENA
+	    INCF 				MILLAR, 1 								; MILLAR = MILLAR+1
+	    MOVF 				MILLAR, 0 								; W <- MILLAR
+	    SUBLW 			0X06 								; W <- OXO6 (00000110)-W
+	    BTFSS 				STATUS, Z 								; Comprueba si la bandera Z = 1
+	    GOTO 				E_UNIDADES							; Si es 0 se repite el cicli a E_UNIDADES
+	    GOTO 				INICIO 								; Si es 1 se va a INICIO
 	    
 
 INTERRUPCION:
-	MOVWF W_RES								 ; W_RES = WS
-	SWAPF STATUS, W	 							 ; W = SWAP (STATUS)
-	MOVWF STATUS_RES 							; Mueve lo de W en la variable STATUS_RES
-    	MOVF CONT, 0 ; Mueve lo de la variable CONT en W
-	SUBLW 0X04 ; Resta 4 a W
-	BTFSS STATUS, Z ; Testea la bandera Z
-	GOTO CICLO
-	CLRF CONT ; Salto en caso de que el bit testeado es igual a 1
-	CLRF PTA ; Limpia la variable PTA
-	BSF PTA, 0 ; Pone el bit 0 de la variable PTA en 0		
+	MOVWF 				W_RES								 ; W_RES = WS
+	SWAPF 				STATUS, W	 							 ; W = SWAP (STATUS)
+	MOVWF 				STAT_RES 								 ; STAT_RES = W
+    	MOVF 				CONT, 0 								 ; W <- CONT
+	SUBLW 				0X04 								; Resta 4 a W
+	BTFSS 				STATUS, Z 							; Testea la bandera Z
+	GOTO 				CICLO
+	CLRF 				CONT	 							; Salto en caso de que el bit testeado es igual a 1
+	CLRF 				PTA 									; Limpia la variable PTA
+	BSF 					PTA, 0 								; Pone el bit 0 de la variable PTA en 0		
 
 
 	TABLA ; Tabla del 0 al 9 en hexadecimal
