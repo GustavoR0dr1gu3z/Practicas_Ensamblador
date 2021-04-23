@@ -71,23 +71,19 @@ E_UNIDADES ; Etiqueta para las unidades
 	    CALL RETARDO_400ms 						; Llama a la subrutina RETARDO
 	    INCF UNIDAD, 1 								; UNIDAD = UNIDAD+1
 	    MOVF UNIDAD, 0 								; W <- UNIDAD
-	    SUBLW 0X09 								; Le resta el valor de 10 a W
-	    CALL TABLA
-   	    MOVWF PORTB
-	    BTFSS STATUS, Z ; Testea la bandera Z
-	    GOTO UNI
-	    GOTO DECE ; Salto en caso de que el bit testeado es igual a 1
+	    SUBLW 0X09 								; W <- 0AH (00001010)-W
+	    BTFSS STATUS, Z 								; Comprueba si la bandera Z = 1
+	    GOTO E_UNIDADES							; Si es 0 se repite
+	    GOTO E_DECENAS 							; Si es 1 se va a E_DECENAS
 	    
-	DECE ; Etiqueta para las decenas
-	    CLRF UNIDAD ; Limpia la variable UNIDAD
-	    INCF DECENA, 1 ; Incrementa la variable DECENA en 1
-	    MOVF DECENA, 0 ; Mueve el valor de DECENA a W
-	    SUBLW 0X06 ; Le resta el valor de 6 a W
-	    CALL TABLA2
-   	    MOVWF PORTB
-	    BTFSS STATUS, Z ; Testea la bandera Z
-	    GOTO UNI
-	    GOTO CENTE ; Salto en caso de que el bit testeado es igual a 1
+E_DECENAS ; Etiqueta para las decenas
+	    CLRF UNIDAD 								; Pone en 0's la variable UNIDAD
+	    INCF DECENA, 1 								; DECENA = DECENA+1
+	    MOVF DECENA, 0 								; W <- DECENA
+	    SUBLW 0X06 								; W <- 0x06 (00000110)-W
+	    BTFSS STATUS, Z 								; Comprueba si la bandera Z = 1
+	    GOTO UNI									;
+	    GOTO CENTE 								; Salto en caso de que el bit testeado es igual a 1
 	    
 	CENTE ; Etiqueta para las centenas
 	    CLRF UNIDAD ; Limpia la variable UNIDAD
@@ -95,8 +91,6 @@ E_UNIDADES ; Etiqueta para las unidades
 	    INCF CENTENA, 1 ; Incrementa la variable CENTENA en 1
 	    MOVF CENTENA, 0 ; Mueve el valor de CENTENA a W
 	    SUBLW 0X09 ; Le resta el valor de 9 a W
-	    CALL TABLA
-   	    MOVWF PORTB
 	    BTFSS STATUS, Z ; Testea la bandera Z
 	    GOTO UNI
 	    GOTO MILL ; Salto en caso de que el bit testeado es igual a 1
@@ -108,8 +102,6 @@ E_UNIDADES ; Etiqueta para las unidades
 	    INCF MILLAR, 1 ; Incrementa la variable MILLAR en 1
 	    MOVF MILLAR, 0 ; Mueve el valor de la variable MILLAR a W
 	    SUBLW 0X06 ; Le resta el valor de 6 a W
-	    CALL TABLA2
-   	    MOVWF PORTB
 	    BTFSS STATUS, Z ; Testea la bandera Z
 	    GOTO UNI
 	    GOTO INICIO ; Salto en caso de que el bit testeado es igual a 1
