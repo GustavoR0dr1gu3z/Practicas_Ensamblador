@@ -129,14 +129,14 @@ CICLO ; Etiqueta para ciclo
 	    MOVWF 			PORTB 								; PORTB <- W
 	    MOVF 				PTA,0 								; W <- PTA
 	    MOVWF 			PORTA								; PORTA <- W
-	    INCF CONT, 1 ; Incrementa CONT y lo guarda en si mismo
-	    RLF PTA ; Multiplica lo de W por 2
-	    SWAPF STATUS_RES, W
-	    MOVWF STATUS ; Mueve lo de W a STATUS
-	    SWAPF W_RES, W_RES ; Intercambia lo de la variable W_RES
-	    SWAPF W_RES, W
-	    BCF INTCON, T0IF ; Limpia el bit T0IF del registro INTCON
-	    RETFIE ; Return de la interrupción
+	    INCF 				CONT, 1 								; CONT = CONT+1
+	    RLF 				PTA 									; PTA = PTA*2
+	    SWAPF 			W_RES, W							; W_RES = SWAP(W_RES)
+	    MOVWF 			STATUS 								; W = SWAP(W_RES)
+;	    SWAPF W_RES, W_RES ; Intercambia lo de la variable W_RES
+;	    SWAPF W_RES, W
+	    BCF 				INTCON, T0IF 							; Limpia el bit T0IF del registro INTCON
+	    RETFIE 													; Return de la interrupción
 	    
 	TABLA ; Tabla del 0 al 9 en hexadecimal
 	    ADDWF PCL,1 ; Suma PCL <- W+PCL
