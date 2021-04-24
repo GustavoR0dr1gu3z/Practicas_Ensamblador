@@ -106,16 +106,16 @@ E_MILLARES ; Etiqueta para los millares
 	    
 
 INTERRUPCION:
-	MOVWF 				W_RES								 ; W_RES = WS
-	SWAPF 				STATUS, W	 						 ; W = SWAP (STATUS)
-	MOVWF 				STAT_RES 							 ; STAT_RES = W
-    	MOVF 				CONT, 0 								 ; W <- CONT
-	SUBLW 				b'00000100' 									; W <- 04H-W
-	BTFSS 				STATUS, Z 							; Comprueba si la bandera Z
-	GOTO 				CICLO								; Si es 0 se va a CICLO
-	CLRF 				CONT	 							; Casi 1; se limpia CONT
-	CLRF					PTA 									; Limpia la variable PTA
-	BSF 					PTA, 0 								; Pone el bit 0 de la variable PTA en 0		
+	MOVWF 	W_RES
+	SWAPF	STATUS, W
+	MOVWF	STAT_RES
+	MOVF	CONT,0
+	SUBLW	0X04
+	BTFSS	STATUS,Z
+	GOTO 	CICLO
+	CLRF		CONT
+	CLRF		PTA
+	BSF		PTA, 0							; Pone el bit 0 de la variable PTA en 0		
 
 
 CICLO ; Etiqueta para ciclo

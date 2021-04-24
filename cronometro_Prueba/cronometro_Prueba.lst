@@ -1,0 +1,857 @@
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-23-2021  21:55:43         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001         list            p=16f887        ; list directive to define processor
+                      00002         #include        <p16f887.inc>   ; processor specific variable definitions
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F887 processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2013 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00809         LIST
+                      00003 
+                      00004 
+                      00005 ; '__CONFIG' directive is used to embed configuration data within .asm file.
+                      00006 ; The labels following the directive are located in the respective .inc file.
+                      00007 ; See respective data sheet for additional information on configuration word.
+                      00008 
+Warning[205]: Found directive in column 1. (__CONFIG)
+2007   28E4           00009 __CONFIG   _CONFIG1, _LVP_OFF & _FCMEN_ON & _IESO_OFF & _BOR_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _PWR
+                            TE_ON & _WDT_OFF & _INTRC_OSC_NOCLKOUT 
+Warning[205]: Found directive in column 1. (__CONFIG)
+2008   3EFF           00010 __CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
+                      00011 
+                      00012 
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00013 CBLOCK 0X20 ; Dirección de memoria para las variables
+  00000020            00014 CounterA, CounterB, CounterC
+  00000023            00015 CONT, W_RES, STAT_RES, PTA
+Warning[205]: Found directive in column 1. (ENDC)
+                      00016 ENDC ; Fin de bloque de librerías
+                      00017 
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00018 CBLOCK 0X30
+  00000030            00019 UNIDAD,DECENA,CENTENA,MILLAR ;Variables del programa principal
+Warning[205]: Found directive in column 1. (ENDC)
+                      00020 ENDC
+                      00021 
+                      00022 ;**********************************************************************
+Warning[205]: Found directive in column 1. (ORG)
+0000                  00023 ORG 0x00 ; posición 0
+Warning[203]: Found opcode in column 1. (GOTO)
+0000   2805           00024 GOTO PUERTOS ; Comienzo del programa
+                      00025 
+Warning[205]: Found directive in column 1. (ORG)
+0004                  00026 ORG 0X04
+Warning[203]: Found opcode in column 1. (GOTO)
+0004   283C           00027 GOTO INTERRUPCION
+                      00028 
+0005                  00029 PUERTOS:
+0005   0103           00030         CLRW
+0006   1683           00031         BSF             STATUS, RP0
+0007   3000           00032         MOVLW   0X00
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-23-2021  21:55:43         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0008   0086           00033         MOVWF   TRISB
+0009   30F0           00034         MOVLW   0XF0
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+000A   0085           00035         MOVWF   TRISA
+                      00036 
+000B   1303           00037         BCF             STATUS, RP1
+000C   1283           00038         BCF             STATUS, RP0
+000D   0185           00039         CLRF            PORTA
+000E   0186           00040         CLRF    PORTB
+000F   1426           00041         BSF             PTA,0
+                      00042 
+0010                  00043 CONFI_TMR0:
+0010   30A0           00044         MOVLW   b'10100000'
+                      00045 
+0011                  00046 INTCONN:
+0011   008B           00047         MOVWF   INTCON
+0012   1683           00048         BSF             STATUS, RP0
+0013   3081           00049         MOVLW   b'10000001'
+                      00050 
+0014                  00051 OPTION_REGG:
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0014   0081           00052         MOVWF   OPTION_REG
+0015   1283           00053         BCF             STATUS, RP0
+0016   3000           00054         MOVLW   0X00
+0017   00A3           00055         MOVWF   CONT
+                      00056 
+0018                  00057 INICIO:
+0018   3000           00058         MOVLW   0X00
+0019   00B0           00059         MOVWF   UNIDAD
+001A   00B1           00060         MOVWF   DECENA
+001B   00B2           00061         MOVWF   CENTENA
+001C   00B3           00062         MOVWF   MILLAR
+                      00063 
+001D                  00064 UNI:
+001D   2061           00065         CALL    RETARDO
+001E   0AB0           00066         INCF            UNIDAD,1
+001F   0830           00067         MOVF    UNIDAD,0
+0020   3C09           00068         SUBLW   0X09
+0021   1D03           00069         BTFSS   STATUS,Z
+0022   281D           00070         GOTO    UNI
+0023   2824           00071         GOTO    DECE
+                      00072 
+0024                  00073 DECE:
+0024   01B0           00074         CLRF            UNIDAD
+0025   0AB1           00075         INCF            DECENA,1
+0026   0831           00076         MOVF    DECENA,0
+0027   3C06           00077         SUBLW   0X06
+0028   1D03           00078         BTFSS   STATUS,Z
+0029   281D           00079         GOTO    UNI
+002A   282B           00080         GOTO    CENTE
+                      00081 
+002B                  00082 CENTE:
+002B   01B0           00083         CLRF    UNIDAD
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-23-2021  21:55:43         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+002C   01B1           00084         CLRF            DECENA
+002D   0AB2           00085         INCF    CENTENA,1
+002E   0832           00086         MOVF    CENTENA,0
+002F   3C09           00087         SUBLW   0X09
+0030   1D03           00088         BTFSS   STATUS,Z
+0031   281D           00089         GOTO    UNI
+0032   2833           00090         GOTO    MILL
+                      00091 
+0033                  00092 MILL:
+0033   01B0           00093         CLRF            UNIDAD
+0034   01B1           00094         CLRF            DECENA
+0035   01B2           00095         CLRF            CENTENA
+0036   0AB3           00096         INCF            MILLAR,1
+0037   0833           00097         MOVF    MILLAR,0
+0038   3C06           00098         SUBLW   0X06
+0039   1D03           00099         BTFSS   STATUS,Z
+003A   281D           00100         GOTO    UNI
+003B   2818           00101         GOTO    INICIO
+                      00102 
+003C                  00103 INTERRUPCION:
+003C   00A4           00104         MOVWF   W_RES
+003D   0E03           00105         SWAPF   STATUS, W
+003E   00A5           00106         MOVWF   STAT_RES
+003F   0823           00107         MOVF    CONT,0
+0040   3C04           00108         SUBLW   0X04
+0041   1D03           00109         BTFSS   STATUS,Z
+0042   2846           00110         GOTO    CICLO
+0043   01A3           00111         CLRF            CONT
+0044   01A6           00112         CLRF            PTA
+0045   1426           00113         BSF             PTA, 0
+                      00114 
+0046                  00115 CICLO:
+0046   0823           00116         MOVF    CONT, 0
+0047   3E30           00117         ADDLW   0X30
+0048   0084           00118             MOVWF                       FSR                                                             
+                                    ; FSR <- W
+0049   0800           00119             MOVF                                INDF, 0                                                 
+                                            ; W <- INDF
+004A   2056           00120             CALL                                TABLA                                                   
+                                     ; Llama a la subrutina tabla
+004B   0086           00121             MOVWF                       PORTB                                                           
+                            ; PORTB <- W
+004C   0826           00122             MOVF                                PTA,0                                                   
+                                            ; W <- PTA
+004D   0085           00123             MOVWF                       PORTA                                                           
+                            ; PORTA <- W
+004E   0AA3           00124             INCF                                CONT, 1                                                 
+                                            ; CONT = CONT+1
+Message[305]: Using default destination of 1 (file).
+004F   0DA6           00125             RLF                                 PTA                                                     
+                                            ; PTA = PTA*2
+0050   0E25           00126             SWAPF                       STAT_RES, W                                                     
+                            ; W_RES = SWAP(W_RES)
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-23-2021  21:55:43         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0051   0083           00127             MOVWF                       STATUS                                                          
+                            ; W = SWAP(W_RES)
+Warning[202]: Argument out of range.  Least significant bits used.
+0052   0E24           00128             SWAPF                               W_RES, W_RES
+0053   0E24           00129             SWAPF                               W_RES, W
+0054   110B           00130             BCF                                 INTCON, T0IF                                            
+                                    ; Limpia el bit T0IF del registro INTCON
+0055   0009           00131             RETFIE                                                              
+                      00132 
+                      00133 
+0056                  00134 TABLA:
+0056   0782           00135         ADDWF           PCL, 1; Suma PCL <- W+PCL
+0057   34C0           00136         RETLW           b'11000000'     ; 0
+0058   34F9           00137         RETLW           b'11111001'     ; 1
+0059   34A4           00138         RETLW           b'10100100'     ; 2
+005A   34B0           00139         RETLW           b'10110000'     ; 3
+005B   3499           00140         RETLW           b'10011001'     ; 4
+005C   3492           00141         RETLW           b'10010010'     ; 5
+005D   3482           00142         RETLW           b'10000010'     ; 6
+005E   34F8           00143         RETLW           b'11111000'     ; 7
+005F   3480           00144         RETLW           b'10000000'     ; 8
+0060   3498           00145         RETLW           b'10011000'     ; 9
+                      00146 
+0061                  00147 RETARDO:
+0061   3003           00148                 movlw   D'3'
+0062   00A2           00149                 movwf   CounterC
+0063   3008           00150                 movlw   D'8'
+0064   00A1           00151                 movwf   CounterB
+0065   3076           00152                 movlw   D'118'
+0066   00A0           00153                 movwf   CounterA
+0067   0BA0           00154 loop            decfsz  CounterA,1
+0068   2867           00155                 goto    loop
+0069   0BA1           00156                 decfsz  CounterB,1
+006A   2867           00157                 goto    loop
+006B   0BA2           00158                 decfsz  CounterC,1
+006C   2867           00159                 goto    loop
+006D   3400           00160                 retlw   0
+006E   0008           00161                 RETURN
+                      00162 
+                      00163        END
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-23-2021  21:55:43         PAGE  5
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ABDEN                             00000000
+ABDOVF                            00000007
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+ANS0                              00000000
+ANS1                              00000001
+ANS10                             00000002
+ANS11                             00000003
+ANS12                             00000004
+ANS13                             00000005
+ANS2                              00000002
+ANS3                              00000003
+ANS4                              00000004
+ANS5                              00000005
+ANS6                              00000006
+ANS7                              00000007
+ANS8                              00000000
+ANS9                              00000001
+ANSEL                             00000188
+ANSELH                            00000189
+BAUDCTL                           00000187
+BCLIE                             00000003
+BCLIF                             00000003
+BF                                00000000
+BRG0                              00000000
+BRG1                              00000001
+BRG10                             00000002
+BRG11                             00000003
+BRG12                             00000004
+BRG13                             00000005
+BRG14                             00000006
+BRG15                             00000007
+BRG16                             00000003
+BRG2                              00000002
+BRG3                              00000003
+BRG4                              00000004
+BRG5                              00000005
+BRG6                              00000006
+BRG7                              00000007
+BRG8                              00000000
+BRG9                              00000001
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-23-2021  21:55:43         PAGE  6
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+BRGH                              00000002
+C                                 00000000
+C1CH0                             00000000
+C1CH1                             00000001
+C1IE                              00000005
+C1IF                              00000005
+C1OE                              00000005
+C1ON                              00000007
+C1OUT                             00000006
+C1POL                             00000004
+C1R                               00000002
+C1RSEL                            00000005
+C1SEN                             00000005
+C2CH0                             00000000
+C2CH1                             00000001
+C2IE                              00000006
+C2IF                              00000006
+C2OE                              00000005
+C2ON                              00000007
+C2OUT                             00000006
+C2POL                             00000004
+C2R                               00000002
+C2REN                             00000004
+C2RSEL                            00000004
+C2SYNC                            00000000
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           0000001D
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCPR1                             00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CCPR2                             0000001B
+CCPR2H                            0000001C
+CCPR2L                            0000001B
+CENTE                             0000002B
+CENTENA                           00000032
+CHS0                              00000002
+CHS1                              00000003
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-23-2021  21:55:43         PAGE  7
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CHS2                              00000004
+CHS3                              00000005
+CICLO                             00000046
+CKE                               00000006
+CKP                               00000004
+CM1CON0                           00000107
+CM2CON0                           00000108
+CM2CON1                           00000109
+CONFI_TMR0                        00000010
+CONT                              00000023
+CREN                              00000004
+CSRC                              00000007
+CounterA                          00000020
+CounterB                          00000021
+CounterC                          00000022
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+DC1B0                             00000004
+DC1B1                             00000005
+DC2B0                             00000004
+DC2B1                             00000005
+DECE                              00000024
+DECENA                            00000031
+D_A                               00000005
+D_NOT_A                           00000005
+ECCPAS                            0000009C
+ECCPAS0                           00000004
+ECCPAS1                           00000005
+ECCPAS2                           00000006
+ECCPASE                           00000007
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDAT                             0000010C
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+FVREN                             00000000
+GCEN                              00000007
+GIE                               00000007
+GO                                00000001
+GO_DONE                           00000001
+GO_NOT_DONE                       00000001
+HTS                               00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-23-2021  21:55:43         PAGE  8
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+INICIO                            00000018
+INTCON                            0000000B
+INTCONN                           00000011
+INTE                              00000004
+INTEDG                            00000006
+INTERRUPCION                      0000003C
+INTF                              00000001
+IOCB                              00000096
+IOCB0                             00000000
+IOCB1                             00000001
+IOCB2                             00000002
+IOCB3                             00000003
+IOCB4                             00000004
+IOCB5                             00000005
+IOCB6                             00000006
+IOCB7                             00000007
+IRCF0                             00000004
+IRCF1                             00000005
+IRCF2                             00000006
+IRP                               00000007
+LTS                               00000001
+MC1OUT                            00000007
+MC2OUT                            00000006
+MILL                              00000033
+MILLAR                            00000033
+MSK                               00000093
+MSK0                              00000000
+MSK1                              00000001
+MSK2                              00000002
+MSK3                              00000003
+MSK4                              00000004
+MSK5                              00000005
+MSK6                              00000006
+MSK7                              00000007
+NOT_A                             00000005
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000001
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OERR                              00000001
+OPTION_REG                        00000081
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-23-2021  21:55:43         PAGE  9
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+OPTION_REGG                       00000014
+OSCCON                            0000008F
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+OSTS                              00000003
+P                                 00000004
+P1M0                              00000006
+P1M1                              00000007
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PDC0                              00000000
+PDC1                              00000001
+PDC2                              00000002
+PDC3                              00000003
+PDC4                              00000004
+PDC5                              00000005
+PDC6                              00000006
+PEIE                              00000006
+PEN                               00000002
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PORTD                             00000008
+PORTE                             00000009
+PR2                               00000092
+PRSEN                             00000007
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSSAC0                            00000002
+PSSAC1                            00000003
+PSSBD0                            00000000
+PSSBD1                            00000001
+PSTRCON                           0000009D
+PTA                               00000026
+PUERTOS                           00000005
+PULSR                             00000002
+PULSS                             00000003
+PWM1CON                           0000009B
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-23-2021  21:55:43         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RA6                               00000006
+RA7                               00000007
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCEN                              00000003
+RCIDL                             00000006
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+RD0                               00000000
+RD1                               00000001
+RD2                               00000002
+RD3                               00000003
+RD4                               00000004
+RD5                               00000005
+RD6                               00000006
+RD7                               00000007
+RE0                               00000000
+RE1                               00000001
+RE2                               00000002
+RE3                               00000003
+READ_WRITE                        00000002
+RETARDO                           00000061
+RP0                               00000005
+RP1                               00000006
+RSEN                              00000001
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SBOREN                            00000004
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-23-2021  21:55:43         PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SCKP                              00000004
+SCS                               00000000
+SEN                               00000000
+SENDB                             00000003
+SMP                               00000007
+SPBRG                             00000099
+SPBRGH                            0000009A
+SPEN                              00000007
+SR0                               00000006
+SR1                               00000007
+SRCON                             00000185
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPCON2                           00000091
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPMSK                            00000093
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+STAT_RES                          00000025
+STRA                              00000000
+STRB                              00000001
+STRC                              00000002
+STRD                              00000003
+STRSYNC                           00000004
+SWDTEN                            00000000
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1GINV                            00000007
+T1GIV                             00000007
+T1GSS                             00000001
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TABLA                             00000056
+TMR0                              00000001
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-23-2021  21:55:43         PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1                              0000000E
+TMR1CS                            00000001
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISA6                            00000006
+TRISA7                            00000007
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRISD                             00000088
+TRISD0                            00000000
+TRISD1                            00000001
+TRISD2                            00000002
+TRISD3                            00000003
+TRISD4                            00000004
+TRISD5                            00000005
+TRISD6                            00000006
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-23-2021  21:55:43         PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRISD7                            00000007
+TRISE                             00000089
+TRISE0                            00000000
+TRISE1                            00000001
+TRISE2                            00000002
+TRISE3                            00000003
+TRMT                              00000001
+TUN0                              00000000
+TUN1                              00000001
+TUN2                              00000002
+TUN3                              00000003
+TUN4                              00000004
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+ULPWUE                            00000005
+ULPWUIE                           00000002
+ULPWUIF                           00000002
+UNI                               0000001D
+UNIDAD                            00000030
+VCFG0                             00000004
+VCFG1                             00000005
+VR0                               00000000
+VR1                               00000001
+VR2                               00000002
+VR3                               00000003
+VRCON                             00000097
+VREN                              00000007
+VROE                              00000006
+VRR                               00000005
+VRSS                              00000004
+W                                 00000000
+WCOL                              00000007
+WDTCON                            00000105
+WDTPS0                            00000001
+WDTPS1                            00000002
+WDTPS2                            00000003
+WDTPS3                            00000004
+WPUB                              00000095
+WPUB0                             00000000
+WPUB1                             00000001
+WPUB2                             00000002
+WPUB3                             00000003
+WPUB4                             00000004
+WPUB5                             00000005
+WPUB6                             00000006
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-23-2021  21:55:43         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+WPUB7                             00000007
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+WUE                               00000001
+W_RES                             00000024
+Z                                 00000002
+_BOR21V                           00003EFF
+_BOR40V                           00003FFF
+_BOR4V_BOR21V                     00003EFF
+_BOR4V_BOR40V                     00003FFF
+_BOREN_NSLEEP                     00003EFF
+_BOREN_OFF                        00003CFF
+_BOREN_ON                         00003FFF
+_BOREN_SBODEN                     00003DFF
+_BOR_NSLEEP                       00003EFF
+_BOR_OFF                          00003CFF
+_BOR_ON                           00003FFF
+_BOR_SBODEN                       00003DFF
+_CONFIG1                          00002007
+_CONFIG2                          00002008
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003F7F
+_CP_OFF                           00003FFF
+_CP_ON                            00003FBF
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         00001FFF
+_DEVID1                           00002006
+_EC_OSC                           00003FFB
+_EXTRC                            00003FFF
+_EXTRCIO                          00003FFE
+_EXTRC_OSC_CLKOUT                 00003FFF
+_EXTRC_OSC_NOCLKOUT               00003FFE
+_FCMEN_OFF                        000037FF
+_FCMEN_ON                         00003FFF
+_FOSC_EC                          00003FFB
+_FOSC_EXTRC_CLKOUT                00003FFF
+_FOSC_EXTRC_NOCLKOUT              00003FFE
+_FOSC_HS                          00003FFA
+_FOSC_INTRC_CLKOUT                00003FFD
+_FOSC_INTRC_NOCLKOUT              00003FFC
+_FOSC_LP                          00003FF8
+_FOSC_XT                          00003FF9
+_HS_OSC                           00003FFA
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_IESO_OFF                         00003BFF
+_IESO_ON                          00003FFF
+_INTOSC                           00003FFD
+_INTOSCIO                         00003FFC
+_INTRC_OSC_CLKOUT                 00003FFD
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-23-2021  21:55:43         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_INTRC_OSC_NOCLKOUT               00003FFC
+_LP_OSC                           00003FF8
+_LVP_OFF                          00002FFF
+_LVP_ON                           00003FFF
+_MCLRE_OFF                        00003FDF
+_MCLRE_ON                         00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+_WDT_OFF                          00003FF7
+_WDT_ON                           00003FFF
+_WRT_1FOURTH                      00003BFF
+_WRT_256                          00003DFF
+_WRT_HALF                         000039FF
+_WRT_OFF                          00003FFF
+_XT_OSC                           00003FF9
+__16F887                          00000001
+loop                              00000067
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXX- ----------------
+2000 : -------XX------- ---------------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   108
+Program Memory Words Free:  8084
+
+
+Errors   :     0
+Warnings :    11 reported,     0 suppressed
+Messages :     4 reported,     0 suppressed
+
+
