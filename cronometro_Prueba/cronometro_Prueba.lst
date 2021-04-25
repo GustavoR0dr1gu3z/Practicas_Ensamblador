@@ -1,4 +1,4 @@
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:03:38         PAGE  1
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:07:52         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Warning[203]: Found opcode in column 1. (GOTO)
 0006   1683           00031         BSF             STATUS, RP0
 0007   3000           00032         MOVLW   0X00
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:03:38         PAGE  2
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:07:52         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ Message[305]: Using default destination of 1 (file).
 002A   3C06           00080         SUBLW   06H
 002B   1D03           00081         BTFSS   STATUS,Z
 002C   2820           00082         GOTO    UNI
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:03:38         PAGE  3
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:07:52         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0051   0AA3           00127             INCF                                CONT, 1                                                 
                                             ; CONT = CONT+1
 Message[305]: Using default destination of 1 (file).
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:03:38         PAGE  4
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:07:52         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -225,7 +225,7 @@ Warning[202]: Argument out of range.  Least significant bits used.
 0071   0008           00164                 RETURN
                       00165 
                       00166        END
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:03:38         PAGE  5
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:07:52         PAGE  5
 
 
 SYMBOL TABLE
@@ -284,7 +284,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:03:38         PAGE  6
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:07:52         PAGE  6
 
 
 SYMBOL TABLE
@@ -343,7 +343,7 @@ CENTE                             0000002E
 CENTENA                           00000032
 CHS0                              00000002
 CHS1                              00000003
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:03:38         PAGE  7
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:07:52         PAGE  7
 
 
 SYMBOL TABLE
@@ -402,7 +402,7 @@ GO_NOT_DONE                       00000001
 HTS                               00000002
 I2C_DATA                          00000005
 I2C_READ                          00000002
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:03:38         PAGE  8
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:07:52         PAGE  8
 
 
 SYMBOL TABLE
@@ -461,7 +461,7 @@ NOT_W                             00000002
 NOT_WRITE                         00000002
 OERR                              00000001
 OPTION_REG                        00000081
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:03:38         PAGE  9
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:07:52         PAGE  9
 
 
 SYMBOL TABLE
@@ -520,7 +520,7 @@ RA2                               00000002
 RA3                               00000003
 RA4                               00000004
 RA5                               00000005
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:03:38         PAGE 10
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:07:52         PAGE 10
 
 
 SYMBOL TABLE
@@ -579,7 +579,7 @@ R_NOT_W                           00000002
 R_W                               00000002
 S                                 00000003
 SBOREN                            00000004
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:03:38         PAGE 11
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:07:52         PAGE 11
 
 
 SYMBOL TABLE
@@ -638,7 +638,7 @@ T2CKPS1                           00000001
 T2CON                             00000012
 TABLA                             00000059
 TMR0                              00000001
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:03:38         PAGE 12
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:07:52         PAGE 12
 
 
 SYMBOL TABLE
@@ -697,7 +697,7 @@ TRISD3                            00000003
 TRISD4                            00000004
 TRISD5                            00000005
 TRISD6                            00000006
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:03:38         PAGE 13
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:07:52         PAGE 13
 
 
 SYMBOL TABLE
@@ -756,7 +756,7 @@ WPUB3                             00000003
 WPUB4                             00000004
 WPUB5                             00000005
 WPUB6                             00000006
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:03:38         PAGE 14
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:07:52         PAGE 14
 
 
 SYMBOL TABLE
@@ -815,7 +815,7 @@ _IESO_ON                          00003FFF
 _INTOSC                           00003FFD
 _INTOSCIO                         00003FFC
 _INTRC_OSC_CLKOUT                 00003FFD
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:03:38         PAGE 15
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  20:07:52         PAGE 15
 
 
 SYMBOL TABLE
