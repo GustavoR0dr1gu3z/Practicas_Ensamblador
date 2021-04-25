@@ -122,7 +122,7 @@ CICLO:
 	    MOVF 				PTA,0   								; W <- PTA
 	    MOVWF 			PORTA								; PORTA <- W
 	    INCF 				CONT, 1 								; CONT = CONT+1
-	    RLF 				PTA								; PTA = PTA*2
+	    RLF 				PTA									; PTA = PTA*2
 	    SWAPF 			STAT_RES, W							; W_RES = SWAP(W_RES)
 	    MOVWF 			STATUS 								; W = SWAP(W_RES)
 	    SWAPF				W_RES, W_RES
