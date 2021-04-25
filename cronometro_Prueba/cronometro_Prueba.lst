@@ -1,4 +1,4 @@
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  17:51:09         PAGE  1
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  19:56:53         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -50,14 +50,14 @@ Warning[203]: Found opcode in column 1. (GOTO)
 Warning[205]: Found directive in column 1. (ORG)
 0004                  00026 ORG 0X04
 Warning[203]: Found opcode in column 1. (GOTO)
-0004   283C           00027 GOTO INTERRUPCION
+0004   283F           00027 GOTO INTERRUPCION
                       00028 
 0005                  00029 PUERTOS:
 0005   0103           00030         CLRW
 0006   1683           00031         BSF             STATUS, RP0
 0007   3000           00032         MOVLW   0X00
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  17:51:09         PAGE  2
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  19:56:53         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -72,7 +72,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 000C   1283           00038         BCF             STATUS, RP0
 000D   0185           00039         CLRF            PORTA
 000E   0186           00040         CLRF    PORTB
-000F   1026           00041         BCF             PTA,0
+000F   1426           00041         BSF             PTA,0
                       00042 
 0010                  00043 CONFI_TMR0:
 0010   30A0           00044         MOVLW   b'10100000'
@@ -92,137 +92,141 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 0018                  00057 INICIO:
 0018   3000           00058         MOVLW   0X00
 0019   00B0           00059         MOVWF   UNIDAD
-001A   00B1           00060         MOVWF   DECENA
-001B   00B2           00061         MOVWF   CENTENA
-001C   00B3           00062         MOVWF   MILLAR
-                      00063 
-001D                  00064 UNI:
-001D   2062           00065         CALL    RETARDO
-001E   0AB0           00066         INCF            UNIDAD,1
-001F   0830           00067         MOVF    UNIDAD,0
-0020   3C0A           00068         SUBLW   0AH
-0021   1D03           00069         BTFSS   STATUS,Z
-0022   281D           00070         GOTO    UNI
-0023   2824           00071         GOTO    DECE
-                      00072 
-0024                  00073 DECE:
-0024   01B0           00074         CLRF            UNIDAD
-0025   0AB1           00075         INCF            DECENA,1
-0026   0831           00076         MOVF    DECENA,0
-0027   3C06           00077         SUBLW   06H
-0028   1D03           00078         BTFSS   STATUS,Z
-0029   281D           00079         GOTO    UNI
-002A   282B           00080         GOTO    CENTE
-                      00081 
-002B                  00082 CENTE:
-002B   01B0           00083         CLRF    UNIDAD
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  17:51:09         PAGE  3
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-002C   01B1           00084         CLRF            DECENA
-002D   0AB2           00085         INCF    CENTENA,1
-002E   0832           00086         MOVF    CENTENA,0
-002F   3C0A           00087         SUBLW   0AH
-0030   1D03           00088         BTFSS   STATUS,Z
-0031   281D           00089         GOTO    UNI
-0032   2833           00090         GOTO    MILL
-                      00091 
-0033                  00092 MILL:
-0033   01B0           00093         CLRF            UNIDAD
-0034   01B1           00094         CLRF            DECENA
-0035   01B2           00095         CLRF            CENTENA
-0036   0AB3           00096         INCF            MILLAR,1
-0037   0833           00097         MOVF    MILLAR,0
-0038   3C06           00098         SUBLW   06H
-0039   1D03           00099         BTFSS   STATUS,Z
-003A   281D           00100         GOTO    UNI
-003B   2818           00101         GOTO    INICIO
-                      00102 
-003C                  00103 INTERRUPCION:
-003C   00A4           00104         MOVWF   W_RES
-003D   0E03           00105         SWAPF   STATUS, W
-003E   00A5           00106         MOVWF   STAT_RES
-003F   0823           00107         MOVF    CONT,0
-0040   3C04           00108         SUBLW   0X04
-0041   1D03           00109         BTFSS   STATUS,Z
-0042   2847           00110         GOTO    CICLO
-0043   01A3           00111         CLRF            CONT
-0044   30FF           00112         MOVLW   0XFF    
-0045   3026           00113         MOVLW   PTA
-0046   1026           00114         BCF             PTA, 0
-                      00115 
-0047                  00116 CICLO:
-0047   0823           00117         MOVF    CONT, 0
-0048   3E30           00118         ADDLW   0X30
-0049   0084           00119             MOVWF                       FSR                                                             
-                                    ; FSR <- W
-004A   0800           00120             MOVF                                INDF, 0                                                 
-                                            ; W <- INDF
-004B   2057           00121             CALL                                TABLA                                                   
-                                     ; Llama a la subrutina tabla
-004C   0086           00122             MOVWF                       PORTB                                                           
-                            ; PORTB <- W
-004D   0826           00123             MOVF                                PTA,0                                                   
-                                            ; W <- PTA
-004E   0085           00124             MOVWF                       PORTA                                                           
-                            ; PORTA <- W
-004F   0AA3           00125             INCF                                CONT, 1                                                 
-                                            ; CONT = CONT+1
+001A   3000           00060         MOVLW   0X00
+001B   00B1           00061         MOVWF   DECENA
+001C   3000           00062         MOVLW   0X00
+001D   00B2           00063         MOVWF   CENTENA
+001E   3000           00064         MOVLW   0X00
+001F   00B3           00065         MOVWF   MILLAR
+                      00066 
+0020                  00067 UNI:
+0020   2065           00068         CALL    RETARDO
+0021   0AB0           00069         INCF            UNIDAD,1
 Message[305]: Using default destination of 1 (file).
-0050   0DA6           00126             RLF                                 PTA                                                     
-                                            ; PTA = PTA*2
-0051   0E25           00127             SWAPF                       STAT_RES, W                                                     
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  17:51:09         PAGE  4
+0022   08B0           00070         MOVF    UNIDAD
+0023   3C09           00071         SUBLW   0X09
+0024   1D03           00072         BTFSS   STATUS,Z
+0025   2820           00073         GOTO    UNI
+0026   2827           00074         GOTO    DECE
+                      00075 
+0027                  00076 DECE:
+0027   01B0           00077         CLRF            UNIDAD
+0028   0AB1           00078         INCF            DECENA,1
+0029   0831           00079         MOVF    DECENA,0
+002A   3C06           00080         SUBLW   06H
+002B   1D03           00081         BTFSS   STATUS,Z
+002C   2820           00082         GOTO    UNI
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  19:56:53         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
+002D   282E           00083         GOTO    CENTE
+                      00084 
+002E                  00085 CENTE:
+002E   01B0           00086         CLRF    UNIDAD
+002F   01B1           00087         CLRF            DECENA
+0030   0AB2           00088         INCF    CENTENA,1
+0031   0832           00089         MOVF    CENTENA,0
+0032   3C09           00090         SUBLW   0X09
+0033   1D03           00091         BTFSS   STATUS,Z
+0034   2820           00092         GOTO    UNI
+0035   2836           00093         GOTO    MILL
+                      00094 
+0036                  00095 MILL:
+0036   01B0           00096         CLRF            UNIDAD
+0037   01B1           00097         CLRF            DECENA
+0038   01B2           00098         CLRF            CENTENA
+0039   0AB3           00099         INCF            MILLAR,1
+003A   0833           00100         MOVF    MILLAR,0
+003B   3C06           00101         SUBLW   06H
+003C   1D03           00102         BTFSS   STATUS,Z
+003D   2820           00103         GOTO    UNI
+003E   2818           00104         GOTO    INICIO
+                      00105 
+003F                  00106 INTERRUPCION:
+003F   00A4           00107         MOVWF   W_RES
+0040   0E03           00108         SWAPF   STATUS, W
+0041   00A5           00109         MOVWF   STAT_RES
+0042   0823           00110         MOVF    CONT,0
+0043   3C04           00111         SUBLW   0X04
+0044   1D03           00112         BTFSS   STATUS,Z
+0045   284A           00113         GOTO    CICLO
+0046   01A3           00114         CLRF            CONT
+0047   3000           00115         MOVLW   0X00
+0048   3026           00116         MOVLW   PTA
+0049   10A6           00117         BCF             PTA, 1
+                      00118 
+004A                  00119 CICLO:
+004A   0823           00120             MOVF        CONT, 0
+004B   3E30           00121             ADDLW       0X30
+004C   0084           00122             MOVWF                       FSR                                                             
+                                    ; FSR <- W
+004D   0800           00123             MOVF                                INDF, 0                                                 
+                                            ; W <- INDF
+004E   205A           00124             CALL                                TABLA                                                   
+                                     ; Llama a la subrutina tabla
+004F   0086           00125             MOVWF                       PORTB                                                           
+                            ; PORTB <- W
+0050   0826           00126             MOVF                                PTA,0                                                   
+                                            ; W <- PTA
+0051   0085           00127             MOVWF                       PORTA                                                           
+                            ; PORTA <- W
+0052   0AA3           00128             INCF                                CONT, 1                                                 
+                                            ; CONT = CONT+1
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  19:56:53         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Message[305]: Using default destination of 1 (file).
+0053   0DA6           00129             RLF                                 PTA                                                     
+                                            ; PTA = PTA*2
+0054   0E25           00130             SWAPF                       STAT_RES, W                                                     
                             ; W_RES = SWAP(W_RES)
-0052   0083           00128             MOVWF                       STATUS                                                          
+0055   0083           00131             MOVWF                       STATUS                                                          
                             ; W = SWAP(W_RES)
 Warning[202]: Argument out of range.  Least significant bits used.
-0053   0E24           00129             SWAPF                               W_RES, W_RES
-0054   0E24           00130             SWAPF                               W_RES, W
-0055   110B           00131             BCF                                 INTCON, T0IF                                            
+0056   0E24           00132             SWAPF                               W_RES, W_RES
+0057   0E24           00133             SWAPF                               W_RES, W
+0058   110B           00134             BCF                                 INTCON, T0IF                                            
                                     ; Limpia el bit T0IF del registro INTCON
-0056   0009           00132             RETFIE                                                              
-                      00133 
-                      00134 
-0057                  00135 TABLA:
-0057   0782           00136         ADDWF           PCL, 1; Suma PCL <- W+PCL
-0058   34C0           00137         RETLW           b'11000000'     ; 0
-0059   34F9           00138         RETLW           b'11111001'     ; 1
-005A   34A4           00139         RETLW           b'10100100'     ; 2
-005B   34B0           00140         RETLW           b'10110000'     ; 3
-005C   3499           00141         RETLW           b'10011001'     ; 4
-005D   3492           00142         RETLW           b'10010010'     ; 5
-005E   3482           00143         RETLW           b'10000010'     ; 6
-005F   34F8           00144         RETLW           b'11111000'     ; 7
-0060   3480           00145         RETLW           b'10000000'     ; 8
-0061   3498           00146         RETLW           b'10011000'     ; 9
-                      00147 
-0062                  00148 RETARDO:
-0062   3003           00149                 movlw   D'3'
-0063   00A2           00150                 movwf   CounterC
-0064   3008           00151                 movlw   D'8'
-0065   00A1           00152                 movwf   CounterB
-0066   3076           00153                 movlw   D'118'
-0067   00A0           00154                 movwf   CounterA
-0068   0BA0           00155 loop            decfsz  CounterA,1
-0069   2868           00156                 goto    loop
-006A   0BA1           00157                 decfsz  CounterB,1
-006B   2868           00158                 goto    loop
-006C   0BA2           00159                 decfsz  CounterC,1
-006D   2868           00160                 goto    loop
-006E   3400           00161                 retlw   0
-006F   0008           00162                 RETURN
-                      00163 
-                      00164        END
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  17:51:09         PAGE  5
+0059   0009           00135             RETFIE                                                              
+                      00136 
+                      00137 
+005A                  00138 TABLA:
+005A   0782           00139         ADDWF           PCL, 1; Suma PCL <- W+PCL
+005B   34C0           00140         RETLW           b'11000000'     ; 0
+005C   34F9           00141         RETLW           b'11111001'     ; 1
+005D   34A4           00142         RETLW           b'10100100'     ; 2
+005E   34B0           00143         RETLW           b'10110000'     ; 3
+005F   3499           00144         RETLW           b'10011001'     ; 4
+0060   3492           00145         RETLW           b'10010010'     ; 5
+0061   3482           00146         RETLW           b'10000010'     ; 6
+0062   34F8           00147         RETLW           b'11111000'     ; 7
+0063   3480           00148         RETLW           b'10000000'     ; 8
+0064   3498           00149         RETLW           b'10011000'     ; 9
+                      00150 
+0065                  00151 RETARDO:
+0065   3003           00152                 movlw   D'3'
+0066   00A2           00153                 movwf   CounterC
+0067   3008           00154                 movlw   D'8'
+0068   00A1           00155                 movwf   CounterB
+0069   3076           00156                 movlw   D'118'
+006A   00A0           00157                 movwf   CounterA
+006B   0BA0           00158 loop            decfsz  CounterA,1
+006C   286B           00159                 goto    loop
+006D   0BA1           00160                 decfsz  CounterB,1
+006E   286B           00161                 goto    loop
+006F   0BA2           00162                 decfsz  CounterC,1
+0070   286B           00163                 goto    loop
+0071   3400           00164                 retlw   0
+0072   0008           00165                 RETURN
+                      00166 
+                      00167        END
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  19:56:53         PAGE  5
 
 
 SYMBOL TABLE
@@ -281,7 +285,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  17:51:09         PAGE  6
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  19:56:53         PAGE  6
 
 
 SYMBOL TABLE
@@ -336,11 +340,11 @@ CCPR1L                            00000015
 CCPR2                             0000001B
 CCPR2H                            0000001C
 CCPR2L                            0000001B
-CENTE                             0000002B
+CENTE                             0000002E
 CENTENA                           00000032
 CHS0                              00000002
 CHS1                              00000003
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  17:51:09         PAGE  7
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  19:56:53         PAGE  7
 
 
 SYMBOL TABLE
@@ -348,7 +352,7 @@ SYMBOL TABLE
 
 CHS2                              00000004
 CHS3                              00000005
-CICLO                             00000047
+CICLO                             0000004A
 CKE                               00000006
 CKP                               00000004
 CM1CON0                           00000107
@@ -368,7 +372,7 @@ DC1B0                             00000004
 DC1B1                             00000005
 DC2B0                             00000004
 DC2B1                             00000005
-DECE                              00000024
+DECE                              00000027
 DECENA                            00000031
 D_A                               00000005
 D_NOT_A                           00000005
@@ -399,7 +403,7 @@ GO_NOT_DONE                       00000001
 HTS                               00000002
 I2C_DATA                          00000005
 I2C_READ                          00000002
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  17:51:09         PAGE  8
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  19:56:53         PAGE  8
 
 
 SYMBOL TABLE
@@ -413,7 +417,7 @@ INTCON                            0000000B
 INTCONN                           00000011
 INTE                              00000004
 INTEDG                            00000006
-INTERRUPCION                      0000003C
+INTERRUPCION                      0000003F
 INTF                              00000001
 IOCB                              00000096
 IOCB0                             00000000
@@ -431,7 +435,7 @@ IRP                               00000007
 LTS                               00000001
 MC1OUT                            00000007
 MC2OUT                            00000006
-MILL                              00000033
+MILL                              00000036
 MILLAR                            00000033
 MSK                               00000093
 MSK0                              00000000
@@ -458,7 +462,7 @@ NOT_W                             00000002
 NOT_WRITE                         00000002
 OERR                              00000001
 OPTION_REG                        00000081
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  17:51:09         PAGE  9
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  19:56:53         PAGE  9
 
 
 SYMBOL TABLE
@@ -517,7 +521,7 @@ RA2                               00000002
 RA3                               00000003
 RA4                               00000004
 RA5                               00000005
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  17:51:09         PAGE 10
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  19:56:53         PAGE 10
 
 
 SYMBOL TABLE
@@ -566,7 +570,7 @@ RE1                               00000001
 RE2                               00000002
 RE3                               00000003
 READ_WRITE                        00000002
-RETARDO                           00000062
+RETARDO                           00000065
 RP0                               00000005
 RP1                               00000006
 RSEN                              00000001
@@ -576,7 +580,7 @@ R_NOT_W                           00000002
 R_W                               00000002
 S                                 00000003
 SBOREN                            00000004
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  17:51:09         PAGE 11
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  19:56:53         PAGE 11
 
 
 SYMBOL TABLE
@@ -633,9 +637,9 @@ T1SYNC                            00000002
 T2CKPS0                           00000000
 T2CKPS1                           00000001
 T2CON                             00000012
-TABLA                             00000057
+TABLA                             0000005A
 TMR0                              00000001
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  17:51:09         PAGE 12
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  19:56:53         PAGE 12
 
 
 SYMBOL TABLE
@@ -694,7 +698,7 @@ TRISD3                            00000003
 TRISD4                            00000004
 TRISD5                            00000005
 TRISD6                            00000006
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  17:51:09         PAGE 13
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  19:56:53         PAGE 13
 
 
 SYMBOL TABLE
@@ -725,7 +729,7 @@ UA                                00000001
 ULPWUE                            00000005
 ULPWUIE                           00000002
 ULPWUIF                           00000002
-UNI                               0000001D
+UNI                               00000020
 UNIDAD                            00000030
 VCFG0                             00000004
 VCFG1                             00000005
@@ -753,7 +757,7 @@ WPUB3                             00000003
 WPUB4                             00000004
 WPUB5                             00000005
 WPUB6                             00000006
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  17:51:09         PAGE 14
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  19:56:53         PAGE 14
 
 
 SYMBOL TABLE
@@ -812,7 +816,7 @@ _IESO_ON                          00003FFF
 _INTOSC                           00003FFD
 _INTOSCIO                         00003FFC
 _INTRC_OSC_CLKOUT                 00003FFD
-MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  17:51:09         PAGE 15
+MPASM  5.50             CRONOMETRO_PRUEBA.ASM   4-24-2021  19:56:53         PAGE 15
 
 
 SYMBOL TABLE
@@ -836,23 +840,23 @@ _WRT_HALF                         000039FF
 _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
-loop                              00000068
+loop                              0000006B
 
 
 MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
 
 0000 : X---XXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
-0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX ----------------
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXX-------------
 2000 : -------XX------- ---------------- ---------------- ----------------
 
 All other memory blocks unused.
 
-Program Memory Words Used:   109
-Program Memory Words Free:  8083
+Program Memory Words Used:   112
+Program Memory Words Free:  8080
 
 
 Errors   :     0
 Warnings :    11 reported,     0 suppressed
-Messages :     4 reported,     0 suppressed
+Messages :     5 reported,     0 suppressed
 
 
