@@ -1,0 +1,5 @@
+Message[302] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\IVANPMA-MAIN\ASE\ASE.ASM 28 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\IVANPMA-MAIN\ASE\ASE.ASM 30 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\IVANPMA-MAIN\ASE\ASE.ASM 46 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\IVANPMA-MAIN\ASE\ASE.ASM 140 : Using default destination of 1 (file).
+Warning[202] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\IVANPMA-MAIN\ASE\ASE.ASM 143 : Argument out of range.  Least significant bits used.
