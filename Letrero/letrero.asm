@@ -91,7 +91,14 @@ TABLA
 	RETLW				b'11000111'		; L
 	RETLW				b'11111111'		; ESPACIO
 	RETLW				b'10001100'		; P
-
+	RETLW				b'10001000'		; A
+	RETLW				b'11000111'		; L
+	RETLW				b'11001111'		; I
+	RETLW				b'11000111'		; L
+	RETLW				b'11000111'		; L		
+	RETLW				b'11000000'		; O
+	RETLW				b'11111111'		; ESPACIO
+	
 
 
 RETARDO 													; 300 ms
