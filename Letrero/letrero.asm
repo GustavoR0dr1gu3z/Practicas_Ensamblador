@@ -66,27 +66,27 @@ INTERRUPCION:
 	BSF					HABILITA, 3		; Se Pone En 1 El Bit 3 De HABILITA
 
 CICLO:
-	MOVF				CONT, 0
-	ADDWF				PUNTERO, 0
-	CALL				TABLA	
-	MOVWF				inve									; Variable para invertir
-	COMF				inve, W								; Hace el complemento de la salida
-	MOVWF				PORTB
-	MOVF				HABILITA, 0
-	MOVWF				inve2									; Variable para invertir
-	COMF				inve2, W								; Hace el complemento de la salida
-	MOVWF				PORTA
-	INCF					CONT, 1
-	RRF					HABILITA, F
-	SWAPF				STATUS_RES, W
-	MOVWF				STATUS
-	SWAPF				W_RES, W_RES
-	SWAPF				W_RES, W
-	BCF					INTCON, T0IF
-	RETFIE
+	MOVF				CONT, 0			; Mueve CONT A W
+	ADDWF				PUNTERO, 0		; Suma Puntero A W
+	CALL				TABLA			; Manda A Llamar TABLA
+	MOVWF				inve				; Variable Para Invertir
+	COMF				inve, W			; Hace Cl Complemento De La Salida
+	MOVWF				PORTB			; Se Muestra El Resultado En PUERTB
+	MOVF				HABILITA, 0		; W <- HABILITA
+	MOVWF				inve2				; Variable para invertir
+	COMF				inve2, W			; Hace el complemento de la salida
+	MOVWF				PORTA			; Se Muestra En PUERTA
+	INCF					CONT, 1			; CONT = CONT+1
+	RRF					HABILITA, F		; Rota Hacia La Derecha HABILITA
+	SWAPF				STATUS_RES, W	; W = SWAP(STATUS_RES)
+	MOVWF				STATUS			; W = STATUS
+	SWAPF				W_RES, W_RES	; W_RES = SWAPF(W_RES)
+	SWAPF				W_RES, W		; W = SWAPF(W_RES)
+	BCF					INTCON, T0IF		; Limpia El Bit T0IF Del Registro INTCON
+	RETFIE								; Termina La Interrupción
 
 TABLA
-	ADDWF				PCL, 1
+	ADDWF				PCL, 1			; PCL = W + PCL
 	RETLW				b'11111111'		; ESPACIO	
 	RETLW				b'11111111'		; ESPACIO
 	RETLW				b'11111111'		; ESPACIO
@@ -128,7 +128,7 @@ TABLA
 	RETLW				b'11111111'		; ESPACIO
 
 
-RETARDO 													; 300 ms
+RETARDO 								; 300 ms
 		movlw	D'3'
 		movwf	CounterC
 		movlw	D'8'
