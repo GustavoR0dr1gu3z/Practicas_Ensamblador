@@ -54,16 +54,16 @@ INICIO:
 
 
 INTERRUPCION:
-	MOVWF				W_RES
-	SWAPF				STATUS, W
-	MOVWF				STATUS_RES
-	MOVF				CONT, 0
-	SUBLW				0X04
-	BTFSS				STATUS, Z
-	GOTO 				CICLO
-	CLRF					CONT
-	CLRF					HABILITA
-	BSF					HABILITA, 3
+	MOVWF				W_RES			; Mueve W a W_REs
+	SWAPF				STATUS, W		; Intercambia STATUS En W
+	MOVWF				STATUS_RES		; W = STATUS_RES
+	MOVF				CONT, 0			; Mueve Cont A W
+	SUBLW				0X04			; Resta 4 A W
+	BTFSS				STATUS, Z		; Verifica Si Z == 1
+	GOTO 				CICLO			; No (Se Va A Ciclo)
+	CLRF					CONT			; Si (Se Limpia Contador)
+	CLRF					HABILITA			; Se Limpia HABILITA
+	BSF					HABILITA, 3		; Se Pone En 1 El Bit 3 De HABILITA
 
 CICLO:
 	MOVF				CONT, 0
