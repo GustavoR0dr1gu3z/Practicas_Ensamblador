@@ -68,8 +68,12 @@ CICLO:
 	MOVF				CONT, 0
 	ADDWF				PUNTERO, 0
 	CALL				TABLA	
+	MOVWF				inve									; Variable para invertir
+	COMF				inve, W								; Hace el complemento de la salida
 	MOVWF				PORTB
 	MOVF				HABILITA, 0
+	MOVWF				inve2									; Variable para invertir
+	COMF				inve2, W								; Hace el complemento de la salida
 	MOVWF				PORTA
 	INCF					CONT, 1
 	RRF					HABILITA, F
