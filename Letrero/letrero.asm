@@ -12,7 +12,7 @@ list		p=16f887	; list directive to define processor
 	ENDC
 
 	ORG 0X00
-		GOTO			CONFIGURACION
+		GOTO			CONFIGURACION	
 	ORG 0X04
 		GOTO			INTERRUPCION
 
