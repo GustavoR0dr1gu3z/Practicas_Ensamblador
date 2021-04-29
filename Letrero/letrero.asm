@@ -124,18 +124,18 @@ TABLA
 	RETLW				b'11111111'		; ESPACIO
 
 RETARDO 													; 300 ms
-		movlw	D'3'
-		movwf	CounterC
-		movlw	D'8'
-		movwf	CounterB
-		movlw	D'118'
-		movwf	CounterA
-loop		decfsz	CounterA,1
-		goto	loop
-		decfsz	CounterB,1
-		goto	loop
-		decfsz	CounterC,1
-		goto	loop
-		retlw	0
+	movlw				D'2'
+	movwf				CounterC
+	movlw				D'134'
+	movwf				CounterB
+	movlw				D'152'
+	movwf				CounterA
+loop	decfsz				CounterA,1
+	goto					loop
+	decfsz				CounterB,1
+	goto					loop
+	decfsz				CounterC,1
+	goto					loop
+	retlw					 0
 		RETURN
-	END          
+	END
