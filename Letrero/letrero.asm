@@ -11,10 +11,10 @@ list		p=16f887	; list directive to define processor
 		inve, inve2							; Variables Para El Programa	
 	ENDC								; Fin De Bloque De Librerías 
 
-	ORG 0X00
-		GOTO			CONFIGURACION	
-	ORG 0X04
-		GOTO			INTERRUPCION
+	ORG 0X00								; Inicio Del Programa
+		GOTO			CONFIGURACION	; Etiqueta Configuración
+	ORG 0X04								; Dirreción de la Interrupcion
+		GOTO			INTERRUPCION		; Etiqueta Interrupcion
 
 CONFIGURACION:
 	CLRW
