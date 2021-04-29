@@ -113,6 +113,14 @@ TABLA
 	RETLW				b'11111111'		; ESPACIO
 	RETLW				b'11000110'		; C
 	RETLW				b'10001000'		; A
+	RETLW				b'10001110'		; F
+	RETLW				b'10000110'		; E
+	RETLW				b'11111111'		; ESPACIO
+	RETLW 				b'11100001'		; J
+	RETLW				b'10001000'		; A
+	RETLW 				b'11100001'		; J
+	RETLW				b'10001000'		; A
+	RETLW				b'11111111'		; ESPACIO
 
 RETARDO 													; 300 ms
 	movlw				D'2'
