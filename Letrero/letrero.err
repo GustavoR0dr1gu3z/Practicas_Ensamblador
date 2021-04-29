@@ -1,0 +1,5 @@
+Warning[205] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\PROYECTOS_MPLAB\LETRERO\LETRERO.ASM 1 : Found directive in column 1. (list)
+Message[302] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\PROYECTOS_MPLAB\LETRERO\LETRERO.ASM 22 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\PROYECTOS_MPLAB\LETRERO\LETRERO.ASM 24 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\PROYECTOS_MPLAB\LETRERO\LETRERO.ASM 39 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[202] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\PROYECTOS_MPLAB\LETRERO\LETRERO.ASM 78 : Argument out of range.  Least significant bits used.
