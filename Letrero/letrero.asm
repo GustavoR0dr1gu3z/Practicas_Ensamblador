@@ -44,13 +44,13 @@ OPTION_REGG:
 
 INICIO:
 	CALL				RETARDO			; Mandar A Llamar Subrutina RETARDO
-	INCF					PUNTERO, 1
-	MOVF				PUNTERO, 0
-	SUBLW				.36
-	BTFSS				STATUS, Z
-	GOTO 				INICIO
-	CLRF					PUNTERO
-	GOTO 				INICIO
+	INCF					PUNTERO, 1		; PUNTERO =PUNTERO+1
+	MOVF				PUNTERO, 0		; W = PUNTERO
+	SUBLW				.36				; Resta 36 A W
+	BTFSS				STATUS, Z		; Verifica SI Z == 1
+	GOTO 				INICIO			; No (Se Va A Inicio)
+	CLRF					PUNTERO			; Si (Limpia La Variable PUNTERO)
+	GOTO 				INICIO			; Se Va Inicio
 
 
 INTERRUPCION:
