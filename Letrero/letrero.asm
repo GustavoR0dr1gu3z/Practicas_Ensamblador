@@ -109,7 +109,10 @@ TABLA
 	RETLW				b'11000000'		; O
 	RETLW				b'11111111'		; ESPACIO
 	RETLW				b'10000110'		; E
-	
+	RETLW				b'10010010'		; S
+	RETLW				b'11111111'		; ESPACIO
+	RETLW				b'11000110'		; C
+	RETLW				b'10001000'		; A
 
 RETARDO 													; 300 ms
 	movlw				D'2'
