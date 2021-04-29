@@ -29,15 +29,15 @@ CONFIGURACION:
 	BSF					HABILITA,3		; Poner En 1 El Bit 3 De Habilita
 
 CONFI_TMR0:
-	MOVLW				b'10100000'
+	MOVLW				b'10100000'		; Configurar TMR0
 	
 INTCONN:
-	MOVWF				INTCON
+	MOVWF				INTCON			; Asignación  De Valores A Las Banderas Del Registro
 	BSF					STATUS, RP0
-	MOVLW				b'10000010'
+	MOVLW				b'10000010'		; Configurar OPTION_REG
 
 OPTION_REGG:
-	MOVWF				OPTION_REG
+	MOVWF				OPTION_REG		; Asignación De Valores A Las Banderas Del Registro
 	BCF					STATUS, RP0
 	CLRF					CONT
 	CLRF					PUNTERO
