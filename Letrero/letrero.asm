@@ -38,12 +38,12 @@ INTCONN:
 
 OPTION_REGG:
 	MOVWF				OPTION_REG		; Asignación De Valores A Las Banderas Del Registro
-	BCF					STATUS, RP0
-	CLRF					CONT
-	CLRF					PUNTERO
+	BCF					STATUS, RP0	
+	CLRF					CONT			; Limpiar La Variable CONT
+	CLRF					PUNTERO			; Limpiar La Variable PUNTERO
 
 INICIO:
-	CALL				RETARDO
+	CALL				RETARDO			; Mandar A Llamar Subrutina RETARDO
 	INCF					PUNTERO, 1
 	MOVF				PUNTERO, 0
 	SUBLW				.36
