@@ -17,16 +17,16 @@ list		p=16f887	; list directive to define processor
 		GOTO			INTERRUPCION		; Etiqueta Interrupcion
 
 CONFIGURACION:
-	CLRW
-	BSF 					STATUS, RP0
-	MOVLW				0X00
-	MOVWF				TRISB
-	MOVLW				0XF0
-	MOVWF				TRISA
-	BCF					STATUS, RP0
-	CLRF					PORTA
-	CLRF					PORTB
-	BSF					HABILITA,3
+	CLRW								; Limpiar W (Poner en 0's)
+	BSF 					STATUS, RP0		; RP0 = Registro 1 de status
+	MOVLW				0X00			; 00000000
+	MOVWF				TRISB			; Puerto B Como Salida
+	MOVLW				0XF0				; 11110000
+	MOVWF				TRISA			; Puerto A como Entrada y Salida
+	BCF					STATUS, RP0		; RP0 = Registro Status
+	CLRF					PORTA			; Limpiar PORTA (Poner en 0's)
+	CLRF					PORTB			; Limpiar PORTB (Poner en 0's)
+	BSF					HABILITA,3		; Poner En 1 El Bit 3 De Habilita
 
 CONFI_TMR0:
 	MOVLW				b'10100000'
