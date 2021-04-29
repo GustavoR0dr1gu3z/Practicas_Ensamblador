@@ -8,6 +8,7 @@ list		p=16f887	; list directive to define processor
 		CounterA, CounterB, CounterC
 		W_RES, STATUS_RES
 		CONT, PUNTERO, HABILITA
+		inve, inve2
 	ENDC
 
 	ORG 0X00

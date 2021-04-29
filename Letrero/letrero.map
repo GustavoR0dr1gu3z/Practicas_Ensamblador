@@ -1,12 +1,12 @@
 MPLINK 4.48, Linker
-Linker Map File - Created Wed Apr 28 23:33:24 2021
+Linker Map File - Created Thu Apr 29 11:54:05 2021
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
                    .org_0       code   0x000000    program   0x000000
                    .org_1       code   0x000000    program   0x000002
-                   .org_2       code   0x000004    program   0x000096
+                   .org_2       code   0x000004    program   0x0000d2
    .config_2007_LETRERO.O       code   0x002007    program   0x000002
    .config_2008_LETRERO.O       code   0x002008    program   0x000002
 
@@ -16,9 +16,9 @@ Linker Map File - Created Wed Apr 28 23:33:24 2021
                                Start         End      
                            ---------   ---------      
                             0x000000    0x000000      
-                            0x000004    0x00004e      
+                            0x000004    0x00006c      
                             0x002007    0x002008      
-            78 out of 8455 program addresses used, program memory utilization is 0%
+            108 out of 8455 program addresses used, program memory utilization is 1%
 
 
 
@@ -32,9 +32,9 @@ Linker Map File - Created Wed Apr 28 23:33:24 2021
                   INTCONN   0x000010    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
              INTERRUPCION   0x00001f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
               OPTION_REGG   0x000013    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
-                  RETARDO   0x000041    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
-                    TABLA   0x000037    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
-                     loop   0x000047    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
+                  RETARDO   0x00005f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
+                    TABLA   0x00003b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
+                     loop   0x000065    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
 
 
 
@@ -48,8 +48,8 @@ Linker Map File - Created Wed Apr 28 23:33:24 2021
                    INICIO   0x000017    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
              INTERRUPCION   0x00001f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
                     CICLO   0x000029    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
-                    TABLA   0x000037    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
-                  RETARDO   0x000041    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
-                     loop   0x000047    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
+                    TABLA   0x00003b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
+                  RETARDO   0x00005f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
+                     loop   0x000065    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Letrero\letrero.asm
 
 

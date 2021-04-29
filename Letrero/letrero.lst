@@ -1,4 +1,4 @@
-MPASM  5.50                       LETRERO.ASM   4-29-2021  11:53:31         PAGE  1
+MPASM  5.50                       LETRERO.ASM   4-29-2021  11:54:03         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -25,168 +25,165 @@ Warning[205]: Found directive in column 1. (list)
   00000020            00008                 CounterA, CounterB, CounterC
   00000023            00009                 W_RES, STATUS_RES
   00000025            00010                 CONT, PUNTERO, HABILITA
-                      00011         ENDC
-                      00012 
-0000                  00013         ORG 0X00
-0000   2805           00014                 GOTO                    CONFIGURACION
-0004                  00015         ORG 0X04
-0004   281F           00016                 GOTO                    INTERRUPCION
-                      00017 
-0005                  00018 CONFIGURACION:
-0005   0103           00019         CLRW
-0006   1683           00020         BSF                                     STATUS, RP0
-0007   3000           00021         MOVLW                           0X00
+  00000028            00011                 inve, inve2
+                      00012         ENDC
+                      00013 
+0000                  00014         ORG 0X00
+0000   2805           00015                 GOTO                    CONFIGURACION
+0004                  00016         ORG 0X04
+0004   281F           00017                 GOTO                    INTERRUPCION
+                      00018 
+0005                  00019 CONFIGURACION:
+0005   0103           00020         CLRW
+0006   1683           00021         BSF                                     STATUS, RP0
+0007   3000           00022         MOVLW                           0X00
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0008   0086           00022         MOVWF                           TRISB
-0009   30F0           00023         MOVLW                           0XF0
+0008   0086           00023         MOVWF                           TRISB
+0009   30F0           00024         MOVLW                           0XF0
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-000A   0085           00024         MOVWF                           TRISA
-000B   1283           00025         BCF                                     STATUS, RP0
-000C   0185           00026         CLRF                                    PORTA
-000D   0186           00027         CLRF                                    PORTB
-000E   15A7           00028         BSF                                     HABILITA,3
-                      00029 
-000F                  00030 CONFI_TMR0:
-000F   30A0           00031         MOVLW                           b'10100000'
-                      00032         
-0010                  00033 INTCONN:
-0010   008B           00034         MOVWF                           INTCON
-0011   1683           00035         BSF                                     STATUS, RP0
-0012   3082           00036         MOVLW                           b'10000010'
-                      00037 
-0013                  00038 OPTION_REGG:
+000A   0085           00025         MOVWF                           TRISA
+000B   1283           00026         BCF                                     STATUS, RP0
+000C   0185           00027         CLRF                                    PORTA
+000D   0186           00028         CLRF                                    PORTB
+000E   15A7           00029         BSF                                     HABILITA,3
+                      00030 
+000F                  00031 CONFI_TMR0:
+000F   30A0           00032         MOVLW                           b'10100000'
+                      00033         
+0010                  00034 INTCONN:
+0010   008B           00035         MOVWF                           INTCON
+0011   1683           00036         BSF                                     STATUS, RP0
+0012   3082           00037         MOVLW                           b'10000010'
+                      00038 
+0013                  00039 OPTION_REGG:
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0013   0081           00039         MOVWF                           OPTION_REG
-MPASM  5.50                       LETRERO.ASM   4-29-2021  11:53:31         PAGE  2
+MPASM  5.50                       LETRERO.ASM   4-29-2021  11:54:03         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0014   1283           00040         BCF                                     STATUS, RP0
-0015   01A5           00041         CLRF                                    CONT
-0016   01A6           00042         CLRF                                    PUNTERO
-                      00043 
-0017                  00044 INICIO:
-0017   205F           00045         CALL                            RETARDO
-0018   0AA6           00046         INCF                                    PUNTERO, 1
-0019   0826           00047         MOVF                            PUNTERO, 0
-001A   3C19           00048         SUBLW                           0X19
-001B   1D03           00049         BTFSS                           STATUS, Z
-001C   2817           00050         GOTO                            INICIO
-001D   01A6           00051         CLRF                                    PUNTERO
-001E   2817           00052         GOTO                            INICIO
-                      00053 
+0013   0081           00040         MOVWF                           OPTION_REG
+0014   1283           00041         BCF                                     STATUS, RP0
+0015   01A5           00042         CLRF                                    CONT
+0016   01A6           00043         CLRF                                    PUNTERO
+                      00044 
+0017                  00045 INICIO:
+0017   205F           00046         CALL                            RETARDO
+0018   0AA6           00047         INCF                                    PUNTERO, 1
+0019   0826           00048         MOVF                            PUNTERO, 0
+001A   3C19           00049         SUBLW                           0X19
+001B   1D03           00050         BTFSS                           STATUS, Z
+001C   2817           00051         GOTO                            INICIO
+001D   01A6           00052         CLRF                                    PUNTERO
+001E   2817           00053         GOTO                            INICIO
                       00054 
-001F                  00055 INTERRUPCION:
-001F   00A3           00056         MOVWF                           W_RES
-0020   0E03           00057         SWAPF                           STATUS, W
-0021   00A4           00058         MOVWF                           STATUS_RES
-0022   0825           00059         MOVF                            CONT, 0
-0023   3C04           00060         SUBLW                           0X04
-0024   1D03           00061         BTFSS                           STATUS, Z
-0025   2829           00062         GOTO                            CICLO
-0026   01A5           00063         CLRF                                    CONT
-0027   01A7           00064         CLRF                                    HABILITA
-0028   15A7           00065         BSF                                     HABILITA, 3
-                      00066 
-0029                  00067 CICLO:
-0029   0825           00068         MOVF                            CONT, 0
-002A   0726           00069         ADDWF                           PUNTERO, 0
-002B   203B           00070         CALL                            TABLA   
-Error[113]  : Symbol not previously defined (inve)
-002C   0080           00071         MOVWF                           inve                                                            
+                      00055 
+001F                  00056 INTERRUPCION:
+001F   00A3           00057         MOVWF                           W_RES
+0020   0E03           00058         SWAPF                           STATUS, W
+0021   00A4           00059         MOVWF                           STATUS_RES
+0022   0825           00060         MOVF                            CONT, 0
+0023   3C04           00061         SUBLW                           0X04
+0024   1D03           00062         BTFSS                           STATUS, Z
+0025   2829           00063         GOTO                            CICLO
+0026   01A5           00064         CLRF                                    CONT
+0027   01A7           00065         CLRF                                    HABILITA
+0028   15A7           00066         BSF                                     HABILITA, 3
+                      00067 
+0029                  00068 CICLO:
+0029   0825           00069         MOVF                            CONT, 0
+002A   0726           00070         ADDWF                           PUNTERO, 0
+002B   203B           00071         CALL                            TABLA   
+002C   00A8           00072         MOVWF                           inve                                                            
                                     ; Variable para invertir
-Error[113]  : Symbol not previously defined (inve)
-002D   0900           00072         COMF                            inve, W                                                         
+002D   0928           00073         COMF                            inve, W                                                         
                             ; Hace el complemento de la salida
-002E   0086           00073         MOVWF                           PORTB
-002F   0827           00074         MOVF                            HABILITA, 0
-Error[113]  : Symbol not previously defined (inve2)
-0030   0080           00075         MOVWF                           inve2                                                           
+002E   0086           00074         MOVWF                           PORTB
+002F   0827           00075         MOVF                            HABILITA, 0
+0030   00A9           00076         MOVWF                           inve2                                                           
                                     ; Variable para invertir
-Error[113]  : Symbol not previously defined (inve2)
-0031   0900           00076         COMF                            inve2, W                                                        
+0031   0929           00077         COMF                            inve2, W                                                        
                                     ; Hace el complemento de la salida
-0032   0085           00077         MOVWF                           PORTA
-0033   0AA5           00078         INCF                                    CONT, 1
-0034   0CA7           00079         RRF                                     HABILITA, F
-0035   0E24           00080         SWAPF                           STATUS_RES, W
-0036   0083           00081         MOVWF                           STATUS
+0032   0085           00078         MOVWF                           PORTA
+0033   0AA5           00079         INCF                                    CONT, 1
+0034   0CA7           00080         RRF                                     HABILITA, F
+0035   0E24           00081         SWAPF                           STATUS_RES, W
+0036   0083           00082         MOVWF                           STATUS
 Warning[202]: Argument out of range.  Least significant bits used.
-0037   0EA3           00082         SWAPF                           W_RES, W_RES
-0038   0E23           00083         SWAPF                           W_RES, W
-MPASM  5.50                       LETRERO.ASM   4-29-2021  11:53:31         PAGE  3
+0037   0EA3           00083         SWAPF                           W_RES, W_RES
+0038   0E23           00084         SWAPF                           W_RES, W
+0039   110B           00085         BCF                                     INTCON, T0IF
+003A   0009           00086         RETFIE
+                      00087 
+MPASM  5.50                       LETRERO.ASM   4-29-2021  11:54:03         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0039   110B           00084         BCF                                     INTCON, T0IF
-003A   0009           00085         RETFIE
-                      00086 
-003B                  00087 TABLA
-003B   0782           00088         ADDWF                           PCL, 1
-003C   34FF           00089         RETLW                           b'11111111'             ; ESPACIO
-003D   3486           00090         RETLW                           b'10000110'             ; E
-003E   34C7           00091         RETLW                           b'11000111'             ; L
-003F   34FF           00092         RETLW                           b'11111111'             ; ESPACIO
-0040   348C           00093         RETLW                           b'10001100'             ; P
-0041   3488           00094         RETLW                           b'10001000'             ; A
-0042   34C7           00095         RETLW                           b'11000111'             ; L
-0043   34CF           00096         RETLW                           b'11001111'             ; I
-0044   34C7           00097         RETLW                           b'11000111'             ; L
-0045   34C7           00098         RETLW                           b'11000111'             ; L             
-0046   34C0           00099         RETLW                           b'11000000'             ; O
-0047   34FF           00100         RETLW                           b'11111111'             ; ESPACIO
-0048   34C0           00101         RETLW                           b'11000000'             ; O
-0049   34FF           00102         RETLW                           b'11111111'             ; ESPACIO
-004A   3486           00103         RETLW                           b'10000110'             ; E
-004B   34C7           00104         RETLW                           b'11000111'             ; L
-004C   34FF           00105         RETLW                           b'11111111'             ; ESPACIO
-004D   348E           00106         RETLW                           b'10001110'             ; F
-004E   34C0           00107         RETLW                           b'11000000'             ; O
-004F   34C6           00108         RETLW                           b'11000110'             ; C
-0050   34C0           00109         RETLW                           b'11000000'             ; O
-0051   34FF           00110         RETLW                           b'11111111'             ; ESPACIO
-0052   3486           00111         RETLW                           b'10000110'             ; E
-0053   3492           00112         RETLW                           b'10010010'             ; S
-0054   34FF           00113         RETLW                           b'11111111'             ; ESPACIO
-0055   34C6           00114         RETLW                           b'11000110'             ; C
-0056   3488           00115         RETLW                           b'10001000'             ; A
-0057   348E           00116         RETLW                           b'10001110'             ; F
-0058   3486           00117         RETLW                           b'10000110'             ; E
-0059   34FF           00118         RETLW                           b'11111111'             ; ESPACIO
-005A   34E1           00119         RETLW                           b'11100001'             ; J
-005B   3488           00120         RETLW                           b'10001000'             ; A
-005C   34E1           00121         RETLW                           b'11100001'             ; J
-005D   3488           00122         RETLW                           b'10001000'             ; A
-005E   34FF           00123         RETLW                           b'11111111'             ; ESPACIO
-                      00124 
-005F                  00125 RETARDO                                                                                                 
+003B                  00088 TABLA
+003B   0782           00089         ADDWF                           PCL, 1
+003C   34FF           00090         RETLW                           b'11111111'             ; ESPACIO
+003D   3486           00091         RETLW                           b'10000110'             ; E
+003E   34C7           00092         RETLW                           b'11000111'             ; L
+003F   34FF           00093         RETLW                           b'11111111'             ; ESPACIO
+0040   348C           00094         RETLW                           b'10001100'             ; P
+0041   3488           00095         RETLW                           b'10001000'             ; A
+0042   34C7           00096         RETLW                           b'11000111'             ; L
+0043   34CF           00097         RETLW                           b'11001111'             ; I
+0044   34C7           00098         RETLW                           b'11000111'             ; L
+0045   34C7           00099         RETLW                           b'11000111'             ; L             
+0046   34C0           00100         RETLW                           b'11000000'             ; O
+0047   34FF           00101         RETLW                           b'11111111'             ; ESPACIO
+0048   34C0           00102         RETLW                           b'11000000'             ; O
+0049   34FF           00103         RETLW                           b'11111111'             ; ESPACIO
+004A   3486           00104         RETLW                           b'10000110'             ; E
+004B   34C7           00105         RETLW                           b'11000111'             ; L
+004C   34FF           00106         RETLW                           b'11111111'             ; ESPACIO
+004D   348E           00107         RETLW                           b'10001110'             ; F
+004E   34C0           00108         RETLW                           b'11000000'             ; O
+004F   34C6           00109         RETLW                           b'11000110'             ; C
+0050   34C0           00110         RETLW                           b'11000000'             ; O
+0051   34FF           00111         RETLW                           b'11111111'             ; ESPACIO
+0052   3486           00112         RETLW                           b'10000110'             ; E
+0053   3492           00113         RETLW                           b'10010010'             ; S
+0054   34FF           00114         RETLW                           b'11111111'             ; ESPACIO
+0055   34C6           00115         RETLW                           b'11000110'             ; C
+0056   3488           00116         RETLW                           b'10001000'             ; A
+0057   348E           00117         RETLW                           b'10001110'             ; F
+0058   3486           00118         RETLW                           b'10000110'             ; E
+0059   34FF           00119         RETLW                           b'11111111'             ; ESPACIO
+005A   34E1           00120         RETLW                           b'11100001'             ; J
+005B   3488           00121         RETLW                           b'10001000'             ; A
+005C   34E1           00122         RETLW                           b'11100001'             ; J
+005D   3488           00123         RETLW                           b'10001000'             ; A
+005E   34FF           00124         RETLW                           b'11111111'             ; ESPACIO
+                      00125 
+005F                  00126 RETARDO                                                                                                 
                                     ; 300 ms
-005F   3002           00126         movlw                           D'2'
-0060   00A2           00127         movwf                           CounterC
-0061   3086           00128         movlw                           D'134'
-0062   00A1           00129         movwf                           CounterB
-0063   3098           00130         movlw                           D'152'
-0064   00A0           00131         movwf                           CounterA
-0065   0BA0           00132 loop    decfsz                          CounterA,1
-0066   2865           00133         goto                                    loop
-0067   0BA1           00134         decfsz                          CounterB,1
-0068   2865           00135         goto                                    loop
-MPASM  5.50                       LETRERO.ASM   4-29-2021  11:53:31         PAGE  4
+005F   3002           00127         movlw                           D'2'
+0060   00A2           00128         movwf                           CounterC
+0061   3086           00129         movlw                           D'134'
+0062   00A1           00130         movwf                           CounterB
+0063   3098           00131         movlw                           D'152'
+0064   00A0           00132         movwf                           CounterA
+0065   0BA0           00133 loop    decfsz                          CounterA,1
+0066   2865           00134         goto                                    loop
+0067   0BA1           00135         decfsz                          CounterB,1
+0068   2865           00136         goto                                    loop
+0069   0BA2           00137         decfsz                          CounterC,1
+006A   2865           00138         goto                                    loop
+006B   3400           00139         retlw                                    0
+MPASM  5.50                       LETRERO.ASM   4-29-2021  11:54:03         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0069   0BA2           00136         decfsz                          CounterC,1
-006A   2865           00137         goto                                    loop
-006B   3400           00138         retlw                                    0
-006C   0008           00139                 RETURN
-                      00140         END
-MPASM  5.50                       LETRERO.ASM   4-29-2021  11:53:31         PAGE  5
+006C   0008           00140                 RETURN
+                      00141         END
+MPASM  5.50                       LETRERO.ASM   4-29-2021  11:54:03         PAGE  5
 
 
 SYMBOL TABLE
@@ -245,7 +242,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM  5.50                       LETRERO.ASM   4-29-2021  11:53:31         PAGE  6
+MPASM  5.50                       LETRERO.ASM   4-29-2021  11:54:03         PAGE  6
 
 
 SYMBOL TABLE
@@ -304,7 +301,7 @@ CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
 CHS3                              00000005
-MPASM  5.50                       LETRERO.ASM   4-29-2021  11:53:31         PAGE  7
+MPASM  5.50                       LETRERO.ASM   4-29-2021  11:54:03         PAGE  7
 
 
 SYMBOL TABLE
@@ -363,7 +360,7 @@ I2C_DATA                          00000005
 I2C_READ                          00000002
 I2C_START                         00000003
 I2C_STOP                          00000004
-MPASM  5.50                       LETRERO.ASM   4-29-2021  11:53:31         PAGE  8
+MPASM  5.50                       LETRERO.ASM   4-29-2021  11:54:03         PAGE  8
 
 
 SYMBOL TABLE
@@ -422,7 +419,7 @@ OPTION_REGG                       00000013
 OSCCON                            0000008F
 OSCTUNE                           00000090
 OSFIE                             00000007
-MPASM  5.50                       LETRERO.ASM   4-29-2021  11:53:31         PAGE  9
+MPASM  5.50                       LETRERO.ASM   4-29-2021  11:54:03         PAGE  9
 
 
 SYMBOL TABLE
@@ -481,7 +478,7 @@ RA7                               00000007
 RB0                               00000000
 RB1                               00000001
 RB2                               00000002
-MPASM  5.50                       LETRERO.ASM   4-29-2021  11:53:31         PAGE 10
+MPASM  5.50                       LETRERO.ASM   4-29-2021  11:54:03         PAGE 10
 
 
 SYMBOL TABLE
@@ -540,7 +537,7 @@ SCS                               00000000
 SEN                               00000000
 SENDB                             00000003
 SMP                               00000007
-MPASM  5.50                       LETRERO.ASM   4-29-2021  11:53:31         PAGE 11
+MPASM  5.50                       LETRERO.ASM   4-29-2021  11:54:03         PAGE 11
 
 
 SYMBOL TABLE
@@ -599,7 +596,7 @@ TMR0IF                            00000002
 TMR1                              0000000E
 TMR1CS                            00000001
 TMR1GE                            00000006
-MPASM  5.50                       LETRERO.ASM   4-29-2021  11:53:31         PAGE 12
+MPASM  5.50                       LETRERO.ASM   4-29-2021  11:54:03         PAGE 12
 
 
 SYMBOL TABLE
@@ -658,7 +655,7 @@ TRISE                             00000089
 TRISE0                            00000000
 TRISE1                            00000001
 TRISE2                            00000002
-MPASM  5.50                       LETRERO.ASM   4-29-2021  11:53:31         PAGE 13
+MPASM  5.50                       LETRERO.ASM   4-29-2021  11:54:03         PAGE 13
 
 
 SYMBOL TABLE
@@ -717,7 +714,7 @@ WRERR                             00000003
 WUE                               00000001
 W_RES                             00000023
 Z                                 00000002
-MPASM  5.50                       LETRERO.ASM   4-29-2021  11:53:31         PAGE 14
+MPASM  5.50                       LETRERO.ASM   4-29-2021  11:54:03         PAGE 14
 
 
 SYMBOL TABLE
@@ -776,7 +773,7 @@ _LVP_ON                           00003FFF
 _MCLRE_OFF                        00003FDF
 _MCLRE_ON                         00003FFF
 _PWRTE_OFF                        00003FFF
-MPASM  5.50                       LETRERO.ASM   4-29-2021  11:53:31         PAGE 15
+MPASM  5.50                       LETRERO.ASM   4-29-2021  11:54:03         PAGE 15
 
 
 SYMBOL TABLE
@@ -794,6 +791,8 @@ _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
 __DEBUG                           1
+inve                              00000028
+inve2                             00000029
 loop                              00000065
 
 
@@ -809,7 +808,7 @@ Program Memory Words Used:   106
 Program Memory Words Free:  8086
 
 
-Errors   :     4
+Errors   :     0
 Warnings :     2 reported,     0 suppressed
 Messages :     3 reported,     0 suppressed
 
