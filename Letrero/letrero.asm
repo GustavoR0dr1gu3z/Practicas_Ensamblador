@@ -7,5 +7,8 @@
 	CBLOCK 0X20
 		CounterA, CounterB, CounterC
 		W_RES, STATUS_RES
-		CONT, PTA
+		CONT, PUNTERO, HABILITA
 	ENDC
+
+	
+	
