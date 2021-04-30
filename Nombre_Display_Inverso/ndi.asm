@@ -32,38 +32,26 @@
 
 	list		p=16f887	; list directive to define processor
 	#include	<p16f887.inc>	; processor specific variable definitions
-
-
 	__CONFIG    _CONFIG1, _LVP_OFF & _FCMEN_ON & _IESO_OFF & _BOR_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _PWRTE_ON & _WDT_OFF & _INTRC_OSC_NOCLKOUT
 	__CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
-
-
 ;**********************************************************************
 ORG     0x000					; processor reset vector
-
 CBLOCK 0X20
 				Contador, CounterA, CounterB, CounterC, Co
 ENDC
-
-
 GOTO PUERTOS 				; Comienzo del programa
-
-PUERTOS:
-							
+PUERTOS:							
 	BSF 			STATUS, RP0 	; SE ACCEDE AL BANCO 1 PARA USAR LOS TRIS
-
 							; SE CONFIGURAN LOS PUERTOS DE ENTRADAS Y SALIDAS
 	MOVLW 		0X00		;W = 00000000
 	MOVWF 		TRISB		;PUERTO B COMO SALIDA
 	MOVLW		0X00
 	MOVWF		TRISC
-
 							;SE ACCEDE AL BANCO 3 PARA LOS ANSEL, ANSELH
 	BSF 			STATUS, RP1
 							;SE LIMPIAN (coloca 0's)LOS REGISTROS ANSEL, ANSELH PARA E/S DIGITAL
 	CLRF 		ANSEL
 	CLRF 		ANSELH
-
 							;SE ACCEDE AL BANCO 0 PARA LOS PUERTOS
 	BCF 			STATUS, RP1
 	BCF 			STATUS, RP0
@@ -85,7 +73,6 @@ DISPLAY2:
 	CALL 		TABLA2
 	MOVWF 		PORTC
 	CALL		RETARDO_400ms
-
 	INCF			Contador, F
 	INCF			Co,F
 
@@ -153,8 +140,6 @@ TABLA2:
 	RETLW		b'11011101'	; D_2
 	RETLW		b'01110111'	; A_2
 	RETLW		b'11111111'	; ESPACIO
-
-
 
 RETARDO_400ms:
 		movlw	D'3'
