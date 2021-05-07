@@ -1,4 +1,4 @@
-MPASM  5.50                           LCD.ASM   5-7-2021  18:11:21         PAGE  1
+MPASM  5.50                           LCD.ASM   5-7-2021  18:12:36         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 0010   2023           00039         CALL                            TABLA1                  ; TABLA DE LA PRIMER LINEA
 0011   0086           00040         MOVWF                           PORTB                   ; MUESTRA EN EL PUERTO B
 0012   204F           00041         CALL                                    ENVIAR_DATO     ; ENVIAR LOS DATOS
-MPASM  5.50                           LCD.ASM   5-7-2021  18:11:21         PAGE  2
+MPASM  5.50                           LCD.ASM   5-7-2021  18:12:36         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0049                  00084 ENABLE_LCD
 0049   1487           00085         BSF                                     PORTC,1                 ; ENABLE EN 1
 004A   2057           00086         CALL                            RETARDO                 ; RUTINA DE RETARDO
-MPASM  5.50                           LCD.ASM   5-7-2021  18:11:21         PAGE  3
+MPASM  5.50                           LCD.ASM   5-7-2021  18:12:36         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -154,7 +154,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 005E   2859           00116         goto    ciclo
 005F   0008           00117         RETURN
                       00118         END                       ; directive 'end of program'
-MPASM  5.50                           LCD.ASM   5-7-2021  18:11:21         PAGE  4
+MPASM  5.50                           LCD.ASM   5-7-2021  18:12:36         PAGE  4
 
 
 SYMBOL TABLE
@@ -213,7 +213,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM  5.50                           LCD.ASM   5-7-2021  18:11:21         PAGE  5
+MPASM  5.50                           LCD.ASM   5-7-2021  18:12:36         PAGE  5
 
 
 SYMBOL TABLE
@@ -272,7 +272,7 @@ CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
 CHS3                              00000005
-MPASM  5.50                           LCD.ASM   5-7-2021  18:11:21         PAGE  6
+MPASM  5.50                           LCD.ASM   5-7-2021  18:12:36         PAGE  6
 
 
 SYMBOL TABLE
@@ -331,7 +331,7 @@ I2C_READ                          00000002
 I2C_START                         00000003
 I2C_STOP                          00000004
 INDF                              00000000
-MPASM  5.50                           LCD.ASM   5-7-2021  18:11:21         PAGE  7
+MPASM  5.50                           LCD.ASM   5-7-2021  18:12:36         PAGE  7
 
 
 SYMBOL TABLE
@@ -390,7 +390,7 @@ OSCCON                            0000008F
 OSCTUNE                           00000090
 OSFIE                             00000007
 OSFIF                             00000007
-MPASM  5.50                           LCD.ASM   5-7-2021  18:11:21         PAGE  8
+MPASM  5.50                           LCD.ASM   5-7-2021  18:12:36         PAGE  8
 
 
 SYMBOL TABLE
@@ -449,7 +449,7 @@ RB1                               00000001
 RB2                               00000002
 RB3                               00000003
 RB4                               00000004
-MPASM  5.50                           LCD.ASM   5-7-2021  18:11:21         PAGE  9
+MPASM  5.50                           LCD.ASM   5-7-2021  18:12:36         PAGE  9
 
 
 SYMBOL TABLE
@@ -508,7 +508,7 @@ SENDB                             00000003
 SMP                               00000007
 SPBRG                             00000099
 SPBRGH                            0000009A
-MPASM  5.50                           LCD.ASM   5-7-2021  18:11:21         PAGE 10
+MPASM  5.50                           LCD.ASM   5-7-2021  18:12:36         PAGE 10
 
 
 SYMBOL TABLE
@@ -567,7 +567,7 @@ TMR1CS                            00000001
 TMR1GE                            00000006
 TMR1H                             0000000F
 TMR1IE                            00000000
-MPASM  5.50                           LCD.ASM   5-7-2021  18:11:21         PAGE 11
+MPASM  5.50                           LCD.ASM   5-7-2021  18:12:36         PAGE 11
 
 
 SYMBOL TABLE
@@ -626,7 +626,7 @@ TRISE1                            00000001
 TRISE2                            00000002
 TRISE3                            00000003
 TRMT                              00000001
-MPASM  5.50                           LCD.ASM   5-7-2021  18:11:21         PAGE 12
+MPASM  5.50                           LCD.ASM   5-7-2021  18:12:36         PAGE 12
 
 
 SYMBOL TABLE
@@ -685,7 +685,7 @@ Z                                 00000002
 _BOR21V                           00003EFF
 _BOR40V                           00003FFF
 _BOR4V_BOR21V                     00003EFF
-MPASM  5.50                           LCD.ASM   5-7-2021  18:11:21         PAGE 13
+MPASM  5.50                           LCD.ASM   5-7-2021  18:12:36         PAGE 13
 
 
 SYMBOL TABLE
@@ -744,7 +744,7 @@ _PWRTE_OFF                        00003FFF
 _PWRTE_ON                         00003FEF
 _WDTE_OFF                         00003FF7
 _WDTE_ON                          00003FFF
-MPASM  5.50                           LCD.ASM   5-7-2021  18:11:21         PAGE 14
+MPASM  5.50                           LCD.ASM   5-7-2021  18:12:36         PAGE 14
 
 
 SYMBOL TABLE
