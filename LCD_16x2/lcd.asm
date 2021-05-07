@@ -71,14 +71,30 @@ CONF_PUERTOS:
 	MOVLW				H'01'			; Limpia la pantala
 	CALL 				CONTROL	
 
-
+REINICIAR:
+	CLRF 				Cont
+VISUALIZAR_LCD:
+	MOVWF				Cont,W
+	CALL				TABLA
+	CALL				CARACTER
+	INCF				Cont, F
+	MOVLW				.30
+	XORWF				Cont	
+	BTFSS				STATUS, Z
+	GOTO				VISUALIZAR_LCD	; Z = 0
+	CALL				RETARDO		; Z = 1
+	MOVLW				H'01'
+	CALL				CONTROL
+	CALL				RETARDO
+	GOTO 				REINICIAR
 
 TABLA:
 	ADDWF				PCL,F
-	DT					"Hola Mundo ICO, Gustavo Rodriguez Calzada"
+	DT					"Hola Mundo ICO Gustavo Calzada"
 
-
-
+CARACTER:
+	BSF					RS
+	GOTO				CARGA
 CONTROL:
 	BCF					RS				; Decir a la LCD que le mandaremos una instrucción de control
 	MOVWF				PORTB			; Mostrara la literal
