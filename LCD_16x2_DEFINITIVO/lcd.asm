@@ -68,9 +68,9 @@ TABLA_2
 	DT					"2021"
 
 CONF_LCD:
-        BCF 					PORTC,0     		 ; RS=0 MODO INSTRUCCION
-        MOVLW 				0x01         			; El comando 0x01 limpia la pantalla en el LCD
-        MOVWF 				PORTB
+        BCF 					PORTC,0     		; RS=0 MODO INSTRUCCION
+        MOVLW 				0x01         			; LIMPIA PANTALLA 	
+        MOVWF 				PORTB			; MUESTRA EN PUERTO B
         CALL 				LCD_Comando     	; Se da de alta el comando
         MOVLW 				0x0C       			; Selecciona la primera línea
         MOVWF 				PORTB
