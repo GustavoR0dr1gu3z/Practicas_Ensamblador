@@ -51,9 +51,26 @@ CONF_PUERTOS:
 
 
 
+; RETARDO 
+RETARDO 								; 300 ms
+		movlw	D'3'
+		movwf	CounterC
+		movlw	D'8'
+		movwf	CounterB
+		movlw	D'118'
+		movwf	CounterA
+loop		decfsz	CounterA,1
+		goto	loop
+		decfsz	CounterB,1
+		goto	loop
+		decfsz	CounterC,1
+		goto	loop
+		retlw	0
+		RETURN
+	END  
 
 
-; RUTINA DE RETARDO 5ms
+; RUTINA DE RETARDO 5ms PARA PROCESAMIENTO DE INSTRUCCIONES
 ;PIC Time Delay = 0,00500100 s with Osc = 4000000 Hz
 		movlw	D'7'
 		movwf	CounterB
