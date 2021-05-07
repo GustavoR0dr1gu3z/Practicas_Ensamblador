@@ -57,29 +57,28 @@ MENSAJE_2
 	GOTO				MENSAJE_2    
     	RETURN
 
-
 TABLA_1
-	ADDWF 	PCL,1
-	DT	"HOLA "
-	DT	"MUNDO"
+	ADDWF 				PCL,1
+	DT					"HOLA "
+	DT					"MUNDO"
 
 TABLA_2
-	ADDWF 	PCL,1
-	DT	"ICO "
-	DT	"2021"
+	ADDWF 				PCL,1
+	DT					"ICO "
+	DT					"2021"
 
 LCD_Inicializa
-        BCF 	PORTC,0      ; RS=0 MODO INSTRUCCION
-        MOVLW 	0x01         ; El comando 0x01 limpia la pantalla en el LCD
-        MOVWF 	PORTB
-        CALL 	LCD_Comando     ; Se da de alta el comando
-        MOVLW 	0x0C       ; Selecciona la primera línea
-        MOVWF 	PORTB
-        CALL 	LCD_Comando     ; Se da de alta el comando
-        MOVLW 	0x3C       ; Se configura el cursor
-        MOVWF 	PORTB
-        CALL 	LCD_Comando     ; Se da de alta el comando
-        BSF 	PORTC, 0     ; Rs=1 MODO DATO
+        BCF 					PORTC,0      ; RS=0 MODO INSTRUCCION
+        MOVLW 				0x01         ; El comando 0x01 limpia la pantalla en el LCD
+        MOVWF 				PORTB
+        CALL 				LCD_Comando     ; Se da de alta el comando
+        MOVLW 				0x0C       ; Selecciona la primera línea
+        MOVWF 				PORTB
+        CALL 				LCD_Comando     ; Se da de alta el comando
+        MOVLW 				0x3C       ; Se configura el cursor
+        MOVWF 				PORTB
+        CALL 				LCD_Comando     ; Se da de alta el comando
+        BSF 					PORTC, 0     ; Rs=1 MODO DATO
         RETURN
 ;Subrutina para enviar comandos
 LCD_Comando
