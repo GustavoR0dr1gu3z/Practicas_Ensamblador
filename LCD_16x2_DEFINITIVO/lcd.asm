@@ -8,7 +8,7 @@
 
 
 	CBLOCK	0X20
-		Contador, CounterA, CounterB, CounterC, CounterD, CounterE
+		Contador, CounterA, CounterB
 	ENDC
 
 	ORG	    0x00
@@ -68,7 +68,7 @@ TABLA2:
 	DT					"2021"
 
 CONF_LCD:
-        BCF 					PORTC,0     		; RS=0 MODO INSTRUCCION
+        BCF 					PORTA,0     		; RS=0 MODO INSTRUCCION
         MOVLW 				0x01         			; LIMPIA PANTALLA 	
         MOVWF 				PORTB			; MUESTRA EN PUERTO B
         CALL 				ENABLE_LCD     	; DA DE ALTA EL COMANDO
@@ -83,21 +83,21 @@ CONF_LCD:
 
 
 ENABLE_LCD:
-        BSF 					PORTC,1       		; ENABLE EN 1
+        BSF 					PORTA,1       		; ENABLE EN 1
         CALL 				RETARDO   		; RUTINA DE RETARDO
         CALL 				RETARDO		;RUTINA DE RETARDO	
-        BCF 					PORTC, 1   	 	; ENABLE=0    
+        BCF 					PORTA, 1   	 	; ENABLE=0    
         CALL 				RETARDO		;RUTINA DE RETARDO	
         RETURN     
 
 
 ENVIAR_DATO
-        BSF 					PORTC,0     		; RS=1 MODO DATO
+        BSF 					PORTA,0     		; RS=1 MODO DATO
         CALL 				ENABLE_LCD    	; DA DE ALTA EL COMANDO
         RETURN
 
 LINEA2:
-        BCF 					PORTC, 0   		 ; RS=0 MODO INSTRUCCION
+        BCF 					PORTA, 0   		 ; RS=0 MODO INSTRUCCION
         MOVLW 				0xC0      			 ; SELECCIÓN LINEA DOS DE LCD
         MOVWF 				PORTB			; MUESTRA EN PUERTO B
         CALL					ENABLE_LCD  		; DA DE ALTA EL COMANDO
