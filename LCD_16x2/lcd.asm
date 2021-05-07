@@ -71,12 +71,14 @@ CONF_PUERTOS:
 
 CONTROL:
 	BCF					RS				; Decir a la LCD que le mandaremos una instrucción de control
-
-
+	MOVWF				PORTB			; Mostrara la literal
+	BSF					E				; Habilita el enable
+	CALL				RETARDOP	
+	BCF					E				; Desabilita el Enable
 
 
 ; RETARDO 
-RETARDO 								; 300 ms
+RETARDO: 								; 300 ms
 		movlw	D'3'
 		movwf	CounterC
 		movlw	D'8'
@@ -96,6 +98,7 @@ loop		decfsz	CounterA,1
 
 ; RUTINA DE RETARDO 5ms PARA PROCESAMIENTO DE INSTRUCCIONES
 ;PIC Time Delay = 0,00500100 s with Osc = 4000000 Hz
+RETARDOP:
 		movlw	D'7'
 		movwf	CounterB
 		movlw	D'124'
