@@ -71,18 +71,18 @@ CONF_LCD:
         BCF 					PORTC,0     		; RS=0 MODO INSTRUCCION
         MOVLW 				0x01         			; LIMPIA PANTALLA 	
         MOVWF 				PORTB			; MUESTRA EN PUERTO B
-        CALL 				LCD_Comando     							; Se da de alta el comando
+        CALL 				ENABLE_LCD     	; DA DE ALTA EL COMANDO
         MOVLW 				0x0C       			; SELECCIÓN DE LA PRIMER LINEA
         MOVWF 				PORTB			; SE MUESTRA EN EL PUERTO B
-        CALL 				LCD_Comando     	
+        CALL 				ENABLE_LCD     	; DA DE ALTA EL COMANDO
         MOVLW 				0x3C       			; CONFIGUACION DEL CURSOS
         MOVWF 				PORTB
-        CALL 				LCD_Comando     	
+        CALL 				ENABLE_LCD     	; DA DE ALTA EL COMANDO
         BSF 					PORTC, 0     		; Rs=1 MODO DATO
         RETURN								
 
 
-LCD_Comando
+ENABLE_LCD:
         BSF 					PORTC,1       		; ENABLE EN 1
         CALL 				DELAY      						; Tiempo de espera
         CALL 				DELAY			
@@ -93,14 +93,14 @@ LCD_Comando
 
 ENVIAR_DATO
         BSF 					PORTC,0     		; RS=1 MODO DATO
-        CALL 				LCD_Comando    	
+        CALL 				ENABLE_LCD    	; DA DE ALTA EL COMANDO
         RETURN
 
 LINEA2:
         BCF 					PORTC, 0   		 ; RS=0 MODO INSTRUCCION
         MOVLW 				0xC0      			 ; SELECCIÓN LINEA DOS DE LCD
         MOVWF 				PORTB			; MUESTRA EN PUERTO B
-        CALL					LCD_Comando    	
+        CALL					ENABLE_LCD  		; DA DE ALTA EL COMANDO
         RETURN
 
 
