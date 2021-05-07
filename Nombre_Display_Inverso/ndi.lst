@@ -1,4 +1,4 @@
-MPASM  5.50                           NDI.ASM   4-6-2021  21:15:40         PAGE  1
+MPASM  5.50                           NDI.ASM   4-30-2021  19:09:09         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -47,179 +47,164 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00007 ;==========================================================================
                       00008 
                       00809         LIST
-                      00035 
-                      00036 
-2007   28E4           00037         __CONFIG    _CONFIG1, _LVP_OFF & _FCMEN_ON & _IESO_OFF & _BOR_OFF & _CPD_OFF & _CP_OFF & _MCLRE_
+2007   28E4           00035         __CONFIG    _CONFIG1, _LVP_OFF & _FCMEN_ON & _IESO_OFF & _BOR_OFF & _CPD_OFF & _CP_OFF & _MCLRE_
                             ON & _PWRTE_ON & _WDT_OFF & _INTRC_OSC_NOCLKOUT
-2008   3EFF           00038         __CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
-                      00039 
-                      00040 
-                      00041 ;**********************************************************************
+2008   3EFF           00036         __CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
+                      00037 ;**********************************************************************
 Warning[205]: Found directive in column 1. (ORG)
-0000                  00042 ORG     0x000                                   ; processor reset vector
-MPASM  5.50                           NDI.ASM   4-6-2021  21:15:40         PAGE  2
+0000                  00038 ORG     0x000                                   ; processor reset vector
+Warning[205]: Found directive in column 1. (CBLOCK)
+                      00039 CBLOCK 0X20
+  00000020            00040                                 Contador, CounterA, CounterB, CounterC, Co
+Warning[205]: Found directive in column 1. (ENDC)
+MPASM  5.50                           NDI.ASM   4-30-2021  19:09:09         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00043 
-Warning[205]: Found directive in column 1. (CBLOCK)
-                      00044 CBLOCK 0X20
-  00000020            00045                                 Contador, CounterA, CounterB, CounterC, Co
-Warning[205]: Found directive in column 1. (ENDC)
-                      00046 ENDC
-                      00047 
-                      00048 
+                      00041 ENDC
 Warning[203]: Found opcode in column 1. (GOTO)
-0000   2801           00049 GOTO PUERTOS                            ; Comienzo del programa
-                      00050 
-0001                  00051 PUERTOS:
-                      00052                                                         
-0001   1683           00053         BSF                     STATUS, RP0     ; SE ACCEDE AL BANCO 1 PARA USAR LOS TRIS
-                      00054 
-                      00055                                                         ; SE CONFIGURAN LOS PUERTOS DE ENTRADAS Y SALIDA
+0000   2801           00042 GOTO PUERTOS                            ; Comienzo del programa
+0001                  00043 PUERTOS:                                                        
+0001   1683           00044         BSF                     STATUS, RP0     ; SE ACCEDE AL BANCO 1 PARA USAR LOS TRIS
+                      00045                                                         ; SE CONFIGURAN LOS PUERTOS DE ENTRADAS Y SALIDA
                             S
-0002   3000           00056         MOVLW           0X00            ;W = 00000000
+0002   3000           00046         MOVLW           0X00            ;W = 00000000
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0003   0086           00057         MOVWF           TRISB           ;PUERTO B COMO SALIDA
-0004   3000           00058         MOVLW           0X00
+0003   0086           00047         MOVWF           TRISB           ;PUERTO B COMO SALIDA
+0004   3000           00048         MOVLW           0X00
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0005   0087           00059         MOVWF           TRISC
-                      00060 
-                      00061                                                         ;SE ACCEDE AL BANCO 3 PARA LOS ANSEL, ANSELH
-0006   1703           00062         BSF                     STATUS, RP1
-                      00063                                                         ;SE LIMPIAN (coloca 0's)LOS REGISTROS ANSEL, ANS
+0005   0087           00049         MOVWF           TRISC
+                      00050                                                         ;SE ACCEDE AL BANCO 3 PARA LOS ANSEL, ANSELH
+0006   1703           00051         BSF                     STATUS, RP1
+                      00052                                                         ;SE LIMPIAN (coloca 0's)LOS REGISTROS ANSEL, ANS
                             ELH PARA E/S DIGITAL
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0007   0188           00064         CLRF            ANSEL
+0007   0188           00053         CLRF            ANSEL
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0008   0189           00065         CLRF            ANSELH
-                      00066 
-                      00067                                                         ;SE ACCEDE AL BANCO 0 PARA LOS PUERTOS
-0009   1303           00068         BCF                     STATUS, RP1
-000A   1283           00069         BCF                     STATUS, RP0
-                      00070                                                         ;SE COLOCA EN CEROS LOS PUERTOS
-000B   0186           00071         CLRF            PORTB
-000C   0187           00072         CLRF                    PORTC
-                      00073 
-000D                  00074 INICIO:
-000D   01A0           00075         CLRF            Contador
-000E   01A4           00076         CLRF                    Co
-000F                  00077 DISPLAY1:
-000F   0820           00078         MOVF            Contador,W
+0008   0189           00054         CLRF            ANSELH
+                      00055                                                         ;SE ACCEDE AL BANCO 0 PARA LOS PUERTOS
+0009   1303           00056         BCF                     STATUS, RP1
+000A   1283           00057         BCF                     STATUS, RP0
+                      00058                                                         ;SE COLOCA EN CEROS LOS PUERTOS
+000B   0186           00059         CLRF            PORTB
+000C   0187           00060         CLRF                    PORTC
+                      00061 
+000D                  00062 INICIO:
+000D   01A0           00063         CLRF            Contador
+000E   01A4           00064         CLRF                    Co
+000F                  00065 DISPLAY1:
+000F   0820           00066         MOVF            Contador,W
 Warning[202]: Argument out of range.  Least significant bits used.
-0010   0820           00079         MOVF            Contador,Co
-0011   201E           00080         CALL            TABLA1
-0012   0086           00081         MOVWF           PORTB
-                      00082 
-0013                  00083 DISPLAY2:
-0013   0824           00084         MOVF            Co,W
-0014   2039           00085         CALL            TABLA2
-MPASM  5.50                           NDI.ASM   4-6-2021  21:15:40         PAGE  3
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-0015   0087           00086         MOVWF           PORTC
-0016   2054           00087         CALL            RETARDO_400ms
-                      00088 
-0017   0AA0           00089         INCF                    Contador, F
-0018   0AA4           00090         INCF                    Co,F
-                      00091 
-0019                  00092 CONTADOR:
-0019   301A           00093         MOVLW           .26
-001A   0620           00094         XORWF           Contador,W
-001B   1D03           00095         BTFSS           STATUS, Z       ; Si Z = 1      El bit Z se usa mucho para saber si un número es
+0010   0820           00067         MOVF            Contador,Co
+0011   201E           00068         CALL            TABLA1
+0012   0086           00069         MOVWF           PORTB
+                      00070 
+0013                  00071 DISPLAY2:
+0013   0824           00072         MOVF            Co,W
+0014   2039           00073         CALL            TABLA2
+0015   0087           00074         MOVWF           PORTC
+0016   2054           00075         CALL            RETARDO_400ms
+0017   0AA0           00076         INCF                    Contador, F
+0018   0AA4           00077         INCF                    Co,F
+                      00078 
+0019                  00079 CONTADOR:
+0019   301A           00080         MOVLW           .26
+001A   0620           00081         XORWF           Contador,W
+001B   1D03           00082         BTFSS           STATUS, Z       ; Si Z = 1      El bit Z se usa mucho para saber si un número es
                              igual a otro.
-001C   280F           00096         GOTO            DISPLAY1
-001D   280D           00097         GOTO            INICIO
-                      00098 
-001E                  00099 TABLA1:
-001E   0782           00100         ADDWF           PCL, F
-001F   3404           00101         RETLW           b'00000100'     ; G_1
-0020   3403           00102         RETLW           b'00000011'     ; U_1
-0021   3444           00103         RETLW           b'01000100'     ; S_1
-0022   34FC           00104         RETLW           b'11111100'     ; T_1
-0023   3430           00105         RETLW           b'00110000'     ; A_1
-0024   343F           00106         RETLW           b'00111111'     ; V_1
-0025   3400           00107         RETLW           b'00000000'     ; O_1
-0026   34FF           00108         RETLW           b'11111111'     ; ESPACIO
-0027   3438           00109         RETLW           b'00111000'     ; R_1
-0028   3400           00110         RETLW           b'00000000'     ; O_1
-0029   34C0           00111         RETLW           b'11000000'     ; D_1
-002A   3438           00112         RETLW           b'00111000'     ; R_1
-002B   34CC           00113         RETLW           b'11001100'     ; I_1
-002C   3404           00114         RETLW           b'00000100'     ; G_1
-002D   3403           00115         RETLW           b'00000011'     ; U_1
-002E   340C           00116         RETLW           b'00001100'     ; E_1
-002F   34CC           00117         RETLW           b'11001100'     ; Z_1
-0030   34FF           00118         RETLW           b'11111111'     ; ESPACIO
-0031   340C           00119         RETLW           b'00001100'     ; C_1
-0032   3430           00120         RETLW           b'00110000'     ; A_1
-0033   340F           00121         RETLW           b'00001111'     ; L_1
-0034   34CC           00122         RETLW           b'11001100'     ; Z_1
-0035   3430           00123         RETLW           b'00110000'     ; A_1
-0036   34C0           00124         RETLW           b'11000000'     ; D_1
-0037   3430           00125         RETLW           b'00110000'     ; A_1
-0038   34FF           00126         RETLW           b'11111111'     ; ESPACIO
-                      00127 
-0039                  00128 TABLA2:
-0039   0782           00129         ADDWF           PCL,F
-003A   34F7           00130         RETLW           b'11110111'     ; G_2   
-003B   34FF           00131         RETLW           b'11111111'     ; U_2
-003C   3477           00132         RETLW           b'01110111'     ; S_2
-003D   34DD           00133         RETLW           b'11011101'     ; T_2
-003E   3477           00134         RETLW           b'01110111'     ; A_2
-003F   34BB           00135         RETLW           b'10111011'     ; V_2
-0040   34FF           00136         RETLW           b'11111111'     ; O_2
-0041   34FF           00137         RETLW           b'11111111'     ; ESPACIO
-MPASM  5.50                           NDI.ASM   4-6-2021  21:15:40         PAGE  4
+001C   280F           00083         GOTO            DISPLAY1
+001D   280D           00084         GOTO            INICIO
+MPASM  5.50                           NDI.ASM   4-30-2021  19:09:09         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0042   3467           00138         RETLW           b'01100111'     ; R_2
-0043   34FF           00139         RETLW           b'11111111'     ; O_2
-0044   34DD           00140         RETLW           b'11011101'     ; D_2
-0045   3467           00141         RETLW           b'01100111'     ; R_2
-0046   34DD           00142         RETLW           b'11011101'     ; I_2
-0047   34F7           00143         RETLW           b'11110111'     ; G_2   
-0048   34FF           00144         RETLW           b'11111111'     ; U_2
-0049   347F           00145         RETLW           b'01111111'     ; E_2
-004A   34BB           00146         RETLW           b'10111011'     ; Z_2
-004B   34FF           00147         RETLW           b'11111111'     ; ESPACIO
-004C   34FF           00148         RETLW           b'11111111'     ; C_2
-004D   3477           00149         RETLW           b'01110111'     ; A_2
-004E   34FF           00150         RETLW           b'11111111'     ; L_2
-004F   34BB           00151         RETLW           b'10111011'     ; Z_2
-0050   3477           00152         RETLW           b'01110111'     ; A_2
-0051   34DD           00153         RETLW           b'11011101'     ; D_2
-0052   3477           00154         RETLW           b'01110111'     ; A_2
-0053   34FF           00155         RETLW           b'11111111'     ; ESPACIO
-                      00156 
-                      00157 
-                      00158 
-0054                  00159 RETARDO_400ms:
-0054   3003           00160                 movlw   D'3'
-0055   00A3           00161                 movwf   CounterC
-0056   3008           00162                 movlw   D'8'
-0057   00A2           00163                 movwf   CounterB
-0058   3076           00164                 movlw   D'118'
-0059   00A1           00165                 movwf   CounterA
-005A   0BA1           00166 loop            decfsz  CounterA,1
-005B   285A           00167                 goto    loop
-005C   0BA2           00168                 decfsz  CounterB,1
-005D   285A           00169                 goto    loop
-005E   0BA3           00170                 decfsz  CounterC,1
-005F   285A           00171                 goto    loop
-0060   3400           00172                 retlw   0
-0061   0008           00173                 RETURN
+                      00085 
+001E                  00086 TABLA1:
+001E   0782           00087         ADDWF           PCL, F
+001F   3404           00088         RETLW           b'00000100'     ; G_1
+0020   3403           00089         RETLW           b'00000011'     ; U_1
+0021   3444           00090         RETLW           b'01000100'     ; S_1
+0022   34FC           00091         RETLW           b'11111100'     ; T_1
+0023   3430           00092         RETLW           b'00110000'     ; A_1
+0024   343F           00093         RETLW           b'00111111'     ; V_1
+0025   3400           00094         RETLW           b'00000000'     ; O_1
+0026   34FF           00095         RETLW           b'11111111'     ; ESPACIO
+0027   3438           00096         RETLW           b'00111000'     ; R_1
+0028   3400           00097         RETLW           b'00000000'     ; O_1
+0029   34C0           00098         RETLW           b'11000000'     ; D_1
+002A   3438           00099         RETLW           b'00111000'     ; R_1
+002B   34CC           00100         RETLW           b'11001100'     ; I_1
+002C   3404           00101         RETLW           b'00000100'     ; G_1
+002D   3403           00102         RETLW           b'00000011'     ; U_1
+002E   340C           00103         RETLW           b'00001100'     ; E_1
+002F   34CC           00104         RETLW           b'11001100'     ; Z_1
+0030   34FF           00105         RETLW           b'11111111'     ; ESPACIO
+0031   340C           00106         RETLW           b'00001100'     ; C_1
+0032   3430           00107         RETLW           b'00110000'     ; A_1
+0033   340F           00108         RETLW           b'00001111'     ; L_1
+0034   34CC           00109         RETLW           b'11001100'     ; Z_1
+0035   3430           00110         RETLW           b'00110000'     ; A_1
+0036   34C0           00111         RETLW           b'11000000'     ; D_1
+0037   3430           00112         RETLW           b'00110000'     ; A_1
+0038   34FF           00113         RETLW           b'11111111'     ; ESPACIO
+                      00114 
+0039                  00115 TABLA2:
+0039   0782           00116         ADDWF           PCL,F
+003A   34F7           00117         RETLW           b'11110111'     ; G_2   
+003B   34FF           00118         RETLW           b'11111111'     ; U_2
+003C   3477           00119         RETLW           b'01110111'     ; S_2
+003D   34DD           00120         RETLW           b'11011101'     ; T_2
+003E   3477           00121         RETLW           b'01110111'     ; A_2
+003F   34BB           00122         RETLW           b'10111011'     ; V_2
+0040   34FF           00123         RETLW           b'11111111'     ; O_2
+0041   34FF           00124         RETLW           b'11111111'     ; ESPACIO
+0042   3467           00125         RETLW           b'01100111'     ; R_2
+0043   34FF           00126         RETLW           b'11111111'     ; O_2
+0044   34DD           00127         RETLW           b'11011101'     ; D_2
+0045   3467           00128         RETLW           b'01100111'     ; R_2
+0046   34DD           00129         RETLW           b'11011101'     ; I_2
+0047   34F7           00130         RETLW           b'11110111'     ; G_2   
+0048   34FF           00131         RETLW           b'11111111'     ; U_2
+0049   347F           00132         RETLW           b'01111111'     ; E_2
+004A   34BB           00133         RETLW           b'10111011'     ; Z_2
+004B   34FF           00134         RETLW           b'11111111'     ; ESPACIO
+004C   34FF           00135         RETLW           b'11111111'     ; C_2
+004D   3477           00136         RETLW           b'01110111'     ; A_2
+004E   34FF           00137         RETLW           b'11111111'     ; L_2
+MPASM  5.50                           NDI.ASM   4-30-2021  19:09:09         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+004F   34BB           00138         RETLW           b'10111011'     ; Z_2
+0050   3477           00139         RETLW           b'01110111'     ; A_2
+0051   34DD           00140         RETLW           b'11011101'     ; D_2
+0052   3477           00141         RETLW           b'01110111'     ; A_2
+0053   34FF           00142         RETLW           b'11111111'     ; ESPACIO
+                      00143 
+0054                  00144 RETARDO_400ms:
+0054   3003           00145                 movlw   D'3'
+0055   00A3           00146                 movwf   CounterC
+0056   3008           00147                 movlw   D'8'
+0057   00A2           00148                 movwf   CounterB
+0058   3076           00149                 movlw   D'118'
+0059   00A1           00150                 movwf   CounterA
+005A   0BA1           00151 loop            decfsz  CounterA,1
+005B   285A           00152                 goto    loop
+005C   0BA2           00153                 decfsz  CounterB,1
+005D   285A           00154                 goto    loop
+005E   0BA3           00155                 decfsz  CounterC,1
+005F   285A           00156                 goto    loop
+0060   3400           00157                 retlw   0
+0061   0008           00158                 RETURN
 Warning[205]: Found directive in column 1. (END)
-                      00174 END
-MPASM  5.50                           NDI.ASM   4-6-2021  21:15:40         PAGE  5
+                      00159 END
+MPASM  5.50                           NDI.ASM   4-30-2021  19:09:09         PAGE  5
 
 
 SYMBOL TABLE
@@ -278,7 +263,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM  5.50                           NDI.ASM   4-6-2021  21:15:40         PAGE  6
+MPASM  5.50                           NDI.ASM   4-30-2021  19:09:09         PAGE  6
 
 
 SYMBOL TABLE
@@ -337,7 +322,7 @@ CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
 CHS3                              00000005
-MPASM  5.50                           NDI.ASM   4-6-2021  21:15:40         PAGE  7
+MPASM  5.50                           NDI.ASM   4-30-2021  19:09:09         PAGE  7
 
 
 SYMBOL TABLE
@@ -396,7 +381,7 @@ I2C_DATA                          00000005
 I2C_READ                          00000002
 I2C_START                         00000003
 I2C_STOP                          00000004
-MPASM  5.50                           NDI.ASM   4-6-2021  21:15:40         PAGE  8
+MPASM  5.50                           NDI.ASM   4-30-2021  19:09:09         PAGE  8
 
 
 SYMBOL TABLE
@@ -455,7 +440,7 @@ OSFIE                             00000007
 OSFIF                             00000007
 OSTS                              00000003
 P                                 00000004
-MPASM  5.50                           NDI.ASM   4-6-2021  21:15:40         PAGE  9
+MPASM  5.50                           NDI.ASM   4-30-2021  19:09:09         PAGE  9
 
 
 SYMBOL TABLE
@@ -514,7 +499,7 @@ RB2                               00000002
 RB3                               00000003
 RB4                               00000004
 RB5                               00000005
-MPASM  5.50                           NDI.ASM   4-6-2021  21:15:40         PAGE 10
+MPASM  5.50                           NDI.ASM   4-30-2021  19:09:09         PAGE 10
 
 
 SYMBOL TABLE
@@ -573,7 +558,7 @@ SMP                               00000007
 SPBRG                             00000099
 SPBRGH                            0000009A
 SPEN                              00000007
-MPASM  5.50                           NDI.ASM   4-6-2021  21:15:40         PAGE 11
+MPASM  5.50                           NDI.ASM   4-30-2021  19:09:09         PAGE 11
 
 
 SYMBOL TABLE
@@ -632,7 +617,7 @@ TMR1GE                            00000006
 TMR1H                             0000000F
 TMR1IE                            00000000
 TMR1IF                            00000000
-MPASM  5.50                           NDI.ASM   4-6-2021  21:15:40         PAGE 12
+MPASM  5.50                           NDI.ASM   4-30-2021  19:09:09         PAGE 12
 
 
 SYMBOL TABLE
@@ -691,7 +676,7 @@ TRISE2                            00000002
 TRISE3                            00000003
 TRMT                              00000001
 TUN0                              00000000
-MPASM  5.50                           NDI.ASM   4-6-2021  21:15:40         PAGE 13
+MPASM  5.50                           NDI.ASM   4-30-2021  19:09:09         PAGE 13
 
 
 SYMBOL TABLE
@@ -750,7 +735,7 @@ _BOR21V                           00003EFF
 _BOR40V                           00003FFF
 _BOR4V_BOR21V                     00003EFF
 _BOR4V_BOR40V                     00003FFF
-MPASM  5.50                           NDI.ASM   4-6-2021  21:15:40         PAGE 14
+MPASM  5.50                           NDI.ASM   4-30-2021  19:09:09         PAGE 14
 
 
 SYMBOL TABLE
@@ -809,7 +794,7 @@ _PWRTE_ON                         00003FEF
 _WDTE_OFF                         00003FF7
 _WDTE_ON                          00003FFF
 _WDT_OFF                          00003FF7
-MPASM  5.50                           NDI.ASM   4-6-2021  21:15:40         PAGE 15
+MPASM  5.50                           NDI.ASM   4-30-2021  19:09:09         PAGE 15
 
 
 SYMBOL TABLE

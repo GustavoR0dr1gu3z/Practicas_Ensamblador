@@ -2,7 +2,7 @@
 MagicCookie={0b13fe8c-dfe0-40eb-8900-6712719559a7}
 Version=1.0
 [File000]
-Location=C:\Users\gusta\OneDrive\Escritorio\IvanPMa-main\ase\ase.o
+Location=C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\ase.o
 Folder=Intermediary
 DeviceName=PIC16F887
 LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
@@ -15,7 +15,7 @@ ToolArgsString=
 TraceCmdString=
 DebugOptions=
 [File001]
-Location=C:\Users\gusta\OneDrive\Escritorio\IvanPMa-main\ase\ase.err
+Location=C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\ase.err
 Folder=Intermediary
 DeviceName=PIC16F887
 LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
@@ -28,7 +28,7 @@ ToolArgsString=
 TraceCmdString=
 DebugOptions=
 [File002]
-Location=C:\Users\gusta\OneDrive\Escritorio\IvanPMa-main\ase\ase.hex
+Location=C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\ase.hex
 Folder=Output
 DeviceName=PIC16F887
 LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
@@ -41,7 +41,7 @@ ToolArgsString=
 TraceCmdString=
 DebugOptions=
 [File003]
-Location=C:\Users\gusta\OneDrive\Escritorio\IvanPMa-main\ase\ase.lst
+Location=C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\ase.lst
 Folder=Output
 DeviceName=PIC16F887
 LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}
@@ -54,7 +54,7 @@ ToolArgsString=
 TraceCmdString=
 DebugOptions=
 [File004]
-Location=C:\Users\gusta\OneDrive\Escritorio\IvanPMa-main\ase\ase.cof
+Location=C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\Cronometro\ase.cof
 Folder=Output
 DeviceName=PIC16F887
 LanguageToolSuiteID={6B3DAA78-59C1-46DD-B6AA-DBDAE4E06484}

@@ -1,4 +1,4 @@
-MPASM  5.50                           ASE.ASM   4-26-2021  10:24:21         PAGE  1
+MPASM  5.50                           ASE.ASM   4-30-2021  19:01:31         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -34,11 +34,11 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00018 
 0000                  00019         ORG 0x00                                                                                        
                                              ; posición 0
-0000   2805           00020         GOTO PUERTOS                                                                                    
-                            ; Comienzo del programa
+0000   2805           00020         GOTO                            PUERTOS                                                         
+                                                            ; Comienzo del programa
 0004                  00021         ORG 0X04                                                                                        
                                             ; DIreccion de la interrupcion
-0004   283E           00022         GOTO INTERRUPCION       
+0004   283E           00022         GOTO                            INTERRUPCION    
                       00023 
 0005                  00024 PUERTOS
 0005   0103           00025         CLRW                                                                                            
@@ -57,7 +57,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 000B   1283           00032         BCF                                     STATUS, RP0                                             
                                     ; RP0 = 0 REGISTRO STATIS
 000C   0185           00033         CLRF                                    PORTA                                                   
-MPASM  5.50                           ASE.ASM   4-26-2021  10:24:21         PAGE  2
+MPASM  5.50                           ASE.ASM   4-30-2021  19:01:31         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                             ; Verifica si es 1
 0024   281F           00067         GOTO                            E_UNIDADES                                                      
                             ; No
-MPASM  5.50                           ASE.ASM   4-26-2021  10:24:21         PAGE  3
+MPASM  5.50                           ASE.ASM   4-30-2021  19:01:31         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00099 ;       MOVLW   0XFF
                       00100 ;       MOVWF   UNIDAD
                       00101 ;       MOVLW   0XFF
-MPASM  5.50                           ASE.ASM   4-26-2021  10:24:21         PAGE  4
+MPASM  5.50                           ASE.ASM   4-30-2021  19:01:31         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                                      ; Llama a la subrutina tabla   
 004D   00B4           00132             MOVWF                       inve                                                            
                                     ; Variable para invertir
-MPASM  5.50                           ASE.ASM   4-26-2021  10:24:21         PAGE  5
+MPASM  5.50                           ASE.ASM   4-30-2021  19:01:31         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -293,7 +293,7 @@ Warning[202]: Argument out of range.  Least significant bits used.
 0068   00A2           00165                 movwf   CounterC
 0069   3086           00166                 movlw   D'134'
 006A   00A1           00167                 movwf   CounterB
-MPASM  5.50                           ASE.ASM   4-26-2021  10:24:21         PAGE  6
+MPASM  5.50                           ASE.ASM   4-30-2021  19:01:31         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -310,7 +310,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0073   3400           00176                 retlw    0
 0074   0008           00177                 RETURN
                       00178         END
-MPASM  5.50                           ASE.ASM   4-26-2021  10:24:21         PAGE  7
+MPASM  5.50                           ASE.ASM   4-30-2021  19:01:31         PAGE  7
 
 
 SYMBOL TABLE
@@ -369,7 +369,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM  5.50                           ASE.ASM   4-26-2021  10:24:21         PAGE  8
+MPASM  5.50                           ASE.ASM   4-30-2021  19:01:31         PAGE  8
 
 
 SYMBOL TABLE
@@ -428,7 +428,7 @@ CENTENA                           00000032
 CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
-MPASM  5.50                           ASE.ASM   4-26-2021  10:24:21         PAGE  9
+MPASM  5.50                           ASE.ASM   4-30-2021  19:01:31         PAGE  9
 
 
 SYMBOL TABLE
@@ -487,7 +487,7 @@ GO                                00000001
 GO_DONE                           00000001
 GO_NOT_DONE                       00000001
 HTS                               00000002
-MPASM  5.50                           ASE.ASM   4-26-2021  10:24:21         PAGE 10
+MPASM  5.50                           ASE.ASM   4-30-2021  19:01:31         PAGE 10
 
 
 SYMBOL TABLE
@@ -546,7 +546,7 @@ NOT_TX8                           00000006
 NOT_W                             00000002
 NOT_WRITE                         00000002
 OERR                              00000001
-MPASM  5.50                           ASE.ASM   4-26-2021  10:24:21         PAGE 11
+MPASM  5.50                           ASE.ASM   4-30-2021  19:01:31         PAGE 11
 
 
 SYMBOL TABLE
@@ -605,7 +605,7 @@ RA1                               00000001
 RA2                               00000002
 RA3                               00000003
 RA4                               00000004
-MPASM  5.50                           ASE.ASM   4-26-2021  10:24:21         PAGE 12
+MPASM  5.50                           ASE.ASM   4-30-2021  19:01:31         PAGE 12
 
 
 SYMBOL TABLE
@@ -664,7 +664,7 @@ RX9D                              00000000
 R_NOT_W                           00000002
 R_W                               00000002
 S                                 00000003
-MPASM  5.50                           ASE.ASM   4-26-2021  10:24:21         PAGE 13
+MPASM  5.50                           ASE.ASM   4-30-2021  19:01:31         PAGE 13
 
 
 SYMBOL TABLE
@@ -723,7 +723,7 @@ T2CKPS0                           00000000
 T2CKPS1                           00000001
 T2CON                             00000012
 TABLA                             0000005C
-MPASM  5.50                           ASE.ASM   4-26-2021  10:24:21         PAGE 14
+MPASM  5.50                           ASE.ASM   4-30-2021  19:01:31         PAGE 14
 
 
 SYMBOL TABLE
@@ -782,7 +782,7 @@ TRISD2                            00000002
 TRISD3                            00000003
 TRISD4                            00000004
 TRISD5                            00000005
-MPASM  5.50                           ASE.ASM   4-26-2021  10:24:21         PAGE 15
+MPASM  5.50                           ASE.ASM   4-30-2021  19:01:31         PAGE 15
 
 
 SYMBOL TABLE
@@ -841,7 +841,7 @@ WPUB3                             00000003
 WPUB4                             00000004
 WPUB5                             00000005
 WPUB6                             00000006
-MPASM  5.50                           ASE.ASM   4-26-2021  10:24:21         PAGE 16
+MPASM  5.50                           ASE.ASM   4-30-2021  19:01:31         PAGE 16
 
 
 SYMBOL TABLE
@@ -900,7 +900,7 @@ _IESO_ON                          00003FFF
 _INTOSC                           00003FFD
 _INTOSCIO                         00003FFC
 _INTRC_OSC_CLKOUT                 00003FFD
-MPASM  5.50                           ASE.ASM   4-26-2021  10:24:21         PAGE 17
+MPASM  5.50                           ASE.ASM   4-30-2021  19:01:31         PAGE 17
 
 
 SYMBOL TABLE
