@@ -37,7 +37,7 @@ MEN_LINEA_1:
 	MOVF 				Contador,W		; Contador = W
 	CALL				TABLA1			; TABLA DE LA PRIMER LINEA
 	MOVWF				PORTB			; MUESTRA EN EL PUERTO B
-	CALL    				ENVIAR_DATO		
+	CALL    				ENVIAR_DATO	; ENVIAR LOS DATOS
 	INCF				Contador, F		; Contador = Contador+1
 	MOVLW				B'00001010'		;ES EL TAMAÑO TOTAL DE LA CADENA DEL MENSAJE 2
 	XORWF				Contador,W		; XOR  ENTRE Contador y W
@@ -49,7 +49,7 @@ MEN_LINEA_2:
 	MOVF 				Contador,W		; Contador = W
 	CALL				TABLA2			; TABLA DE LA SEGUNDA LINEA
 	MOVWF				PORTB			; MUESTRA EN EL PUERTO B
-	CALL    				ENVIAR_DATO
+	CALL    				ENVIAR_DATO	; ENVIAR LOS DATOS
 	INCF				Contador, F		; Contador = Contador+1
 	MOVLW				B'00001000'		;ES EL TAMAÑO TOTAL DE LA CADENA DEL MENSAJE 2
 	XORWF				Contador,W		; XOR ENTRE Contador y W
