@@ -1,0 +1,4 @@
+Warning[207] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\PROYECTOS_MPLAB\LCD_16X2_DEFINITIVO\LCD.ASM 19 : Found label after column 1. (val1)
+Warning[207] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\PROYECTOS_MPLAB\LCD_16X2_DEFINITIVO\LCD.ASM 20 : Found label after column 1. (val2)
+Message[302] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\PROYECTOS_MPLAB\LCD_16X2_DEFINITIVO\LCD.ASM 34 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\GUSTA\ONEDRIVE\ESCRITORIO\PROYECTOS_MPLAB\LCD_16X2_DEFINITIVO\LCD.ASM 35 : Register in operand not in bank 0.  Ensure that bank bits are correct.
