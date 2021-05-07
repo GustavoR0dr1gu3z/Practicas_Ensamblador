@@ -6,24 +6,23 @@
 	__CONFIG    _CONFIG1, _LVP_OFF & _FCMEN_ON & _IESO_OFF & _BOR_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _PWRTE_ON & _WDT_OFF & _INTRC_OSC_NOCLKOUT
 	__CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
 
+CounterA equ 0x30
+CounterB equ 0x31
 
 	CBLOCK	0X20
-		Contador, CounterA, CounterB
+		Contador
 	ENDC
 
 	ORG	    0x00
    	 GOTO    				C_PUERTOS
     
 C_PUERTOS
-	BSF 					STATUS, RP0		; RP0 = Registro 1 de status
-	MOVLW				0X00			; 00000000
-	MOVWF				TRISB			; Puerto B Como Salida
-	MOVLW				0X00			; 00000000
-	MOVWF				TRISA			; Puerto A como Entrada y Salida
+	CLRF				PORTB			; Puerto B Como Salida
+	CLRF				PORTA			; Puerto A como Entrada y Salida
 	BSF					STATUS, RP0		; RP0 = Registro Status
 	BCF					STATUS, RP1		; RP1 = Registro Status
-	CLRF				PORTA			; Limpiar PORTA (Poner en 0's)
-	CLRF				PORTB			; Limpiar PORTB (Poner en 0's)
+	CLRF				TRISA			; Limpiar PORTA (Poner en 0's)
+	CLRF				TRISB			; Limpiar PORTB (Poner en 0's)
 	BCF					STATUS, RP0		; RP0 = Registro Status
 
 INICIO:
