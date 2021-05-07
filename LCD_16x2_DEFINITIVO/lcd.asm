@@ -25,10 +25,10 @@ C_PUERTOS
 	CLRF				PORTB			; Limpiar PORTB (Poner en 0's)
 
 INICIO:
-	CLRF				COUNT			;LIMPIRAR EL CONTADOR
-    CALL    LCD_Inicializa
-    CALL    MENSAJE_1
-    CALL    LCD_Linea2
+	CLRF				Contador			;LIMPIRAR EL CONTADOR
+    	CALL   	 			LCD_Inicializa
+    	CALL  	 			MENSAJE_1
+    	CALL  				LCD_Linea2
 	CLRF	COUNT			;LIMPRIAR EL CONTADOR
     CALL    MENSAJE_2
     GOTO    INICIO
