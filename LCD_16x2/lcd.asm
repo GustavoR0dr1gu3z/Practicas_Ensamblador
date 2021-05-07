@@ -97,6 +97,7 @@ CARACTER:
 	GOTO				CARGA
 CONTROL:
 	BCF					RS				; Decir a la LCD que le mandaremos una instrucción de control
+CARGA
 	MOVWF				PORTB			; Mostrara la literal
 	BSF					E				; Habilita el enable
 	CALL				RETARDOP	
