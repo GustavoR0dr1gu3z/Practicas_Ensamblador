@@ -50,12 +50,12 @@ MEN_LINEA_2:
 	CALL				TABLA_2			
 	MOVWF				PORTB			; MUESTRA EN EL PUERTO B
 	CALL    				LCD_Envia
-	INCF				Contador, F
+	INCF				Contador, F		; Contador = Contador+1
 	MOVLW				B'00001000'		;ES EL TAMAÑO TOTAL DE LA CADENA DEL MENSAJE 2
-	XORWF				Contador,W
-	BTFSS				STATUS,Z
-	GOTO				MEN_LINEA_2   
-    	RETURN
+	XORWF				Contador,W		; XOR ENTRE Contador y W
+	BTFSS				STATUS,Z		; Z = 1?
+	GOTO				MEN_LINEA_2   	; NO
+    	RETURN								; SI
 
 TABLA_1
 	ADDWF 				PCL,1
