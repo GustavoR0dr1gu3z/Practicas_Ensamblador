@@ -35,7 +35,7 @@ INICIO:
 
 MEN_LINEA_1:
 	MOVF 				Contador,W		; Contador = W
-	CALL				TABLA_1		
+	CALL				TABLA1			; TABLA DE LA PRIMER LINEA
 	MOVWF				PORTB			; MUESTRA EN EL PUERTO B
 	CALL    				LCD_Envia		
 	INCF				Contador, F		; Contador = Contador+1
@@ -47,7 +47,7 @@ MEN_LINEA_1:
 
 MEN_LINEA_2:
 	MOVF 				Contador,W		; Contador = W
-	CALL				TABLA_2			
+	CALL				TABLA2			; TABLA DE LA SEGUNDA LINEA
 	MOVWF				PORTB			; MUESTRA EN EL PUERTO B
 	CALL    				LCD_Envia
 	INCF				Contador, F		; Contador = Contador+1
@@ -57,12 +57,12 @@ MEN_LINEA_2:
 	GOTO				MEN_LINEA_2   	; NO
     	RETURN								; SI
 
-TABLA_1
+TABLA1:
 	ADDWF 				PCL,1
 	DT					"HOLA "
 	DT					"MUNDO"
 
-TABLA_2
+TABLA2:
 	ADDWF 				PCL,1
 	DT					"ICO "
 	DT					"2021"
