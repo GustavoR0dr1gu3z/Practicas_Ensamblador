@@ -38,8 +38,8 @@ MENSAJE_1
 	CALL				TABLA_1
 	MOVWF				PORTB
 	CALL    				LCD_Envia
-	INCF				COUNT, F
-	MOVLW				B'00001010'	;ES EL TAMAÑO TOTAL DE LA CADENA DEL MENSAJE 2
+	INCF				Contador, F
+	MOVLW				B'00001010'		;ES EL TAMAÑO TOTAL DE LA CADENA DEL MENSAJE 2
 	XORWF				COUNT,W
 	BTFSS				STATUS,Z
 	GOTO				MENSAJE_1    
@@ -51,7 +51,7 @@ MENSAJE_2
 	MOVWF				PORTB
 	CALL    				LCD_Envia
 	INCF				COUNT, F
-	MOVLW				B'00001000'	;ES EL TAMAÑO TOTAL DE LA CADENA DEL MENSAJE 2
+	MOVLW				B'00001000'		;ES EL TAMAÑO TOTAL DE LA CADENA DEL MENSAJE 2
 	XORWF				COUNT,W
 	BTFSS				STATUS,Z
 	GOTO				MENSAJE_2    
@@ -68,37 +68,37 @@ TABLA_2
 	DT					"2021"
 
 LCD_Inicializa
-        BCF 					PORTC,0      ; RS=0 MODO INSTRUCCION
-        MOVLW 				0x01         ; El comando 0x01 limpia la pantalla en el LCD
+        BCF 					PORTC,0     		 ; RS=0 MODO INSTRUCCION
+        MOVLW 				0x01         			; El comando 0x01 limpia la pantalla en el LCD
         MOVWF 				PORTB
-        CALL 				LCD_Comando     ; Se da de alta el comando
-        MOVLW 				0x0C       ; Selecciona la primera línea
+        CALL 				LCD_Comando     	; Se da de alta el comando
+        MOVLW 				0x0C       			; Selecciona la primera línea
         MOVWF 				PORTB
-        CALL 				LCD_Comando     ; Se da de alta el comando
-        MOVLW 				0x3C       ; Se configura el cursor
+        CALL 				LCD_Comando     	; Se da de alta el comando
+        MOVLW 				0x3C       			; Se configura el cursor
         MOVWF 				PORTB
-        CALL 				LCD_Comando     ; Se da de alta el comando
-        BSF 					PORTC, 0     ; Rs=1 MODO DATO
+        CALL 				LCD_Comando     	; Se da de alta el comando
+        BSF 					PORTC, 0     		; Rs=1 MODO DATO
         RETURN
 ;Subrutina para enviar comandos
 LCD_Comando
-        BSF 	PORTC,1        ; Pone la ENABLE en 1
-        CALL 	DELAY      ; Tiempo de espera
-        CALL 	DELAY
-        BCF 	PORTC, 1    ; ENABLE=0    
-        CALL 	DELAY
+        BSF 					PORTC,1       		 ; Pone la ENABLE en 1
+        CALL 				DELAY      		; Tiempo de espera
+        CALL 				DELAY
+        BCF 					PORTC, 1   		 ; ENABLE=0    
+        CALL 				DELAY
         RETURN     
 ;Subrutina para enviar un dato
 LCD_Envia
-        BSF 	PORTC,0     ; RS=1 MODO DATO
-        CALL 	LCD_Comando    ; Se da de alta el comando
+        BSF 					PORTC,0     		; RS=1 MODO DATO
+        CALL 				LCD_Comando    	; Se da de alta el comando
         RETURN
 ;Configuración Lineal 2 LCD
 LCD_Linea2
-        BCF 	PORTC, 0    ; RS=0 MODO INSTRUCCION
-        MOVLW 	0xC0        ; Selecciona linea 2 pantalla en el LCD
-        MOVWF 	PORTB
-        CALL	LCD_Comando    ; Se da de alta el comando
+        BCF 					PORTC, 0   		 ; RS=0 MODO INSTRUCCION
+        MOVLW 				0xC0      			 ; Selecciona linea 2 pantalla en el LCD
+        MOVWF 				PORTB
+        CALL					LCD_Comando    	; Se da de alta el comando
         RETURN
 ; Subrutina de retardo
 DELAY           
