@@ -12,7 +12,7 @@
 	ENDC
 
 	ORG	    0x00
-   	 GOTO    C_PUERTOS
+   	 GOTO    				C_PUERTOS
     
 C_PUERTOS
 	BSF 					STATUS, RP0		; RP0 = Registro 1 de status
@@ -29,9 +29,9 @@ INICIO:
     	CALL   	 			LCD_Inicializa
     	CALL  	 			MENSAJE_1
     	CALL  				LCD_Linea2
-	CLRF	COUNT			;LIMPRIAR EL CONTADOR
-    CALL    MENSAJE_2
-    GOTO    INICIO
+	CLRF				Contador			;LIMPRIAR EL CONTADOR
+    	CALL   	 			MENSAJE_2
+    	GOTO    				INICIO
 
 MENSAJE_1
 	MOVF 	COUNT,W
