@@ -71,36 +71,39 @@ CONF_LCD:
         BCF 					PORTC,0     		; RS=0 MODO INSTRUCCION
         MOVLW 				0x01         			; LIMPIA PANTALLA 	
         MOVWF 				PORTB			; MUESTRA EN PUERTO B
-        CALL 				LCD_Comando     	; Se da de alta el comando
-        MOVLW 				0x0C       			; Selecciona la primera línea
+        CALL 				LCD_Comando     							; Se da de alta el comando
+        MOVLW 				0x0C       			; SELECCIÓN DE LA PRIMER LINEA
+        MOVWF 				PORTB			; SE MUESTRA EN EL PUERTO B
+        CALL 				LCD_Comando     	
+        MOVLW 				0x3C       			; CONFIGUACION DEL CURSOS
         MOVWF 				PORTB
-        CALL 				LCD_Comando     	; Se da de alta el comando
-        MOVLW 				0x3C       			; Se configura el cursor
-        MOVWF 				PORTB
-        CALL 				LCD_Comando     	; Se da de alta el comando
+        CALL 				LCD_Comando     	
         BSF 					PORTC, 0     		; Rs=1 MODO DATO
-        RETURN
-;Subrutina para enviar comandos
+        RETURN								
+
+
 LCD_Comando
-        BSF 					PORTC,1       		 ; Pone la ENABLE en 1
-        CALL 				DELAY      		; Tiempo de espera
-        CALL 				DELAY
+        BSF 					PORTC,1       		; ENABLE EN 1
+        CALL 				DELAY      						; Tiempo de espera
+        CALL 				DELAY			
         BCF 					PORTC, 1   		 ; ENABLE=0    
-        CALL 				DELAY
+        CALL 				DELAY			
         RETURN     
-;Subrutina para enviar un dato
+
+
 LCD_Envia
         BSF 					PORTC,0     		; RS=1 MODO DATO
-        CALL 				LCD_Comando    	; Se da de alta el comando
+        CALL 				LCD_Comando    	
         RETURN
-;Configuración Lineal 2 LCD
+
 LCD_Linea2
         BCF 					PORTC, 0   		 ; RS=0 MODO INSTRUCCION
-        MOVLW 				0xC0      			 ; Selecciona linea 2 pantalla en el LCD
-        MOVWF 				PORTB
-        CALL					LCD_Comando    	; Se da de alta el comando
+        MOVLW 				0xC0      			 ; SELECCIÓN LINEA DOS DE LCD
+        MOVWF 				PORTB			; MUESTRA EN PUERTO B
+        CALL					LCD_Comando    	
         RETURN
-; Subrutina de retardo
+
+
 DELAY           
         movlw 	.255
         movwf 	val2 
