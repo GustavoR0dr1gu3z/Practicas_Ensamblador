@@ -1,0 +1,55 @@
+MPLINK 4.48, Linker
+Linker Map File - Created Fri May 07 09:27:07 2021
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x0000b8
+       .config_2007_LCD.O       code   0x002007    program   0x000002
+       .config_2008_LCD.O       code   0x002008    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x00005b      
+                            0x002007    0x002008      
+            94 out of 8455 program addresses used, program memory utilization is 1%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                 CARACTER   0x00003c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+                    CARGA   0x00003f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+             CONF_PUERTOS   0x000001    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+                  CONTROL   0x00003e    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+                REINICIAR   0x00000f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+                  RETARDO   0x000045    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+                 RETARDOP   0x000053    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+                    TABLA   0x00001d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+           VISUALIZAR_LCD   0x000010    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+                     loop   0x00004b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+                    loop2   0x000057    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+             CONF_PUERTOS   0x000001    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+                REINICIAR   0x00000f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+           VISUALIZAR_LCD   0x000010    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+                    TABLA   0x00001d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+                 CARACTER   0x00003c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+                  CONTROL   0x00003e    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+                    CARGA   0x00003f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+                  RETARDO   0x000045    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+                     loop   0x00004b    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+                 RETARDOP   0x000053    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+                    loop2   0x000057    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2\lcd.asm
+
+
