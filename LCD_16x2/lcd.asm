@@ -48,6 +48,14 @@ ENDC
 GOTO CONF_PUERTOS ; Comienzo del programa
 
 CONF_PUERTOS:
+	BSF 					STATUS, RP0		; RP0 = Registro 1 de status
+	MOVLW				0X00			; 00000000
+	MOVWF				TRISB			; Puerto B Como Salida
+	MOVLW				0X00			; 11110000
+	MOVWF				TRISA			; Puerto A como Entrada y Salida
+	BCF					STATUS, RP0		; RP0 = Registro Status
+	CLRF				PORTA			; Limpiar PORTA (Poner en 0's)
+	CLRF				PORTB			; Limpiar PORTB (Poner en 0's)
 
 
 
