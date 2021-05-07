@@ -20,9 +20,11 @@ C_PUERTOS
 	MOVWF				TRISB			; Puerto B Como Salida
 	MOVLW				0X00			; 00000000
 	MOVWF				TRISA			; Puerto A como Entrada y Salida
-	BCF					STATUS, RP0		; RP0 = Registro Status
+	BSF					STATUS, RP0		; RP0 = Registro Status
+	BCF					STATUS, RP1		; RP1 = Registro Status
 	CLRF				PORTA			; Limpiar PORTA (Poner en 0's)
 	CLRF				PORTB			; Limpiar PORTB (Poner en 0's)
+	BCF					STATUS, RP0		; RP0 = Registro Status
 
 INICIO:
 	CLRF				Contador			; LIMPIRAR EL CONTADOR
@@ -115,7 +117,6 @@ ciclo2
         goto 	ciclo2
         decfsz 	CounterB,1
         goto 	ciclo
-        return
-		RETURN
+	RETURN
 	END                       ; directive 'end of program'
 

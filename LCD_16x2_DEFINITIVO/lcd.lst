@@ -1,4 +1,4 @@
-MPASM  5.50                           LCD.ASM   5-7-2021  17:10:54         PAGE  1
+MPASM  5.50                           LCD.ASM   5-7-2021  17:18:27         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -24,7 +24,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00008 
                       00009 
                       00010         CBLOCK  0X20
-  00000020            00011                 Contador, CounterA, CounterB, CounterC, CounterD, CounterE
+  00000020            00011                 Contador, CounterA, CounterB
                       00012         ENDC
                       00013 
 0000                  00014         ORG         0x00
@@ -38,123 +38,125 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 0004   3000           00021         MOVLW                           0X00                    ; 00000000
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 0005   0085           00022         MOVWF                           TRISA                   ; Puerto A como Entrada y Salida
-0006   1283           00023         BCF                                     STATUS, RP0             ; RP0 = Registro Status
-0007   0185           00024         CLRF                            PORTA                   ; Limpiar PORTA (Poner en 0's)
-0008   0186           00025         CLRF                            PORTB                   ; Limpiar PORTB (Poner en 0's)
-                      00026 
-0009                  00027 INICIO:
-0009   01A0           00028         CLRF                            Contador                        ; LIMPIRAR EL CONTADOR
-000A   2038           00029         CALL                            CONF_LCD                ; SE VA A CONFIGURACION DEL LCD
-000B   2010           00030         CALL                            MEN_LINEA_1             ; CONF MENSAJE 1
-000C   204D           00031         CALL                            LINEA2                  ; ETIQUETA LINEA2
-000D   01A0           00032         CLRF                            Contador                        ;LIMPRIAR EL CONTADOR
-000E   201A           00033         CALL                            MEN_LINEA_2             ; CONF MENSAJE 2
-000F   2809           00034         GOTO                                    INICIO                  ; INICIO
-                      00035 
-0010                  00036 MEN_LINEA_1:
-0010   0820           00037         MOVF                            Contador,W              ; Contador = W
-0011   2024           00038         CALL                            TABLA1                  ; TABLA DE LA PRIMER LINEA
-0012   0086           00039         MOVWF                           PORTB                   ; MUESTRA EN EL PUERTO B
-0013   204A           00040         CALL                                    ENVIAR_DATO     ; ENVIAR LOS DATOS
-0014   0AA0           00041         INCF                            Contador, F             ; Contador = Contador+1
-MPASM  5.50                           LCD.ASM   5-7-2021  17:10:54         PAGE  2
+0006   1683           00023         BSF                                     STATUS, RP0             ; RP0 = Registro Status
+0007   1303           00024         BCF                                     STATUS, RP1             ; RP1 = Registro Status
+0008   0185           00025         CLRF                            PORTA                   ; Limpiar PORTA (Poner en 0's)
+0009   0186           00026         CLRF                            PORTB                   ; Limpiar PORTB (Poner en 0's)
+000A   1283           00027         BCF                                     STATUS, RP0             ; RP0 = Registro Status
+                      00028 
+000B                  00029 INICIO:
+000B   01A0           00030         CLRF                            Contador                        ; LIMPIRAR EL CONTADOR
+000C   203A           00031         CALL                            CONF_LCD                ; SE VA A CONFIGURACION DEL LCD
+000D   2012           00032         CALL                            MEN_LINEA_1             ; CONF MENSAJE 1
+000E   204F           00033         CALL                            LINEA2                  ; ETIQUETA LINEA2
+000F   01A0           00034         CLRF                            Contador                        ;LIMPRIAR EL CONTADOR
+0010   201C           00035         CALL                            MEN_LINEA_2             ; CONF MENSAJE 2
+0011   280B           00036         GOTO                                    INICIO                  ; INICIO
+                      00037 
+0012                  00038 MEN_LINEA_1:
+0012   0820           00039         MOVF                            Contador,W              ; Contador = W
+0013   2026           00040         CALL                            TABLA1                  ; TABLA DE LA PRIMER LINEA
+0014   0086           00041         MOVWF                           PORTB                   ; MUESTRA EN EL PUERTO B
+MPASM  5.50                           LCD.ASM   5-7-2021  17:18:27         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0015   300A           00042         MOVLW                           B'00001010'             ;ES EL TAMAÑO TOTAL DE LA CADENA DEL MEN
+0015   204C           00042         CALL                                    ENVIAR_DATO     ; ENVIAR LOS DATOS
+0016   0AA0           00043         INCF                            Contador, F             ; Contador = Contador+1
+0017   300A           00044         MOVLW                           B'00001010'             ;ES EL TAMAÑO TOTAL DE LA CADENA DEL MEN
                             SAJE 2
-0016   0620           00043         XORWF                           Contador,W              ; XOR  ENTRE Contador y W
-0017   1D03           00044         BTFSS                           STATUS,Z                ; Z = 1?
-0018   2810           00045         GOTO                            MEN_LINEA_1     ; NO
-0019   0008           00046         RETURN                                                          ; SI
-                      00047 
-001A                  00048 MEN_LINEA_2:
-001A   0820           00049         MOVF                            Contador,W              ; Contador = W
-001B   202F           00050         CALL                            TABLA2                  ; TABLA DE LA SEGUNDA LINEA
-001C   0086           00051         MOVWF                           PORTB                   ; MUESTRA EN EL PUERTO B
-001D   204A           00052         CALL                                    ENVIAR_DATO     ; ENVIAR LOS DATOS
-001E   0AA0           00053         INCF                            Contador, F             ; Contador = Contador+1
-001F   3008           00054         MOVLW                           B'00001000'             ;ES EL TAMAÑO TOTAL DE LA CADENA DEL MEN
+0018   0620           00045         XORWF                           Contador,W              ; XOR  ENTRE Contador y W
+0019   1D03           00046         BTFSS                           STATUS,Z                ; Z = 1?
+001A   2812           00047         GOTO                            MEN_LINEA_1     ; NO
+001B   0008           00048         RETURN                                                          ; SI
+                      00049 
+001C                  00050 MEN_LINEA_2:
+001C   0820           00051         MOVF                            Contador,W              ; Contador = W
+001D   2031           00052         CALL                            TABLA2                  ; TABLA DE LA SEGUNDA LINEA
+001E   0086           00053         MOVWF                           PORTB                   ; MUESTRA EN EL PUERTO B
+001F   204C           00054         CALL                                    ENVIAR_DATO     ; ENVIAR LOS DATOS
+0020   0AA0           00055         INCF                            Contador, F             ; Contador = Contador+1
+0021   3008           00056         MOVLW                           B'00001000'             ;ES EL TAMAÑO TOTAL DE LA CADENA DEL MEN
                             SAJE 2
-0020   0620           00055         XORWF                           Contador,W              ; XOR ENTRE Contador y W
-0021   1D03           00056         BTFSS                           STATUS,Z                ; Z = 1?
-0022   281A           00057         GOTO                            MEN_LINEA_2     ; NO
-0023   0008           00058         RETURN                                                          ; SI
-                      00059 
-0024                  00060 TABLA1:
-0024   0782           00061         ADDWF                           PCL,1
-0025   3448 344F 344C 00062         DT                                      "HOLA "
+0022   0620           00057         XORWF                           Contador,W              ; XOR ENTRE Contador y W
+0023   1D03           00058         BTFSS                           STATUS,Z                ; Z = 1?
+0024   281C           00059         GOTO                            MEN_LINEA_2     ; NO
+0025   0008           00060         RETURN                                                          ; SI
+                      00061 
+0026                  00062 TABLA1:
+0026   0782           00063         ADDWF                           PCL,1
+0027   3448 344F 344C 00064         DT                                      "HOLA "
        3441 3420 
-002A   344D 3455 344E 00063         DT                                      "MUNDO"
+002C   344D 3455 344E 00065         DT                                      "MUNDO"
        3444 344F 
-                      00064 
-002F                  00065 TABLA2:
-002F   0782           00066         ADDWF                           PCL,1
-0030   3449 3443 344F 00067         DT                                      "ICO "
+                      00066 
+0031                  00067 TABLA2:
+0031   0782           00068         ADDWF                           PCL,1
+0032   3449 3443 344F 00069         DT                                      "ICO "
        3420 
-0034   3432 3430 3432 00068         DT                                      "2021"
+0036   3432 3430 3432 00070         DT                                      "2021"
        3431 
-                      00069 
-0038                  00070 CONF_LCD:
-0038   1007           00071         BCF                                     PORTC,0                 ; RS=0 MODO INSTRUCCION
-0039   3001           00072         MOVLW                           0x01                            ; LIMPIA PANTALLA       
-003A   0086           00073         MOVWF                           PORTB                   ; MUESTRA EN PUERTO B
-003B   2044           00074         CALL                            ENABLE_LCD      ; DA DE ALTA EL COMANDO
-003C   300C           00075         MOVLW                           0x0C                            ; SELECCIÓN DE LA PRIMER LINEA
-003D   0086           00076         MOVWF                           PORTB                   ; SE MUESTRA EN EL PUERTO B
-003E   2044           00077         CALL                            ENABLE_LCD      ; DA DE ALTA EL COMANDO
-003F   303C           00078         MOVLW                           0x3C                            ; CONFIGUACION DEL CURSOS
-0040   0086           00079         MOVWF                           PORTB                   ; MUESTRA EN EL PUERTO B
-0041   2044           00080         CALL                            ENABLE_LCD      ; DA DE ALTA EL COMANDO
-0042   1407           00081         BSF                                     PORTC, 0                ; Rs=1 MODO DATO
-0043   0008           00082         RETURN                                                          
-                      00083 
-                      00084 
-0044                  00085 ENABLE_LCD:
-0044   1487           00086         BSF                                     PORTC,1                 ; ENABLE EN 1
-0045   2052           00087         CALL                            RETARDO                 ; RUTINA DE RETARDO
-0046   2052           00088         CALL                            RETARDO         ;RUTINA DE RETARDO      
-MPASM  5.50                           LCD.ASM   5-7-2021  17:10:54         PAGE  3
+                      00071 
+003A                  00072 CONF_LCD:
+003A   1005           00073         BCF                                     PORTA,0                 ; RS=0 MODO INSTRUCCION
+003B   3001           00074         MOVLW                           0x01                            ; LIMPIA PANTALLA       
+003C   0086           00075         MOVWF                           PORTB                   ; MUESTRA EN PUERTO B
+003D   2046           00076         CALL                            ENABLE_LCD      ; DA DE ALTA EL COMANDO
+003E   300C           00077         MOVLW                           0x0C                            ; SELECCIÓN DE LA PRIMER LINEA
+003F   0086           00078         MOVWF                           PORTB                   ; SE MUESTRA EN EL PUERTO B
+0040   2046           00079         CALL                            ENABLE_LCD      ; DA DE ALTA EL COMANDO
+0041   303C           00080         MOVLW                           0x3C                            ; CONFIGUACION DEL CURSOS
+0042   0086           00081         MOVWF                           PORTB                   ; MUESTRA EN EL PUERTO B
+0043   2046           00082         CALL                            ENABLE_LCD      ; DA DE ALTA EL COMANDO
+0044   1407           00083         BSF                                     PORTC, 0                ; Rs=1 MODO DATO
+0045   0008           00084         RETURN                                                          
+                      00085 
+                      00086 
+0046                  00087 ENABLE_LCD:
+0046   1485           00088         BSF                                     PORTA,1                 ; ENABLE EN 1
+MPASM  5.50                           LCD.ASM   5-7-2021  17:18:27         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0047   1087           00089         BCF                                     PORTC, 1                ; ENABLE=0    
-0048   2052           00090         CALL                            RETARDO         ;RUTINA DE RETARDO      
-0049   0008           00091         RETURN     
-                      00092 
-                      00093 
-004A                  00094 ENVIAR_DATO
-004A   1407           00095         BSF                                     PORTC,0                 ; RS=1 MODO DATO
-004B   2044           00096         CALL                            ENABLE_LCD      ; DA DE ALTA EL COMANDO
-004C   0008           00097         RETURN
-                      00098 
-004D                  00099 LINEA2:
-004D   1007           00100         BCF                                     PORTC, 0                 ; RS=0 MODO INSTRUCCION
-004E   30C0           00101         MOVLW                           0xC0                             ; SELECCIÓN LINEA DOS DE LCD
-004F   0086           00102         MOVWF                           PORTB                   ; MUESTRA EN PUERTO B
-0050   2044           00103         CALL                                    ENABLE_LCD              ; DA DE ALTA EL COMANDO
-0051   0008           00104         RETURN
-                      00105 
-                      00106 
-0052                  00107 RETARDO:                                                                ; 300 ms
-0052   30FF           00108         movlw   .255
-0053   00A2           00109         movwf   CounterB 
-0054                  00110 ciclo
-0054   30FF           00111         movlw   .255
-0055   00A1           00112         movwf   CounterA
-0056                  00113 ciclo2
-0056   0BA1           00114         decfsz  CounterA,1
-0057   2856           00115         goto    ciclo2
-0058   0BA2           00116         decfsz  CounterB,1
-0059   2854           00117         goto    ciclo
-005A   0008           00118         return
-005B   0008           00119                 RETURN
-                      00120         END                       ; directive 'end of program'
-MPASM  5.50                           LCD.ASM   5-7-2021  17:10:54         PAGE  4
+0047   2054           00089         CALL                            RETARDO                 ; RUTINA DE RETARDO
+0048   2054           00090         CALL                            RETARDO         ;RUTINA DE RETARDO      
+0049   1085           00091         BCF                                     PORTA, 1                ; ENABLE=0    
+004A   2054           00092         CALL                            RETARDO         ;RUTINA DE RETARDO      
+004B   0008           00093         RETURN     
+                      00094 
+                      00095 
+004C                  00096 ENVIAR_DATO
+004C   1405           00097         BSF                                     PORTA,0                 ; RS=1 MODO DATO
+004D   2046           00098         CALL                            ENABLE_LCD      ; DA DE ALTA EL COMANDO
+004E   0008           00099         RETURN
+                      00100 
+004F                  00101 LINEA2:
+004F   1005           00102         BCF                                     PORTA, 0                 ; RS=0 MODO INSTRUCCION
+0050   30C0           00103         MOVLW                           0xC0                             ; SELECCIÓN LINEA DOS DE LCD
+0051   0086           00104         MOVWF                           PORTB                   ; MUESTRA EN PUERTO B
+0052   2046           00105         CALL                                    ENABLE_LCD              ; DA DE ALTA EL COMANDO
+0053   0008           00106         RETURN
+                      00107 
+                      00108 
+0054                  00109 RETARDO:                                                                ; 300 ms
+0054   30FF           00110         movlw   .255
+0055   00A2           00111         movwf   CounterB 
+0056                  00112 ciclo
+0056   30FF           00113         movlw   .255
+0057   00A1           00114         movwf   CounterA
+0058                  00115 ciclo2
+0058   0BA1           00116         decfsz  CounterA,1
+0059   2858           00117         goto    ciclo2
+005A   0BA2           00118         decfsz  CounterB,1
+005B   2856           00119         goto    ciclo
+005C   0008           00120         return
+005D   0008           00121                 RETURN
+                      00122         END                       ; directive 'end of program'
+MPASM  5.50                           LCD.ASM   5-7-2021  17:18:27         PAGE  4
 
 
 SYMBOL TABLE
@@ -213,7 +215,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM  5.50                           LCD.ASM   5-7-2021  17:10:54         PAGE  5
+MPASM  5.50                           LCD.ASM   5-7-2021  17:18:27         PAGE  5
 
 
 SYMBOL TABLE
@@ -272,7 +274,7 @@ CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
 CHS3                              00000005
-MPASM  5.50                           LCD.ASM   5-7-2021  17:10:54         PAGE  6
+MPASM  5.50                           LCD.ASM   5-7-2021  17:18:27         PAGE  6
 
 
 SYMBOL TABLE
@@ -283,16 +285,13 @@ CKP                               00000004
 CM1CON0                           00000107
 CM2CON0                           00000108
 CM2CON1                           00000109
-CONF_LCD                          00000038
+CONF_LCD                          0000003A
 CREN                              00000004
 CSRC                              00000007
 C_PUERTOS                         00000001
 Contador                          00000020
 CounterA                          00000021
 CounterB                          00000022
-CounterC                          00000023
-CounterD                          00000024
-CounterE                          00000025
 D                                 00000005
 DATA_ADDRESS                      00000005
 DC                                00000001
@@ -317,8 +316,8 @@ EEDATH                            0000010E
 EEIE                              00000004
 EEIF                              00000004
 EEPGD                             00000007
-ENABLE_LCD                        00000044
-ENVIAR_DATO                       0000004A
+ENABLE_LCD                        00000046
+ENVIAR_DATO                       0000004C
 F                                 00000001
 FERR                              00000002
 FSR                               00000004
@@ -331,16 +330,16 @@ GO_NOT_DONE                       00000001
 HTS                               00000002
 I2C_DATA                          00000005
 I2C_READ                          00000002
-MPASM  5.50                           LCD.ASM   5-7-2021  17:10:54         PAGE  7
+I2C_START                         00000003
+I2C_STOP                          00000004
+INDF                              00000000
+MPASM  5.50                           LCD.ASM   5-7-2021  17:18:27         PAGE  7
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-I2C_START                         00000003
-I2C_STOP                          00000004
-INDF                              00000000
-INICIO                            00000009
+INICIO                            0000000B
 INTCON                            0000000B
 INTE                              00000004
 INTEDG                            00000006
@@ -358,12 +357,12 @@ IRCF0                             00000004
 IRCF1                             00000005
 IRCF2                             00000006
 IRP                               00000007
-LINEA2                            0000004D
+LINEA2                            0000004F
 LTS                               00000001
 MC1OUT                            00000007
 MC2OUT                            00000006
-MEN_LINEA_1                       00000010
-MEN_LINEA_2                       0000001A
+MEN_LINEA_1                       00000012
+MEN_LINEA_2                       0000001C
 MSK                               00000093
 MSK0                              00000000
 MSK1                              00000001
@@ -390,15 +389,15 @@ NOT_WRITE                         00000002
 OERR                              00000001
 OPTION_REG                        00000081
 OSCCON                            0000008F
-MPASM  5.50                           LCD.ASM   5-7-2021  17:10:54         PAGE  8
+OSCTUNE                           00000090
+OSFIE                             00000007
+OSFIF                             00000007
+MPASM  5.50                           LCD.ASM   5-7-2021  17:18:27         PAGE  8
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-OSCTUNE                           00000090
-OSFIE                             00000007
-OSFIF                             00000007
 OSTS                              00000003
 P                                 00000004
 P1M0                              00000006
@@ -449,15 +448,15 @@ RA6                               00000006
 RA7                               00000007
 RB0                               00000000
 RB1                               00000001
-MPASM  5.50                           LCD.ASM   5-7-2021  17:10:54         PAGE  9
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+MPASM  5.50                           LCD.ASM   5-7-2021  17:18:27         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-RB2                               00000002
-RB3                               00000003
-RB4                               00000004
 RB5                               00000005
 RB6                               00000006
 RB7                               00000007
@@ -494,7 +493,7 @@ RE1                               00000001
 RE2                               00000002
 RE3                               00000003
 READ_WRITE                        00000002
-RETARDO                           00000052
+RETARDO                           00000054
 RP0                               00000005
 RP1                               00000006
 RSEN                              00000001
@@ -508,15 +507,15 @@ SCKP                              00000004
 SCS                               00000000
 SEN                               00000000
 SENDB                             00000003
-MPASM  5.50                           LCD.ASM   5-7-2021  17:10:54         PAGE 10
+SMP                               00000007
+SPBRG                             00000099
+SPBRGH                            0000009A
+MPASM  5.50                           LCD.ASM   5-7-2021  17:18:27         PAGE 10
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-SMP                               00000007
-SPBRG                             00000099
-SPBRGH                            0000009A
 SPEN                              00000007
 SR0                               00000006
 SR1                               00000007
@@ -560,22 +559,22 @@ T1SYNC                            00000002
 T2CKPS0                           00000000
 T2CKPS1                           00000001
 T2CON                             00000012
-TABLA1                            00000024
-TABLA2                            0000002F
+TABLA1                            00000026
+TABLA2                            00000031
 TMR0                              00000001
 TMR0IE                            00000005
 TMR0IF                            00000002
 TMR1                              0000000E
 TMR1CS                            00000001
-MPASM  5.50                           LCD.ASM   5-7-2021  17:10:54         PAGE 11
+TMR1GE                            00000006
+TMR1H                             0000000F
+TMR1IE                            00000000
+MPASM  5.50                           LCD.ASM   5-7-2021  17:18:27         PAGE 11
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-TMR1GE                            00000006
-TMR1H                             0000000F
-TMR1IE                            00000000
 TMR1IF                            00000000
 TMR1L                             0000000E
 TMR1ON                            00000000
@@ -626,15 +625,15 @@ TRISD7                            00000007
 TRISE                             00000089
 TRISE0                            00000000
 TRISE1                            00000001
-MPASM  5.50                           LCD.ASM   5-7-2021  17:10:54         PAGE 12
+TRISE2                            00000002
+TRISE3                            00000003
+TRMT                              00000001
+MPASM  5.50                           LCD.ASM   5-7-2021  17:18:27         PAGE 12
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-TRISE2                            00000002
-TRISE3                            00000003
-TRMT                              00000001
 TUN0                              00000000
 TUN1                              00000001
 TUN2                              00000002
@@ -685,15 +684,15 @@ WREN                              00000002
 WRERR                             00000003
 WUE                               00000001
 Z                                 00000002
-MPASM  5.50                           LCD.ASM   5-7-2021  17:10:54         PAGE 13
+_BOR21V                           00003EFF
+_BOR40V                           00003FFF
+_BOR4V_BOR21V                     00003EFF
+MPASM  5.50                           LCD.ASM   5-7-2021  17:18:27         PAGE 13
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-_BOR21V                           00003EFF
-_BOR40V                           00003FFF
-_BOR4V_BOR21V                     00003EFF
 _BOR4V_BOR40V                     00003FFF
 _BOREN_NSLEEP                     00003EFF
 _BOREN_OFF                        00003CFF
@@ -744,15 +743,15 @@ _LVP_ON                           00003FFF
 _MCLRE_OFF                        00003FDF
 _MCLRE_ON                         00003FFF
 _PWRTE_OFF                        00003FFF
-MPASM  5.50                           LCD.ASM   5-7-2021  17:10:54         PAGE 14
+_PWRTE_ON                         00003FEF
+_WDTE_OFF                         00003FF7
+_WDTE_ON                          00003FFF
+MPASM  5.50                           LCD.ASM   5-7-2021  17:18:27         PAGE 14
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-_PWRTE_ON                         00003FEF
-_WDTE_OFF                         00003FF7
-_WDTE_ON                          00003FFF
 _WDT_OFF                          00003FF7
 _WDT_ON                           00003FFF
 _WRT_1FOURTH                      00003BFF
@@ -762,20 +761,20 @@ _WRT_OFF                          00003FFF
 _XT_OSC                           00003FF9
 __16F887                          00000001
 __DEBUG                           1
-ciclo                             00000054
-ciclo2                            00000056
+ciclo                             00000056
+ciclo2                            00000058
 
 
 MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
 
 0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
-0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXX---- ---------------- ----------------
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXX-- ---------------- ----------------
 2000 : -------XX------- ---------------- ---------------- ----------------
 
 All other memory blocks unused.
 
-Program Memory Words Used:    92
-Program Memory Words Free:  8100
+Program Memory Words Used:    94
+Program Memory Words Free:  8098
 
 
 Errors   :     0
