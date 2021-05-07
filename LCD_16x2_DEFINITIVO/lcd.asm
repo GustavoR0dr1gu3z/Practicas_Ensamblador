@@ -79,7 +79,7 @@ CONF_LCD:
         MOVLW 				0x3C       			; CONFIGUACION DEL CURSOS
         MOVWF 				PORTB			; MUESTRA EN EL PUERTO B
         CALL 				ENABLE_LCD     	; DA DE ALTA EL COMANDO
-        BSF 					PORTC, 0     		; Rs=1 MODO DATO
+        BSF 					PORTA, 0     		; Rs=1 MODO DATO
         RETURN								
 
 
