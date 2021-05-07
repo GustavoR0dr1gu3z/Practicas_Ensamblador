@@ -25,30 +25,30 @@ C_PUERTOS
 	CLRF				PORTB			; Limpiar PORTB (Poner en 0's)
 
 INICIO:
-	CLRF				Contador			;LIMPIRAR EL CONTADOR
-    	CALL   	 			CONF_LCD
-    	CALL  	 			MEN_LINEA_1
-    	CALL  				LCD_Linea2
+	CLRF				Contador			; LIMPIRAR EL CONTADOR
+    	CALL   	 			CONF_LCD		; SE VA A CONFIGURACION DEL LCD
+    	CALL  	 			MEN_LINEA_1		; CONF MENSAJE 1
+    	CALL  				LCD_Linea2		
 	CLRF				Contador			;LIMPRIAR EL CONTADOR
-    	CALL   	 			MEN_LINEA_2
-    	GOTO    				INICIO
+    	CALL   	 			MEN_LINEA_2		; CONF MENSAJE 2
+    	GOTO    				INICIO			; INICIO
 
 MEN_LINEA_1:
-	MOVF 				COUNT,W
-	CALL				TABLA_1
-	MOVWF				PORTB
-	CALL    				LCD_Envia
-	INCF				Contador, F
+	MOVF 				Contador,W		; Contador = W
+	CALL				TABLA_1		
+	MOVWF				PORTB			; MUESTRA EN EL PUERTO B
+	CALL    				LCD_Envia		
+	INCF				Contador, F		; Contador = Contador+1
 	MOVLW				B'00001010'		;ES EL TAMAÑO TOTAL DE LA CADENA DEL MENSAJE 2
-	XORWF				Contador,W
-	BTFSS				STATUS,Z
-	GOTO				MEN_LINEA_1    
-    	RETURN
+	XORWF				Contador,W		; XOR  ENTRE Contador y W
+	BTFSS				STATUS,Z		; Z = 1?
+	GOTO				MEN_LINEA_1    	; NO
+    	RETURN								; SI
 
 MEN_LINEA_2:
-	MOVF 				Contador,W
-	CALL				TABLA_2
-	MOVWF				PORTB
+	MOVF 				Contador,W		; Contador = W
+	CALL				TABLA_2			
+	MOVWF				PORTB			; MUESTRA EN EL PUERTO B
 	CALL    				LCD_Envia
 	INCF				Contador, F
 	MOVLW				B'00001000'		;ES EL TAMAÑO TOTAL DE LA CADENA DEL MENSAJE 2
