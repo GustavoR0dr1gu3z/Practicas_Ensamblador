@@ -1,4 +1,4 @@
-MPASM  5.50                           LCD.ASM   5-7-2021  9:25:07         PAGE  1
+MPASM  5.50                           LCD.ASM   5-7-2021  9:26:24         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -38,9 +38,8 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00032 
                       00033 
                       00034 ;**********************************************************************
-Warning[205]: Found directive in column 1. (list)
-                      00035 list            p=16f887        ; list directive to define processor
-                      00036 #include        <p16f887.inc>   ; processor specific variable definitions
+                      00035         list            p=16f887        ; list directive to define processor
+                      00036         #include        <p16f887.inc>   ; processor specific variable definitions
                       00001         LIST
                       00002 
                       00003 ;==========================================================================
@@ -57,13 +56,13 @@ Warning[205]: Found directive in column 1. (list)
 2008   3EFF           00040         __CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
                       00041 
                       00042         CBLOCK 0X20                                                     ; Direcció De Memoria Para Las V
-MPASM  5.50                           LCD.ASM   5-7-2021  9:25:07         PAGE  2
+                            ariables
+MPASM  5.50                           LCD.ASM   5-7-2021  9:26:24         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                            ariables
   00000020            00043                 CounterA, CounterB, CounterC, CounterD, CounterE                        ; Variable Para 
                             El Retardo
   00000025            00044                 Cont    
@@ -73,11 +72,9 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00048         #DEFINE         RS                      PORTA, 0                        ; Rs
                       00049         #DEFINE E                       PORTA, 1                        ; Enable
                       00050 
-Warning[205]: Found directive in column 1. (ORG)
-0000                  00051 ORG 0x000 ; posición 0
+0000                  00051         ORG 0x000 ; posición 0
                       00052 
-Warning[203]: Found opcode in column 1. (GOTO)
-0000   2801           00053 GOTO CONF_PUERTOS ; Comienzo del programa
+0000   2801           00053         GOTO CONF_PUERTOS ; Comienzo del programa
                       00054 
 0001                  00055 CONF_PUERTOS:
 0001   1683           00056         BSF                                     STATUS, RP0             ; RP0 = Registro 1 de status
@@ -102,9 +99,9 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                       00073 
 000F                  00074 REINICIAR:
 000F   01A5           00075         CLRF                            Cont
-0010                  00076 VISUALIZAR_LCD:
+0010                  00076 VISUALIZAR_LCD
 Error[108]  : Illegal character (,)
-0010   0080           00077         MOVWF                           Cont,W
+0010   0080           00077         MOVWF                           Cont, W
 0011   201D           00078         CALL                            TABLA
 0012   203C           00079         CALL                            CARACTER
 0013   0AA5           00080         INCF                            Cont, F
@@ -116,15 +113,15 @@ Error[108]  : Illegal character (,)
 0019   3001           00086         MOVLW                           H'01'
 001A   203E           00087         CALL                            CONTROL
 001B   2045           00088         CALL                            RETARDO
-MPASM  5.50                           LCD.ASM   5-7-2021  9:25:07         PAGE  3
+001C   280F           00089         GOTO                            REINICIAR
+                      00090 
+001D                  00091 TABLA:
+MPASM  5.50                           LCD.ASM   5-7-2021  9:26:24         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-001C   280F           00089         GOTO                            REINICIAR
-                      00090 
-001D                  00091 TABLA:
 001D   0782           00092         ADDWF                           PCL,F
 001E   3448 346F 346C 00093         DT                                      "Hola Mundo ICO Gustavo Calzada"
        3461 3420 344D 
@@ -175,21 +172,21 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0053                  00129 RETARDOP:
 0053   3007           00130                 movlw   D'7'
 0054   00A4           00131                 movwf   CounterE
-MPASM  5.50                           LCD.ASM   5-7-2021  9:25:07         PAGE  4
+0055   307C           00132                 movlw   D'124'
+0056   00A3           00133                 movwf   CounterD
+0057   0BA3           00134 loop2           decfsz  CounterD,1
+MPASM  5.50                           LCD.ASM   5-7-2021  9:26:24         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0055   307C           00132                 movlw   D'124'
-0056   00A3           00133                 movwf   CounterD
-0057   0BA3           00134 loop2           decfsz  CounterD,1
 0058   2857           00135                 goto    loop2
 0059   0BA4           00136                 decfsz  CounterE,1
 005A   2857           00137                 goto    loop2
 005B   3400           00138                 retlw   0
                       00139                 END
-MPASM  5.50                           LCD.ASM   5-7-2021  9:25:07         PAGE  5
+MPASM  5.50                           LCD.ASM   5-7-2021  9:26:24         PAGE  5
 
 
 SYMBOL TABLE
@@ -248,7 +245,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM  5.50                           LCD.ASM   5-7-2021  9:25:07         PAGE  6
+MPASM  5.50                           LCD.ASM   5-7-2021  9:26:24         PAGE  6
 
 
 SYMBOL TABLE
@@ -307,7 +304,7 @@ CCPR2H                            0000001C
 CCPR2L                            0000001B
 CHS0                              00000002
 CHS1                              00000003
-MPASM  5.50                           LCD.ASM   5-7-2021  9:25:07         PAGE  7
+MPASM  5.50                           LCD.ASM   5-7-2021  9:26:24         PAGE  7
 
 
 SYMBOL TABLE
@@ -366,7 +363,7 @@ GO_DONE                           00000001
 GO_NOT_DONE                       00000001
 HTS                               00000002
 I2C_DATA                          00000005
-MPASM  5.50                           LCD.ASM   5-7-2021  9:25:07         PAGE  8
+MPASM  5.50                           LCD.ASM   5-7-2021  9:26:24         PAGE  8
 
 
 SYMBOL TABLE
@@ -425,7 +422,7 @@ OSCCON                            0000008F
 OSCTUNE                           00000090
 OSFIE                             00000007
 OSFIF                             00000007
-MPASM  5.50                           LCD.ASM   5-7-2021  9:25:07         PAGE  9
+MPASM  5.50                           LCD.ASM   5-7-2021  9:26:24         PAGE  9
 
 
 SYMBOL TABLE
@@ -484,7 +481,7 @@ RB1                               00000001
 RB2                               00000002
 RB3                               00000003
 RB4                               00000004
-MPASM  5.50                           LCD.ASM   5-7-2021  9:25:07         PAGE 10
+MPASM  5.50                           LCD.ASM   5-7-2021  9:26:24         PAGE 10
 
 
 SYMBOL TABLE
@@ -543,7 +540,7 @@ SCKP                              00000004
 SCS                               00000000
 SEN                               00000000
 SENDB                             00000003
-MPASM  5.50                           LCD.ASM   5-7-2021  9:25:07         PAGE 11
+MPASM  5.50                           LCD.ASM   5-7-2021  9:26:24         PAGE 11
 
 
 SYMBOL TABLE
@@ -602,7 +599,7 @@ TMR0IF                            00000002
 TMR1                              0000000E
 TMR1CS                            00000001
 TMR1GE                            00000006
-MPASM  5.50                           LCD.ASM   5-7-2021  9:25:07         PAGE 12
+MPASM  5.50                           LCD.ASM   5-7-2021  9:26:24         PAGE 12
 
 
 SYMBOL TABLE
@@ -661,7 +658,7 @@ TRISE                             00000089
 TRISE0                            00000000
 TRISE1                            00000001
 TRISE2                            00000002
-MPASM  5.50                           LCD.ASM   5-7-2021  9:25:07         PAGE 13
+MPASM  5.50                           LCD.ASM   5-7-2021  9:26:24         PAGE 13
 
 
 SYMBOL TABLE
@@ -720,7 +717,7 @@ WREN                              00000002
 WRERR                             00000003
 WUE                               00000001
 Z                                 00000002
-MPASM  5.50                           LCD.ASM   5-7-2021  9:25:07         PAGE 14
+MPASM  5.50                           LCD.ASM   5-7-2021  9:26:24         PAGE 14
 
 
 SYMBOL TABLE
@@ -779,7 +776,7 @@ _LVP_ON                           00003FFF
 _MCLRE_OFF                        00003FDF
 _MCLRE_ON                         00003FFF
 _PWRTE_OFF                        00003FFF
-MPASM  5.50                           LCD.ASM   5-7-2021  9:25:07         PAGE 15
+MPASM  5.50                           LCD.ASM   5-7-2021  9:26:24         PAGE 15
 
 
 SYMBOL TABLE
@@ -814,7 +811,7 @@ Program Memory Words Free:  8100
 
 
 Errors   :     1
-Warnings :     3 reported,     0 suppressed
+Warnings :     0 reported,     0 suppressed
 Messages :     2 reported,     0 suppressed
 
 

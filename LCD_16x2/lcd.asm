@@ -32,8 +32,8 @@
 
 
 ;**********************************************************************
-list		p=16f887	; list directive to define processor
-#include	<p16f887.inc>	; processor specific variable definitions
+	list		p=16f887	; list directive to define processor
+	#include	<p16f887.inc>	; processor specific variable definitions
 
 
 	__CONFIG    _CONFIG1, _LVP_OFF & _FCMEN_ON & _IESO_OFF & _BOR_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _PWRTE_ON & _WDT_OFF & _INTRC_OSC_NOCLKOUT
@@ -48,9 +48,9 @@ list		p=16f887	; list directive to define processor
 	#DEFINE 	RS 			PORTA, 0			; Rs
 	#DEFINE	E			PORTA, 1 			; Enable
 
-ORG 0x000 ; posición 0
+	ORG 0x000 ; posición 0
 
-GOTO CONF_PUERTOS ; Comienzo del programa
+	GOTO CONF_PUERTOS ; Comienzo del programa
 
 CONF_PUERTOS:
 	BSF 					STATUS, RP0		; RP0 = Registro 1 de status
@@ -74,7 +74,7 @@ CONF_PUERTOS:
 REINICIAR:
 	CLRF 				Cont
 VISUALIZAR_LCD:
-	MOVWF				Cont,W
+	MOVF				Cont, W
 	CALL				TABLA
 	CALL				CARACTER
 	INCF				Cont, F
