@@ -60,6 +60,11 @@ CONF_PUERTOS:
 
 ; INICIALIZACION DE LA PANTALLA LCD
 	MOVLW				H'38'			; Bus de datos de 8 pines 
+	CALL 				CONTROL
+	MOVLW				h'0C'				; Enciende LCD y apaga cursor
+	CALL				CONTROL
+	MOVLW				H'01'			; Limpia la pantala
+	CALL 				CONTROL	
 
 
 
