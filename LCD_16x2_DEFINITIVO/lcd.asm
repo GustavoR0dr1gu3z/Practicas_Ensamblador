@@ -3,40 +3,29 @@
 	#include	<p16f887.inc>	; processor specific variable definitions
 
 
-; '__CONFIG' directive is used to embed configuration data within .asm file.
-; The labels following the directive are located in the respective .inc file.
-; See respective data sheet for additional information on configuration word.
-
 	__CONFIG    _CONFIG1, _LVP_OFF & _FCMEN_ON & _IESO_OFF & _BOR_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _PWRTE_ON & _WDT_OFF & _INTRC_OSC_NOCLKOUT
 	__CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
 
 
-
-;***** VARIABLE DEFINITIONS
-	
-
-;**********************************************************************
-	val1 	equ 0x30
-	val2 	equ 0x31 
-
 	CBLOCK	0X20
-		COUNT
+		Contador, val1, val2
 	ENDC
 
-	ORG	    0
-    GOTO    CONFIGURA_PTOS
+	ORG	    0x00
+   	 GOTO    C_PUERTOS
     
-CONFIGURA_PTOS
-    CLRF    PORTB
-    CLRF    PORTC	;LIMPIAR PORTB Y PORTC
-    BSF	    STATUS,RP0
-    BCF	    STATUS,RP1
-    CLRF    TRISB
-    CLRF    TRISC	;SELECIONAR PORTB Y PORTC COMO SALIDAS
-    BCF	    STATUS,RP0 
+C_PUERTOS
+	BSF 					STATUS, RP0		; RP0 = Registro 1 de status
+	MOVLW				0X00			; 00000000
+	MOVWF				TRISB			; Puerto B Como Salida
+	MOVLW				0X00			; 00000000
+	MOVWF				TRISA			; Puerto A como Entrada y Salida
+	BCF					STATUS, RP0		; RP0 = Registro Status
+	CLRF				PORTA			; Limpiar PORTA (Poner en 0's)
+	CLRF				PORTB			; Limpiar PORTB (Poner en 0's)
 
-INICIO
-	CLRF	COUNT			;LIMPIRAR EL CONTADOR
+INICIO:
+	CLRF				COUNT			;LIMPIRAR EL CONTADOR
     CALL    LCD_Inicializa
     CALL    MENSAJE_1
     CALL    LCD_Linea2
