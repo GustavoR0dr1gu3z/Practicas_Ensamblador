@@ -48,3 +48,19 @@ ENDC
 GOTO CONF_PUERTOS ; Comienzo del programa
 
 CONF_PUERTOS:
+
+
+
+
+
+; RUTINA DE RETARDO 5ms
+;PIC Time Delay = 0,00500100 s with Osc = 4000000 Hz
+		movlw	D'7'
+		movwf	CounterB
+		movlw	D'124'
+		movwf	CounterA
+loop		decfsz	CounterA,1
+		goto	loop
+		decfsz	CounterB,1
+		goto	loop
+		retlw	0
