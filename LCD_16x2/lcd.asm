@@ -79,7 +79,7 @@ VISUALIZAR_LCD:
 	CALL				CARACTER
 	INCF				Cont, F
 	MOVLW				.30
-	XORWF				Cont	
+	XORWF				Cont, W	
 	BTFSS				STATUS, Z
 	GOTO				VISUALIZAR_LCD	; Z = 0
 	CALL				RETARDO		; Z = 1
