@@ -40,10 +40,12 @@ list		p=16f887	; list directive to define processor
 	__CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
 
 
-ORG 0x000 ; posición 0
-CBLOCK 0X20
 
-ENDC
+
+	#DEFINE 	RS 			PORTA, 0			; Rs
+	#DEFINE	E			PORTA, 1 			; Enable
+
+ORG 0x000 ; posición 0
 
 GOTO CONF_PUERTOS ; Comienzo del programa
 
@@ -67,7 +69,8 @@ CONF_PUERTOS:
 	CALL 				CONTROL	
 
 
-
+CONTROL:
+	BCF					RS				; Decir a la LCD que le mandaremos una instrucción de control
 
 
 
