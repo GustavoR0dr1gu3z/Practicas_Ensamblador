@@ -40,7 +40,7 @@ list		p=16f887	; list directive to define processor
 	__CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
 
 	CBLOCK 0X20							; Direcció De Memoria Para Las Variables
-		CounterA, CounterB, CounterC			; Variable Para El Retardo
+		CounterA, CounterB, CounterC, CounterD, CounterE			; Variable Para El Retardo
 		Cont	
 	ENDC		
 
@@ -128,12 +128,12 @@ loop		decfsz	CounterA,1
 ;PIC Time Delay = 0,00500100 s with Osc = 4000000 Hz
 RETARDOP:
 		movlw	D'7'
-		movwf	CounterB
+		movwf	CounterE
 		movlw	D'124'
-		movwf	CounterA
-loop		decfsz	CounterA,1
+		movwf	CounterD
+loop		decfsz	CounterD,1
 		goto	loop
-		decfsz	CounterB,1
+		decfsz	CounterE,1
 		goto	loop
 		retlw	0
 		END
