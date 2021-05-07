@@ -1,11 +1,11 @@
 MPLINK 4.48, Linker
-Linker Map File - Created Fri May 07 16:37:48 2021
+Linker Map File - Created Fri May 07 17:10:55 2021
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
                    .org_0       code   0x000000    program   0x000000
-                   .org_1       code   0x000000    program   0x0000b4
+                   .org_1       code   0x000000    program   0x0000b8
        .config_2007_LCD.O       code   0x002007    program   0x000002
        .config_2008_LCD.O       code   0x002008    program   0x000002
 
@@ -14,46 +14,46 @@ Linker Map File - Created Fri May 07 16:37:48 2021
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x000059      
+                            0x000000    0x00005b      
                             0x002007    0x002008      
-            92 out of 8455 program addresses used, program memory utilization is 1%
+            94 out of 8455 program addresses used, program memory utilization is 1%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-           CONFIGURA_PTOS   0x000001    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                    DELAY   0x000051    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                   INICIO   0x000008    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-              LCD_Comando   0x000043    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                LCD_Envia   0x000049    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-           LCD_Inicializa   0x000037    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-               LCD_Linea2   0x00004c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                MENSAJE_1   0x00000f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                MENSAJE_2   0x000019    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                  TABLA_1   0x000023    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                  TABLA_2   0x00002e    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                    ciclo   0x000053    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                   ciclo2   0x000055    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                 CONF_LCD   0x000038    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                C_PUERTOS   0x000001    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+               ENABLE_LCD   0x000044    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+              ENVIAR_DATO   0x00004a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                   INICIO   0x000009    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                   LINEA2   0x00004d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+              MEN_LINEA_1   0x000010    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+              MEN_LINEA_2   0x00001a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                  RETARDO   0x000052    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                   TABLA1   0x000024    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                   TABLA2   0x00002f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                    ciclo   0x000054    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                   ciclo2   0x000056    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
 
 
 
                               Symbols - Sorted by Address
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-           CONFIGURA_PTOS   0x000001    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                   INICIO   0x000008    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                MENSAJE_1   0x00000f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                MENSAJE_2   0x000019    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                  TABLA_1   0x000023    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                  TABLA_2   0x00002e    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-           LCD_Inicializa   0x000037    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-              LCD_Comando   0x000043    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                LCD_Envia   0x000049    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-               LCD_Linea2   0x00004c    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                    DELAY   0x000051    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                    ciclo   0x000053    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
-                   ciclo2   0x000055    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                C_PUERTOS   0x000001    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                   INICIO   0x000009    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+              MEN_LINEA_1   0x000010    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+              MEN_LINEA_2   0x00001a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                   TABLA1   0x000024    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                   TABLA2   0x00002f    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                 CONF_LCD   0x000038    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+               ENABLE_LCD   0x000044    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+              ENVIAR_DATO   0x00004a    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                   LINEA2   0x00004d    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                  RETARDO   0x000052    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                    ciclo   0x000054    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
+                   ciclo2   0x000056    program     static C:\Users\gusta\OneDrive\Escritorio\PROYECTOS_MPLAB\LCD_16x2_DEFINITIVO\lcd.asm
 
 

@@ -8,7 +8,7 @@
 
 
 	CBLOCK	0X20
-		Contador, val1, val2
+		Contador, CounterA, CounterB, CounterC, CounterD, CounterE
 	ENDC
 
 	ORG	    0x00
@@ -76,7 +76,7 @@ CONF_LCD:
         MOVWF 				PORTB			; SE MUESTRA EN EL PUERTO B
         CALL 				ENABLE_LCD     	; DA DE ALTA EL COMANDO
         MOVLW 				0x3C       			; CONFIGUACION DEL CURSOS
-        MOVWF 				PORTB
+        MOVWF 				PORTB			; MUESTRA EN EL PUERTO B
         CALL 				ENABLE_LCD     	; DA DE ALTA EL COMANDO
         BSF 					PORTC, 0     		; Rs=1 MODO DATO
         RETURN								
@@ -84,10 +84,10 @@ CONF_LCD:
 
 ENABLE_LCD:
         BSF 					PORTC,1       		; ENABLE EN 1
-        CALL 				DELAY      						; Tiempo de espera
-        CALL 				DELAY			
-        BCF 					PORTC, 1   		 ; ENABLE=0    
-        CALL 				DELAY			
+        CALL 				RETARDO   		; RUTINA DE RETARDO
+        CALL 				RETARDO		;RUTINA DE RETARDO	
+        BCF 					PORTC, 1   	 	; ENABLE=0    
+        CALL 				RETARDO		;RUTINA DE RETARDO	
         RETURN     
 
 
@@ -104,18 +104,18 @@ LINEA2:
         RETURN
 
 
-DELAY           
+RETARDO: 								; 300 ms
         movlw 	.255
-        movwf 	val2 
+        movwf 	CounterB 
 ciclo
         movlw 	.255
-        movwf 	val1
+        movwf 	CounterA
 ciclo2
-        decfsz	val1,1
+        decfsz	CounterA,1
         goto 	ciclo2
-        decfsz 	val2,1
+        decfsz 	CounterB,1
         goto 	ciclo
         return
-
+		RETURN
 	END                       ; directive 'end of program'
 
