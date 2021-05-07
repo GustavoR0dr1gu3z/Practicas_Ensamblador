@@ -28,7 +28,7 @@ INICIO:
 	CLRF				Contador			; LIMPIRAR EL CONTADOR
     	CALL   	 			CONF_LCD		; SE VA A CONFIGURACION DEL LCD
     	CALL  	 			MEN_LINEA_1		; CONF MENSAJE 1
-    	CALL  				LCD_Linea2		
+    	CALL  				LINEA2			; ETIQUETA LINEA2
 	CLRF				Contador			;LIMPRIAR EL CONTADOR
     	CALL   	 			MEN_LINEA_2		; CONF MENSAJE 2
     	GOTO    				INICIO			; INICIO
@@ -96,7 +96,7 @@ LCD_Envia
         CALL 				LCD_Comando    	
         RETURN
 
-LCD_Linea2
+LINEA2:
         BCF 					PORTC, 0   		 ; RS=0 MODO INSTRUCCION
         MOVLW 				0xC0      			 ; SELECCIÓN LINEA DOS DE LCD
         MOVWF 				PORTB			; MUESTRA EN PUERTO B
