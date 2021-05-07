@@ -67,7 +67,7 @@ loop		decfsz	CounterA,1
 		goto	loop
 		retlw	0
 		RETURN
-	END  
+  
 
 
 ; RUTINA DE RETARDO 5ms PARA PROCESAMIENTO DE INSTRUCCIONES
@@ -81,3 +81,4 @@ loop		decfsz	CounterA,1
 		decfsz	CounterB,1
 		goto	loop
 		retlw	0
+		END
