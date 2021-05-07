@@ -39,7 +39,10 @@ list		p=16f887	; list directive to define processor
 	__CONFIG    _CONFIG1, _LVP_OFF & _FCMEN_ON & _IESO_OFF & _BOR_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _PWRTE_ON & _WDT_OFF & _INTRC_OSC_NOCLKOUT
 	__CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
 
-
+	CBLOCK 0X20							; Direcció De Memoria Para Las Variables
+		CounterA, CounterB, CounterC			; Variable Para El Retardo
+		Cont	
+	ENDC		
 
 
 	#DEFINE 	RS 			PORTA, 0			; Rs
@@ -69,13 +72,21 @@ CONF_PUERTOS:
 	CALL 				CONTROL	
 
 
+
+TABLA:
+	ADDWF				PCL,F
+	DT					"Hola Mundo ICO, Gustavo Rodriguez Calzada"
+
+
+
 CONTROL:
 	BCF					RS				; Decir a la LCD que le mandaremos una instrucción de control
 	MOVWF				PORTB			; Mostrara la literal
 	BSF					E				; Habilita el enable
 	CALL				RETARDOP	
 	BCF					E				; Desabilita el Enable
-
+	CALL				RETARDOP
+	RETURN
 
 ; RETARDO 
 RETARDO: 								; 300 ms
