@@ -131,9 +131,9 @@ RETARDOP:
 		movwf	CounterE
 		movlw	D'124'
 		movwf	CounterD
-loop		decfsz	CounterD,1
-		goto	loop
+loop2		decfsz	CounterD,1
+		goto	loop2
 		decfsz	CounterE,1
-		goto	loop
+		goto	loop2
 		retlw	0
 		END
