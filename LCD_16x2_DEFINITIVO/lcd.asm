@@ -26,7 +26,7 @@ C_PUERTOS
 
 INICIO:
 	CLRF				Contador			;LIMPIRAR EL CONTADOR
-    	CALL   	 			LCD_Inicializa
+    	CALL   	 			CONF_LCD
     	CALL  	 			MEN_LINEA_1
     	CALL  				LCD_Linea2
 	CLRF				Contador			;LIMPRIAR EL CONTADOR
@@ -67,7 +67,7 @@ TABLA_2
 	DT					"ICO "
 	DT					"2021"
 
-LCD_Inicializa
+CONF_LCD:
         BCF 					PORTC,0     		 ; RS=0 MODO INSTRUCCION
         MOVLW 				0x01         			; El comando 0x01 limpia la pantalla en el LCD
         MOVWF 				PORTB
