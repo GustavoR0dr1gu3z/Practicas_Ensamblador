@@ -13,15 +13,15 @@ CounterB equ 0x31
 		Contador
 	ENDC
 
-	ORG	    0
+	ORG	    0x00
    	 GOTO    				C_PUERTOS
     
 C_PUERTOS
 	CLRF				PORTB			; Puerto B Como Salida
-	CLRF				PORTA			; Puerto A como Entrada y Salida
+	CLRF				PORTC			; Puerto A como Entrada y Salida
 	BSF					STATUS, RP0		; RP0 = Registro Status
 	BCF					STATUS, RP1		; RP1 = Registro Status
-	CLRF				TRISA			; Limpiar PORTA (Poner en 0's)
+	CLRF				TRISC			; Limpiar PORTA (Poner en 0's)
 	CLRF				TRISB			; Limpiar PORTB (Poner en 0's)
 	BCF					STATUS, RP0		; RP0 = Registro Status
 
@@ -60,16 +60,16 @@ MEN_LINEA_2
 
 TABLA1
 	ADDWF 				PCL,1
-	DT					"HOLA "
-	DT					"MUNDO"
+	DT "HOLA "
+	DT "MUNDO"
 
 TABLA2
 	ADDWF 				PCL,1
-	DT					"ICO "
-	DT					"2021"
+	DT "ICO "
+	DT "2021"
 
 CONF_LCD
-        BCF 					PORTA,0     		; RS=0 MODO INSTRUCCION
+        BCF 					PORTC,0     		; RS=0 MODO INSTRUCCION
         MOVLW 				0x01         			; LIMPIA PANTALLA 	
         MOVWF 				PORTB			; MUESTRA EN PUERTO B
         CALL 				ENABLE_LCD     	; DA DE ALTA EL COMANDO
@@ -79,26 +79,26 @@ CONF_LCD
         MOVLW 				0x3C       			; CONFIGUACION DEL CURSOS
         MOVWF 				PORTB			; MUESTRA EN EL PUERTO B
         CALL 				ENABLE_LCD     	; DA DE ALTA EL COMANDO
-        BSF 					PORTA, 0     		; Rs=1 MODO DATO
+        BSF 					PORTC, 0     		; Rs=1 MODO DATO
         RETURN								
 
 
 ENABLE_LCD
-        BSF 					PORTA,1       		; ENABLE EN 1
+        BSF 					PORTC,1       		; ENABLE EN 1
         CALL 				RETARDO   		; RUTINA DE RETARDO
         CALL 				RETARDO		;RUTINA DE RETARDO	
-        BCF 					PORTA, 1   	 	; ENABLE=0    
+        BCF 					PORTC, 1   	 	; ENABLE=0    
         CALL 				RETARDO		;RUTINA DE RETARDO	
         RETURN     
 
 
 ENVIAR_DATO
-        BSF 					PORTA,0     		; RS=1 MODO DATO
+        BSF 					PORTC,0     		; RS=1 MODO DATO
         CALL 				ENABLE_LCD    	; DA DE ALTA EL COMANDO
         RETURN
 
 LINEA2
-        BCF 					PORTA, 0   		 ; RS=0 MODO INSTRUCCION
+        BCF 					PORTC, 0   		 ; RS=0 MODO INSTRUCCION
         MOVLW 				0xC0      			 ; SELECCIÓN LINEA DOS DE LCD
         MOVWF 				PORTB			; MUESTRA EN PUERTO B
         CALL					ENABLE_LCD  		; DA DE ALTA EL COMANDO
