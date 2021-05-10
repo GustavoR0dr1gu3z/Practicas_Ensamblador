@@ -6,11 +6,8 @@
 	__CONFIG    _CONFIG1, _LVP_OFF & _FCMEN_ON & _IESO_OFF & _BOR_OFF & _CPD_OFF & _CP_OFF & _MCLRE_ON & _PWRTE_ON & _WDT_OFF & _INTRC_OSC_NOCLKOUT
 	__CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
 
-CounterA equ 0x30
-CounterB equ 0x31
-
 	CBLOCK	0X20
-		Contador
+		Contador, CounterA, CounterB
 	ENDC
 
 	ORG	    0x00
@@ -26,7 +23,7 @@ C_PUERTOS
 	BCF					STATUS, RP0		; RP0 = Registro Status
 
 INICIO
-	CLRF				Contador			; LIMPIRAR EL CONTADOR
+	CLRF				Contador			; LIMPIAR EL CONTADOR
     	CALL   	 			CONF_LCD		; SE VA A CONFIGURACION DEL LCD
     	CALL  	 			MEN_LINEA_1		; CONF MENSAJE 1
     	CALL  				LINEA2			; ETIQUETA LINEA2
@@ -103,7 +100,7 @@ LINEA2
         RETURN
 
 
-RETARDO 								; 300 ms
+RETARDO 								
         movlw 	.255
         movwf 	CounterB 
 ciclo
